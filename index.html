@@ -274,10 +274,10 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
     <div class="eyebrow reveal">PREMIUM MY ARSE</div>
     <h2 class="reveal">You've been sold the same boot, dressed up, for years.</h2>
     <div class="pairs">
-      <div class="pair reveal"><div class="bad">Soles that turn to chalk in the shed before you've worn them out.</div><div class="good">An SC-TPU midsole that won't crumble in your shed.</div></div>
-      <div class="pair reveal"><div class="bad">A break-in period. A fortnight of bleeding into them to earn it.</div><div class="good">Comfortable from the first shift. No break-in.</div></div>
-      <div class="pair reveal"><div class="bad">Linings that cook your feet into a sweatbox by smoko.</div><div class="good">Water-resistant, and it actually breathes.</div></div>
-      <div class="pair reveal"><div class="bad">A six-month warranty on a boot you stand in twelve hours a day.</div><div class="good">A steel toe certified to AS/NZS 2210.3. To a standard, not a price.</div></div>
+      <div class="pair"><div class="bad">Soles that turn to chalk in the shed before you've worn them out.</div><div class="good">An SC-TPU midsole that won't crumble in your shed.</div></div>
+      <div class="pair"><div class="bad">A break-in period. A fortnight of bleeding into them to earn it.</div><div class="good">Comfortable from the first shift. No break-in.</div></div>
+      <div class="pair"><div class="bad">Linings that cook your feet into a sweatbox by smoko.</div><div class="good">Water-resistant, and it actually breathes.</div></div>
+      <div class="pair"><div class="bad">A six-month warranty on a boot you stand in twelve hours a day.</div><div class="good">A steel toe certified to AS/NZS 2210.3. To a standard, not a price.</div></div>
     </div>
     <p class="creed reveal">Comfort isn't a luxury. It's what you're owed.</p>
     <p class="bproof reveal">Talk's cheap. Belt sander, water, blade. We put them through it on camera.</p>
@@ -460,6 +460,13 @@ function initScroll(){
   const track=document.getElementById('ticker');
   let base=gsap.to(track,{xPercent:-50,repeat:-1,duration:24,ease:'none'});
   ScrollTrigger.create({trigger:document.body,start:'top top',end:'bottom bottom',onUpdate:s=>{const v=Math.min(Math.abs(s.getVelocity()/300),6);gsap.to(base,{timeScale:1+v,duration:0.3,overwrite:true});}});
+
+  // betrayal pairs: the lie slides in from the left, the fix from the right, scrubbed
+  gsap.utils.toArray('.pair').forEach(p=>{
+    const tl=gsap.timeline({scrollTrigger:{trigger:p,start:'top 86%',end:'top 58%',scrub:true}});
+    tl.from(p.querySelector('.bad'),{x:-30,opacity:0,ease:'none'},0)
+      .from(p.querySelector('.good'),{x:30,opacity:0,ease:'none'},0);
+  });
 
   // rally: words rise on scrub
   gsap.from('.rally h2 .w i',{yPercent:115,stagger:0.06,ease:'expo.out',scrollTrigger:{trigger:'.rally',start:'top 70%',end:'top 20%',scrub:true}});
