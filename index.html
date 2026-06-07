@@ -134,6 +134,14 @@ section{padding-block:clamp(5rem,12vh,10rem);position:relative}
 .betray div{padding-block:clamp(1.1rem,2.2vw,1.6rem);border-top:1px solid var(--far-line);font-size:clamp(1.1rem,1rem + 0.55vw,1.45rem);color:var(--far-smoke);display:flex;gap:clamp(1rem,2.5vw,2rem);align-items:baseline}
 .betray div:last-child{border-bottom:1px solid var(--far-line)}
 .betray .x{font-family:"Space Grotesk";font-weight:700;color:var(--far-white);font-size:0.8em;flex:none;min-width:2ch}
+.pairs{margin-top:clamp(2.5rem,5vw,4rem)}
+.pair{display:grid;grid-template-columns:1fr;gap:0.6rem;padding-block:clamp(1.3rem,2.6vw,1.9rem);border-top:1px solid var(--far-line)}
+.pairs .pair:last-child{border-bottom:1px solid var(--far-line)}
+@media(min-width:780px){.pair{grid-template-columns:1fr 1fr;column-gap:clamp(2rem,5vw,4.5rem);align-items:start}}
+.pair .bad{color:var(--far-smoke);font-size:clamp(1rem,1rem + 0.3vw,1.2rem);position:relative;padding-left:1.5rem;line-height:1.4}
+.pair .bad::before{content:"\00D7";position:absolute;left:0;top:0;color:var(--far-smoke);font-weight:700}
+.pair .good{color:var(--far-white);font-family:"Space Grotesk";font-weight:500;font-size:clamp(1.05rem,1rem + 0.45vw,1.4rem);letter-spacing:-0.01em;position:relative;padding-left:1.5rem;line-height:1.3}
+.pair .good::before{content:"\2192";position:absolute;left:0;top:0;color:var(--far-white)}
 .creed{margin-top:clamp(3.5rem,8vw,6rem);font-family:"Space Grotesk";font-weight:700;font-size:clamp(1.9rem,5.5vw,4rem);letter-spacing:-0.035em;max-width:16ch;line-height:1.02;color:var(--far-white)}
 
 /* rally */
@@ -253,29 +261,18 @@ footer{padding-block:clamp(3rem,6vw,5rem);border-top:1px solid var(--far-line)}
   </div>
 </div>
 
-<section class="benefits wrap">
-  <div class="eyebrow reveal">What's different</div>
-  <h2 class="reveal">Every other boot gets the same things wrong. We started there.</h2>
-  <div class="blist">
-    <div class="bitem reveal"><h3>No break-in</h3><p>Comfortable from the first shift. No fortnight of blisters to earn it.</p></div>
-    <div class="bitem reveal"><h3>A sole that won't crumble in your shed</h3><p>Built on an SC-TPU midsole, not the cheap stuff that turns to chalk in a year.</p></div>
-    <div class="bitem reveal"><h3>Water-resistant, still breathable</h3><p>Keeps the wet out without turning your boot into a sweatbox.</p></div>
-    <div class="bitem reveal"><h3>Toe cap, built to AS/NZS 2210.3</h3><p>Certified protection where it counts. Not a sticker on a box.</p></div>
-  </div>
-  <p class="bproof reveal">Talk's cheap. Belt sander, water, blade. We put them through it on camera.</p>
-</section>
-
 <section class="enemy">
   <div class="wrap">
     <div class="eyebrow reveal">PREMIUM MY ARSE</div>
     <h2 class="reveal">You've been sold the same boot, dressed up, for years.</h2>
-    <div class="betray">
-      <div class="reveal"><span class="x">01</span><span>Soles that turn to chalk in the shed before you've worn them out.</span></div>
-      <div class="reveal"><span class="x">02</span><span>A break-in period. As if bleeding into them for a fortnight is a feature.</span></div>
-      <div class="reveal"><span class="x">03</span><span>A six-month warranty on a boot you stand in for twelve hours a day.</span></div>
-      <div class="reveal"><span class="x">04</span><span>The morning tax. That first step off the bed, every single day.</span></div>
+    <div class="pairs">
+      <div class="pair reveal"><div class="bad">Soles that turn to chalk in the shed before you've worn them out.</div><div class="good">An SC-TPU midsole that won't crumble in your shed.</div></div>
+      <div class="pair reveal"><div class="bad">A break-in period. A fortnight of bleeding into them to earn it.</div><div class="good">Comfortable from the first shift. No break-in.</div></div>
+      <div class="pair reveal"><div class="bad">Linings that cook your feet into a sweatbox by smoko.</div><div class="good">Water-resistant, and it actually breathes.</div></div>
+      <div class="pair reveal"><div class="bad">A six-month warranty on a boot you stand in twelve hours a day.</div><div class="good">A steel toe certified to AS/NZS 2210.3. To a standard, not a price.</div></div>
     </div>
     <p class="creed reveal">Comfort isn't a luxury. It's what you're owed.</p>
+    <p class="bproof reveal">Talk's cheap. Belt sander, water, blade. We put them through it on camera.</p>
   </div>
 </section>
 
