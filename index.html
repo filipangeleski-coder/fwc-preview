@@ -249,7 +249,7 @@ footer{padding-block:clamp(3rem,6vw,5rem);border-top:1px solid var(--far-line)}
         <button type="submit">Get my link →</button>
         <span class="success">You're in. Check your phone.</span>
       </div>
-      <p class="counter"><b id="count">64</b> tradies in. First 100 pairs go at <b>$219</b>. After that the price goes up.</p>
+      <p class="counter"><b id="count">68</b> tradies in. First 100 pairs go at <b>$219</b>. After that the price goes up.</p>
     </form>
   </div>
 </header>
@@ -402,8 +402,32 @@ function initScroll(){
   // accordion
   document.querySelectorAll('.q button').forEach(b=>b.addEventListener('click',()=>{const q=b.parentElement,o=q.classList.contains('open');document.querySelectorAll('.q').forEach(x=>x.classList.remove('open'));if(!o)q.classList.add('open');}));
 
-  // signup
-  document.querySelectorAll('.signup').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();const i=f.querySelector('input');if(!i.value||!i.value.includes('@')){i.focus();return;}f.classList.add('done');}));
+  // signup → Klaviyo Client API (company RDYHLe / list XQ9bDs "FAR Early Access", double opt-in OFF)
+  const KL_COMPANY='RDYHLe', KL_LIST='XQ9bDs';
+  const EMAIL_RE=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  document.querySelectorAll('.signup').forEach(f=>{
+    const i=f.querySelector('input'), btn=f.querySelector('button');
+    const origLabel=btn?btn.textContent:'';
+    f.addEventListener('submit',async e=>{
+      e.preventDefault();
+      const email=(i.value||'').trim();
+      if(!EMAIL_RE.test(email)){i.focus();return;}
+      if(btn){btn.disabled=true;btn.textContent='…';}
+      try{
+        const r=await fetch(`https://a.klaviyo.com/client/subscriptions/?company_id=${KL_COMPANY}`,{
+          method:'POST',
+          headers:{'Content-Type':'application/json','revision':'2024-10-15'},
+          body:JSON.stringify({data:{type:'subscription',attributes:{profile:{data:{type:'profile',attributes:{email}}}},relationships:{list:{data:{type:'list',id:KL_LIST}}}}})
+        });
+        if(!r.ok && r.status!==202) throw new Error('status '+r.status);
+        f.classList.add('done');
+        if(window.fbq) fbq('track','Lead');               // fires once Meta Pixel is on the live store
+        if(window.gtag) gtag('event','generate_lead');
+      }catch(err){
+        if(btn){btn.disabled=false;btn.textContent='Try again →';}  // honest: never fake success on failure
+      }
+    });
+  });
 
   // magnetic CTA
   if(matchMedia('(hover:hover)').matches && !RM){
