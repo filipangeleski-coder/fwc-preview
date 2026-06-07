@@ -203,6 +203,21 @@ section{padding-block:clamp(5rem,12vh,10rem);position:relative}
 .q .a>div{overflow:hidden}
 .q .a p{color:var(--far-smoke);max-width:62ch;padding-bottom:1.6rem}
 
+/* build / construction breakdown (becomes the real parts-explode when teardown photos land) */
+.build{background:var(--far-ink)}
+.build .eyebrow{margin-bottom:1.3rem}
+.build h2{font-size:clamp(1.9rem,5vw,3.6rem);max-width:18ch;margin-bottom:clamp(2.5rem,6vw,4.5rem);color:var(--far-white)}
+.build-grid{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+@media(min-width:880px){.build-grid{grid-template-columns:0.86fr 1.14fr}}
+.build-boot{position:relative;border:1px solid var(--far-line);border-radius:6px;overflow:hidden;background:var(--far-deep);aspect-ratio:4/5}
+.build-boot img{width:100%;height:100%;object-fit:cover;object-position:center 42%}
+.build-boot figcaption{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:1.1rem 1.2rem;font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--far-smoke);background:linear-gradient(180deg,transparent,color-mix(in oklch,var(--far-deep) 92%,transparent))}
+.layers{display:flex;flex-direction:column}
+.layer{display:grid;grid-template-columns:auto 1fr;gap:clamp(1rem,2.5vw,1.8rem);padding-block:clamp(1.2rem,2.4vw,1.7rem);border-top:1px solid var(--far-line);align-items:baseline}
+.layers .layer:last-child{border-bottom:1px solid var(--far-line)}
+.layer .ln{font-family:"Space Grotesk";font-weight:700;font-size:clamp(1rem,1.4vw,1.2rem);color:var(--far-smoke);letter-spacing:0.04em}
+.layer h3{font-size:clamp(1.2rem,2.4vw,1.7rem);letter-spacing:-0.02em;color:var(--far-white)}
+.layer p{margin-top:0.5rem;color:var(--far-smoke);max-width:42ch;font-size:clamp(0.98rem,0.97rem + 0.2vw,1.15rem)}
 footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px solid var(--far-line);overflow:hidden}
 .bigmark{font-family:"Space Grotesk";font-weight:700;font-size:clamp(7rem,40vw,34rem);line-height:0.74;letter-spacing:-0.06em;text-align:center;color:transparent;background:linear-gradient(180deg,color-mix(in oklch,var(--far-white) 16%,transparent),transparent 92%);-webkit-background-clip:text;background-clip:text;user-select:none;margin-bottom:clamp(1.5rem,4vw,3rem)}
 .foot{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;align-items:center}
@@ -302,6 +317,26 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
     <p>We're not a brand that found a factory. We're tradies who got tired of limping to the ute at knock-off and decided to build the boot nobody would make for us. <b>Every test, every stuff-up, every win, filmed and put online.</b></p>
     <p>You're not buying into a logo. You're getting in early on something three blokes are still building. The Founding Crew gets the first pair, and we don't forget who got in first.</p>
     <div class="sig">— Fil, Grant &amp; Lionel</div>
+  </div>
+</section>
+
+<section class="build">
+  <div class="wrap">
+    <div class="eyebrow reveal">Built to be cut open</div>
+    <h2 class="reveal">Nothing to hide. Here's what you're standing on.</h2>
+    <div class="build-grid">
+      <figure class="build-boot reveal">
+        <img src="hero_boot_b.png" alt="FAR boot">
+        <figcaption>Cut one open and this is what you find.</figcaption>
+      </figure>
+      <div class="layers">
+        <div class="layer reveal"><span class="ln">01</span><div><h3>Steel toe cap</h3><p>Certified to AS/NZS 2210.3. Built to a standard, not a price.</p></div></div>
+        <div class="layer reveal"><span class="ln">02</span><div><h3>SC-TPU midsole</h3><p>The same supercritical foam process as Adidas Ultraboost. Moulded into the outsole so it can't peel away or crumble in your shed.</p></div></div>
+        <div class="layer reveal"><span class="ln">03</span><div><h3>Poron insole</h3><p>Blue memory foam over Poron. Comfortable from the first shift. No break-in.</p></div></div>
+        <div class="layer reveal"><span class="ln">04</span><div><h3>Nitrile outsole</h3><p>Rated to 300°C. Most work boots tap out near 130. Grip that holds on a hot slab.</p></div></div>
+        <div class="layer reveal"><span class="ln">05</span><div><h3>Nubuck upper, side zip</h3><p>Water-resistant, it breathes, and the zip means it goes on without a fight.</p></div></div>
+      </div>
+    </div>
   </div>
 </section>
 
