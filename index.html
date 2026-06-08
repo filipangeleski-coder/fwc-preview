@@ -38,7 +38,7 @@ h1,h2,h3,.display{font-family:"Space Grotesk",sans-serif;font-weight:700;line-he
 :focus-visible{outline:2px solid var(--far-white);outline-offset:3px}
 
 /* ---------- cinematic intro ---------- */
-#intro{position:fixed;inset:0;z-index:10000;background:var(--far-deep);display:flex;align-items:center;justify-content:center;overflow:hidden}
+#intro{position:fixed;inset:0;z-index:10000;background:var(--far-deep);display:flex;align-items:flex-end;justify-content:center;padding-bottom:clamp(7vh,11vh,13vh);overflow:hidden}
 #intro .mark{font-family:"Space Grotesk";font-weight:700;font-size:clamp(4rem,18vw,16rem);letter-spacing:-0.04em;color:var(--far-white);opacity:0;transform:scale(1.18);filter:blur(8px)}
 #intro .sweep{position:absolute;top:50%;left:-30%;width:30%;height:2px;background:linear-gradient(90deg,transparent,var(--far-white),transparent);opacity:0.9;box-shadow:0 0 28px 2px color-mix(in oklch,var(--far-white) 60%,transparent)}
 #intro .sub{text-align:center;color:var(--far-smoke);font-size:0.78rem;letter-spacing:0.34em;text-transform:uppercase;opacity:0;margin-top:0.2rem}
@@ -51,8 +51,11 @@ h1,h2,h3,.display{font-family:"Space Grotesk",sans-serif;font-weight:700;line-he
 @keyframes subIn{to{opacity:1}}
 @keyframes introOut{to{transform:translateY(-100%);opacity:0}}
 #intro .gbg{position:absolute;inset:0;z-index:0;overflow:hidden}
-#intro .gbg video{width:100%;height:100%;object-fit:cover;opacity:0.62;filter:contrast(1.06) saturate(1.06)}
-#intro .gbg::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,transparent 34%,color-mix(in oklch,var(--far-deep) 78%,transparent) 82%,var(--far-deep) 100%)}
+#intro .gbg video{width:100%;height:100%;object-fit:cover;opacity:0.92;filter:contrast(1.06) saturate(1.06)}
+@media(min-width:760px){#intro .gbg video{object-fit:contain}}
+#intro .gbg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,color-mix(in oklch,var(--far-deep) 30%,transparent) 0%,transparent 32%,transparent 58%,color-mix(in oklch,var(--far-deep) 78%,transparent) 86%,var(--far-deep) 100%)}
+#intro .mark,#intro .sub,#intro .enter{text-shadow:0 2px 24px color-mix(in oklch,var(--far-deep) 80%,transparent)}
+#intro .mark{font-size:clamp(3rem,12vw,9rem)}
 #intro .inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:clamp(1rem,2.5vw,1.6rem);text-align:center}
 #intro .enter{font-family:"Space Grotesk";font-weight:700;font-size:0.9rem;letter-spacing:0.2em;text-transform:uppercase;border:1px solid var(--far-white);color:var(--far-white);background:transparent;padding:0.95rem 2.4rem;border-radius:2px;cursor:pointer;opacity:0;transform:translateY(12px);transition:background .25s var(--ease),color .25s var(--ease),opacity .6s var(--ease),transform .6s var(--ease)}
 #intro.go .enter{opacity:1;transform:none;transition-delay:1.15s}
@@ -258,7 +261,7 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
 </head>
 <body class="lock">
 <div id="intro" aria-hidden="true">
-  <div class="gbg"><video autoplay muted loop playsinline preload="auto" poster="entry_boot_poster.jpg"><source src="entry_boot.mp4" type="video/mp4"></video></div>
+  <div class="gbg"><video autoplay muted loop playsinline preload="auto" poster="entry_explode_poster.jpg"><source src="entry_explode_web.mp4" type="video/mp4"></video></div>
   <div class="sweep"></div>
   <div class="inner">
     <div class="mark">FAR</div>
