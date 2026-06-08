@@ -440,9 +440,9 @@ const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
   const btn=document.getElementById('enterBtn');
   if(btn)btn.addEventListener('click',e=>{e.preventDefault();finish();});
   if(!location.hash.includes('holdgate')){
+    // hold until the user clicks Enter (or deliberately scrolls). No auto-enter — Fil wants it to wait.
     addEventListener('wheel',finish,{once:true,passive:true});
-    addEventListener('touchmove',finish,{once:true,passive:true}); // deliberate scroll, NOT a tap (was touchstart -> tapped Enter then scrolled past hero)
-    setTimeout(finish,4500); // fallback auto-enter, lands on hero
+    addEventListener('touchmove',finish,{once:true,passive:true});
   }
 })();
 
