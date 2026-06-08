@@ -489,13 +489,18 @@ function initScroll(){
   // accordion
   document.querySelectorAll('.q button').forEach(b=>b.addEventListener('click',()=>{const q=b.parentElement,o=q.classList.contains('open');document.querySelectorAll('.q').forEach(x=>x.classList.remove('open'));if(!o)q.classList.add('open');}));
 
-  // signup — REAL CAPTURE via KickoffLabs AnyForm (kol.js, campaign 193736) -> syncs to Klaviyo
-  // list XQ9bDs with the kol_* referral properties (3/5/10 ladder). kol.js binds to every
-  // form[data-kol-form=true], auto-detects input[type=email], and OWNS the submit. We do NOT
-  // preventDefault or post elsewhere (AnyForm won't fire if the form is wired to another service).
-  // On a confirmed (non-anonymous) lead, kol.js emits 'kol:leadchange' -> we show our own styled
-  // inline success + the person's share link so they can pull their crew in. Degrades gracefully:
-  // if the event shape differs, capture still happens via AnyForm; only the inline flourish is skipped.
+  // signup — REAL CAPTURE via KickoffLabs (kol.js, campaign 193736) -> syncs to Klaviyo list
+  // XQ9bDs with the kol_* referral properties (3/5/10 ladder). kol.js binds to every
+  // form[data-kol-form=true] and captures the email — BUT ONLY once "On-Page"/AnyForm is enabled
+  // for the campaign (config flag onPageEnabled). Until that dashboard toggle is on, kol.js's
+  // connectForm() never runs. The guard below ALWAYS prevents the native submit so the page can
+  // never reload with the email in the URL (the leak caught in the S246 live test). When On-Page
+  // is on, kol.js's own submit handler captures + fires 'kol:leadchange' -> we paint the styled
+  // inline success + the person's share link below.
+  const EMAIL_RE=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  document.querySelectorAll('.signup').forEach(f=>{
+    f.addEventListener('submit',ev=>{ev.preventDefault();const i=f.querySelector('input');if(i&&!EMAIL_RE.test((i.value||'').trim()))i.focus();});
+  });
   document.addEventListener('kol:leadchange',e=>{
     const lead=e.detail&&e.detail.lead;
     if(!lead||lead.anonymous)return;
