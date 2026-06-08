@@ -41,7 +41,7 @@ h1,h2,h3,.display{font-family:"Space Grotesk",sans-serif;font-weight:700;line-he
 #intro{position:fixed;inset:0;z-index:10000;background:var(--far-deep);display:flex;align-items:center;justify-content:center;overflow:hidden}
 #intro .mark{font-family:"Space Grotesk";font-weight:700;font-size:clamp(4rem,18vw,16rem);letter-spacing:-0.04em;color:var(--far-white);opacity:0;transform:scale(1.18);filter:blur(8px)}
 #intro .sweep{position:absolute;top:50%;left:-30%;width:30%;height:2px;background:linear-gradient(90deg,transparent,var(--far-white),transparent);opacity:0.9;box-shadow:0 0 28px 2px color-mix(in oklch,var(--far-white) 60%,transparent)}
-#intro .sub{position:absolute;bottom:14%;left:0;right:0;text-align:center;color:var(--far-smoke);font-size:0.78rem;letter-spacing:0.34em;text-transform:uppercase;opacity:0}
+#intro .sub{text-align:center;color:var(--far-smoke);font-size:0.78rem;letter-spacing:0.34em;text-transform:uppercase;opacity:0;margin-top:0.2rem}
 #intro.go .mark{animation:markIn 1.1s var(--ease) .35s forwards}
 #intro.go .sweep{animation:sweep 1.1s var(--ease) .15s forwards}
 #intro.go .sub{animation:subIn .6s var(--ease) 1.1s forwards}
@@ -203,8 +203,8 @@ section{padding-block:clamp(5rem,12vh,10rem);position:relative}
 .q .a>div{overflow:hidden}
 .q .a p{color:var(--far-smoke);max-width:62ch;padding-bottom:1.6rem}
 
-/* exploded view — real parts, cut from the actual boot, separate on scroll */
-.explode{background:var(--far-ink);overflow:hidden}
+/* exploded view — real parts, studio-shot on black, separate on scroll. Pure-black stage so part backdrops + reflections merge seamlessly. */
+.explode{background:#000;overflow:hidden}
 .explode .eyebrow{margin-bottom:1.3rem}
 .explode h2{font-size:clamp(1.9rem,5vw,3.6rem);max-width:17ch;margin-bottom:clamp(2.5rem,6vw,4.5rem);color:var(--far-white)}
 .exploded{display:flex;flex-direction:column;align-items:center;gap:clamp(2rem,5vw,3.6rem);position:relative;max-width:760px;margin-inline:auto}
@@ -216,12 +216,18 @@ section{padding-block:clamp(5rem,12vh,10rem);position:relative}
   .epart:nth-child(even) img{order:2}.epart:nth-child(even) .elabel{order:1;text-align:right}
 }
 .epart .pimg{display:flex;justify-content:center;width:100%}
-.epart img{max-height:clamp(96px,18vw,168px);width:auto;object-fit:contain;filter:drop-shadow(0 26px 42px rgba(0,0,0,.6))}
+.epart img{max-height:clamp(132px,27vw,290px);width:auto;object-fit:contain;mix-blend-mode:lighten}
+.epart:first-child img{max-height:clamp(180px,34vw,360px)}
 .elabel{text-align:center}
 .elabel span{display:block;font-family:"Space Grotesk";font-weight:700;font-size:clamp(1.1rem,2.4vw,1.65rem);color:var(--far-white);letter-spacing:-0.015em}
 .elabel p{margin-top:0.45rem;color:var(--far-smoke);max-width:40ch;font-size:clamp(0.95rem,0.94rem + 0.2vw,1.1rem)}
 @media(min-width:720px){.elabel p{margin-inline:0}.epart:nth-child(even) .elabel p{margin-left:auto}}
 .enote{margin-top:clamp(2.5rem,5vw,4rem);text-align:center;color:var(--far-smoke);font-size:0.88rem;max-width:48ch;margin-inline:auto}
+/* mid-page signup band */
+.midjoin{text-align:center;padding-block:clamp(3.5rem,9vw,6.5rem);border-block:1px solid var(--far-line)}
+.midjoin .ml{font-family:"Space Grotesk";font-weight:700;font-size:clamp(1.5rem,4.5vw,2.8rem);letter-spacing:-0.025em;color:var(--far-white);max-width:18ch;margin-inline:auto;line-height:1.04}
+.midjoin .ms{margin-top:0.9rem;color:var(--far-smoke);font-size:clamp(0.95rem,1rem + 0.2vw,1.15rem)}
+.midjoin .signup{margin-inline:auto;margin-top:clamp(1.6rem,3vw,2.2rem)}
 footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px solid var(--far-line);overflow:hidden}
 .bigmark{font-family:"Space Grotesk";font-weight:700;font-size:clamp(7rem,40vw,34rem);line-height:0.74;letter-spacing:-0.06em;text-align:center;color:transparent;background:linear-gradient(180deg,color-mix(in oklch,var(--far-white) 16%,transparent),transparent 92%);-webkit-background-clip:text;background-clip:text;user-select:none;margin-bottom:clamp(1.5rem,4vw,3rem)}
 .foot{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;align-items:center}
@@ -293,10 +299,10 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
     <div class="eyebrow reveal">PREMIUM MY ARSE</div>
     <h2 class="reveal">You've been sold the same boot, dressed up, for years.</h2>
     <div class="pairs">
-      <div class="pair"><div class="bad">Soles that turn to chalk in the shed before you've worn them out.</div><div class="good">An SC-TPU midsole that won't crumble in your shed.</div></div>
-      <div class="pair"><div class="bad">A break-in period. A fortnight of bleeding into them to earn it.</div><div class="good">Comfortable from the first shift. No break-in.</div></div>
-      <div class="pair"><div class="bad">Linings that cook your feet into a sweatbox by smoko.</div><div class="good">Water-resistant, and it actually breathes.</div></div>
-      <div class="pair"><div class="bad">A six-month warranty on a boot you stand in twelve hours a day.</div><div class="good">A steel toe certified to AS/NZS 2210.3. To a standard, not a price.</div></div>
+      <div class="pair"><div class="bad">Soles that turn to chalk in the shed.</div><div class="good">An SC-TPU midsole that won't.</div></div>
+      <div class="pair"><div class="bad">A fortnight of bleeding them in.</div><div class="good">Comfortable from the first shift. No break-in.</div></div>
+      <div class="pair"><div class="bad">Linings that cook your feet by smoko.</div><div class="good">Water-resistant, and it breathes.</div></div>
+      <div class="pair"><div class="bad">A six-month warranty on a boot you live in.</div><div class="good">A steel toe to AS/NZS 2210.3.</div></div>
     </div>
     <p class="creed reveal">Comfort isn't a luxury. It's what you're owed.</p>
     <p class="bproof reveal">Talk's cheap. Belt sander, water, blade. We put them through it on camera.</p>
@@ -310,6 +316,18 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
   </div>
 </section>
 
+<section class="midjoin wrap">
+  <p class="ml reveal">Join the Founding Crew.</p>
+  <p class="ms reveal">The first 100 pairs go at $219. One email puts you on the list.</p>
+  <form class="signup reveal">
+    <div class="form-row">
+      <input type="email" inputmode="email" autocomplete="email" placeholder="Your email" aria-label="Your email" required>
+      <button type="submit">Get my link →</button>
+      <span class="success">You're in. Check your phone.</span>
+    </div>
+  </form>
+</section>
+
 <section class="founder wrap">
   <div class="portrait reveal">
     <img src="founders.png" alt="Fil, Grant and Lionel">
@@ -320,7 +338,7 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
     <h2>Three tradies. One workshop. No marketing department.</h2>
     <p>We're not a brand that found a factory. We're tradies who got tired of limping to the ute at knock-off and decided to build the boot nobody would make for us. <b>Every test, every stuff-up, every win, filmed and put online.</b></p>
     <p>You're not buying into a logo. You're getting in early on something three blokes are still building. The Founding Crew gets the first pair, and we don't forget who got in first.</p>
-    <div class="sig">— Fil, Grant &amp; Lionel</div>
+    <div class="sig">Fil, Grant &amp; Lionel</div>
   </div>
 </section>
 
@@ -329,19 +347,20 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
     <div class="eyebrow reveal">Built to be cut open</div>
     <h2 class="reveal">Nothing to hide. The real build, pulled apart.</h2>
     <div class="exploded">
-      <div class="epart"><img src="part_boot.png" alt="FAR boot"><div class="elabel"><span>The boot</span><p>Wheat nubuck, side zip, water-resistant. Built to AS/NZS 2210.3.</p></div></div>
-      <div class="epart"><img src="part_insole.png" alt="Poron insole"><div class="elabel"><span>Poron insole</span><p>Blue memory foam over Poron. Comfortable from the first shift. No break-in.</p></div></div>
-      <div class="epart"><img src="part_sctpu.png" alt="SC-TPU midsole"><div class="elabel"><span>SC-TPU midsole</span><p>The same supercritical foam process as Adidas Ultraboost. Moulded into the outsole so it can't peel away.</p></div></div>
-      <div class="epart"><img src="part_plate.png" alt="Steel plate"><div class="elabel"><span>Steel toe and plate</span><p>A steel toe certified to AS/NZS 2210.3, and a plate underfoot. Built to a standard, not a price.</p></div></div>
-      <div class="epart"><img src="part_sole.png" alt="Nitrile outsole"><div class="elabel"><span>Nitrile outsole</span><p>Rated to 300°C. Most work boots tap out near 130. Grip that holds on a hot slab.</p></div></div>
+      <div class="epart"><img src="ex_boot.png" alt="FAR boot"><div class="elabel"><span>The boot</span><p>Wheat nubuck, side zip, water-resistant. Built to AS/NZS 2210.3.</p></div></div>
+      <div class="epart"><img src="ex_toecap.png" alt="Steel toe cap"><div class="elabel"><span>Steel toe cap</span><p>Certified to AS/NZS 2210.3. The number a real safety boot has to hit.</p></div></div>
+      <div class="epart"><img src="ex_plate.png" alt="Anti-puncture plate"><div class="elabel"><span>Anti-puncture plate</span><p>A penetration-resistant plate underfoot. A nail through the sole stops here, not in your foot.</p></div></div>
+      <div class="epart"><img src="ex_sctpu.png" alt="SC-TPU midsole"><div class="elabel"><span>SC-TPU midsole</span><p>The same supercritical foam process as Adidas Ultraboost. Moulded into the outsole so it can't peel away.</p></div></div>
+      <div class="epart"><img src="ex_insole.png" alt="Poron insole"><div class="elabel"><span>Poron insole</span><p>Blue memory foam over Poron. Comfortable from the first shift. No break-in.</p></div></div>
+      <div class="epart"><img src="ex_outsole.png" alt="Nitrile outsole"><div class="elabel"><span>Nitrile outsole</span><p>Rated to 300°C. Most work boots tap out near 130. Grip that holds on a hot slab.</p></div></div>
     </div>
-    <p class="enote reveal">Real boot, really cut open. These are the actual parts, not a render.</p>
+    <p class="enote reveal">Every one of these came out of a real FAR boot I cut open.</p>
   </div>
 </section>
 
 <section class="offer wrap">
   <div class="eyebrow reveal">The Founding Crew</div>
-  <h2 class="reveal">Get in before it goes public. Then bring your crew and get looked after.</h2>
+  <h2 class="reveal">Get in early. Then bring your crew and get looked after.</h2>
   <p class="lead reveal">One email puts you on the list with a numbered spot. <b>The first 100 pairs go at $219.</b> Then you get your own link. Every tradie who joins through it moves you up the ladder.</p>
   <div class="ladder">
     <div class="rung reveal"><div class="mates">3</div><img class="thumb" src="tier_socks_cut.png" alt="FAR socks"><div class="what">mates sign up through your link</div><div class="prize">Free FAR socks</div></div>
@@ -400,13 +419,14 @@ const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
   const el=document.getElementById('intro');
   if(!el||RM){el&&el.remove();document.body.classList.remove('lock');startHero();return;}
   requestAnimationFrame(()=>el.classList.add('go'));
-  const finish=()=>{if(el.classList.contains('done'))return;el.classList.add('done');document.body.classList.remove('lock');startHero();setTimeout(()=>el.remove(),1000);};
+  const top=()=>{try{window.scrollTo(0,0);}catch(e){}};
+  const finish=()=>{if(el.classList.contains('done'))return;el.classList.add('done');document.body.classList.remove('lock');top();startHero();requestAnimationFrame(top);setTimeout(()=>{el.remove();top();},1000);};
   const btn=document.getElementById('enterBtn');
-  if(btn)btn.addEventListener('click',finish);
+  if(btn)btn.addEventListener('click',e=>{e.preventDefault();finish();});
   if(!location.hash.includes('holdgate')){
     addEventListener('wheel',finish,{once:true,passive:true});
-    addEventListener('touchstart',finish,{once:true,passive:true});
-    setTimeout(finish,12000); // fallback auto-enter
+    addEventListener('touchmove',finish,{once:true,passive:true}); // deliberate scroll, NOT a tap (was touchstart -> tapped Enter then scrolled past hero)
+    setTimeout(finish,4500); // fallback auto-enter, lands on hero
   }
 })();
 
