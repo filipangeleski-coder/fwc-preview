@@ -203,21 +203,25 @@ section{padding-block:clamp(5rem,12vh,10rem);position:relative}
 .q .a>div{overflow:hidden}
 .q .a p{color:var(--far-smoke);max-width:62ch;padding-bottom:1.6rem}
 
-/* build / construction breakdown (becomes the real parts-explode when teardown photos land) */
-.build{background:var(--far-ink)}
-.build .eyebrow{margin-bottom:1.3rem}
-.build h2{font-size:clamp(1.9rem,5vw,3.6rem);max-width:18ch;margin-bottom:clamp(2.5rem,6vw,4.5rem);color:var(--far-white)}
-.build-grid{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
-@media(min-width:880px){.build-grid{grid-template-columns:0.86fr 1.14fr}}
-.build-boot{position:relative;border:1px solid var(--far-line);border-radius:6px;overflow:hidden;background:var(--far-deep);aspect-ratio:4/5}
-.build-boot img{width:100%;height:100%;object-fit:cover;object-position:center 42%}
-.build-boot figcaption{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:1.1rem 1.2rem;font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--far-smoke);background:linear-gradient(180deg,transparent,color-mix(in oklch,var(--far-deep) 92%,transparent))}
-.layers{display:flex;flex-direction:column}
-.layer{display:grid;grid-template-columns:auto 1fr;gap:clamp(1rem,2.5vw,1.8rem);padding-block:clamp(1.2rem,2.4vw,1.7rem);border-top:1px solid var(--far-line);align-items:baseline}
-.layers .layer:last-child{border-bottom:1px solid var(--far-line)}
-.layer .ln{font-family:"Space Grotesk";font-weight:700;font-size:clamp(1rem,1.4vw,1.2rem);color:var(--far-smoke);letter-spacing:0.04em}
-.layer h3{font-size:clamp(1.2rem,2.4vw,1.7rem);letter-spacing:-0.02em;color:var(--far-white)}
-.layer p{margin-top:0.5rem;color:var(--far-smoke);max-width:42ch;font-size:clamp(0.98rem,0.97rem + 0.2vw,1.15rem)}
+/* exploded view — real parts, cut from the actual boot, separate on scroll */
+.explode{background:var(--far-ink);overflow:hidden}
+.explode .eyebrow{margin-bottom:1.3rem}
+.explode h2{font-size:clamp(1.9rem,5vw,3.6rem);max-width:17ch;margin-bottom:clamp(2.5rem,6vw,4.5rem);color:var(--far-white)}
+.exploded{display:flex;flex-direction:column;align-items:center;gap:clamp(2rem,5vw,3.6rem);position:relative;max-width:760px;margin-inline:auto}
+.exploded::before{content:"";position:absolute;top:4%;bottom:4%;left:50%;width:1px;background:linear-gradient(180deg,transparent,var(--far-line) 12%,var(--far-line) 88%,transparent);z-index:0}
+.epart{position:relative;z-index:1;display:grid;grid-template-columns:1fr;justify-items:center;gap:0.7rem;width:100%}
+@media(min-width:720px){
+  .epart{grid-template-columns:1fr 1fr;align-items:center;gap:clamp(1.5rem,4vw,3.5rem)}
+  .epart:nth-child(odd) img{order:1}.epart:nth-child(odd) .elabel{order:2;text-align:left}
+  .epart:nth-child(even) img{order:2}.epart:nth-child(even) .elabel{order:1;text-align:right}
+}
+.epart .pimg{display:flex;justify-content:center;width:100%}
+.epart img{max-height:clamp(96px,18vw,168px);width:auto;object-fit:contain;filter:drop-shadow(0 26px 42px rgba(0,0,0,.6))}
+.elabel{text-align:center}
+.elabel span{display:block;font-family:"Space Grotesk";font-weight:700;font-size:clamp(1.1rem,2.4vw,1.65rem);color:var(--far-white);letter-spacing:-0.015em}
+.elabel p{margin-top:0.45rem;color:var(--far-smoke);max-width:40ch;font-size:clamp(0.95rem,0.94rem + 0.2vw,1.1rem)}
+@media(min-width:720px){.elabel p{margin-inline:0}.epart:nth-child(even) .elabel p{margin-left:auto}}
+.enote{margin-top:clamp(2.5rem,5vw,4rem);text-align:center;color:var(--far-smoke);font-size:0.88rem;max-width:48ch;margin-inline:auto}
 footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px solid var(--far-line);overflow:hidden}
 .bigmark{font-family:"Space Grotesk";font-weight:700;font-size:clamp(7rem,40vw,34rem);line-height:0.74;letter-spacing:-0.06em;text-align:center;color:transparent;background:linear-gradient(180deg,color-mix(in oklch,var(--far-white) 16%,transparent),transparent 92%);-webkit-background-clip:text;background-clip:text;user-select:none;margin-bottom:clamp(1.5rem,4vw,3rem)}
 .foot{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;align-items:center}
@@ -320,23 +324,18 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
   </div>
 </section>
 
-<section class="build">
+<section class="explode">
   <div class="wrap">
     <div class="eyebrow reveal">Built to be cut open</div>
-    <h2 class="reveal">Nothing to hide. Here's what you're standing on.</h2>
-    <div class="build-grid">
-      <figure class="build-boot reveal">
-        <img src="hero_boot_b.png" alt="FAR boot">
-        <figcaption>Cut one open and this is what you find.</figcaption>
-      </figure>
-      <div class="layers">
-        <div class="layer reveal"><span class="ln">01</span><div><h3>Steel toe cap</h3><p>Certified to AS/NZS 2210.3. Built to a standard, not a price.</p></div></div>
-        <div class="layer reveal"><span class="ln">02</span><div><h3>SC-TPU midsole</h3><p>The same supercritical foam process as Adidas Ultraboost. Moulded into the outsole so it can't peel away or crumble in your shed.</p></div></div>
-        <div class="layer reveal"><span class="ln">03</span><div><h3>Poron insole</h3><p>Blue memory foam over Poron. Comfortable from the first shift. No break-in.</p></div></div>
-        <div class="layer reveal"><span class="ln">04</span><div><h3>Nitrile outsole</h3><p>Rated to 300°C. Most work boots tap out near 130. Grip that holds on a hot slab.</p></div></div>
-        <div class="layer reveal"><span class="ln">05</span><div><h3>Nubuck upper, side zip</h3><p>Water-resistant, it breathes, and the zip means it goes on without a fight.</p></div></div>
-      </div>
+    <h2 class="reveal">Nothing to hide. The real build, pulled apart.</h2>
+    <div class="exploded">
+      <div class="epart"><img src="part_boot.png" alt="FAR boot"><div class="elabel"><span>The boot</span><p>Wheat nubuck, side zip, water-resistant. Built to AS/NZS 2210.3.</p></div></div>
+      <div class="epart"><img src="part_insole.png" alt="Poron insole"><div class="elabel"><span>Poron insole</span><p>Blue memory foam over Poron. Comfortable from the first shift. No break-in.</p></div></div>
+      <div class="epart"><img src="part_sctpu.png" alt="SC-TPU midsole"><div class="elabel"><span>SC-TPU midsole</span><p>The same supercritical foam process as Adidas Ultraboost. Moulded into the outsole so it can't peel away.</p></div></div>
+      <div class="epart"><img src="part_plate.png" alt="Steel plate"><div class="elabel"><span>Steel toe and plate</span><p>A steel toe certified to AS/NZS 2210.3, and a plate underfoot. Built to a standard, not a price.</p></div></div>
+      <div class="epart"><img src="part_sole.png" alt="Nitrile outsole"><div class="elabel"><span>Nitrile outsole</span><p>Rated to 300°C. Most work boots tap out near 130. Grip that holds on a hot slab.</p></div></div>
     </div>
+    <p class="enote reveal">Real boot, really cut open. These are the actual parts, not a render.</p>
   </div>
 </section>
 
@@ -501,6 +500,11 @@ function initScroll(){
     const tl=gsap.timeline({scrollTrigger:{trigger:p,start:'top 86%',end:'top 58%',scrub:true}});
     tl.from(p.querySelector('.bad'),{x:-30,opacity:0,ease:'none'},0)
       .from(p.querySelector('.good'),{x:30,opacity:0,ease:'none'},0);
+  });
+
+  // exploded parts rise + scale into place as the section scrolls (explode reveal, staggered by position)
+  gsap.utils.toArray('.epart').forEach(p=>{
+    gsap.from(p,{opacity:0,y:70,scale:0.88,ease:'none',scrollTrigger:{trigger:p,start:'top 90%',end:'top 56%',scrub:true}});
   });
 
   // rally: words rise on scrub
