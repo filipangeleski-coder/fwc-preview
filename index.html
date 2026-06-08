@@ -108,7 +108,7 @@ h1,h2,h3,.display{font-family:"Space Grotesk",sans-serif;font-weight:700;line-he
 .ticker{border-block:1px solid var(--far-line);padding-block:clamp(0.8rem,1.6vw,1.3rem);overflow:hidden;white-space:nowrap;background:var(--far-deep)}
 .ticker .track{display:inline-flex;align-items:center;gap:2.5rem;will-change:transform}
 .ticker span{font-family:"Space Grotesk";font-weight:700;font-size:clamp(1.8rem,5.5vw,4.5rem);letter-spacing:-0.03em;color:var(--far-white);text-transform:uppercase}
-.ticker .o{color:transparent;-webkit-text-stroke:1px var(--far-line)}
+.ticker .o{color:transparent;-webkit-text-stroke:1px color-mix(in oklch,var(--far-white) 70%,transparent);text-stroke:1px color-mix(in oklch,var(--far-white) 70%,transparent)}
 .ticker .dot{color:var(--far-smoke)}
 
 /* reveal (GSAP-driven; visible by default if JS/GSAP fails) */
@@ -218,6 +218,13 @@ section{padding-block:clamp(5rem,12vh,10rem);position:relative}
 .epart .pimg{display:flex;justify-content:center;width:100%}
 .epart img{max-height:clamp(132px,27vw,290px);width:auto;object-fit:contain;mix-blend-mode:lighten}
 .epart:first-child img{max-height:clamp(180px,34vw,360px)}
+.epart img{transition:transform .4s var(--ease)}
+@media(hover:hover){
+  .epart{transition:filter .35s var(--ease)}
+  .exploded:hover .epart{filter:brightness(0.4)}
+  .exploded:hover .epart:hover{filter:brightness(1.06)}
+  .epart:hover img{transform:scale(1.08)}
+}
 .elabel{text-align:center}
 .elabel span{display:block;font-family:"Space Grotesk";font-weight:700;font-size:clamp(1.1rem,2.4vw,1.65rem);color:var(--far-white);letter-spacing:-0.015em}
 .elabel p{margin-top:0.45rem;color:var(--far-smoke);max-width:40ch;font-size:clamp(0.95rem,0.94rem + 0.2vw,1.1rem)}
@@ -299,10 +306,9 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
     <div class="eyebrow reveal">PREMIUM MY ARSE</div>
     <h2 class="reveal">You've been sold the same boot, dressed up, for years.</h2>
     <div class="pairs">
-      <div class="pair"><div class="bad">Soles that turn to chalk in the shed.</div><div class="good">An SC-TPU midsole that won't.</div></div>
-      <div class="pair"><div class="bad">A fortnight of bleeding them in.</div><div class="good">Comfortable from the first shift. No break-in.</div></div>
+      <div class="pair"><div class="bad">Soles that crumble in the shed.</div><div class="good">A nitrile sole that won't.</div></div>
+      <div class="pair"><div class="bad">A fortnight of wearing them in.</div><div class="good">Comfortable from the first shift. No break-in.</div></div>
       <div class="pair"><div class="bad">Linings that cook your feet by smoko.</div><div class="good">Water-resistant, and it breathes.</div></div>
-      <div class="pair"><div class="bad">A six-month warranty on a boot you live in.</div><div class="good">A steel toe to AS/NZS 2210.3.</div></div>
     </div>
     <p class="creed reveal">Comfort isn't a luxury. It's what you're owed.</p>
     <p class="bproof reveal">Talk's cheap. Belt sander, water, blade. We put them through it on camera.</p>
@@ -319,7 +325,7 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
 <section class="midjoin wrap">
   <p class="ml reveal">Join the Founding Crew.</p>
   <p class="ms reveal">The first 100 pairs go at $219. One email puts you on the list.</p>
-  <form class="signup reveal">
+  <form class="signup">
     <div class="form-row">
       <input type="email" inputmode="email" autocomplete="email" placeholder="Your email" aria-label="Your email" required>
       <button type="submit">Get my link →</button>
@@ -350,7 +356,7 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
       <div class="epart"><img src="ex_boot.png" alt="FAR boot"><div class="elabel"><span>The boot</span><p>Wheat nubuck, side zip, water-resistant. Built to AS/NZS 2210.3.</p></div></div>
       <div class="epart"><img src="ex_toecap.png" alt="Steel toe cap"><div class="elabel"><span>Steel toe cap</span><p>Certified to AS/NZS 2210.3. The number a real safety boot has to hit.</p></div></div>
       <div class="epart"><img src="ex_plate.png" alt="Anti-puncture plate"><div class="elabel"><span>Anti-puncture plate</span><p>A penetration-resistant plate underfoot. A nail through the sole stops here, not in your foot.</p></div></div>
-      <div class="epart"><img src="ex_sctpu.png" alt="SC-TPU midsole"><div class="elabel"><span>SC-TPU midsole</span><p>The same supercritical foam process as Adidas Ultraboost. Moulded into the outsole so it can't peel away.</p></div></div>
+      <div class="epart"><img src="ex_sctpu.png" alt="SC-TPU heel"><div class="elabel"><span>SC-TPU heel</span><p>Energy-return foam moulded into the heel. The same supercritical process as Adidas Ultraboost.</p></div></div>
       <div class="epart"><img src="ex_insole.png" alt="Poron insole"><div class="elabel"><span>Poron insole</span><p>Blue memory foam over Poron. Comfortable from the first shift. No break-in.</p></div></div>
       <div class="epart"><img src="ex_outsole.png" alt="Nitrile outsole"><div class="elabel"><span>Nitrile outsole</span><p>Rated to 300°C. Most work boots tap out near 130. Grip that holds on a hot slab.</p></div></div>
     </div>
