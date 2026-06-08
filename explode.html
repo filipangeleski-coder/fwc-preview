@@ -1,0 +1,62 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;box-sizing:border-box}
+html,body{height:100%;background:#000;overflow:hidden}
+.bex{position:fixed;inset:0;display:grid;place-items:center;background:#000}
+.bex img{position:absolute;width:auto;mix-blend-mode:screen;will-change:transform,opacity;left:50%;top:50%}
+.bx-boot{max-height:46vmin}
+.bx-part{max-height:24vmin}
+.bx-part[data-i="0"]{max-height:17vmin}   /* toe cap */
+.bx-part[data-i="2"]{max-height:15vmin}   /* sctpu */
+.glow{position:fixed;left:50%;top:50%;width:70vmin;height:70vmin;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(255,238,210,0.5),transparent 62%);opacity:0;pointer-events:none;mix-blend-mode:screen}
+</style></head><body>
+<div class="bex" id="bex">
+  <div class="glow" id="glow"></div>
+  <img class="bx-boot" id="boot" src="ex_boot.png">
+  <img class="bx-part" data-i="0" src="ex_toecap.png">
+  <img class="bx-part" data-i="1" src="ex_plate.png">
+  <img class="bx-part" data-i="2" src="ex_sctpu.png">
+  <img class="bx-part" data-i="3" src="ex_insole.png">
+  <img class="bx-part" data-i="4" src="ex_outsole.png">
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+// exploded target positions (vmin from centre), per part index 0..4
+const POS=[
+  {y:-37,x:-7,r:-12}, // toe cap
+  {y:-16,x: 8,r: 10}, // plate
+  {y: 2, x:-8,r:-13}, // sctpu
+  {y: 21,x: 8,r:  9}, // insole
+  {y: 42,x:-5,r: -8}, // outsole
+];
+const vmin=()=>Math.min(innerWidth,innerHeight)/100;
+function place(){
+  gsap.set('.bx-part',{xPercent:-50,yPercent:-50});
+  gsap.set('#boot',{xPercent:-50,yPercent:-50});
+}
+place(); addEventListener('resize',()=>{});
+gsap.set('.bx-part',{x:0,y:0,opacity:0,scale:0.35,rotation:0});
+gsap.set('#boot',{opacity:1,scale:1,rotation:0,y:-4*vmin()});
+gsap.set('#glow',{opacity:0,scale:0.4});
+
+function run(){
+  const v=vmin();
+  const tl=gsap.timeline();
+  // hold the whole boot, then burst
+  tl.to('#boot',{scale:1.06,duration:0.6,ease:'power1.inOut'},0)
+    .to('#glow',{opacity:1,scale:1.1,duration:0.45,ease:'power2.out'},0.55)
+    .to('#glow',{opacity:0,duration:0.9,ease:'power2.in'},0.9)
+    .to('#boot',{opacity:0,scale:1.5,duration:0.55,ease:'power3.in'},0.6)
+    .to('.bx-part',{opacity:1,duration:0.18},0.72)
+    .to('.bx-part',{
+        x:(i)=>POS[i].x*v, y:(i)=>POS[i].y*v, rotation:(i)=>POS[i].r, scale:1,
+        duration:1.25, ease:'power4.out', stagger:0.05},0.72)
+    // settle float
+    .to('.bx-part',{y:'+='+(1.4*v),duration:2.4,ease:'sine.inOut',yoyo:true,repeat:-1,
+        stagger:{each:0.18,yoyo:true,repeat:-1}},'+=0.15');
+  window.__tl=tl;
+}
+window.addEventListener('load',run);
+</script></body></html>
