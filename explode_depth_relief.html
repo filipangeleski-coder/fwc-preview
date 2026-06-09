@@ -1,0 +1,258 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FAR — depth-relief explode (S248 prototype)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;box-sizing:border-box}
+html,body{height:100%;background:#000;overflow:hidden;font-family:"Space Grotesk",sans-serif}
+canvas{display:block}
+#ui{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:9vh;pointer-events:none;z-index:5}
+#enter{font-family:inherit;font-weight:700;font-size:0.9rem;letter-spacing:0.2em;text-transform:uppercase;border:1px solid #f5f5f5;color:#f5f5f5;background:transparent;padding:0.95rem 2.4rem;border-radius:2px;cursor:pointer;opacity:0;transform:translateY(12px);transition:opacity .7s,transform .7s,background .25s,color .25s;pointer-events:auto}
+#enter.on{opacity:1;transform:none}
+#enter:hover{background:#f5f5f5;color:#0a0a0a}
+#sub{color:#8a8a8a;font-size:0.74rem;letter-spacing:0.32em;text-transform:uppercase;margin-bottom:1.2rem;opacity:0;transition:opacity .8s}
+#sub.on{opacity:1}
+#mark{position:fixed;top:4.5vh;left:50%;transform:translateX(-50%);color:#f5f5f5;font-weight:700;font-size:1.6rem;letter-spacing:0.01em;z-index:5}
+#replay{position:fixed;right:1rem;bottom:1rem;z-index:9;background:none;border:1px solid #333;color:#777;font-family:inherit;font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;padding:0.45rem 0.8rem;border-radius:2px;cursor:pointer}
+#replay:hover{color:#eee;border-color:#777}
+#fade{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .9s;z-index:20}
+</style>
+</head><body>
+<div id="mark">FAR</div>
+<div id="ui">
+  <div id="sub">Nothing to hide. This is the boot.</div>
+  <button id="enter" type="button">Enter →</button>
+</div>
+<button id="replay" type="button">Replay</button>
+<div id="fade"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+
+const MOBILE = Math.min(innerWidth, innerHeight) < 700;
+const SEG = MOBILE ? 110 : 180;          // plane subdivisions (relief resolution)
+const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+const renderer = new THREE.WebGLRenderer({antialias: true, powerPreference: 'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+renderer.setSize(innerWidth, innerHeight);
+renderer.setClearColor(0x000000, 1);
+document.body.prepend(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0x000000, 34, 58);
+const camera = new THREE.PerspectiveCamera(38, innerWidth/innerHeight, 0.1, 100);
+camera.position.set(0, 0, 34);
+
+// everything that explodes lives in one group so parallax = group rotation
+const rig = new THREE.Group();
+scene.add(rig);
+
+/* ---------- depth-relief part ---------- */
+const loader = new THREE.TextureLoader();
+const load = u => new Promise(res => loader.load(u, t => { t.colorSpace = THREE.SRGBColorSpace; res(t); }));
+
+function reliefMaterial(map, depth) {
+  return new THREE.ShaderMaterial({
+    uniforms: {
+      uMap: {value: map}, uDepth: {value: depth},
+      uDisp: {value: 2.2},          // relief thickness (world units)
+      uOpacity: {value: 1},
+      uKeyLo: {value: 0.030}, uKeyHi: {value: 0.085},  // luminance key (matches page lighten-blend look)
+      uShade: {value: 0.10},        // subtle depth shading to sell volume
+      uGain: {value: 1.07},         // slight exposure lift vs pure black stage
+    },
+    vertexShader: `
+      uniform sampler2D uDepth; uniform float uDisp;
+      varying vec2 vUv; varying float vD;
+      void main(){
+        vUv = uv;
+        float d = texture2D(uDepth, uv).r;
+        vD = d;
+        vec3 p = position + vec3(0.0, 0.0, (d - 0.5) * uDisp);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+      }`,
+    fragmentShader: `
+      uniform sampler2D uMap; uniform float uOpacity, uKeyLo, uKeyHi, uShade, uGain;
+      varying vec2 vUv; varying float vD;
+      void main(){
+        vec4 c = texture2D(uMap, vUv);
+        float lum = max(max(c.r, c.g), c.b);
+        float a = smoothstep(uKeyLo, uKeyHi, lum);
+        // recessed areas dip slightly darker -> reads as volume under motion
+        vec3 col = c.rgb * uGain * (1.0 - uShade + uShade * smoothstep(0.2, 0.9, vD));
+        gl_FragColor = vec4(col, a * uOpacity);
+        if (gl_FragColor.a < 0.003) discard;
+      }`,
+    transparent: true, depthWrite: false, side: THREE.DoubleSide,
+  });
+}
+
+async function makePart(name, height) {
+  const [map, depth] = await Promise.all([load(name + '.png'), load(name + '_depth.png')]);
+  const aspect = map.image.naturalWidth / map.image.naturalHeight;
+  const geo = new THREE.PlaneGeometry(height * aspect, height, SEG, SEG);
+  const mesh = new THREE.Mesh(geo, reliefMaterial(map, depth));
+  mesh.userData.name = name;
+  rig.add(mesh);
+  return mesh;
+}
+
+/* ---------- dust (real 3D particles = real parallax) ---------- */
+function makeDust() {
+  const N = MOBILE ? 260 : 520;
+  const pos = new Float32Array(N * 3), seed = new Float32Array(N);
+  for (let i = 0; i < N; i++) {
+    pos[i*3] = (Math.random() - 0.5) * 46;
+    pos[i*3+1] = (Math.random() - 0.5) * 30;
+    pos[i*3+2] = (Math.random() - 0.5) * 26;
+    seed[i] = Math.random() * 100;
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  g.setAttribute('aSeed', new THREE.BufferAttribute(seed, 1));
+  const m = new THREE.ShaderMaterial({
+    uniforms: {uTime: {value: 0}, uPx: {value: renderer.getPixelRatio()}},
+    vertexShader: `
+      attribute float aSeed; uniform float uTime, uPx; varying float vA;
+      void main(){
+        vec3 p = position;
+        p.y += sin(uTime * 0.12 + aSeed) * 1.6 + uTime * 0.22;
+        p.y = mod(p.y + 15.0, 30.0) - 15.0;
+        p.x += sin(uTime * 0.07 + aSeed * 2.0) * 0.8;
+        vec4 mv = modelViewMatrix * vec4(p, 1.0);
+        float s = (1.4 + sin(aSeed) * 0.9);
+        gl_PointSize = s * uPx * (26.0 / -mv.z);
+        vA = 0.10 + 0.16 * fract(aSeed * 0.37);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: `
+      varying float vA;
+      void main(){
+        float d = length(gl_PointCoord - 0.5);
+        float a = smoothstep(0.5, 0.08, d) * vA;
+        gl_FragColor = vec4(0.96, 0.95, 0.92, a);
+      }`,
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+  });
+  const pts = new THREE.Points(g, m);
+  scene.add(pts);
+  return m;
+}
+
+/* ---------- burst flash ---------- */
+function makeFlash() {
+  const cv = document.createElement('canvas'); cv.width = cv.height = 256;
+  const x = cv.getContext('2d');
+  const gr = x.createRadialGradient(128,128,0,128,128,128);
+  gr.addColorStop(0, 'rgba(255,238,210,0.85)'); gr.addColorStop(0.45, 'rgba(255,238,210,0.28)'); gr.addColorStop(1, 'rgba(255,238,210,0)');
+  x.fillStyle = gr; x.fillRect(0,0,256,256);
+  const t = new THREE.CanvasTexture(cv);
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({map: t, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending}));
+  s.scale.set(26, 26, 1);
+  scene.add(s);
+  return s.material;
+}
+
+/* ---------- build ---------- */
+// exploded stack targets: y spread + z offsets for parallax + small safe rotations
+const LAYOUT = [
+  {n: 'ex_toecap',  h: 4.6, y: 8.2,  x: -1.5, z: 2.2,  rz: -0.13, ry: -0.10, gain: 1.25},
+  {n: 'ex_plate',   h: 5.6, y: 4.0,  x: 1.5,  z: -1.6, rz: 0.10,  ry: 0.12,  gain: 1.07},
+  {n: 'ex_sctpu',   h: 3.8, y: 0.3,  x: -1.6, z: 1.2,  rz: -0.12, ry: -0.08, gain: 1.07},
+  {n: 'ex_insole',  h: 5.8, y: -3.6, x: 1.6,  z: -1.0, rz: 0.09,  ry: 0.10,  gain: 1.07},
+  {n: 'ex_outsole', h: 6.6, y: -8.0, x: -1.3, z: 1.8,  rz: -0.07, ry: -0.12, gain: 1.12},
+];
+
+const boot = await makePart('ex_boot', 15);
+const parts = await Promise.all(LAYOUT.map(L => makePart(L.n, L.h)));
+parts.forEach((p, i) => { p.material.uniforms.uGain.value = LAYOUT[i].gain; });
+rig.position.y = 0.8;   // lift the composition off the UI band
+const dust = makeDust();
+const flash = makeFlash();
+
+// start state
+boot.position.set(0, -0.2, 0);
+parts.forEach(p => { p.position.set(0, -0.5, -0.5); p.scale.setScalar(0.36); p.material.uniforms.uOpacity.value = 0; });
+
+/* ---------- choreography ---------- */
+const sub = document.getElementById('sub'), enter = document.getElementById('enter');
+
+function run() {
+  gsap.globalTimeline.clear();
+  sub.classList.remove('on'); enter.classList.remove('on');
+  boot.material.uniforms.uOpacity.value = 1;
+  boot.scale.setScalar(1); boot.position.set(0, -0.2, 0); boot.rotation.set(0, 0, 0);
+  parts.forEach(p => { p.position.set(0, -0.5, -0.5); p.rotation.set(0,0,0); p.scale.setScalar(0.36); p.material.uniforms.uOpacity.value = 0; });
+  camera.position.set(0, 0, RM ? 36 : 34);
+  rig.rotation.set(0, 0, 0);
+
+  const tl = gsap.timeline();
+  // 1 — the boot holds. slow dolly-in, gentle breathe, slight relief sway so the depth reads immediately
+  tl.to(camera.position, {z: 30.5, duration: 1.9, ease: 'power1.inOut'}, 0)
+    .to(boot.rotation, {y: 0.10, duration: 1.9, ease: 'sine.inOut'}, 0)
+    .to(boot.scale, {x: 1.04, y: 1.04, z: 1.04, duration: 1.7, ease: 'power1.inOut'}, 0.2)
+  // 2 — burst
+    .to(flash, {opacity: 1, duration: 0.30, ease: 'power2.out'}, 1.75)
+    .to(flash, {opacity: 0, duration: 0.8, ease: 'power2.in'}, 2.08)
+    .to(boot.material.uniforms.uOpacity, {value: 0, duration: 0.5, ease: 'power3.in'}, 1.85)
+    .to(boot.scale, {x: 1.5, y: 1.5, z: 1.5, duration: 0.55, ease: 'power3.in'}, 1.85);
+  parts.forEach((p, i) => {
+    const L = LAYOUT[i], t0 = 2.0 + i * 0.055;
+    tl.set(p.material.uniforms.uOpacity, {value: 1}, 2.0)
+      .to(p.position, {x: L.x, y: L.y, z: L.z, duration: 1.6, ease: 'power3.out'}, t0)
+      .to(p.scale, {x: 1, y: 1, z: 1, duration: 1.5, ease: 'power3.out'}, t0)
+      .to(p.rotation, {z: L.rz, y: L.ry, duration: 1.6, ease: 'power3.out'}, t0);
+  });
+  // 3 — camera pulls back + lifts to frame the full stack
+  tl.to(camera.position, {z: MOBILE ? 54 : 47, y: 0.5, duration: 1.7, ease: 'power2.out'}, 1.95)
+  // 4 — settle: each part floats with its own phase; slow rig drift; UI in
+    .add(() => {
+      parts.forEach((p, i) => {
+        gsap.to(p.position, {y: LAYOUT[i].y + 0.55, duration: 2.6 + i * 0.22, ease: 'sine.inOut', yoyo: true, repeat: -1});
+        gsap.to(p.rotation, {y: LAYOUT[i].ry * 2.1, duration: 3.4 + i * 0.3, ease: 'sine.inOut', yoyo: true, repeat: -1});
+      });
+      if (!RM) gsap.to(rig.rotation, {y: 0.07, duration: 7, ease: 'sine.inOut', yoyo: true, repeat: -1});
+      sub.classList.add('on'); enter.classList.add('on');
+    }, 3.6);
+  window.__tl = tl;
+}
+
+/* ---------- pointer parallax (lerped) ---------- */
+let tx = 0, ty = 0;
+addEventListener('pointermove', e => {
+  tx = (e.clientX / innerWidth - 0.5);
+  ty = (e.clientY / innerHeight - 0.5);
+}, {passive: true});
+
+/* ---------- loop ---------- */
+const clock = new THREE.Clock();
+let px = 0, py = 0;
+renderer.setAnimationLoop(() => {
+  const t = clock.getElapsedTime();
+  dust.uniforms.uTime.value = t;
+  if (!RM) {
+    px += (tx - px) * 0.045; py += (ty - py) * 0.045;
+    rig.rotation.y += ((px * 0.30) - rig.rotation.y) * 0.06;
+    rig.rotation.x += ((py * 0.16) - rig.rotation.x) * 0.06;
+  }
+  renderer.render(scene, camera);
+});
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+
+document.getElementById('replay').addEventListener('click', run);
+document.getElementById('enter').addEventListener('click', () => {
+  document.getElementById('fade').style.opacity = 1;
+  setTimeout(() => document.getElementById('fade').style.opacity = 0, 1400);
+});
+
+run();
+</script></body></html>
