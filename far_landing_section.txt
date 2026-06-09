@@ -65,6 +65,7 @@ h1,h2,h3,.display{font-family:"Space Grotesk",sans-serif;font-weight:700;line-he
 .foot .brand .far-logo{height:2rem}
 .mark .far-logo{width:clamp(210px,66vw,560px);height:auto;margin:0 auto}
 .bigmark .far-logo{width:min(92vw,1080px);height:auto;opacity:.16;fill:var(--far-white);margin:0 auto}
+.hero-ghost .far-logo{height:38vw;width:auto;max-width:none;fill:var(--far-white)}
 .cta-mini{font-family:"Space Grotesk";font-weight:500;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;border:1px solid var(--far-line);padding:0.6rem 1.1rem;border-radius:2px;transition:.25s var(--ease)}
 .cta-mini:hover{background:var(--far-white);color:var(--far-black);border-color:var(--far-white)}
 
@@ -280,7 +281,7 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
     <!-- Cinematic hero: real boot, Gemini-composited dark studio (AMBER set-dressing, whole boot, no construction claim) -->
     <img class="hero-boot-img" src="https://filipangeleski-coder.github.io/fwc-preview/hero_boot_a.png" alt="">
   </div>
-  <div class="hero-ghost" id="ghost" aria-hidden="true">FAR</div>
+  <div class="hero-ghost" id="ghost" aria-hidden="true"><svg class="far-logo"><use href="#far-wm"></use></svg></div>
   <div class="wrap">
     <div class="hero-tag eyebrow">Founding Crew · Open now</div>
     <h1>
