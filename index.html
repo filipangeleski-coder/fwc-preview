@@ -500,7 +500,18 @@ function initScroll(){
   // inline success + the person's share link below.
   const EMAIL_RE=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
   document.querySelectorAll('.signup').forEach(f=>{
-    f.addEventListener('submit',ev=>{ev.preventDefault();const i=f.querySelector('input');if(i&&!EMAIL_RE.test((i.value||'').trim()))i.focus();});
+    f.addEventListener('submit',ev=>{
+      ev.preventDefault();
+      const i=f.querySelector('input'); const email=(i&&i.value||'').trim();
+      if(!EMAIL_RE.test(email)){i&&i.focus();return;}
+      const btn=f.querySelector('button'); if(btn)btn.disabled=true;
+      const done=(share)=>{f.classList.add('done');const s=f.querySelector('.success');if(s)s.innerHTML=share?('You’re in. <a href="'+share+'" style="text-decoration:underline">Send your mates your link →</a>'):'You’re in.';};
+      // Call KickoffLabs' own lead-create (assigns referral link + conversion attribution). NOTE: whether
+      // this feeds Klaviyo for a REAL (non-fraud-flagged) user is pending one organic phone test.
+      if(window._kol&&_kol.leads&&typeof _kol.leads.addLead==='function'){
+        _kol.leads.addLead({email},'anyform').then(lead=>done(lead&&(lead.social_url||lead.status_url||''))).catch(()=>{if(btn)btn.disabled=false;done('');});
+      } else { done(''); }
+    });
   });
   document.addEventListener('kol:leadchange',e=>{
     const lead=e.detail&&e.detail.lead;
