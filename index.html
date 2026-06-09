@@ -112,6 +112,11 @@ h1,h2,h3,.display{font-family:"Space Grotesk",sans-serif;font-weight:700;line-he
 .signup .success{display:none;font-family:"Space Grotesk";font-weight:700;font-size:1.15rem}
 .signup.done input,.signup.done button{display:none}
 .signup.done .success{display:block;text-align:center;width:100%}
+.su-sub{display:block;font-family:"DM Sans";font-weight:400;font-size:0.9rem;color:var(--far-smoke);margin-top:0.45rem;letter-spacing:0;line-height:1.4}
+.su-share{display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;margin-top:0.95rem}
+.su-btn{font-family:"Space Grotesk";font-weight:500;font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;border:1px solid var(--far-line);color:var(--far-white);background:transparent;padding:0.6rem 1.05rem;border-radius:2px;cursor:pointer;transition:background .2s var(--ease),color .2s var(--ease),border-color .2s}
+.su-btn:hover{background:var(--far-white);color:var(--far-black);border-color:var(--far-white)}
+.signup.done .form-row{flex-direction:column;align-items:center}
 
 /* ticker */
 .ticker{border-block:1px solid var(--far-line);padding-block:clamp(0.8rem,1.6vw,1.3rem);overflow:hidden;white-space:nowrap;background:var(--far-deep)}
@@ -514,7 +519,15 @@ function initScroll(){
       const i=f.querySelector('input'); const email=(i&&i.value||'').trim();
       if(!EMAIL_RE.test(email)){i&&i.focus();return;}
       const btn=f.querySelector('button'); if(btn)btn.disabled=true;
-      const done=(share)=>{f.classList.add('done');const s=f.querySelector('.success');if(s)s.innerHTML=share?('You’re in. <a href="'+share+'" style="text-decoration:underline">Send your mates your link →</a>'):'You’re in.';};
+      const done=(share)=>{
+        f.classList.add('done');
+        const s=f.querySelector('.success'); if(!s)return;
+        if(share){
+          const msg='Mate, check these out. Work boots built by a tradie. '+share;
+          s.innerHTML='You’re in.<span class="su-sub">Bring your mates in. Every one moves you up the ladder.</span><span class="su-share"><a class="su-btn" href="https://wa.me/?text='+encodeURIComponent(msg)+'" target="_blank" rel="noopener">WhatsApp</a><a class="su-btn" href="sms:?&body='+encodeURIComponent(msg)+'">Text</a><button type="button" class="su-btn su-copy">Copy link</button></span>';
+          const cp=s.querySelector('.su-copy'); if(cp)cp.addEventListener('click',function(){try{navigator.clipboard.writeText(share);}catch(e){}cp.textContent='Copied ✓';});
+        } else { s.textContent='You’re in.'; }
+      };
       // Call KickoffLabs' own lead-create (assigns referral link + conversion attribution). NOTE: whether
       // this feeds Klaviyo for a REAL (non-fraud-flagged) user is pending one organic phone test.
       if(window._kol&&_kol.leads&&typeof _kol.leads.addLead==='function'){
@@ -522,16 +535,8 @@ function initScroll(){
       } else { done(''); }
     });
   });
-  document.addEventListener('kol:leadchange',e=>{
-    const lead=e.detail&&e.detail.lead;
-    if(!lead||lead.anonymous)return;
-    const share=lead.share_url||lead.status_url||(window._kol&&_kol.options&&_kol.options.share_url)||'';
-    document.querySelectorAll('.signup').forEach(f=>{
-      f.classList.add('done');
-      const s=f.querySelector('.success');
-      if(s&&share)s.innerHTML='You’re in. <a href="'+share+'" style="text-decoration:underline">Send your mates your link →</a>';
-    });
-  });
+  // (kol:leadchange listener removed S247 — the form handler's done() owns the success+share UI;
+  //  the listener was overwriting it with a homepage-navigating link, the bug Fil caught.)
 
   // magnetic CTA
   if(matchMedia('(hover:hover)').matches && !RM){
