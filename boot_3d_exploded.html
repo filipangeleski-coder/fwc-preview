@@ -63,6 +63,7 @@ renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 renderer.setSize(innerWidth, innerHeight);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.14;
+renderer.localClippingEnabled = true;
 const ANISO = Math.min(8, renderer.capabilities.getMaxAnisotropy());
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -141,9 +142,13 @@ scene.add(ground);
 /* assembled pos0 (inside the boot, f=0) -> exploded pos1 (f=1).
    rot is the resting orientation (YXZ order). s = scale (number or [x,y,z]).
    fade: parts are invisible at f=0 and fade in early in the scroll. */
-const BOOT_FILE = new URLSearchParams(location.search).get('boot') === 'side' ? 'models3d/boot_side.glb' : 'models3d/boot.glb';
+const BOOT_Q = new URLSearchParams(location.search).get('boot');
+const BOOT_FILE = BOOT_Q ? `models3d/boot_${BOOT_Q}.glb` : 'models3d/boot_trellis.glb';
+/* trellis scan carries the ladder-top it was shot on — clip everything below the sole */
+const bootClip = new THREE.Plane(new THREE.Vector3(0, 1, 0), 99);
+const BOOT_CLIP_LOCAL = -0.55;
 const CFG = {
-  boot:    {f: BOOT_FILE,              s: 3.2,  rot: [-0.28, 0, 0], pos0: [0, 0.10, 0],    pos1: [0,  1.55, 0],    fade: false, mat: {roughness: 0.62, metalness: 0.0}},
+  boot:    {f: BOOT_FILE,              s: 3.2,  rot: [-0.10, 0, 0], pos0: [0, 0.10, 0],    pos1: [0,  1.55, 0],    fade: false, mat: {roughness: 0.62, metalness: 0.0}},
   toecap:  {f: 'models3d/toecap.glb',  s: 1.35, rot: [0, 0, 0],     pos0: [0, -0.10, -0.5], pos1: [0,  0.38, -1.0], fade: true,  mat: {roughness: 0.32, metalness: 0.88}},
   insole:  {f: 'models3d/insole.glb',  s: 2.5,  rot: [-1.47, 0, 0.14], pos0: [0, -0.15, 0], pos1: [0, -0.12, 0],  fade: true,  mat: {roughness: 0.8, metalness: 0.0}},
   sctpu:   {f: 'models3d/sctpu.glb',   s: 1.15, rot: [0, 0, 0],     pos0: [0, -0.30, 0.4],  pos1: [0, -0.72, 0.60], fade: true,  mat: {roughness: 0.5, metalness: 0.0}},
@@ -184,6 +189,7 @@ function loadOne(name) {
             if (o.material[k]) { o.material[k].anisotropy = ANISO; o.material[k].needsUpdate = true; }
           }
           if (CFG[name].fade) { o.material.transparent = true; }
+          if (name === 'boot' && BOOT_FILE.includes('trellis')) { o.material.clippingPlanes = [bootClip]; }
           mats.push(o.material); } } });
       /* normalize: center + unit-size, then apply our scale */
       const box = new THREE.Box3().setFromObject(obj);
@@ -305,6 +311,7 @@ function placeLabels() {
 const clk = new THREE.Clock();
 renderer.setAnimationLoop(() => {
   updateCamera(Math.min(clk.getDelta(), 0.05), easeExp(X.f));
+  if (nodes.boot) bootClip.constant = -(rig.position.y + nodes.boot.position.y + BOOT_CLIP_LOCAL);
   placeLabels();
   renderer.render(scene, camera);
 });
