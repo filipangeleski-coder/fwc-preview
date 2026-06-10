@@ -24,10 +24,16 @@ canvas{display:block}
 #load .b{width:180px;height:2px;background:var(--line)}
 #load .b i{display:block;height:100%;width:0%;background:var(--ink);transition:width .3s}
 #load span{color:var(--smoke);font-size:0.74rem;letter-spacing:0.3em;text-transform:uppercase;font-family:"Space Grotesk"}
+#pull{position:fixed;right:clamp(0.8rem,2.5vw,2.2rem);top:50%;transform:translateY(-50%);z-index:6;display:flex;flex-direction:column;align-items:center;gap:0.7rem}
+#pull .pl{writing-mode:vertical-rl;color:var(--smoke);font-family:"Space Grotesk";font-size:0.66rem;letter-spacing:0.28em;text-transform:uppercase}
+#pull input{appearance:none;-webkit-appearance:none;writing-mode:vertical-lr;direction:rtl;width:4px;height:min(34vh,300px);background:var(--line);border-radius:2px;cursor:pointer;outline:none}
+#pull input::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--ink);border:1px solid #000;cursor:grab}
+#pull input::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--ink);border:1px solid #000;cursor:grab}
 </style></head><body>
 <div id="stage"></div>
 <div id="mark">FAR</div>
 <div id="hint">Scroll to pull it apart · drag to spin · pinch to zoom</div>
+<div id="pull"><span class="pl">Pull it apart</span><input id="pullR" type="range" min="0" max="1000" value="0" aria-label="Pull the boot apart"></div>
 <div id="load"><span>Loading the real build</span><div class="b"><i id="lb"></i></div></div>
 
 <div class="label" id="lab-boot"><span class="ln"></span><div class="t">The boot</div><div class="d">Wheat nubuck, side zip. Built to AS/NZS 2210.3.</div></div>
@@ -46,7 +52,6 @@ canvas{display:block}
 <script type="module">
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
-import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -57,7 +62,8 @@ const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true, powerPre
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 renderer.setSize(innerWidth, innerHeight);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.05;
+renderer.toneMappingExposure = 1.14;
+const ANISO = Math.min(8, renderer.capabilities.getMaxAnisotropy());
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 stage.appendChild(renderer.domElement);
@@ -69,21 +75,62 @@ scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture
 const camera = new THREE.PerspectiveCamera(34, innerWidth/innerHeight, 0.1, 100);
 camera.position.set(0.6, 0.3, 7.4);
 
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true; controls.dampingFactor = 0.06;
-controls.enablePan = false;
-controls.minDistance = 4.2; controls.maxDistance = 11;
-controls.minPolarAngle = Math.PI * 0.22; controls.maxPolarAngle = Math.PI * 0.62;
-controls.autoRotate = !RM; controls.autoRotateSpeed = 0.55;
-controls.target.set(0, 0, 0);
+/* ---------- custom orbit: drag spins, pinch zooms, WHEEL IS LEFT ALONE so the
+   page scrolls and the scroll drives the explode (the OrbitControls wheel-trap
+   was eating the scroll entirely) ---------- */
+const orbit = {theta: 0.12, phi: 1.32, radius: 7.4, tTheta: 0.12, tPhi: 1.32, tRadius: 7.4, idle: 0};
+const ORB = {minPhi: Math.PI * 0.26, maxPhi: Math.PI * 0.60, minR: 4.0, maxR: 12.5};
+const cv = renderer.domElement;
+cv.style.touchAction = 'pan-y';            // one finger vertical = native page scroll on mobile
+let dragging = false, px0 = 0, py0 = 0, pinch0 = 0, r0 = 0;
+cv.addEventListener('pointerdown', e => { dragging = true; px0 = e.clientX; py0 = e.clientY; orbit.idle = 0; });
+addEventListener('pointermove', e => {
+  if (!dragging) return;
+  const dx = e.clientX - px0, dy = e.clientY - py0; px0 = e.clientX; py0 = e.clientY;
+  orbit.tTheta -= dx * 0.0052;
+  orbit.tPhi = Math.min(ORB.maxPhi, Math.max(ORB.minPhi, orbit.tPhi - dy * 0.0038));
+  orbit.idle = 0;
+});
+addEventListener('pointerup', () => dragging = false);
+addEventListener('pointercancel', () => dragging = false);
+cv.addEventListener('touchstart', e => {
+  if (e.touches.length === 2) {
+    pinch0 = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+    r0 = orbit.tRadius;
+  }
+}, {passive: true});
+cv.addEventListener('touchmove', e => {
+  if (e.touches.length === 2) {
+    e.preventDefault();   // pinch = zoom (two fingers only; one finger stays native scroll)
+    const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+    orbit.tRadius = Math.min(ORB.maxR, Math.max(ORB.minR, r0 * pinch0 / Math.max(d, 1)));
+    orbit.idle = 0;
+  }
+}, {passive: false});
+cv.addEventListener('dblclick', () => { orbit.tRadius = orbit.tRadius > 6.2 ? 4.6 : 7.4; orbit.idle = 0; });
+function updateCamera(dt, explodeK) {
+  orbit.idle += dt;
+  if (!RM && !dragging && orbit.idle > 2.2) orbit.tTheta += dt * 0.07;   // gentle auto-sway when idle
+  orbit.theta += (orbit.tTheta - orbit.theta) * 0.08;
+  orbit.phi += (orbit.tPhi - orbit.phi) * 0.08;
+  orbit.radius += (orbit.tRadius - orbit.radius) * 0.08;
+  const R = orbit.radius * (1 + 0.34 * explodeK);   // pull back as the stack opens
+  const y = 0.42 * explodeK;                        // rise with the boot
+  camera.position.set(
+    R * Math.sin(orbit.phi) * Math.sin(orbit.theta),
+    R * Math.cos(orbit.phi) + y,
+    R * Math.sin(orbit.phi) * Math.cos(orbit.theta));
+  camera.lookAt(0, -0.15 + y * 0.4, 0);
+}
 
 /* lights — studio key + rim + fill (environment gives PBR base) */
-const key = new THREE.DirectionalLight(0xfff2e0, 2.4); key.position.set(4, 6, 5);
+const key = new THREE.DirectionalLight(0xfff2e0, 2.9); key.position.set(4, 6, 5);
 key.castShadow = true; key.shadow.mapSize.set(2048, 2048); key.shadow.radius = 6;
 key.shadow.camera.left = key.shadow.camera.bottom = -6; key.shadow.camera.right = key.shadow.camera.top = 6;
-const rim = new THREE.DirectionalLight(0xdfe8ff, 1.1); rim.position.set(-5, 3.5, -4);
-const fill = new THREE.AmbientLight(0x404038, 0.7);
-scene.add(key, rim, fill);
+const rim = new THREE.DirectionalLight(0xdfe8ff, 1.7); rim.position.set(-5, 3.5, -4);
+const kick = new THREE.DirectionalLight(0xffd9a0, 0.9); kick.position.set(2, -1, -5);
+const fill = new THREE.AmbientLight(0x36342f, 0.55);
+scene.add(key, rim, kick, fill);
 
 /* soft ground shadow */
 const ground = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), new THREE.ShadowMaterial({opacity: 0.30}));
@@ -94,12 +141,13 @@ scene.add(ground);
 /* assembled pos0 (inside the boot, f=0) -> exploded pos1 (f=1).
    rot is the resting orientation (YXZ order). s = scale (number or [x,y,z]).
    fade: parts are invisible at f=0 and fade in early in the scroll. */
+const BOOT_FILE = new URLSearchParams(location.search).get('boot') === 'side' ? 'models3d/boot_side.glb' : 'models3d/boot.glb';
 const CFG = {
-  boot:    {f: 'models3d/boot.glb',    s: 3.2,  rot: [-0.28, 0, 0], pos0: [0, 0.10, 0],    pos1: [0,  1.55, 0],    fade: false},
-  toecap:  {f: 'models3d/toecap.glb',  s: 1.35, rot: [0, 0, 0],     pos0: [0, -0.10, -0.5], pos1: [0,  0.38, -1.0], fade: true},
-  insole:  {f: 'models3d/insole.glb',  s: 2.5,  rot: [-1.47, 0, 0.14], pos0: [0, -0.15, 0], pos1: [0, -0.12, 0],  fade: true},
-  sctpu:   {f: 'models3d/sctpu.glb',   s: 1.15, rot: [0, 0, 0],     pos0: [0, -0.30, 0.4],  pos1: [0, -0.72, 0.60], fade: true},
-  plate:   {f: 'models3d/plate.glb',   s: 2.4,  rot: [0, Math.PI/2, 0], pos0: [0, -0.35, 0], pos1: [0, -1.30, 0],  fade: true},
+  boot:    {f: BOOT_FILE,              s: 3.2,  rot: [-0.28, 0, 0], pos0: [0, 0.10, 0],    pos1: [0,  1.55, 0],    fade: false, mat: {roughness: 0.62, metalness: 0.0}},
+  toecap:  {f: 'models3d/toecap.glb',  s: 1.35, rot: [0, 0, 0],     pos0: [0, -0.10, -0.5], pos1: [0,  0.38, -1.0], fade: true,  mat: {roughness: 0.32, metalness: 0.88}},
+  insole:  {f: 'models3d/insole.glb',  s: 2.5,  rot: [-1.47, 0, 0.14], pos0: [0, -0.15, 0], pos1: [0, -0.12, 0],  fade: true,  mat: {roughness: 0.8, metalness: 0.0}},
+  sctpu:   {f: 'models3d/sctpu.glb',   s: 1.15, rot: [0, 0, 0],     pos0: [0, -0.30, 0.4],  pos1: [0, -0.72, 0.60], fade: true,  mat: {roughness: 0.5, metalness: 0.0}},
+  plate:   {f: 'models3d/plate.glb',   s: 2.4,  rot: [0, Math.PI/2, 0], pos0: [0, -0.35, 0], pos1: [0, -1.30, 0],  fade: true,  mat: {roughness: 0.55, metalness: 0.1}},
 };
 const ORDER = ['boot','toecap','insole','sctpu','plate'];
 const RIG_YAW = 2.59;   // boot faces front-3/4 (toe toward camera-right)
@@ -128,7 +176,13 @@ function loadOne(name) {
       const obj = g.scene;
       const mats = [];
       obj.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = false;
-        if (o.material) { o.material.envMapIntensity = 0.9;
+        if (o.material) { o.material.envMapIntensity = 1.05;
+          const ov = CFG[name].mat || {};
+          if ('roughness' in o.material && ov.roughness !== undefined) o.material.roughness = ov.roughness;
+          if ('metalness' in o.material && ov.metalness !== undefined) o.material.metalness = ov.metalness;
+          for (const k of ['map','normalMap','roughnessMap','metalnessMap','aoMap']) {
+            if (o.material[k]) { o.material[k].anisotropy = ANISO; o.material[k].needsUpdate = true; }
+          }
           if (CFG[name].fade) { o.material.transparent = true; }
           mats.push(o.material); } } });
       /* normalize: center + unit-size, then apply our scale */
@@ -212,13 +266,20 @@ gsap.to(X, {f: 1, ease: 'none',
   scrollTrigger: {trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 0.8},
   onUpdate: applyExplode});
 
-/* camera dolly on scroll (pull back as the stack opens) */
-gsap.to(camera.position, {z: 9.9, y: 0.45, ease: 'none',
-  scrollTrigger: {trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 0.8}});
+/* camera pulls back + rises as the stack opens (composed into the custom orbit each frame) */
 
 const hint = document.getElementById('hint');
+const pullR = document.getElementById('pullR');
+const maxScroll = () => document.body.scrollHeight - innerHeight;
+let sliderDriving = false;
+pullR.addEventListener('input', () => {
+  sliderDriving = true;
+  window.scrollTo(0, (pullR.value / 1000) * maxScroll());
+  requestAnimationFrame(() => sliderDriving = false);
+});
 addEventListener('scroll', () => {
   hint.classList.toggle('off', scrollY > innerHeight * 0.3);
+  if (!sliderDriving) pullR.value = Math.round((scrollY / Math.max(maxScroll(), 1)) * 1000);
 }, {passive: true});
 
 /* ---------- labels track their parts in screen space ---------- */
@@ -241,8 +302,9 @@ function placeLabels() {
 }
 
 /* ---------- loop ---------- */
+const clk = new THREE.Clock();
 renderer.setAnimationLoop(() => {
-  controls.update();
+  updateCamera(Math.min(clk.getDelta(), 0.05), easeExp(X.f));
   placeLabels();
   renderer.render(scene, camera);
 });
