@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FAR — Founding Crew</title>
+<style>
+
+/* ============================================================
+   FAR — Industrial Workshop redesign (S-facelift prototype)
+   Register: brand. Direction: precision workwear spec-sheet.
+   Warm near-black base, amber load-bearing, industrial type,
+   engineering-drawing callouts. Genre tells removed:
+   no intro gate, no floating dust, no ghost wordmark, no smooth marquee.
+   ============================================================ */
+
+:root{
+  --ink:    oklch(0.145 0.011 65);   /* warm near-black base */
+  --base:   oklch(0.122 0.010 65);   /* deeper panel */
+  --raise:  oklch(0.185 0.011 65);   /* raised surface */
+  --bone:   oklch(0.93 0.012 84);    /* warm off-white */
+  --text:   oklch(0.895 0.010 80);   /* body on dark */
+  --dim:    oklch(0.64 0.012 72);    /* secondary warm grey */
+  --line:   oklch(0.34 0.012 66);    /* hairline */
+  --line-2: oklch(0.42 0.014 68);
+  --amber:  oklch(0.80 0.155 74);    /* LOAD-BEARING FAR amber */
+  --amber-2:oklch(0.71 0.16 62);     /* deeper amber */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --pad: clamp(1.25rem, 5vw, 6rem);
+  --maxw: 1320px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--ink);color:var(--text);
+  font-family:"Barlow",system-ui,sans-serif;
+  font-size:clamp(1rem,0.96rem + 0.25vw,1.12rem);line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;font-weight:400;
+}
+::selection{background:var(--amber);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,.display{font-family:"Barlow Condensed",sans-serif;font-weight:700;line-height:0.94;letter-spacing:0.002em;text-transform:uppercase}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad)}
+.mono{font-family:"Spline Sans Mono",ui-monospace,monospace;font-weight:400}
+.kick{font-family:"Spline Sans Mono",ui-monospace,monospace;font-weight:500;font-size:0.74rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--amber)}
+.kick.dim{color:var(--dim)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+section{padding-block:clamp(4.5rem,11vh,9rem);position:relative}
+
+.far-logo{display:block;fill:currentColor}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:clamp(0.85rem,1.8vw,1.3rem) var(--pad);transition:background .4s var(--ease),border-color .4s,backdrop-filter .4s;
+  border-bottom:1px solid transparent}
+.nav.scrolled{background:color-mix(in oklch,var(--ink) 86%,transparent);backdrop-filter:blur(10px);border-bottom-color:var(--line)}
+.nav .brand .far-logo{height:1.35rem;width:auto;fill:var(--bone)}
+.nav-right{display:flex;align-items:center;gap:clamp(0.9rem,2vw,1.6rem)}
+.nav-spec{display:none}
+@media(min-width:720px){.nav-spec{display:block;color:var(--dim);font-size:0.7rem;letter-spacing:0.18em}}
+.cta-mini{font-family:"Spline Sans Mono",monospace;font-weight:500;font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;
+  border:1px solid var(--amber);color:var(--amber);padding:0.55rem 1.05rem;transition:.22s var(--ease)}
+.cta-mini:hover{background:var(--amber);color:var(--ink)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding-bottom:clamp(2.5rem,6vh,5rem);padding-top:7rem;overflow:hidden;
+  border-bottom:1px solid var(--line)}
+.hero-bg{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(80% 60% at 78% 18%, color-mix(in oklch,var(--amber-2) 16%,transparent), transparent 60%),
+  var(--ink)}
+.hero-bg .boot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%;opacity:0.9;
+  filter:grayscale(0.15) contrast(1.06) brightness(0.92);will-change:transform}
+@media(min-width:980px){.hero-bg .boot{object-position:72% 42%}}
+.hero-bg::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg, color-mix(in oklch,var(--ink) 55%,transparent) 0%, transparent 22%, color-mix(in oklch,var(--ink) 70%,transparent) 64%, var(--ink) 100%)}
+@media(min-width:980px){.hero-bg::after{background:
+  linear-gradient(96deg, var(--ink) 6%, color-mix(in oklch,var(--ink) 66%,transparent) 42%, transparent 74%),
+  linear-gradient(180deg, transparent 58%, var(--ink) 100%)}}
+/* engineering dimension callout on the boot (desktop) */
+.callout{position:absolute;z-index:2;display:none;pointer-events:none}
+@media(min-width:1040px){.callout{display:block;right:8%;top:30%}}
+.callout .c-line{width:120px;height:1px;background:var(--amber);position:relative}
+.callout .c-line::before{content:"";position:absolute;left:0;top:-3px;width:1px;height:7px;background:var(--amber)}
+.callout .c-line::after{content:"";position:absolute;right:0;top:-3px;width:1px;height:7px;background:var(--amber)}
+.callout .c-lab{font-family:"Spline Sans Mono",monospace;font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-top:0.5rem}
+.callout .c-lab span{display:block;color:var(--dim);margin-top:0.15rem}
+.hero .wrap{position:relative;z-index:3;width:100%}
+.hero-kick{display:flex;align-items:center;gap:0.8rem;margin-bottom:clamp(1.1rem,2.6vw,1.7rem)}
+.hero-kick .bar{height:1px;width:clamp(28px,6vw,64px);background:var(--amber)}
+.hero h1{font-size:clamp(2.9rem,9.2vw,8.6rem);letter-spacing:0.004em;max-width:16ch;color:var(--bone)}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln i{display:block;font-style:normal;transform:translateY(112%)}
+.hero h1 .am{color:var(--amber)}
+.hero-sub{margin-top:clamp(1.3rem,3vw,1.9rem);max-width:46ch;color:var(--dim);font-size:clamp(1.05rem,1rem + 0.5vw,1.35rem)}
+.hero-sub b{color:var(--text);font-weight:600}
+
+/* ---------- signup (industrial stamped field) ---------- */
+.signup{margin-top:clamp(1.7rem,3.4vw,2.4rem);max-width:540px}
+.form-row{display:flex;gap:0;border:1px solid var(--line-2);background:var(--base);transition:border-color .25s var(--ease)}
+.form-row:focus-within{border-color:var(--amber)}
+.form-row input{flex:1;background:transparent;border:0;color:var(--bone);font-family:"Barlow";font-size:1.05rem;padding:0.95rem 1.05rem;outline:none;min-width:0}
+.form-row input::placeholder{color:var(--dim)}
+.form-row button{font-family:"Spline Sans Mono",monospace;font-weight:500;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;
+  background:var(--amber);color:var(--ink);border:0;padding:0 1.5rem;cursor:pointer;white-space:nowrap;transition:background .2s var(--ease)}
+.form-row button:hover{background:var(--bone)}
+.counter{margin-top:0.9rem;font-family:"Spline Sans Mono",monospace;font-size:0.82rem;letter-spacing:0.04em;color:var(--dim)}
+.counter b{color:var(--amber);font-weight:500}
+.counter .sep{color:var(--line-2);margin:0 0.5rem}
+.signup.done .form-row{border-color:var(--amber);flex-direction:column;align-items:center;padding:1.15rem}
+.signup .success{display:none;font-family:"Barlow Condensed";font-weight:700;font-size:1.3rem;text-transform:uppercase;color:var(--bone)}
+.signup.done input,.signup.done button{display:none}
+.signup.done .success{display:block;text-align:center;width:100%}
+.su-sub{display:block;font-family:"Barlow";font-weight:400;text-transform:none;font-size:0.92rem;color:var(--dim);margin-top:0.5rem;letter-spacing:0;line-height:1.45}
+.su-label{display:block;font-family:"Spline Sans Mono",monospace;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-top:1rem}
+.su-linkbox{display:inline-block;border:1px solid var(--line-2);background:var(--ink);padding:0.7rem 1rem;margin-top:0.55rem;font-family:"Spline Sans Mono",monospace;font-size:0.82rem;word-break:break-all;color:var(--text);max-width:100%}
+.su-share{display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;margin-top:0.9rem}
+.su-btn{font-family:"Spline Sans Mono",monospace;font-weight:500;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
+  border:1px solid var(--line-2);color:var(--text);background:transparent;padding:0.6rem 1rem;cursor:pointer;transition:.2s var(--ease)}
+.su-btn:hover{background:var(--amber);color:var(--ink);border-color:var(--amber)}
+
+/* referred-mate banner */
+.ref-banner{position:fixed;left:50%;transform:translateX(-50%);bottom:1rem;z-index:9000;background:var(--base);border:1px solid var(--amber);
+  color:var(--bone);padding:0.85rem 1.1rem;display:flex;gap:0.9rem;align-items:center;font-family:"Barlow";font-size:0.95rem;max-width:92vw}
+.ref-banner .ref-btn{font-family:"Spline Sans Mono",monospace;border:1px solid var(--amber);color:var(--amber);padding:0.45rem 0.9rem;
+  font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;background:transparent}
+
+/* ---------- spec tape (amber, replaces marquee) ---------- */
+.spec-tape{background:var(--amber);color:var(--ink);border-block:1px solid var(--amber-2)}
+.spec-tape .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(0.8rem,3vw,2.4rem);padding-block:0.95rem}
+.spec-tape .item{font-family:"Barlow Condensed";font-weight:700;font-size:clamp(0.95rem,2.4vw,1.35rem);letter-spacing:0.03em;text-transform:uppercase;display:flex;align-items:center;gap:0.6rem}
+.spec-tape .item::before{content:"";width:7px;height:7px;background:var(--ink);transform:rotate(45deg);flex:none}
+
+/* ---------- enemy / rejected-spec table ---------- */
+.enemy{background:var(--base)}
+.enemy .head{max-width:760px}
+.enemy h2{font-size:clamp(2.2rem,6.5vw,5rem);max-width:15ch;color:var(--bone);margin-top:1.1rem}
+.pairs{margin-top:clamp(2.5rem,5vw,4rem);border-top:1px solid var(--line)}
+.pair{display:grid;grid-template-columns:1fr;gap:0.55rem;padding-block:clamp(1.3rem,2.6vw,1.85rem);border-bottom:1px solid var(--line)}
+@media(min-width:780px){.pair{grid-template-columns:1.1fr 1fr;column-gap:clamp(2rem,5vw,4.5rem);align-items:center}}
+.pair .bad{color:var(--dim);font-size:clamp(1rem,1rem + 0.3vw,1.22rem);position:relative;padding-left:2.4rem;line-height:1.4}
+.pair .bad::before{content:"REJ";font-family:"Spline Sans Mono",monospace;font-size:0.6rem;letter-spacing:0.08em;color:var(--dim);
+  border:1px solid var(--line-2);padding:0.1rem 0.3rem;position:absolute;left:0;top:0.15rem}
+.pair .good{color:var(--bone);font-family:"Barlow Condensed";font-weight:600;text-transform:uppercase;font-size:clamp(1.15rem,1rem + 0.7vw,1.65rem);
+  letter-spacing:0.01em;position:relative;padding-left:2.4rem;line-height:1.1}
+.pair .good::before{content:"FAR";font-family:"Spline Sans Mono",monospace;font-weight:500;font-size:0.6rem;letter-spacing:0.06em;color:var(--ink);
+  background:var(--amber);padding:0.12rem 0.32rem;position:absolute;left:0;top:0.15rem;text-transform:none}
+.creed{margin-top:clamp(3rem,7vw,5rem);font-family:"Barlow Condensed";font-weight:700;text-transform:uppercase;
+  font-size:clamp(1.9rem,5.5vw,3.8rem);letter-spacing:0.005em;max-width:18ch;line-height:1.0;color:var(--bone)}
+.creed b{color:var(--amber);font-weight:700}
+.bproof{margin-top:clamp(2rem,4vw,3rem);font-family:"Barlow";font-size:clamp(1.05rem,1rem + 0.4vw,1.3rem);color:var(--dim);max-width:40ch}
+.proofs{margin-top:clamp(1.8rem,3.5vw,2.6rem);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(0.5rem,1.4vw,0.9rem);max-width:760px}
+.pf{position:relative;border:1px solid var(--line);overflow:hidden;aspect-ratio:3/4;background:var(--ink)}
+.pf img{width:100%;height:100%;object-fit:cover;filter:grayscale(0.2) contrast(1.06)}
+.pf figcaption{position:absolute;left:0;right:0;bottom:0;padding:0.7rem 0.6rem 0.5rem;font-family:"Spline Sans Mono",monospace;font-weight:500;
+  font-size:clamp(0.6rem,1.5vw,0.74rem);letter-spacing:0.1em;text-transform:uppercase;color:var(--bone);
+  background:linear-gradient(180deg,transparent,color-mix(in oklch,var(--ink) 90%,transparent))}
+.pf .idx{position:absolute;top:0.5rem;left:0.55rem;font-family:"Spline Sans Mono",monospace;font-size:0.62rem;color:var(--amber);letter-spacing:0.08em}
+
+/* ---------- rally (amber-drenched) ---------- */
+.rally{background:var(--amber);color:var(--ink);min-height:88svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;position:relative}
+.rally::before{content:"WE REFUSE TO ACCEPT IT";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:"Barlow Condensed";font-weight:700;font-size:14vw;color:color-mix(in oklch,var(--ink) 7%,transparent);white-space:nowrap;pointer-events:none}
+.rally h2{position:relative;font-size:clamp(3.2rem,16vw,16rem);letter-spacing:0.004em;line-height:0.82}
+.rally h2 .w{display:inline-block;overflow:hidden;vertical-align:top}
+.rally h2 .w i{display:inline-block;font-style:normal}
+.rally .sub{position:relative;margin-top:1.6rem;font-family:"Spline Sans Mono",monospace;color:color-mix(in oklch,var(--ink) 75%,transparent);
+  font-size:clamp(0.85rem,2vw,1.05rem);letter-spacing:0.1em;text-transform:uppercase}
+
+/* ---------- founder ---------- */
+.founder{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+@media(min-width:880px){.founder{grid-template-columns:0.82fr 1.18fr}}
+.founder .portrait{aspect-ratio:4/5;border:1px solid var(--line);position:relative;overflow:hidden;background:var(--base);display:flex;align-items:flex-end;padding:1.2rem}
+.founder .portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(0.25) contrast(1.05);z-index:1}
+.founder .portrait span{position:relative;z-index:3;font-family:"Spline Sans Mono",monospace;color:var(--bone);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase}
+.founder .portrait::before{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,transparent 52%,color-mix(in oklch,var(--ink) 88%,transparent))}
+.founder h2{font-size:clamp(2.1rem,5.5vw,3.9rem);max-width:16ch;color:var(--bone)}
+.founder p{margin-top:1.3rem;color:var(--dim);max-width:52ch}
+.founder p b{color:var(--text);font-weight:600}
+.sig{margin-top:1.7rem;font-family:"Spline Sans Mono",monospace;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber)}
+
+/* ---------- exploded teardown ---------- */
+.explode{background:var(--base)}
+.explode .head{max-width:680px;margin-bottom:clamp(2.5rem,6vw,4rem)}
+.explode h2{font-size:clamp(2rem,5.5vw,3.8rem);max-width:18ch;color:var(--bone);margin-top:1.1rem}
+.exploded{display:flex;flex-direction:column;max-width:880px;margin-inline:auto;border-top:1px solid var(--line)}
+.epart{position:relative;display:grid;grid-template-columns:auto 1fr;gap:clamp(1rem,3vw,2.4rem);align-items:center;
+  padding-block:clamp(1.5rem,3vw,2.4rem);border-bottom:1px solid var(--line)}
+@media(min-width:720px){.epart{grid-template-columns:auto 1.1fr 1fr}}
+.epart .pimg{display:flex;justify-content:center;align-items:center;width:clamp(96px,18vw,180px)}
+.epart img{max-height:clamp(80px,14vw,150px);width:auto;object-fit:contain}
+.epart .enum{font-family:"Spline Sans Mono",monospace;font-size:0.74rem;color:var(--amber);letter-spacing:0.06em;align-self:flex-start;padding-top:0.4rem}
+.elabel span{display:block;font-family:"Barlow Condensed";font-weight:700;text-transform:uppercase;font-size:clamp(1.2rem,2.6vw,1.75rem);color:var(--bone);letter-spacing:0.01em}
+.elabel p{margin-top:0.4rem;color:var(--dim);max-width:46ch;font-size:clamp(0.95rem,0.94rem + 0.2vw,1.08rem)}
+.epart .espec{display:none}
+@media(min-width:720px){.epart .espec{display:block;font-family:"Spline Sans Mono",monospace;font-size:0.72rem;color:var(--dim);letter-spacing:0.04em;line-height:1.7;text-align:right}}
+.epart .espec b{color:var(--amber);font-weight:500}
+.enote{margin-top:clamp(2.2rem,5vw,3.5rem);font-family:"Spline Sans Mono",monospace;color:var(--dim);font-size:0.78rem;letter-spacing:0.03em;max-width:50ch}
+
+/* ---------- mid join ---------- */
+.midjoin{text-align:center;padding-block:clamp(3.5rem,9vw,6rem);background:var(--ink)}
+.midjoin .ml{font-family:"Barlow Condensed";font-weight:700;text-transform:uppercase;font-size:clamp(1.7rem,5vw,3rem);letter-spacing:0.006em;color:var(--bone);max-width:20ch;margin-inline:auto;line-height:1.0}
+.midjoin .ms{margin-top:0.9rem;font-family:"Spline Sans Mono",monospace;color:var(--dim);font-size:clamp(0.82rem,1.6vw,0.95rem);letter-spacing:0.03em}
+.midjoin .signup{margin-inline:auto;margin-top:clamp(1.6rem,3vw,2.2rem)}
+
+/* ---------- offer ladder (stamped tiers) ---------- */
+.offer .head{max-width:680px}
+.offer h2{font-size:clamp(2.1rem,6vw,4.4rem);max-width:17ch;color:var(--bone);margin-top:1.1rem}
+.offer .lead{margin-top:1.4rem;color:var(--dim);max-width:56ch}
+.offer .lead b{color:var(--amber);font-weight:600}
+.ladder{margin-top:clamp(2.6rem,6vw,4rem);border-top:1px solid var(--line)}
+.rung{display:grid;grid-template-columns:auto auto 1fr auto;gap:clamp(0.9rem,2.5vw,2rem);align-items:center;
+  padding-block:clamp(1.3rem,2.6vw,1.95rem);border-bottom:1px solid var(--line);transition:background .3s var(--ease),padding-left .3s var(--ease)}
+.rung:hover{padding-left:0.6rem;background:color-mix(in oklch,var(--amber) 5%,transparent)}
+.rung .mates{font-family:"Barlow Condensed";font-weight:700;font-size:clamp(2.2rem,5.5vw,3.6rem);min-width:2.4ch;line-height:1;color:var(--bone)}
+.rung .thumb{width:clamp(48px,8vw,70px);height:clamp(48px,8vw,70px);object-fit:cover;background:var(--base);border:1px solid var(--line)}
+.rung .what{color:var(--dim);font-size:clamp(0.98rem,1rem + 0.3vw,1.2rem)}
+.rung .prize{font-family:"Spline Sans Mono",monospace;font-weight:500;font-size:clamp(0.72rem,1.6vw,0.88rem);letter-spacing:0.08em;text-transform:uppercase;color:var(--amber);text-align:right}
+.rung:last-child{border-bottom:1px solid var(--amber)}
+.rung:last-child .mates{color:var(--amber)}
+
+/* ---------- closing CTA ---------- */
+.cta2{position:relative;text-align:center;background:var(--base);overflow:hidden}
+.cta2 .cta-boot{position:absolute;inset:0;z-index:0}
+.cta2 .cta-boot img{width:100%;height:100%;object-fit:cover;object-position:center 35%;opacity:0.4;filter:grayscale(0.2) contrast(1.05)}
+.cta2 .cta-boot::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(110% 80% at 50% 40%, transparent, color-mix(in oklch,var(--base) 88%,transparent) 60%, var(--base) 92%)}
+.cta2 .wrap{position:relative;z-index:1}
+.cta2 h2{font-size:clamp(2.6rem,8vw,6rem);max-width:14ch;margin-inline:auto;color:var(--bone)}
+.cta2 .signup{margin-inline:auto;margin-top:2.4rem}
+.cta2 .micro{margin-top:1.2rem;font-family:"Spline Sans Mono",monospace;color:var(--dim);font-size:0.8rem;letter-spacing:0.03em}
+
+/* ---------- faq ---------- */
+.faq h2{font-size:clamp(2rem,5.5vw,3.6rem);margin-bottom:clamp(1.8rem,4vw,2.8rem);color:var(--bone)}
+.q{border-top:1px solid var(--line);counter-increment:q}
+.q:last-of-type{border-bottom:1px solid var(--line)}
+.q button{width:100%;background:none;border:0;color:var(--bone);font-family:"Barlow Condensed";font-weight:600;text-transform:uppercase;
+  font-size:clamp(1.2rem,1rem + 0.7vw,1.7rem);text-align:left;padding:1.5rem 0;cursor:pointer;display:flex;gap:1rem;align-items:center;letter-spacing:0.01em}
+.q button::before{content:"0" counter(q);font-family:"Spline Sans Mono",monospace;font-weight:400;font-size:0.8rem;color:var(--amber);letter-spacing:0.06em;flex:none;padding-top:0.35rem}
+.q .qt{flex:1}
+.q .ic{flex:none;width:1.05em;height:1.05em;position:relative;transition:transform .4s var(--ease)}
+.q .ic::before,.q .ic::after{content:"";position:absolute;background:var(--amber);inset:0;margin:auto}
+.q .ic::before{width:100%;height:1.5px}.q .ic::after{width:1.5px;height:100%}
+.q.open .ic{transform:rotate(135deg)}
+.q .a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.q.open .a{grid-template-rows:1fr}
+.q .a>div{overflow:hidden}
+.q .a p{color:var(--dim);max-width:64ch;padding:0 0 1.6rem 2.4rem}
+
+/* ---------- footer ---------- */
+footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(2.5rem,5vw,4rem);border-top:1px solid var(--line);background:var(--ink)}
+.foot-mark{margin-bottom:clamp(1.8rem,4vw,2.8rem)}
+.foot-mark .far-logo{width:min(80vw,640px);height:auto;fill:var(--raise)}
+.foot{display:flex;flex-wrap:wrap;gap:1.4rem;justify-content:space-between;align-items:center}
+.foot .brand .far-logo{height:1.7rem;fill:var(--bone)}
+.foot .links{display:flex;gap:1.5rem;font-family:"Spline Sans Mono",monospace;font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim)}
+.foot .links a:hover{color:var(--amber)}
+.foot .legal{width:100%;color:var(--dim);font-family:"Spline Sans Mono",monospace;font-size:0.7rem;line-height:1.7;letter-spacing:0.02em;
+  border-top:1px solid var(--line);padding-top:1.4rem;margin-top:0.4rem;max-width:74ch}
+
+/* ---------- reveal ---------- */
+.reveal{will-change:transform,opacity}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001s !important;transition-duration:.001s !important}
+  .hero h1 .ln i{transform:none}
+}
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23211b12'/%3E%3Ctext x='16' y='23' font-family='Barlow Condensed,Arial,sans-serif' font-size='20' font-weight='700' fill='%23f4b652' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://b.kickoffpages.com/2.2.0/kol.js" id="koljs" data-campaign-id="193736" async></script>
+<script async src="https://static.klaviyo.com/onsite/js/RDYHLe/klaviyo.js?company_id=RDYHLe"></script>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute"><symbol id="far-wm" viewBox="50 154 325 117"><polygon points="208.87 156.22 183.43 156.22 135.49 268.65 167.46 268.65 196.15 191.82 212.71 236.16 188.85 223.13 224.84 268.65 256.81 268.65 208.87 156.22"/><path d="M372.72,268.91c-6.71,0-12.72,0-18.73,0-3.8,0-7.6-.11-11.38.05-1.9.08-2.95-.59-3.92-2.16-6.24-10.12-12.6-20.16-18.82-30.29-.98-1.6-2.02-2.16-3.89-2.14-8.59.11-17.18.05-26.03.05v34.26h-29.5v-110.33c1.12,0,2.12,0,3.12,0,21.23,0,42.47.05,63.7,0,7.38-.02,14.48,1.12,21.16,4.34,14.9,7.17,23.05,22.75,20.96,39.23-1.73,13.59-9.12,22.88-21.19,29.31,8.04,12.36,16.1,24.74,24.51,37.67ZM290.06,210.21c12.65,0,25.13.25,37.59-.12,5.57-.17,10.37-2.63,12.07-8.7,2.7-9.64-3.1-17.35-13.18-17.42-11.48-.09-22.96-.02-34.44,0-.68,0-1.35.16-2.04.25v25.99Z"/><path d="M82.6,183.45v21.62h60.19v25.19h-60.2v38.07h-30.11v-110.2h100.21v25.31h-70.09Z"/></symbol></svg>
+
+<nav class="nav" id="nav">
+  <a href="#" class="brand" aria-label="FAR"><svg class="far-logo" role="img" aria-label="FAR" style="height:1.35rem"><use href="#far-wm"></use></svg></a>
+  <div class="nav-right">
+    <span class="nav-spec mono">EST. 2026 · AS/NZS 2210.3</span>
+    <a href="#join" class="cta-mini">Join the crew</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <img class="boot" src="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/hero_boot_a.png?v=1781040888" alt="">
+  </div>
+  <div class="callout" aria-hidden="true">
+    <div class="c-line"></div>
+    <div class="c-lab">STEEL TOE<span>AS/NZS 2210.3</span></div>
+  </div>
+  <div class="wrap">
+    <div class="hero-kick">
+      <span class="bar"></span>
+      <span class="kick">Founding Crew · Open now</span>
+    </div>
+    <h1>
+      <span class="ln"><i>That feeling</i></span>
+      <span class="ln"><i>every morning</i></span>
+      <span class="ln"><i>you reach for</i></span>
+      <span class="ln"><i class="am">your boots.</i></span>
+    </h1>
+    <p class="hero-sub">FAR exists because we got sick of accepting it. <b>Work boots built by tradies, not a boardroom.</b> Launching mid-2026.</p>
+    <form class="signup" id="join" data-kol-form="true" novalidate>
+      <div class="form-row">
+        <input type="email" inputmode="email" autocomplete="email" placeholder="Your email" aria-label="Your email" required>
+        <button type="submit">Get my link →</button>
+        <span class="success">You're in. Check your phone.</span>
+      </div>
+      <p class="counter"><b id="count">68</b> tradies in<span class="sep">/</span>first 100 pairs sold go at <b>$219</b><span class="sep">/</span>then the price goes up</p>
+    </form>
+  </div>
+</header>
+
+<div class="spec-tape" aria-hidden="true">
+  <div class="wrap">
+    <span class="item">No break-in</span>
+    <span class="item">300°C outsole</span>
+    <span class="item">Anti-puncture plate</span>
+    <span class="item">Water resistant</span>
+    <span class="item">AS/NZS 2210.3</span>
+  </div>
+</div>
+
+<section class="enemy">
+  <div class="wrap">
+    <div class="head">
+      <span class="kick reveal">Premium my arse</span>
+      <h2 class="reveal">You've been sold the same boot, dressed up, for years.</h2>
+    </div>
+    <div class="pairs">
+      <div class="pair"><div class="bad">Soles that crumble in the shed.</div><div class="good">A nitrile sole that won't.</div></div>
+      <div class="pair"><div class="bad">A fortnight of wearing them in.</div><div class="good">Comfortable from the first shift. No break-in.</div></div>
+      <div class="pair"><div class="bad">Linings that cook your feet by smoko.</div><div class="good">Water resistant, and it breathes.</div></div>
+    </div>
+    <p class="creed reveal">Comfort isn't a luxury. <b>It's what you're owed.</b></p>
+    <p class="bproof reveal">Talk's cheap. Belt sander, angle grinder, open flame. We put them through it on camera.</p>
+    <div class="proofs reveal">
+      <figure class="pf"><span class="idx">01</span><img src="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/proof_sander.jpg?v=1781040888" alt="Belt sander on the toe cap" loading="lazy"><figcaption>Belt sander</figcaption></figure>
+      <figure class="pf"><span class="idx">02</span><img src="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/proof_grinder.jpg?v=1781040888" alt="Angle grinder against the boot" loading="lazy"><figcaption>Angle grinder</figcaption></figure>
+      <figure class="pf"><span class="idx">03</span><img src="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/proof_fire.jpg?v=1781040888" alt="Boot set alight" loading="lazy"><figcaption>Open flame</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="rally" id="rally">
+  <div class="wrap">
+    <h2><span class="w"><i>We</i></span> <span class="w"><i>refuse</i></span><br><span class="w"><i>to</i></span> <span class="w"><i>accept</i></span> <span class="w"><i>it.</i></span></h2>
+    <p class="sub">That's the whole thing. That's why FAR exists.</p>
+  </div>
+</section>
+
+<section class="founder wrap">
+  <div class="portrait reveal">
+    <img src="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/founders.png?v=1781040888" alt="Fil, Grant and Lionel">
+    <span>Fil / Grant / Lionel</span>
+  </div>
+  <div class="reveal">
+    <span class="kick">Built in public</span>
+    <h2 style="margin-top:1rem">Three tradies. One workshop. No marketing department.</h2>
+    <p>We're not a brand that found a factory. We're tradies who got tired of limping to the ute at knock-off and decided to build the boot nobody would make for us. <b>Every test, every stuff-up, every win, filmed and put online.</b></p>
+    <p>You're not buying into a logo. You're getting in early on something three blokes are still building. The Founding Crew gets the first pair, and we don't forget who got in first.</p>
+    <div class="sig">Fil / Grant / Lionel</div>
+  </div>
+</section>
+
+<section class="explode">
+  <div class="wrap">
+    <div class="head">
+      <span class="kick reveal">Built to be cut open</span>
+      <h2 class="reveal">Nothing to hide. The real build, pulled apart.</h2>
+    </div>
+    <div class="exploded">
+      <div class="epart reveal"><span class="enum">01</span><div class="pimg"><img src="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/ex_boot.png?v=1781040888" alt="FAR boot"></div><div class="elabel"><span>The boot</span><p>Wheat nubuck, side zip, water resistant.</p></div><div class="espec">NUBUCK<br><b>AS/NZS 2210.3</b></div></div>
+      <div class="epart reveal"><span class="enum">02</span><div class="pimg"><img src="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/ex_toecap.png?v=1781040888" alt="Steel toe cap"></div><div class="elabel"><span>Steel toe cap</span><p>Certified to the number a real safety boot has to hit.</p></div><div class="espec">STEEL<br><b>200J RATED</b></div></div>
+      <div class="epart reveal"><span class="enum">03</span><div class="pimg"><img src="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/ex_plate.png?v=1781040888" alt="Anti-puncture plate"></div><div class="elabel"><span>Anti-puncture plate</span><p>A nail through the sole stops here, not in your foot.</p></div><div class="espec">PENETRATION<br><b>RESISTANT</b></div></div>
+      <div class="epart reveal"><span class="enum">04</span><div class="pimg"><img src="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/ex_sctpu.png?v=1781040888" alt="SC-TPU heel"></div><div class="elabel"><span>SC-TPU heel</span><p>Energy-return foam moulded into the heel. The same supercritical process as Adidas Ultraboost.</p></div><div class="espec">SUPERCRITICAL<br><b>TPU FOAM</b></div></div>
+      <div class="epart reveal"><span class="enum">05</span><div class="pimg"><img src="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/ex_insole.png?v=1781040888" alt="Poron insole"></div><div class="elabel"><span>Poron insole</span><p>Blue memory foam over Poron. Comfortable from the first shift. No break-in.</p></div><div class="espec">PORON<br><b>NO BREAK-IN</b></div></div>
+      <div class="epart reveal"><span class="enum">06</span><div class="pimg"><img src="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/ex_outsole.png?v=1781040888" alt="Nitrile outsole"></div><div class="elabel"><span>Nitrile outsole</span><p>Most work boots tap out near 130. Grip that holds on a hot slab.</p></div><div class="espec">NITRILE<br><b>RATED 300°C</b></div></div>
+    </div>
+    <p class="enote reveal">Every one of these came out of a real FAR boot I cut open.</p>
+  </div>
+</section>
+
+<section class="midjoin">
+  <div class="wrap">
+    <p class="ml reveal">Join the Founding Crew.</p>
+    <p class="ms reveal">The first 100 pairs sold go at $219. One email puts you on the list.</p>
+    <form class="signup">
+      <div class="form-row">
+        <input type="email" inputmode="email" autocomplete="email" placeholder="Your email" aria-label="Your email" required>
+        <button type="submit">Get my link →</button>
+        <span class="success">You're in. Check your phone.</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="offer wrap">
+  <div class="head">
+    <span class="kick reveal">The Founding Crew</span>
+    <h2 class="reveal">Get in early. Then bring your crew and get looked after.</h2>
+  </div>
+  <p class="lead reveal">One email puts you on the list with a numbered spot and your own link. Every tradie who joins through it moves you up the ladder. When the boots land, the Founding Crew hears first. <b>The first 100 pairs sold go at $219.</b></p>
+  <div class="ladder">
+    <div class="rung reveal"><div class="mates">3</div><img class="thumb" src="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/tier_socks_cut.png?v=1781040888" alt="FAR socks"><div class="what">mates sign up through your link</div><div class="prize">Free FAR socks</div></div>
+    <div class="rung reveal"><div class="mates">5</div><img class="thumb" src="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/tier_slides.png?v=1781040888" alt="FAR slides"><div class="what">mates sign up through your link</div><div class="prize">Free FAR slides</div></div>
+    <div class="rung reveal"><div class="mates">10</div><img class="thumb" src="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/tier_boots.jpg?v=1781040888" alt="FAR boots"><div class="what">mates sign up through your link</div><div class="prize">Free boots. On us.</div></div>
+  </div>
+</section>
+
+<section class="cta2">
+  <div class="cta-boot" aria-hidden="true"><img src="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/hero_boot_b.png?v=1781040888" alt=""></div>
+  <div class="wrap">
+    <h2 class="reveal">Stop accepting it.</h2>
+    <form class="signup" data-kol-form="true">
+      <div class="form-row">
+        <input type="email" inputmode="email" autocomplete="email" placeholder="Your email" aria-label="Your email" required>
+        <button type="submit">Get my link →</button>
+        <span class="success">You're in. Check your phone.</span>
+      </div>
+    </form>
+    <p class="micro">One email. No spam. A heads-up when it's time, and the chance to get free gear before then.</p>
+  </div>
+</section>
+
+<section class="faq wrap">
+  <h2 class="reveal">Fair questions.</h2>
+  <div class="reveal">
+    <div class="q"><button><span class="qt">Is this a pre-order?</span> <span class="ic"></span></button><div class="a"><div><p>No. The Founding Crew is the list. You hear first when the boots land, and the first 100 pairs sold go at $219. First in, best dressed. No money changes hands now.</p></div></div></div>
+    <div class="q"><button><span class="qt">When do they ship?</span> <span class="ic"></span></button><div class="a"><div><p>Launching mid-2026. We'd rather be a few weeks late than ship a boot that falls apart. You'll hear before anyone else.</p></div></div></div>
+    <div class="q"><button><span class="qt">Are they waterproof?</span> <span class="ic"></span></button><div class="a"><div><p>Water resistant. We chose breathability over turning your boot into a sweatbox. Built for twelve-hour shifts on concrete, not creek crossings.</p></div></div></div>
+    <div class="q"><button><span class="qt">Where are they made?</span> <span class="ic"></span></button><div class="a"><div><p>Designed in Australia, made overseas to AS/NZS 2210.3, in a factory we visit in person and put our name on. We'll always tell you straight.</p></div></div></div>
+    <div class="q"><button><span class="qt">What does it cost to join?</span> <span class="ic"></span></button><div class="a"><div><p>Nothing. One email. The only thing it costs is your mate's sore feet if you don't tell him about it.</p></div></div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-mark" aria-hidden="true"><svg class="far-logo"><use href="#far-wm"></use></svg></div>
+    <div class="foot">
+      <a href="#" class="brand" aria-label="FAR"><svg class="far-logo" role="img" aria-label="FAR"><use href="#far-wm"></use></svg></a>
+      <div class="links">
+        <a href="https://www.instagram.com/farworkwear" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@farworkwear" target="_blank" rel="noopener">TikTok</a>
+        <a href="#join">Join</a>
+      </div>
+      <div class="legal">© 2026 FAR Workwear. Designed in Australia. Built to AS/NZS 2210.3. Destruction tests filmed in controlled conditions.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
+<script>
+const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* hero entrance (no intro gate — plays on load) */
+function startHero(){
+  if(window.gsap){
+    gsap.to('.hero h1 .ln i',{y:0,duration:1,ease:'expo.out',stagger:0.09,delay:0.1});
+    gsap.from(['.hero-kick','.hero-sub','.hero .signup'],{y:18,opacity:0,duration:0.9,ease:'expo.out',stagger:0.1,delay:0.3});
+    gsap.from('.callout',{opacity:0,x:20,duration:1,ease:'expo.out',delay:0.9});
+  } else {
+    document.querySelectorAll('.hero h1 .ln i').forEach(i=>i.style.transform='none');
+  }
+  initScroll();
+}
+
+function initScroll(){
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+  // count-up (any [data-count])
+  const fmt=n=>n.toLocaleString('en-AU');
+  const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,t=+el.dataset.count,s=el.dataset.suffix||'';let t0=null;const step=ts=>{t0=t0||ts;const p=Math.min((ts-t0)/1700,1),k=1-Math.pow(1-p,4);el.textContent=fmt(Math.floor(k*t))+s;if(p<1)requestAnimationFrame(step);else el.textContent=fmt(t)+s;};requestAnimationFrame(step);cio.unobserve(el);}),{threshold:0.5});
+  document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+  // accordion
+  document.querySelectorAll('.q button').forEach(b=>b.addEventListener('click',()=>{const q=b.parentElement,o=q.classList.contains('open');document.querySelectorAll('.q').forEach(x=>x.classList.remove('open'));if(!o)q.classList.add('open');}));
+
+  // signup — REAL CAPTURE via KickoffLabs (kol.js, campaign 193736) -> syncs to Klaviyo list
+  // XQ9bDs with the kol_* referral properties (3/5/10 ladder). kol.js binds to every
+  // form[data-kol-form=true]. Guard ALWAYS prevents the native submit so the page can never
+  // reload with the email in the URL. On success we paint the styled inline success + share link.
+  const EMAIL_RE=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  document.querySelectorAll('.signup').forEach(f=>{
+    f.addEventListener('submit',ev=>{
+      ev.preventDefault();
+      const i=f.querySelector('input'); const email=(i&&i.value||'').trim();
+      if(!EMAIL_RE.test(email)){i&&i.focus();return;}
+      const btn=f.querySelector('button'); if(btn)btn.disabled=true;
+      const done=(lead)=>{
+        const f2=f; f2.classList.add('done');
+        const s=f2.querySelector('.success'); if(!s)return;
+        const share=lead&&lead.social_url?lead.social_url:'';
+        const sid=lead&&lead.social_id?lead.social_id:'';
+        if(share){
+          const msg='Mate, check these out. Work boots built by a tradie. '+share;
+          s.innerHTML='You’re in.'
+            +'<span class="su-sub">Bring your mates in. Every one moves you up the ladder.</span>'
+            +'<span class="su-label">Your link. Copy it, send it.</span>'
+            +'<span class="su-linkbox">'+share+'</span>'
+            +'<span class="su-share">'
+            +'<button type="button" class="su-btn su-copy">Copy link</button>'
+            +'<a class="su-btn" href="https://wa.me/?text='+encodeURIComponent(msg)+'" target="_blank" rel="noopener">WhatsApp</a>'
+            +'<a class="su-btn" href="sms:?&body='+encodeURIComponent(msg)+'">Text</a>'
+            +'</span>'
+            +(sid?'<span class="su-share"><a class="su-btn" href="https://crew.farworkwear.com.au/?kolid='+sid+'" target="_blank" rel="noopener">See your progress</a></span>':'');
+          const cp=s.querySelector('.su-copy'); if(cp)cp.addEventListener('click',function(){try{navigator.clipboard.writeText(share);}catch(e){}cp.textContent='Copied ✓';});
+        }
+      };
+      if(window._kol&&_kol.leads&&typeof _kol.leads.addLead==='function'){
+        _kol.leads.addLead({email},'anyform').then(lead=>done(lead)).catch(()=>{if(btn)btn.disabled=false;done(null);});
+      } else { done(''); }
+    });
+  });
+
+  // magnetic CTA
+  if(matchMedia('(hover:hover)').matches && !RM){
+    document.querySelectorAll('.form-row button').forEach(btn=>{const p=btn.parentElement;
+      p.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();btn.style.transform=`translate(${(e.clientX-(r.left+r.width/2))*0.1}px,${(e.clientY-(r.top+r.height/2))*0.14}px)`;});
+      p.addEventListener('mouseleave',()=>btn.style.transform='');});
+  }
+
+  if(!window.gsap || !window.ScrollTrigger){document.querySelectorAll('.reveal').forEach(el=>el.style.opacity=1);return;}
+  gsap.registerPlugin(ScrollTrigger);
+
+  if(window.Lenis && !RM){
+    const lenis=new Lenis({lerp:0.09,smoothWheel:true});
+    lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(t=>lenis.raf(t*1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  gsap.utils.toArray('.reveal').forEach(el=>{
+    gsap.from(el,{y:32,opacity:0,duration:1,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 88%'}});
+  });
+
+  // hero boot subtle parallax exit
+  gsap.to('.hero-bg .boot',{yPercent:-12,scale:1.06,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+  gsap.to('.hero .wrap',{yPercent:-10,opacity:0.3,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+  gsap.to('.cta2 .cta-boot img',{yPercent:-10,ease:'none',scrollTrigger:{trigger:'.cta2',start:'top bottom',end:'bottom top',scrub:true}});
+
+  // betrayal pairs: rejected slides from left, FAR fix from right
+  gsap.utils.toArray('.pair').forEach(p=>{
+    const tl=gsap.timeline({scrollTrigger:{trigger:p,start:'top 86%',end:'top 58%',scrub:true}});
+    tl.from(p.querySelector('.bad'),{x:-26,opacity:0,ease:'none'},0)
+      .from(p.querySelector('.good'),{x:26,opacity:0,ease:'none'},0);
+  });
+
+  // rally words rise on scrub
+  gsap.from('.rally h2 .w i',{yPercent:115,stagger:0.06,ease:'expo.out',scrollTrigger:{trigger:'.rally',start:'top 70%',end:'top 20%',scrub:true}});
+  gsap.from('.rally .sub',{opacity:0,scrollTrigger:{trigger:'.rally',start:'top 40%'}});
+}
+
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',startHero);}else{startHero();}
+
+// referred-mate arrival: ?kid= present -> context banner
+(function(){
+  try{
+    var kid=new URLSearchParams(location.search).get('kid');
+    if(!kid)return;
+    var b=document.createElement('div'); b.className='ref-banner';
+    b.innerHTML='A mate put you onto this.<a href="#join" class="ref-btn">Have a look</a>';
+    document.body.appendChild(b);
+    var a=b.querySelector('.ref-btn');
+    a.addEventListener('click',function(e){e.preventDefault();var j=document.getElementById('join');if(j)j.scrollIntoView({behavior:'smooth',block:'center'});b.remove();});
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
