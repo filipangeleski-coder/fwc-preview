@@ -313,7 +313,7 @@ window.addEventListener('load',()=>{
   const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
   ScrollTrigger.create({
-    trigger:'#estage', start:'top top', end:()=>'+='+(window.innerHeight*3.2),
+    trigger:'#estage', start:'top top', end:()=>'+='+(window.innerHeight*4.8),
     pin:true, scrub:reduce?false:0.6, anticipatePin:1, invalidateOnRefresh:true,
     onUpdate:self=>{
       const p=self.progress;
