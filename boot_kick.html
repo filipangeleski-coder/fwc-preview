@@ -185,23 +185,23 @@ h1,h2,h3,.display{font-family:"Space Grotesk",sans-serif;font-weight:700;line-he
 <script>
 const FRAMES=96, PAD=n=>String(n).padStart(2,'0');
 const canvas=document.getElementById('boot'), ctx=canvas.getContext('2d');
-const imgs=[]; let loaded=0;
+const bitmaps=[]; let loaded=0;
 const lbar=document.getElementById('lbar'), lpct=document.getElementById('lpct'), loader=document.getElementById('loader');
 
 function src(i){return 'boot_seq_kick/f_'+String(i).padStart(3,'0')+'.jpg';}
-function draw(i){const im=imgs[i]; if(im&&im.complete) ctx.drawImage(im,0,0,canvas.width,canvas.height);}
+// draw is gated to animation frames + skips redundant redraws (GPU-fast ImageBitmap)
+let curFrame=-1, pendFrame=0, rafQueued=false;
+function paint(){ rafQueued=false; const bm=bitmaps[pendFrame]; if(bm && pendFrame!==curFrame){ ctx.drawImage(bm,0,0,canvas.width,canvas.height); curFrame=pendFrame; } }
+function draw(i){ pendFrame=i; if(!rafQueued){ rafQueued=true; requestAnimationFrame(paint); } }
 
-// preload
-for(let i=0;i<FRAMES;i++){
-  const im=new Image();
-  im.onload=im.onerror=()=>{
-    loaded++;
-    const p=Math.round(loaded/FRAMES*100);
-    lbar.style.width=p+'%'; lpct.textContent='Loading '+p+'%';
-    if(loaded===FRAMES) ready();
-  };
-  im.src=src(i); imgs[i]=im;
-}
+// preload -> decode each frame ONCE to an ImageBitmap (no per-draw JPEG decode = smooth scrub)
+(function preload(){
+  for(let i=0;i<FRAMES;i++){
+    fetch(src(i)).then(r=>r.blob()).then(b=>createImageBitmap(b)).then(bm=>{ bitmaps[i]=bm; })
+      .catch(()=>{})
+      .finally(()=>{ loaded++; const p=Math.round(loaded/FRAMES*100); lbar.style.width=p+'%'; lpct.textContent='Loading '+p+'%'; if(loaded===FRAMES) ready(); });
+  }
+})();
 
 const intro=document.getElementById('intro'), enterBtn=document.getElementById('enterBtn');
 let isReady=false;
