@@ -128,7 +128,7 @@ h1,h2,h3,.display{font-family:"Space Grotesk",sans-serif;font-weight:700;line-he
   <div class="inner">
     <span class="mark"><svg class="far-logo"><use href="#far-wm"></use></svg></span>
     <span class="sub">Built to be cut open</span>
-    <button class="enter" id="enterBtn" type="button">Enter →</button>
+    <button class="enter" id="enterBtn" type="button">Scroll to enter ↓</button>
   </div>
 </div>
 
@@ -211,12 +211,18 @@ function ready(){
   loader.classList.add('gone');
   intro.classList.add('go');
 }
+let entered=false;
 function enter(){
+  if(entered||!isReady) return; entered=true;
   intro.classList.add('done');
   document.body.classList.remove('lock');
   setTimeout(()=>{intro.style.display='none'; if(window.ScrollTrigger) ScrollTrigger.refresh();},900);
 }
 enterBtn.addEventListener('click',enter);
+// scroll-to-enter: first wheel / touch / down-key lifts the gate, no click needed
+window.addEventListener('wheel', enter, {passive:true});
+window.addEventListener('touchmove', enter, {passive:true});
+window.addEventListener('keydown', e=>{ if(['ArrowDown','PageDown',' ','Enter'].includes(e.key)) enter(); });
 
 // fade helper
 function lerpOpacity(p,inStart,inEnd,outStart,outEnd){
