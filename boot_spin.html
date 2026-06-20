@@ -255,8 +255,8 @@ window.addEventListener('load',()=>{
       const f=Math.min(FRAMES-1,Math.round(p*(FRAMES-1)));
       draw(f);
       // instrument: ~peak explode near middle of clip
-      const exploded = p>0.18 && p<0.72;
-      fidx.innerHTML='<b>'+PAD(Math.round(p*100))+'</b> / '+(exploded?'Exploded':(p>=0.72?'Reassembled':'Assembled'));
+      const exploded = p>0.2;
+      fidx.innerHTML='<b>'+PAD(Math.round(p*100))+'</b> / '+(exploded?'Exploded':'Assembled');
       // overlay choreography
       ovIntro.style.opacity = lerpOpacity(p,0,0.001,0.08,0.20);
       ovMid.style.opacity   = lerpOpacity(p,0.34,0.46,0.56,0.66);
