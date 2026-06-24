@@ -40,6 +40,8 @@ body{background:transparent;color:var(--far-white);font-family:"DM Sans",system-
 .aurora::after{width:56vw;height:56vw;right:-14vw;bottom:-10vh;background:radial-gradient(circle,oklch(0.27 0.004 60) 0%,transparent 64%);opacity:0.5;animation:aur2 34s var(--ease) infinite alternate}
 @keyframes aur1{to{transform:translate(24vw,18vh) scale(1.22)}}
 @keyframes aur2{to{transform:translate(-20vw,-16vh) scale(1.16)}}
+/* aurora is hidden behind the opaque black hero — kill its compositing while the kick is pinned (perf) */
+body.hero-pinned .aurora{visibility:hidden}
 body.lock{overflow:hidden;height:100vh}
 ::selection{background:var(--far-white);color:var(--far-black)}
 a{color:inherit;text-decoration:none}
@@ -615,9 +617,11 @@ function initScroll(){
     if(!stage) return;
     const ovIntro=document.getElementById('ovIntro'), ovEnd=document.getElementById('ovEnd'), cue=document.getElementById('scrollcue');
     if(RM){ draw(FRAMES-1); return; }   // reduced-motion: show the exploded end frame, no pin
+    document.body.classList.add('hero-pinned');
     ScrollTrigger.create({
       trigger:'#estage', start:'top top', end:()=>'+='+(innerHeight*4.6),
       pin:true, scrub:0.6, anticipatePin:1, invalidateOnRefresh:true,
+      onToggle:self=>document.body.classList.toggle('hero-pinned',self.isActive),
       onUpdate:self=>{
         const p=self.progress;
         draw(Math.min(FRAMES-1,Math.round(p*(FRAMES-1))));
