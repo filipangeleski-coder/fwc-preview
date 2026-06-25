@@ -13,7 +13,9 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--ink);color:var(--white);font-family:"DM Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;padding:clamp(1.5rem,5vw,4rem)}
 h1{font-family:"Space Grotesk";font-weight:700;font-size:clamp(1.6rem,4vw,2.6rem);letter-spacing:-0.03em}
-.sub{color:var(--smoke);margin-top:.6rem;max-width:60ch;font-size:.95rem;line-height:1.5}
+.sub{color:var(--smoke);margin-top:.6rem;max-width:64ch;font-size:.95rem;line-height:1.5}
+.notes{margin-top:1rem;color:var(--smoke);font-size:.9rem;line-height:1.7;max-width:64ch}
+.notes b{color:var(--white);font-weight:500}
 .grid{display:grid;grid-template-columns:1fr;gap:clamp(1.5rem,3vw,2.5rem);margin-top:clamp(2rem,5vw,3.5rem)}
 @media(min-width:760px){.grid{grid-template-columns:1fr 1fr}}
 .card{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#000}
@@ -23,49 +25,66 @@ h1{font-family:"Space Grotesk";font-weight:700;font-size:clamp(1.6rem,4vw,2.6rem
 .name{font-family:"Space Grotesk";font-weight:700;font-size:1.25rem;letter-spacing:-0.02em;margin-top:.35rem}
 .note{color:var(--smoke);font-size:.9rem;line-height:1.45;margin-top:.5rem}
 .note b{color:var(--white);font-weight:500}
-.foot{margin-top:clamp(2.5rem,5vw,3.5rem);color:var(--smoke);font-size:.85rem;line-height:1.5;border-top:1px solid var(--line);padding-top:1.5rem;max-width:70ch}
 .pick{display:inline-block;font-family:"Space Grotesk";font-weight:700;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);background:var(--white);padding:.3rem .6rem;border-radius:3px;margin-left:.5rem;vertical-align:middle}
+.pending{display:flex;align-items:center;justify-content:center;aspect-ratio:3/4;background:#000;color:var(--smoke);font-family:"Space Grotesk";font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;text-align:center;padding:1rem;line-height:1.6}
+.sec{margin-top:clamp(3rem,7vw,5rem);font-family:"Space Grotesk";font-weight:700;font-size:1.1rem;letter-spacing:.04em;color:var(--smoke);text-transform:uppercase;border-top:1px solid var(--line);padding-top:1.5rem}
+.foot{margin-top:clamp(2.5rem,5vw,3.5rem);color:var(--smoke);font-size:.85rem;line-height:1.5;border-top:1px solid var(--line);padding-top:1.5rem;max-width:72ch}
 </style>
 </head>
 <body>
-  <h1>Hero directions — pick one</h1>
-  <p class="sub">All seeded on your real boot (the angled still), Seedance cinematic motion around it. 720p tests — we upscale the winner to 4K and boomerang-loop it seamless. Tell me the number and any tweak (faster, more atmosphere, different angle).</p>
+  <h1>Round 2 — your notes, built in</h1>
+  <p class="sub">Same real boot. Now with the drop, the cracked concrete, the dust, and the spin from side profile to front-on — your side + front photos as the start/end frames, so the boot stays itself through the whole spin.</p>
+  <div class="notes">
+    ✓ <b>boot actually drops in</b> and cracks the concrete (01) &nbsp;·&nbsp; ✓ <b>crack in the ground</b> on all &nbsp;·&nbsp; ✓ <b>spins to the front</b> so you see the FAR logo (02, 03) &nbsp;·&nbsp; ✓ <b>impact + reveal combined</b>
+  </div>
 
   <div class="grid">
     <div class="card">
-      <video src="hero_impact.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <video src="hero_drop.mp4" autoplay muted loop playsinline preload="metadata"></video>
       <div class="meta">
-        <span class="tag">01<span class="pick">my pick</span></span>
-        <div class="name">Impact</div>
-        <p class="note">Boot drives down, dust shockwave, the concrete <b>cracks</b>, debris flies. Spectacle that also says "this boot is tough." Most on-brand.</p>
+        <span class="tag">01</span>
+        <div class="name">The drop</div>
+        <p class="note">Boot falls in from above, slams, <b>real cracked concrete</b>, dust shockwave. The motivated impact — no more magic crack. Stays side-on.</p>
       </div>
     </div>
     <div class="card">
-      <video src="hero_forge.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <video src="hero_reveal_rot.mp4" autoplay muted loop playsinline preload="metadata"></video>
       <div class="meta">
-        <span class="tag">02</span>
-        <div class="name">Forge</div>
-        <p class="note">White-hot sparks raining around the boot, industrial, moody. On-brand — the sole's heat-rated to 300°C.</p>
+        <span class="tag">02<span class="pick">my pick</span></span>
+        <div class="name">Reveal + spin to front</div>
+        <p class="note">Dust clears as the camera arcs side → front, landing on the <b>FAR logo</b>, god-ray beam, embers, cracked ground. The most premium.</p>
       </div>
     </div>
     <div class="card">
-      <video src="hero_storm.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <video src="hero_impact_rot.mp4" autoplay muted loop playsinline preload="metadata"></video>
       <div class="meta">
         <span class="tag">03</span>
-        <div class="name">Storm</div>
-        <p class="note">Wet concrete, water bursting, reflections. The prettiest. <b>Flag:</b> leans "waterproof" and we're locked water-resistant — wrong product message.</p>
+        <div class="name">Impact + spin to front</div>
+        <p class="note">Cracks and dust, camera arcs side → front, ends square on the <b>FAR logo</b>. Punchier, less god-ray.</p>
       </div>
     </div>
     <div class="card">
-      <video src="hero_reveal.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <div class="pending">04 · drop + slam + spin<br>rendering…</div>
       <div class="meta">
-        <span class="tag">04</span>
-        <div class="name">Dust reveal</div>
-        <p class="note">Dust clears, god-ray beam, embers floating. Huge mood. The boot tilts slightly off-axis — fixable with a re-roll.</p>
+        <span class="tag">04 — coming</span>
+        <div class="name">Drop → slam → spin to front</div>
+        <p class="note">All of it in one shot: falls in, cracks the slab, then spins to the FAR logo. Adding it the moment it lands.</p>
       </div>
     </div>
   </div>
 
-  <p class="foot">A fifth — "Monument" — turned the boot into a Greek marble column. Total drift, binned. That's the AI tax: ~1 in 5 misses, so we fire a spread and keep the keepers. Whichever you pick, the next pass is: upscale to 4K, seamless boomerang loop, then it drops into the hero in place of the slow pan.</p>
+  <p class="sec">Round 1 (for reference)</p>
+  <div class="grid">
+    <div class="card">
+      <video src="hero_impact.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <div class="meta"><span class="tag">R1</span><div class="name">Impact (original)</div><p class="note">The first crack take — static boot, magic crack. Superseded by 01.</p></div>
+    </div>
+    <div class="card">
+      <video src="hero_storm.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <div class="meta"><span class="tag">R1</span><div class="name">Storm</div><p class="note">Prettiest, but leans "waterproof" — wrong message (we're water-resistant). Parked.</p></div>
+    </div>
+  </div>
+
+  <p class="foot">Pick one (or a combo) and the finishing pass is: upscale to 4K, seamless boomerang loop, drop it into the hero. The grade drifts a touch warm→mono through the spin (the front frame is more desaturated) — easy to match. Tell me which, and any tweak: more violent, longer hold on the front, faster spin, tighter crop.</p>
 </body>
 </html>
