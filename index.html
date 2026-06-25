@@ -233,6 +233,8 @@ section{padding-block:clamp(5rem,12vh,10rem);position:relative}
 .explode{background:#000;overflow:hidden}
 .explode .eyebrow{margin-bottom:1.3rem}
 .explode h2{font-size:clamp(1.9rem,5vw,3.6rem);max-width:17ch;margin-bottom:clamp(2.5rem,6vw,4.5rem);color:var(--far-white)}
+.explode-video{max-width:520px;margin:0 auto clamp(2.5rem,7vw,4.5rem);border-radius:8px;overflow:hidden;border:1px solid var(--far-line);background:#000}
+.explode-video video{width:100%;display:block;aspect-ratio:3/4;object-fit:cover;background:#000}
 .exploded{display:flex;flex-direction:column;align-items:center;gap:clamp(2rem,5vw,3.6rem);position:relative;max-width:760px;margin-inline:auto}
 .exploded::before{content:"";position:absolute;top:4%;bottom:4%;left:50%;width:1px;background:linear-gradient(180deg,transparent,var(--far-line) 12%,var(--far-line) 88%,transparent);z-index:0}
 .epart{position:relative;z-index:1;display:grid;grid-template-columns:1fr;justify-items:center;gap:0.7rem;width:100%}
@@ -389,6 +391,9 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
   <div class="wrap">
     <div class="eyebrow reveal">Built to be cut open</div>
     <h2 class="reveal">Nothing to hide. The real build, pulled apart.</h2>
+    <div class="explode-video reveal">
+      <video src="hero_explode_side.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    </div>
     <div class="exploded">
       <div class="epart"><img src="ex_boot.png" alt="FAR boot"><div class="elabel"><span>The boot</span><p>Wheat nubuck, side zip, water-resistant. Built to AS/NZS 2210.3.</p></div></div>
       <div class="epart"><img src="ex_toecap.png" alt="Steel toe cap"><div class="elabel"><span>Steel toe cap</span><p>Certified to AS/NZS 2210.3. The number a real safety boot has to hit.</p></div></div>
