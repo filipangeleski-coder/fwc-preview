@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>FAR — hero directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--white:#f5f5f5;--smoke:#9a9a96;--line:#2a2a2a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--white);font-family:"DM Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;padding:clamp(1.5rem,5vw,4rem)}
+h1{font-family:"Space Grotesk";font-weight:700;font-size:clamp(1.6rem,4vw,2.6rem);letter-spacing:-0.03em}
+.sub{color:var(--smoke);margin-top:.6rem;max-width:60ch;font-size:.95rem;line-height:1.5}
+.grid{display:grid;grid-template-columns:1fr;gap:clamp(1.5rem,3vw,2.5rem);margin-top:clamp(2rem,5vw,3.5rem)}
+@media(min-width:760px){.grid{grid-template-columns:1fr 1fr}}
+.card{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#000}
+.card video{width:100%;display:block;aspect-ratio:3/4;object-fit:cover;background:#000}
+.meta{padding:1rem 1.1rem 1.2rem}
+.tag{font-family:"Space Grotesk";font-weight:700;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--smoke)}
+.name{font-family:"Space Grotesk";font-weight:700;font-size:1.25rem;letter-spacing:-0.02em;margin-top:.35rem}
+.note{color:var(--smoke);font-size:.9rem;line-height:1.45;margin-top:.5rem}
+.note b{color:var(--white);font-weight:500}
+.foot{margin-top:clamp(2.5rem,5vw,3.5rem);color:var(--smoke);font-size:.85rem;line-height:1.5;border-top:1px solid var(--line);padding-top:1.5rem;max-width:70ch}
+.pick{display:inline-block;font-family:"Space Grotesk";font-weight:700;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);background:var(--white);padding:.3rem .6rem;border-radius:3px;margin-left:.5rem;vertical-align:middle}
+</style>
+</head>
+<body>
+  <h1>Hero directions — pick one</h1>
+  <p class="sub">All seeded on your real boot (the angled still), Seedance cinematic motion around it. 720p tests — we upscale the winner to 4K and boomerang-loop it seamless. Tell me the number and any tweak (faster, more atmosphere, different angle).</p>
+
+  <div class="grid">
+    <div class="card">
+      <video src="hero_impact.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <div class="meta">
+        <span class="tag">01<span class="pick">my pick</span></span>
+        <div class="name">Impact</div>
+        <p class="note">Boot drives down, dust shockwave, the concrete <b>cracks</b>, debris flies. Spectacle that also says "this boot is tough." Most on-brand.</p>
+      </div>
+    </div>
+    <div class="card">
+      <video src="hero_forge.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <div class="meta">
+        <span class="tag">02</span>
+        <div class="name">Forge</div>
+        <p class="note">White-hot sparks raining around the boot, industrial, moody. On-brand — the sole's heat-rated to 300°C.</p>
+      </div>
+    </div>
+    <div class="card">
+      <video src="hero_storm.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <div class="meta">
+        <span class="tag">03</span>
+        <div class="name">Storm</div>
+        <p class="note">Wet concrete, water bursting, reflections. The prettiest. <b>Flag:</b> leans "waterproof" and we're locked water-resistant — wrong product message.</p>
+      </div>
+    </div>
+    <div class="card">
+      <video src="hero_reveal.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <div class="meta">
+        <span class="tag">04</span>
+        <div class="name">Dust reveal</div>
+        <p class="note">Dust clears, god-ray beam, embers floating. Huge mood. The boot tilts slightly off-axis — fixable with a re-roll.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="foot">A fifth — "Monument" — turned the boot into a Greek marble column. Total drift, binned. That's the AI tax: ~1 in 5 misses, so we fire a spread and keep the keepers. Whichever you pick, the next pass is: upscale to 4K, seamless boomerang loop, then it drops into the hero in place of the slow pan.</p>
+</body>
+</html>
