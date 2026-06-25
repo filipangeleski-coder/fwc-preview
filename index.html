@@ -308,8 +308,10 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
 <header class="hero">
   <canvas id="dust" aria-hidden="true"></canvas>
   <div class="hero-bg" aria-hidden="true">
-    <!-- Cinematic hero: the REAL left boot (new portrait shoot 25 Jun), Nano-Banana relit onto a dark mono stage. Identity = real pixels, only the environment is AI. -->
-    <img class="hero-boot-img" src="hero_left.png" alt="">
+    <!-- Cinematic hero: REAL boot still (Nano-Banana relit) seeded into a Seedance cinematic push-in, boomerang-looped seamless. Boot identity from real pixels; AI = camera + atmosphere only (S299/S334 floor). Poster = the still for instant paint + reduced-motion fallback. -->
+    <video class="hero-boot-img" autoplay muted loop playsinline preload="auto" poster="hero_left.png">
+      <source src="hero_boot.mp4" type="video/mp4">
+    </video>
   </div>
   <div class="hero-ghost" id="ghost" aria-hidden="true"><svg class="far-logo"><use href="#far-wm"></use></svg></div>
   <div class="wrap">
