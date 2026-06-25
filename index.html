@@ -102,7 +102,13 @@ h1,h2,h3,.display{font-family:"Space Grotesk",sans-serif;font-weight:700;line-he
 .hero-tag{margin-bottom:clamp(1.2rem,3vw,2rem)}
 .hero h1{font-size:clamp(1.55rem,5.6vw,4.6rem);letter-spacing:-0.035em;max-width:24ch}
 .hero h1 .ln{display:block;overflow:hidden;padding-block:0.02em}
-.hero h1 .ln i{display:block;font-style:normal;transform:translateY(115%)}
+.hero h1 .ln i{display:block;font-style:normal;transform:translateY(115%);transition:transform .9s var(--ease)}
+.hero.textin h1 .ln i{transform:translateY(0)}
+.hero.textin h1 .ln:nth-child(2) i{transition-delay:.08s}
+.hero .hero-tag,.hero .hero-sub,.hero .signup{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.hero.textin .hero-tag{opacity:1;transform:none}
+.hero.textin .hero-sub{opacity:1;transform:none;transition-delay:.16s}
+.hero.textin .signup{opacity:1;transform:none;transition-delay:.32s}
 .hero-sub{margin-top:clamp(1.4rem,3vw,2rem);max-width:44ch;color:var(--far-smoke);font-size:clamp(1.05rem,1rem + 0.55vw,1.4rem)}
 .hero-sub b{color:var(--far-white);font-weight:500}
 
@@ -280,6 +286,7 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
   *{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important}
   .grain,#dust{display:none}
   .hero h1 .ln i{transform:none}
+  .hero .hero-tag,.hero .hero-sub,.hero .signup{opacity:1;transform:none}
   #intro{display:none}
 }
 </style>
@@ -302,9 +309,9 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
 <header class="hero">
   <canvas id="dust" aria-hidden="true"></canvas>
   <div class="hero-bg" aria-hidden="true">
-    <!-- Cinematic hero: REAL boot still (Nano-Banana relit) seeded into a Seedance cinematic push-in, boomerang-looped seamless. Boot identity from real pixels; AI = camera + atmosphere only (S299/S334 floor). Poster = the still for instant paint + reduced-motion fallback. -->
-    <video class="hero-boot-img" autoplay muted loop playsinline preload="auto" poster="hero_left.png">
-      <source src="hero_drop_in.mp4" type="video/mp4">
+    <!-- Cinematic hero: full sequence (real boot seed -> Seedance Mini) drop -> stomp -> explode, plays ONCE on entry, holds on the exploded reveal. Headline punches up on the stomp (~1.8s) via the timeupdate cue in startHero(). -->
+    <video class="hero-boot-img" id="heroVid" autoplay muted playsinline preload="auto" poster="hero_left.png">
+      <source src="hero_sequence.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-ghost" id="ghost" aria-hidden="true"><svg class="far-logo"><use href="#far-wm"></use></svg></div>
@@ -391,9 +398,6 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
   <div class="wrap">
     <div class="eyebrow reveal">Built to be cut open</div>
     <h2 class="reveal">Nothing to hide. The real build, pulled apart.</h2>
-    <div class="explode-video reveal">
-      <video src="hero_explode_side.mp4" autoplay muted loop playsinline preload="metadata"></video>
-    </div>
     <div class="exploded">
       <div class="epart"><img src="ex_boot.png" alt="FAR boot"><div class="elabel"><span>The boot</span><p>Wheat nubuck, side zip, water-resistant. Built to AS/NZS 2210.3.</p></div></div>
       <div class="epart"><img src="ex_toecap.png" alt="Steel toe cap"><div class="elabel"><span>Steel toe cap</span><p>Certified to AS/NZS 2210.3. The number a real safety boot has to hit.</p></div></div>
@@ -481,12 +485,22 @@ const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
 
 /* ---- hero entrance + dust + parallax ---- */
 function startHero(){
-  if(window.gsap){
-    gsap.fromTo('.hero-boot-img',{scale:1.12,opacity:0},{scale:1,opacity:1,duration:1.7,ease:'expo.out'});
-    gsap.to('.hero h1 .ln i',{y:0,duration:1,ease:'expo.out',stagger:0.1,delay:0.15});
-    gsap.from(['.hero-tag','.hero-sub','.signup'],{y:18,opacity:0,duration:0.9,ease:'expo.out',stagger:0.12,delay:0.35});
+  // Headline + copy reveal is gated to the STOMP of the hero video (~1.8s), so the writing punches up on impact.
+  const hero=document.querySelector('.hero');
+  const v=document.getElementById('heroVid');
+  let fired=false;
+  const fire=()=>{ if(fired)return; fired=true; hero.classList.add('textin'); };
+  const STOMP=1.8;
+  if(v && !RM){
+    const onTime=()=>{ if(v.currentTime>=STOMP){ fire(); v.removeEventListener('timeupdate',onTime); } };
+    v.addEventListener('timeupdate',onTime);
+    v.addEventListener('error',fire);
+    v.addEventListener('ended',fire);
+    try{ const p=v.play(); p&&p.catch&&p.catch(()=>{}); }catch(e){}
+    setTimeout(fire,4500);            // safety net if the video stalls / autoplay is blocked
   } else {
-    document.querySelectorAll('.hero h1 .ln i').forEach(i=>i.style.transform='none');
+    if(v){ v.removeAttribute('autoplay'); try{v.pause();}catch(e){} }   // reduced-motion: hold the poster
+    fire();                          // show the copy immediately
   }
   initScroll();
 }
