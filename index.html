@@ -311,7 +311,7 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
   <div class="hero-bg" aria-hidden="true">
     <!-- Cinematic hero: full sequence (real boot seed -> Seedance Mini) drop -> stomp -> explode, plays ONCE on entry, holds on the exploded reveal. Headline punches up on the stomp (~1.8s) via the timeupdate cue in startHero(). -->
     <video class="hero-boot-img" id="heroVid" autoplay muted playsinline preload="auto" poster="hero_sky_start.png">
-      <source src="hero_sky_drop.mp4" type="video/mp4">
+      <source src="hero_storm_drop.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-ghost" id="ghost" aria-hidden="true"><svg class="far-logo"><use href="#far-wm"></use></svg></div>
@@ -490,7 +490,7 @@ function startHero(){
   const v=document.getElementById('heroVid');
   let fired=false;
   const fire=()=>{ if(fired)return; fired=true; hero.classList.add('textin'); };
-  const STOMP=4.3;
+  const STOMP=4.4;
   if(v && !RM){
     const onTime=()=>{ if(v.currentTime>=STOMP){ fire(); v.removeEventListener('timeupdate',onTime); } };
     v.addEventListener('timeupdate',onTime);
