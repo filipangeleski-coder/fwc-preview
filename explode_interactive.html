@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FAR — interactive exploded parts (demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --far-black: oklch(0.16 0.004 60);
+  --far-deep:  oklch(0.075 0.004 60);
+  --far-white: oklch(0.97 0.003 80);
+  --far-smoke: oklch(0.62 0.005 60);
+  --far-line:  oklch(0.30 0.004 60);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --pad: clamp(1.25rem, 5vw, 6.5rem);
+  --maxw: 1280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;background:var(--far-deep)}
+body{background:transparent;color:var(--far-white);font-family:"DM Sans",system-ui,sans-serif;font-size:clamp(1rem,0.95rem + 0.3vw,1.15rem);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.aurora{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background:var(--far-deep)}
+.aurora::before,.aurora::after{content:"";position:absolute;border-radius:50%;filter:blur(80px);mix-blend-mode:screen}
+.aurora::before{width:62vw;height:62vw;left:-12vw;top:-14vh;background:radial-gradient(circle,oklch(0.34 0.004 60) 0%,transparent 64%);opacity:0.5}
+.aurora::after{width:56vw;height:56vw;right:-14vw;bottom:-10vh;background:radial-gradient(circle,oklch(0.27 0.004 60) 0%,transparent 64%);opacity:0.45}
+h1,h2,h3{font-family:"Space Grotesk",sans-serif;font-weight:700;line-height:0.94;letter-spacing:-0.035em}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad)}
+.eyebrow{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:0.76rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--far-smoke)}
+:focus-visible{outline:2px solid var(--far-white);outline-offset:4px;border-radius:4px}
+
+.explode{background:#000;overflow:hidden;padding-block:clamp(3.5rem,9vw,7rem)}
+.explode .eyebrow{margin-bottom:1.3rem}
+.explode h2{font-size:clamp(1.9rem,5vw,3.6rem);max-width:17ch;margin-bottom:0.9rem;color:var(--far-white)}
+.hint{color:var(--far-smoke);font-size:0.95rem;margin-bottom:clamp(2.5rem,6vw,4.5rem)}
+.hint b{color:var(--far-white);font-weight:500}
+
+.exploded{display:flex;flex-direction:column;align-items:center;gap:clamp(1.4rem,4vw,2.8rem);position:relative;max-width:760px;margin-inline:auto}
+.exploded::before{content:"";position:absolute;top:3%;bottom:3%;left:50%;width:1px;background:linear-gradient(180deg,transparent,var(--far-line) 12%,var(--far-line) 88%,transparent);z-index:0}
+
+.epart{position:relative;z-index:1;display:grid;grid-template-columns:1fr;justify-items:center;gap:0.4rem;width:100%;cursor:pointer;outline:none;
+  transition:filter .35s var(--ease), transform .5s var(--ease);}
+@media(min-width:720px){
+  .epart{grid-template-columns:1fr 1fr;align-items:center;gap:clamp(1.5rem,4vw,3.5rem)}
+  .epart:nth-child(odd) .pimg{order:1}.epart:nth-child(odd) .elabel{order:2;text-align:left}
+  .epart:nth-child(even) .pimg{order:2}.epart:nth-child(even) .elabel{order:1;text-align:right}
+}
+.pimg{display:flex;justify-content:center;width:100%}
+.epart img{max-height:clamp(120px,25vw,270px);width:auto;object-fit:contain;mix-blend-mode:lighten;
+  transition:transform .55s var(--ease), filter .35s var(--ease);filter:drop-shadow(0 18px 30px rgba(0,0,0,0.55))}
+.epart:first-child img{max-height:clamp(170px,32vw,340px)}
+
+/* resting / active states (JS-driven so it works on hover AND tap) */
+.exploded.has-active .epart{filter:brightness(0.3)}
+.exploded.has-active .epart.active{filter:brightness(1.06)}
+.epart.active img{transform:scale(1.13)}
+@media(min-width:720px){
+  .epart:nth-child(odd).active img{transform:translateX(-4%) scale(1.13)}
+  .epart:nth-child(even).active img{transform:translateX(4%) scale(1.13)}
+}
+
+.elabel{text-align:center}
+.elabel span{display:inline-block;position:relative;font-family:"Space Grotesk";font-weight:700;font-size:clamp(1.1rem,2.4vw,1.65rem);color:var(--far-white);letter-spacing:-0.015em}
+.elabel span::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:2px;background:var(--far-white);transition:right .5s var(--ease)}
+.epart.active .elabel span::after{right:0}
+.elabel p{color:var(--far-smoke);max-width:40ch;font-size:clamp(0.95rem,0.94rem + 0.2vw,1.1rem);
+  max-height:0;opacity:0;overflow:hidden;margin-top:0;
+  transition:max-height .55s var(--ease), opacity .4s var(--ease), margin-top .4s var(--ease)}
+.epart.active .elabel p{max-height:9rem;opacity:1;margin-top:0.5rem}
+@media(min-width:720px){.epart:nth-child(even) .elabel p{margin-left:auto}}
+
+.enote{color:var(--far-smoke);text-align:center;margin-top:clamp(2.5rem,6vw,4rem);font-size:0.98rem}
+.enote b{color:var(--far-white);font-weight:500}
+</style>
+</head>
+<body>
+<div class="aurora"></div>
+
+<section class="explode">
+  <div class="wrap">
+    <div class="eyebrow">Built to be cut open</div>
+    <h2>Nothing to hide. The real build, pulled apart.</h2>
+    <p class="hint"><b class="d">Hover</b><b class="t">Tap</b> a part to see what it does.</p>
+
+    <div class="exploded">
+      <div class="epart"><div class="pimg"><img src="ex_boot.png" alt="FAR boot"></div><div class="elabel"><span>The boot</span><p>Wheat nubuck, side zip, water-resistant. Built to AS/NZS 2210.3.</p></div></div>
+      <div class="epart"><div class="pimg"><img src="ex_toecap.png" alt="Steel toe cap"></div><div class="elabel"><span>Steel toe cap</span><p>Certified to AS/NZS 2210.3. The number a real safety boot has to hit.</p></div></div>
+      <div class="epart"><div class="pimg"><img src="ex_plate.png" alt="Anti-puncture plate"></div><div class="elabel"><span>Anti-puncture plate</span><p>A penetration-resistant plate underfoot. A nail through the sole stops here, not in your foot.</p></div></div>
+      <div class="epart"><div class="pimg"><img src="ex_sctpu.png" alt="SC-TPU heel"></div><div class="elabel"><span>SC-TPU heel</span><p>Energy-return foam moulded into the heel. The same supercritical process as Adidas Ultraboost.</p></div></div>
+      <div class="epart"><div class="pimg"><img src="ex_insole.png" alt="Poron insole"></div><div class="elabel"><span>Poron insole</span><p>Blue memory foam over Poron. Comfortable from the first shift. No break-in.</p></div></div>
+      <div class="epart"><div class="pimg"><img src="ex_outsole.png" alt="Nitrile outsole"></div><div class="elabel"><span>Nitrile outsole</span><p>Rated to 300°C. Most work boots tap out near 130. Grip that holds on a hot slab.</p></div></div>
+    </div>
+
+    <p class="enote">Every one of these came out of a real FAR boot I cut open.</p>
+  </div>
+</section>
+
+<script>
+const exploded = document.querySelector('.exploded');
+const parts = [...document.querySelectorAll('.epart')];
+let active = null;
+function setActive(p){ if(active===p) return; parts.forEach(x=>x.classList.toggle('active', x===p)); exploded.classList.add('has-active'); active=p; }
+function clearActive(){ if(!active) return; parts.forEach(x=>x.classList.remove('active')); exploded.classList.remove('has-active'); active=null; }
+parts.forEach(p=>{
+  p.tabIndex = 0; p.setAttribute('role','button');
+  p.addEventListener('pointerenter', e=>{ if(e.pointerType==='mouse') setActive(p); });
+  p.addEventListener('pointerleave', e=>{ if(e.pointerType==='mouse') clearActive(); });
+  p.addEventListener('click', ()=>{ active===p ? clearActive() : setActive(p); });        // tap toggle (touch)
+  p.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); active===p?clearActive():setActive(p); } });
+  p.addEventListener('focus', ()=> setActive(p));
+  p.addEventListener('blur', ()=> clearActive());
+});
+// show the right verb for the device
+const touch = matchMedia('(hover:none)').matches;
+document.querySelectorAll('.hint .d').forEach(e=> e.style.display = touch ? 'none':'inline');
+document.querySelectorAll('.hint .t').forEach(e=> e.style.display = touch ? 'inline':'none');
+</script>
+</body>
+</html>
