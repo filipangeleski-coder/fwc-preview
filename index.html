@@ -137,7 +137,7 @@ h1,h2,h3,.display{font-family:"Space Grotesk",sans-serif;font-weight:700;line-he
 .signup.done .form-row{flex-direction:column;align-items:center}
 
 /* ticker */
-.ticker{border-block:1px solid var(--far-line);padding-block:clamp(0.8rem,1.6vw,1.3rem);overflow:hidden;white-space:nowrap;background:var(--far-deep)}
+.ticker{border-block:1px solid var(--far-line);padding-block:clamp(0.8rem,1.6vw,1.3rem);overflow:hidden;white-space:nowrap;background:transparent}
 .ticker .track{display:inline-flex;align-items:center;gap:2.5rem;will-change:transform}
 .ticker span{font-family:"Space Grotesk";font-weight:700;font-size:clamp(1.8rem,5.5vw,4.5rem);letter-spacing:-0.03em;color:var(--far-white);text-transform:uppercase}
 .ticker .o{color:transparent;-webkit-text-stroke:1px color-mix(in oklch,var(--far-white) 70%,transparent);text-stroke:1px color-mix(in oklch,var(--far-white) 70%,transparent)}
@@ -162,7 +162,7 @@ section{padding-block:clamp(5rem,12vh,10rem);position:relative}
 .bitem p{margin-top:0.7rem;color:var(--far-smoke);max-width:42ch}
 .bproof{margin-top:clamp(2.5rem,5vw,3.5rem);font-family:"Space Grotesk";font-weight:500;font-size:clamp(1.1rem,1rem + 0.5vw,1.5rem);color:var(--far-white);letter-spacing:-0.01em;max-width:32ch}
 
-.enemy{background:var(--far-ink)}
+.enemy{background:transparent}
 .enemy .eyebrow{margin-bottom:1.4rem}
 .enemy h2{font-size:clamp(2.3rem,7vw,5.5rem);max-width:15ch}
 .betray{margin-top:clamp(2.5rem,5vw,4rem);max-width:820px}
@@ -417,15 +417,22 @@ footer{padding-block:clamp(2.5rem,5vw,4rem) clamp(3rem,6vw,5rem);border-top:1px 
   </div>
 </section>
 
+<section class="cgifilm" aria-hidden="true" style="background:#000;line-height:0;overflow:hidden">
+  <video style="width:100%;display:block;max-height:92vh;object-fit:cover;background:#000" autoplay muted loop playsinline preload="metadata">
+    <source src="cgi_breakdown.mp4" type="video/mp4">
+  </video>
+</section>
+
 <section class="offer wrap">
   <div class="eyebrow reveal">The Founding Crew</div>
   <h2 class="reveal">Get in early. Then bring your crew and get looked after.</h2>
   <p class="lead reveal">One email puts you on the list with a numbered spot. <b>The first 100 pairs go at $219.</b> Then you get your own link. Every tradie who joins through it moves you up the ladder.</p>
   <div class="ladder">
-    <div class="rung reveal"><div class="mates">3</div><img class="thumb" src="tier_socks_cut.png" alt="FAR socks"><div class="what">mates sign up through your link</div><div class="prize">Free FAR socks</div></div>
-    <div class="rung reveal"><div class="mates">5</div><img class="thumb" src="tier_slides.png" alt="FAR slides"><div class="what">mates sign up through your link</div><div class="prize">Free FAR slides</div></div>
-    <div class="rung reveal"><div class="mates">10</div><img class="thumb" src="tier_boots.jpg" alt="FAR boots"><div class="what">mates sign up through your link</div><div class="prize">Free boots. On us.</div></div>
+    <div class="rung reveal"><div class="mates">3</div><img class="thumb" src="tier_socks_cut.png" alt="FAR socks"><div class="what">mates sign up through your link</div><div class="prize">Free socks with your order</div></div>
+    <div class="rung reveal"><div class="mates">5</div><img class="thumb" src="tier_slides.png" alt="FAR slides"><div class="what">mates sign up through your link</div><div class="prize">Free slides with your order</div></div>
+    <div class="rung reveal"><div class="mates">10</div><img class="thumb" src="tier_boots.jpg" alt="FAR boots"><div class="what">mates sign up through your link</div><div class="prize">Free boots and the full Founding Crew kit. No purchase needed.</div></div>
   </div>
+  <p class="reveal" style="color:var(--far-smoke);max-width:56ch;margin-top:1.5rem;font-size:0.97rem">Socks and slides come free with your order. Hit 10 and the boots and the whole Founding Crew kit are on us, whether you buy or not.</p>
 </section>
 
 <section class="cta2">
