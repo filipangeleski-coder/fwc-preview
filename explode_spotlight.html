@@ -3,16 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>FAR — exploded parts spotlight + wave bg (demo)</title>
+<title>FAR — exploded parts spotlight + shader bg (demo)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --far-deep: oklch(0.075 0.004 60);
   --far-white: oklch(0.97 0.003 80);
   --far-smoke: oklch(0.62 0.005 60);
-  --far-line: oklch(0.30 0.004 60);
   --ease: cubic-bezier(0.16,1,0.3,1);
   --pad: clamp(1.25rem,5vw,6.5rem);
 }
@@ -22,15 +20,7 @@ body{background:#000;color:var(--far-white);font-family:"DM Sans",system-ui,sans
 h2{font-family:"Space Grotesk",sans-serif;font-weight:700;line-height:0.94;letter-spacing:-0.035em}
 .eyebrow{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:0.76rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--far-smoke)}
 
-/* ---------- WAVE BACKGROUND — mono only (S286), slow ambient drift ---------- */
-.waves{position:fixed;inset:0;z-index:-1;overflow:hidden;background:
-  radial-gradient(120% 90% at 50% -10%, oklch(0.16 0.004 60) 0%, #000 60%)}
-.waves svg{position:absolute;left:-25%;width:150%;min-width:1600px;opacity:0.5}
-.waves .w1{bottom:-4%;height:60vh;animation:drift 26s var(--ease) infinite alternate}
-.waves .w2{bottom:-8%;height:72vh;opacity:0.35;animation:drift2 34s var(--ease) infinite alternate}
-.waves .w3{top:-12%;height:55vh;transform:scaleY(-1);opacity:0.22;animation:drift 30s var(--ease) infinite alternate-reverse}
-@keyframes drift{from{transform:translateX(-4%)}to{transform:translateX(4%)}}
-@keyframes drift2{from{transform:translateX(5%)}to{transform:translateX(-5%)}}
+#bg{position:fixed;inset:0;z-index:-1;width:100%;height:100%;display:block;background:#000}
 
 .explode{position:relative;padding:clamp(3.5rem,9vw,7rem) var(--pad);max-width:1100px;margin-inline:auto}
 .explode .eyebrow{margin-bottom:1.2rem}
@@ -38,7 +28,6 @@ h2{font-family:"Space Grotesk",sans-serif;font-weight:700;line-height:0.94;lette
 .hint{color:var(--far-smoke);font-size:0.95rem;margin-bottom:clamp(2rem,5vw,3.5rem)}
 .hint b{color:var(--far-white);font-weight:500}
 
-/* ---------- SPOTLIGHT REVEAL on the single exploded image ---------- */
 .stage{position:relative;width:min(560px,92vw);margin-inline:auto;aspect-ratio:466/600;touch-action:pan-y}
 .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
 .stage .dim{filter:brightness(0.32) contrast(1.02)}
@@ -47,14 +36,12 @@ h2{font-family:"Space Grotesk",sans-serif;font-weight:700;line-height:0.94;lette
           mask-image:radial-gradient(circle 175px at var(--mx,50%) var(--my,42%), #000 0%, #000 34%, transparent 72%);
   opacity:0;transition:opacity .35s var(--ease)}
 .stage.active .lit{opacity:1}
-/* soft glow ring under the cursor */
 .stage .ring{position:absolute;width:350px;height:350px;border-radius:50%;left:var(--mx,50%);top:var(--my,42%);transform:translate(-50%,-50%);
   background:radial-gradient(circle, color-mix(in oklch, var(--far-white) 9%, transparent) 0%, transparent 60%);
   opacity:0;transition:opacity .35s var(--ease);pointer-events:none}
 .stage.active .ring{opacity:1}
 .enote{color:var(--far-smoke);text-align:center;margin-top:clamp(2rem,5vw,3rem);font-size:0.98rem}
 
-/* touch / no-hover devices: just show the full bright image, no spotlight */
 @media (hover:none){
   .stage .dim{filter:none}
   .stage .lit,.stage .ring{display:none}
@@ -62,11 +49,7 @@ h2{font-family:"Space Grotesk",sans-serif;font-weight:700;line-height:0.94;lette
 </style>
 </head>
 <body>
-<div class="waves" aria-hidden="true">
-  <svg class="w1" viewBox="0 0 1600 320" preserveAspectRatio="none"><path fill="oklch(0.20 0.004 60)" d="M0,160 C300,80 500,240 800,160 C1100,80 1300,240 1600,160 L1600,320 L0,320 Z"/></svg>
-  <svg class="w2" viewBox="0 0 1600 320" preserveAspectRatio="none"><path fill="oklch(0.15 0.004 60)" d="M0,180 C260,110 520,250 800,180 C1080,110 1340,250 1600,180 L1600,320 L0,320 Z"/></svg>
-  <svg class="w3" viewBox="0 0 1600 320" preserveAspectRatio="none"><path fill="oklch(0.22 0.004 60)" d="M0,150 C320,90 540,230 820,150 C1100,80 1320,220 1600,150 L1600,320 L0,320 Z"/></svg>
-</div>
+<canvas id="bg" aria-hidden="true"></canvas>
 
 <section class="explode">
   <div class="eyebrow">Built to be cut open</div>
@@ -83,19 +66,65 @@ h2{font-family:"Space Grotesk",sans-serif;font-weight:700;line-height:0.94;lette
 </section>
 
 <script>
+/* ---------- WebGL flowing-fog background — mono only (S286). Domain-warped FBM. ---------- */
+(function(){
+  const cv = document.getElementById('bg');
+  const gl = cv.getContext('webgl', {antialias:false, alpha:false, powerPreference:'low-power'});
+  if(!gl){ cv.style.background='#000'; return; }   // graceful: stays black
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const vs = `attribute vec2 p; void main(){ gl_Position=vec4(p,0.0,1.0); }`;
+  const fs = `
+  precision highp float;
+  uniform vec2 u_res; uniform float u_time;
+  float hash(vec2 p){ p=fract(p*vec2(123.34,456.21)); p+=dot(p,p+34.5); return fract(p.x*p.y); }
+  float noise(vec2 p){ vec2 i=floor(p),f=fract(p);
+    float a=hash(i),b=hash(i+vec2(1,0)),c=hash(i+vec2(0,1)),d=hash(i+vec2(1,1));
+    vec2 u=f*f*(3.0-2.0*f); return mix(mix(a,b,u.x),mix(c,d,u.x),u.y); }
+  float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<6;i++){ v+=a*noise(p); p*=2.0; a*=0.5; } return v; }
+  void main(){
+    vec2 uv = gl_FragCoord.xy/u_res.xy;
+    vec2 p = (uv-0.5)*vec2(u_res.x/u_res.y,1.0)*2.6;
+    float t = u_time*0.025;
+    vec2 q = vec2(fbm(p+vec2(0.0,t)), fbm(p+vec2(5.2,-t)));
+    float n = fbm(p + 1.7*q + t*0.4);
+    float g = pow(n,2.2)*0.22 + smoothstep(0.62,0.96,n)*0.09;
+    float vig = smoothstep(1.3,0.2,length(uv-0.5));
+    g *= mix(0.45,1.0,vig);
+    gl_FragColor = vec4(vec3(g),1.0);
+  }`;
+
+  function sh(t,s){ const o=gl.createShader(t); gl.shaderSource(o,s); gl.compileShader(o); return o; }
+  const prog = gl.createProgram();
+  gl.attachShader(prog,sh(gl.VERTEX_SHADER,vs)); gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,fs));
+  gl.linkProgram(prog); gl.useProgram(prog);
+  const buf=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(prog,'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  const uRes=gl.getUniformLocation(prog,'u_res'), uTime=gl.getUniformLocation(prog,'u_time');
+
+  const SCALE=0.6;   // render below native res; fog is soft so the upscale is invisible -> cheap on phones
+  function resize(){
+    cv.width = Math.max(2, Math.floor(innerWidth*SCALE));
+    cv.height= Math.max(2, Math.floor(innerHeight*SCALE));
+    gl.viewport(0,0,cv.width,cv.height);
+    gl.uniform2f(uRes,cv.width,cv.height);
+  }
+  addEventListener('resize',resize); resize();
+
+  function frame(ms){ gl.uniform1f(uTime, ms*0.001); gl.drawArrays(gl.TRIANGLES,0,3); requestAnimationFrame(frame); }
+  if(reduce){ gl.uniform1f(uTime,8.0); gl.drawArrays(gl.TRIANGLES,0,3); }  // static frame, no loop
+  else requestAnimationFrame(frame);
+})();
+
+/* ---------- spotlight reveal ---------- */
 const stage = document.getElementById('stage');
-function move(e){
-  const r = stage.getBoundingClientRect();
-  const p = e.touches ? e.touches[0] : e;
-  const x = ((p.clientX - r.left) / r.width) * 100;
-  const y = ((p.clientY - r.top) / r.height) * 100;
-  stage.style.setProperty('--mx', x + '%');
-  stage.style.setProperty('--my', y + '%');
-}
+function move(e){ const r=stage.getBoundingClientRect();
+  stage.style.setProperty('--mx', ((e.clientX-r.left)/r.width*100)+'%');
+  stage.style.setProperty('--my', ((e.clientY-r.top)/r.height*100)+'%'); }
 stage.addEventListener('pointerenter', e=>{ if(e.pointerType==='mouse') stage.classList.add('active'); });
 stage.addEventListener('pointerleave', e=>{ if(e.pointerType==='mouse') stage.classList.remove('active'); });
 stage.addEventListener('pointermove', e=>{ if(e.pointerType==='mouse') move(e); });
-// show the verb that matches the device
 const touch = matchMedia('(hover:none)').matches;
 document.querySelectorAll('.hint .d').forEach(e=> e.style.display = touch?'none':'inline');
 document.querySelectorAll('.hint .t').forEach(e=> e.style.display = touch?'inline':'none');
