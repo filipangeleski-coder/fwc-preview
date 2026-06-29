@@ -305,8 +305,8 @@ main, .main-content, #MainContent, .content-for-layout { margin: 0 !important; p
 <header class="hero">
   <canvas id="dust" aria-hidden="true"></canvas>
   <div class="hero-bg" aria-hidden="true">
-    <!-- Cinematic hero: full sequence (real boot seed -> Seedance Mini) drop -> stomp -> explode, plays ONCE on entry, holds on the exploded reveal. Headline punches up on the stomp (~1.8s) via the timeupdate cue in startHero(). -->
-    <video class="hero-boot-img" id="heroVid" autoplay muted playsinline preload="auto" poster="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/hero_sky_start.png?v=1782722080">
+    <!-- Cinematic hero: full sequence (real boot seed -> Seedance Mini) drop -> stomp -> explode -> reversed back to sky. Palindrome: ends on the start frame, so it LOOPS seamlessly (S485 Fil call — supersedes the S475 "no loop" lock, whose only reason was the old explode->sky snap, now removed by the reverse). Headline punches up on the first stomp (~4.4s) via the timeupdate cue in startHero(); the fired-flag stops it re-firing each loop. -->
+    <video class="hero-boot-img" id="heroVid" autoplay muted loop playsinline preload="auto" poster="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/hero_sky_start.png?v=1782722080">
       <source src="https://cdn.shopify.com/s/files/1/0703/9336/4656/files/hero_seq.mp4?v=1782722279" type="video/mp4">
     </video>
   </div>
