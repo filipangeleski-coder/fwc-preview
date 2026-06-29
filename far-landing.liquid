@@ -5,15 +5,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --far-black: oklch(0.16 0.004 60);
-  --far-ink:   oklch(0.115 0.004 60);
-  --far-deep:  oklch(0.075 0.004 60);
-  --far-white: oklch(0.97 0.003 80);
-  --far-smoke: oklch(0.62 0.005 60);
-  --far-line:  oklch(0.30 0.004 60);
+  /* hex fallbacks first - old Android Chrome (<111) / iOS Safari (<15.4) have no oklch(); a bare oklch var would resolve invalid -> dark bg + text fall to initial = white page / unreadable. @supports upgrades modern browsers to oklch (visually identical here; preserves intent + wide-gamut). S485. */
+  --far-black: #0f0d0c;
+  --far-ink:   #060504;
+  --far-deep:  #020101;
+  --far-white: #f6f5f3;
+  --far-smoke: #888583;
+  --far-line:  #2f2d2c;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --pad: clamp(1.25rem, 5vw, 6.5rem);
   --maxw: 1280px;
+}
+@supports (color: oklch(0 0 0)){
+  :root{
+    --far-black: oklch(0.16 0.004 60);
+    --far-ink:   oklch(0.115 0.004 60);
+    --far-deep:  oklch(0.075 0.004 60);
+    --far-white: oklch(0.97 0.003 80);
+    --far-smoke: oklch(0.62 0.005 60);
+    --far-line:  oklch(0.30 0.004 60);
+  }
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;background:var(--far-deep)}
