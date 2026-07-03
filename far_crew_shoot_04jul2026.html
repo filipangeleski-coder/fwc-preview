@@ -1,0 +1,1784 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAR Crew Shoot Brief — 04 Jul 2026</title>
+</head>
+<body>
+<style>
+  :root {
+    --paper: #FBFBF9;
+    --ink: #121211;
+    --muted: #6A6A66;
+    --faint: #F1F0EC;
+    --hair: #E4E3DE;
+    --hair-strong: #C9C8C2;
+    --measure: 42rem;
+  }
+
+  * { box-sizing: border-box; }
+
+  .page {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    padding: 0 20px 140px;
+  }
+
+  .wrap { max-width: var(--measure); margin: 0 auto; }
+
+  .mono {
+    font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  }
+
+  /* ---------- masthead ---------- */
+  .mast {
+    padding: 40px 0 24px;
+    border-bottom: 2px solid var(--ink);
+    animation: rise .5s ease both;
+  }
+  .mast .kicker {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 14px;
+  }
+  .mast h1 {
+    font-weight: 800;
+    font-size: clamp(2.5rem, 11vw, 4.25rem);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .mast h1 span { display: block; }
+  .mast .sub {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    letter-spacing: .04em;
+    color: var(--muted);
+    margin: 18px 0 0;
+  }
+
+  /* ---------- briefing notes ---------- */
+  .notes {
+    display: grid;
+    gap: 1px;
+    background: var(--hair);
+    border: 1px solid var(--hair);
+    margin: 28px 0 8px;
+  }
+  .note {
+    background: var(--paper);
+    padding: 16px 18px;
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .note .tag {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .note p { margin: 0; font-size: 15.5px; }
+  .note strong { font-weight: 700; }
+
+  /* ---------- principle callout ---------- */
+  .principle {
+    margin: 20px 0 0;
+    padding: 22px;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .principle .tag {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--hair-strong);
+    margin: 0 0 10px;
+  }
+  .principle p { margin: 0; font-size: 16px; line-height: 1.6; }
+  .principle strong { font-weight: 700; }
+
+  /* ---------- scrap note ---------- */
+  .scrap {
+    margin: 20px 0 0;
+    padding: 16px 18px;
+    border: 1px dashed var(--hair-strong);
+  }
+  .scrap h3 {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 10px;
+  }
+  .scrap ul { margin: 0; padding: 0 0 0 2px; list-style: none; display: grid; gap: 8px; }
+  .scrap li { font-size: 14.5px; color: var(--muted); }
+  .scrap li strong { color: var(--ink); font-weight: 700; }
+
+  /* ---------- running order label ---------- */
+  .ro-label {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 52px 0 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--hair-strong);
+  }
+
+  /* ---------- bit ---------- */
+  .bit {
+    padding: 40px 0 44px;
+    border-bottom: 1px solid var(--hair-strong);
+  }
+  .bit-head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+  }
+  .bit-num {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    border-radius: 2px;
+    padding: 2px 8px;
+    letter-spacing: .05em;
+  }
+  .bit-title {
+    font-weight: 800;
+    font-size: clamp(1.55rem, 6vw, 2.1rem);
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    line-height: 1.02;
+    margin: 0;
+  }
+  .bit-sub { color: var(--muted); font-style: italic; font-size: 1.05rem; }
+  .refilm {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 3px 7px;
+    border-radius: 2px;
+    align-self: center;
+  }
+
+  /* ---------- spec strip ---------- */
+  .spec {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--hair);
+    border: 1px solid var(--hair);
+    margin: 22px 0 0;
+  }
+  .spec > div { background: var(--paper); padding: 11px 14px; }
+  .spec dt {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 3px;
+  }
+  .spec dd { margin: 0; font-size: 14.5px; line-height: 1.4; }
+  .spec .warn dt { color: var(--ink); }
+  .spec .warn dd { font-weight: 600; }
+
+  /* ---------- the story ---------- */
+  .story {
+    margin: 26px 0 0;
+    padding: 20px 22px;
+    background: var(--faint);
+    border-left: 3px solid var(--ink);
+  }
+  .story h3 {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+  }
+  .story p { margin: 0; font-size: 16px; line-height: 1.6; }
+
+  /* ---------- cold open ---------- */
+  .coldopen { margin: 26px 0 0; }
+  .coldopen .label {
+    display: inline-block;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 4px 9px;
+    margin: 0 0 12px;
+  }
+  .coldopen .action { margin: 0 0 12px; color: var(--muted); font-size: 15.5px; }
+  .coldopen blockquote {
+    margin: 0;
+    padding: 0 0 0 16px;
+    border-left: 2px solid var(--hair-strong);
+    font-size: 1.3rem;
+    line-height: 1.35;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .ost {
+    margin: 14px 0 0;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    color: var(--paper);
+    background: var(--ink);
+    display: inline-block;
+    padding: 6px 10px;
+  }
+  .ost .ost-k {
+    color: var(--hair-strong);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-size: 10.5px;
+    display: block;
+    margin: 0 0 2px;
+  }
+
+  /* ---------- beats ---------- */
+  .beats-label {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 28px 0 12px;
+  }
+  ol.beats {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: beat;
+    display: grid;
+    gap: 12px;
+  }
+  ol.beats li {
+    counter-increment: beat;
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    gap: 12px;
+    font-size: 15.5px;
+    line-height: 1.5;
+  }
+  ol.beats li::before {
+    content: counter(beat);
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--muted);
+    padding-top: 3px;
+    font-variant-numeric: tabular-nums;
+  }
+  .tc {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1px 6px;
+    border-radius: 2px;
+    letter-spacing: .04em;
+    white-space: nowrap;
+  }
+  .button-beat { font-weight: 700; }
+  .beat-k {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ---------- tags ---------- */
+  .endtags { margin: 26px 0 0; display: grid; gap: 10px; }
+  .endrow {
+    display: grid;
+    grid-template-columns: 74px 1fr;
+    gap: 12px;
+    align-items: baseline;
+    font-size: 15px;
+  }
+  .endrow .k {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .endrow .cover-txt {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+  }
+  .endrow .cap-txt { color: var(--ink); }
+  .loopnote { color: var(--muted); font-size: 13.5px; }
+
+  /* ---------- prep ---------- */
+  .prep {
+    margin: 48px 0 0;
+    padding: 28px 0 0;
+    border-top: 2px solid var(--ink);
+  }
+  .prep h2 {
+    font-weight: 800;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin: 0 0 18px;
+  }
+  ul.prep-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  ul.prep-list li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: baseline;
+    padding: 0 0 10px;
+    border-bottom: 1px solid var(--hair);
+    font-size: 15.5px;
+  }
+  ul.prep-list li .for {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .foot {
+    margin: 40px 0 0;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: .04em;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ---------- tentpole ---------- */
+  .tentpole {
+    margin: 44px 0 0;
+    border: 2px solid var(--ink);
+  }
+  .tentpole-head {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 22px 22px 20px;
+  }
+  .tentpole-head .kicker {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--hair-strong);
+    margin: 0 0 10px;
+  }
+  .tentpole-head h2 {
+    font-weight: 800;
+    font-size: clamp(1.9rem, 8vw, 2.6rem);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 0;
+  }
+  .tentpole-head .sub2 { color: var(--hair-strong); font-style: italic; margin: 10px 0 0; font-size: 1rem; }
+  .tentpole-body { padding: 22px; }
+  .tentpole-story {
+    padding: 18px 20px;
+    background: var(--faint);
+    border-left: 3px solid var(--ink);
+    margin: 0 0 18px;
+  }
+  .tentpole-story h3, .prodnote h3 {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+  }
+  .tentpole-story p, .prodnote p { margin: 0; font-size: 16px; line-height: 1.6; }
+  .prodnote {
+    padding: 14px 18px;
+    border: 1px dashed var(--hair-strong);
+    margin: 0 0 22px;
+  }
+  .option-block {
+    margin: 0 0 30px;
+    padding: 20px 0 0;
+    border-top: 1px solid var(--hair-strong);
+  }
+  .option-block:first-of-type { border-top: none; padding-top: 0; }
+  .option-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 0 0 14px;
+    flex-wrap: wrap;
+  }
+  .option-num {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-weight: 700;
+    font-size: 13px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3px 10px;
+    letter-spacing: .05em;
+  }
+  .option-title { font-weight: 800; font-size: 1.15rem; text-transform: uppercase; letter-spacing: -0.01em; }
+  .option-when { color: var(--muted); font-size: 13.5px; margin: 10px 0 0; font-style: italic; }
+  .tentpole .coldopen, .tentpole .beats-label { margin-top: 18px; }
+  .castnotes {
+    margin: 8px 0 0;
+    padding: 18px 20px;
+    background: var(--faint);
+  }
+  .castnotes h3 {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+  .castnotes ul { margin: 0; padding: 0 0 0 2px; list-style: none; display: grid; gap: 10px; }
+  .castnotes li { font-size: 15px; line-height: 1.5; }
+  .castnotes strong { font-weight: 700; }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .mast { animation: none; } }
+
+  @media (max-width: 480px) {
+    .page { font-size: 16px; padding: 0 16px 72px; }
+    .note { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  /* ---------- notes ---------- */
+  .notes-box {
+    margin: 26px 0 0;
+    padding: 14px 16px 16px;
+    background: var(--faint);
+    border: 1px dashed var(--hair-strong);
+  }
+  .notes-box .notes-label {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin: 0 0 8px;
+  }
+  .notes-box textarea {
+    width: 100%;
+    min-height: 56px;
+    resize: vertical;
+    border: 1px solid var(--hair-strong);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 10px 12px;
+    border-radius: 2px;
+  }
+  .notes-box textarea:focus {
+    outline: 2px solid var(--ink);
+    outline-offset: 1px;
+  }
+  .notes-box .saved-flag {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--muted);
+    margin: 6px 0 0;
+    min-height: 14px;
+  }
+
+  .notes-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
+    background: var(--ink);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  .notes-bar button {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--paper);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .notes-bar button:active { transform: translateY(1px); }
+
+  .notes-panel {
+    display: none;
+    margin: 0 0 24px;
+    padding: 18px;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .notes-panel.open { display: block; }
+  .notes-panel h3 {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--hair-strong);
+    margin: 0 0 10px;
+  }
+  .notes-panel textarea {
+    width: 100%;
+    min-height: 180px;
+    background: #1c1c1a;
+    color: var(--paper);
+    border: 1px solid #3a3a37;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 12px;
+    border-radius: 2px;
+  }
+  .notes-panel p { font-size: 12.5px; color: var(--hair-strong); margin: 10px 0 0; }
+</style>
+
+<div class="page">
+  <div class="wrap">
+
+    <header class="mast">
+      <p class="kicker">FAR Crew · Shoot Brief</p>
+      <h1><span>Shoot</span><span>This weekend</span></h1>
+      <p class="sub">1 tentpole reveal (3 staging options) + 25 options: 10 comedy + 10 solo + 5 film-alone · Fil + Grant + Lionel all on camera</p>
+    </header>
+
+    <div class="principle">
+      <p class="tag">The one rule for this batch</p>
+      <p><strong>Broad but specific.</strong> The winners are one exact moment anyone with a job feels, not a moment only a tradie gets. The 5am alarm is the template: a tradie hates it, but so does a nurse, a bus driver, an office worker. Trade skin stays (site, ute, hi-vis, smoko), but the feeling has to be universal. That's why the alarm clip did 78K and the feet-spec stuff died.</p>
+    </div>
+
+    <div class="notes">
+      <div class="note">
+        <span class="tag">How to use</span>
+        <p>These are options for the content session. Read them, pick what to film, bank what we shoot, bin what we don't, hold the good ones we don't get to for next time. Each bit leads with <strong>The Story</strong> so you can work out the blocking yourselves.</p>
+      </div>
+      <div class="note">
+        <span class="tag">Land rule</span>
+        <p>Driveway, garage, yard only. <strong>No filming on any live or active site.</strong></p>
+      </div>
+      <div class="note">
+        <span class="tag">Rules</span>
+        <p>Cold-open on the action (shot 1 IS the hook). Roles float. No CTA in the video. No brand or logo in frame. Comedy = subtitles off; solo talking pieces = subtitles on.</p>
+      </div>
+    </div>
+
+    <div class="scrap">
+      <h3>Already done — do not reshoot</h3>
+      <ul>
+        <li><strong>Whose Job Wrecks You Most</strong> — posted today ("my job is harder"). Cut.</li>
+        <li><strong>The Boss scramble</strong> — already up; a "he comes back" version is too similar. Cut.</li>
+        <li><strong>The Tool Borrower</strong> — already filmed. Only reshoot if you want a better cut. Held, not scripted here.</li>
+      </ul>
+    </div>
+
+    <section class="tentpole">
+      <header class="tentpole-head">
+        <p class="kicker">Tentpole · Founder Reveal</p>
+        <h2>The Barrage</h2>
+        <p class="sub2">Supersedes the 21 Jun dialogue-relay version. HIGH VIS · subtitles ON · no CTA · roles float</p>
+      </header>
+      <div class="tentpole-body">
+        <div class="tentpole-story">
+          <h3>The story</h3>
+          <p>Every earlier version of this reveal tried to sell "we all suffered the same betrayal" through dialogue, three blokes taking turns saying a line. That's the boring version, because it's three people asserting something instead of proving it. The barrage proves it: an actual pile of ~10 dead boots is physical, undeniable evidence, nobody has to claim anything a stranger might not believe. The hook is 100% action, dialogue only enters after the visual has landed, and a specific count beats a vague "every boot we've ever owned."</p>
+        </div>
+        <div class="prodnote">
+          <h3>Production note</h3>
+          <p>Doesn't need 10 continuous live throws in one take. Film individual throws from a few angles/distances and quick-cut them, buries the seams and makes the barrage feel bigger and faster than it was. Boots thrown = your own genuinely dead ones, never a FAR boot. FAR boot stays clean, held up at the end as the contrast.</p>
+        </div>
+
+        <div class="option-block">
+          <div class="option-head"><span class="option-num">OPTION 1</span><span class="option-title">The Count</span><span class="loopnote">— primary rec</span></div>
+          <div class="coldopen">
+            <span class="label">Cold open · shot 1 · no dialogue</span>
+            <p class="action">Wide, one of you standing dead centre in an empty street, arms crossed, waiting. Beat. A boot flies in from off-screen, thuds down. No reaction. Second. Third. Then relentless — Grant and Lionel either side of frame, hurling dead boots rapid-fire, cut faster each time, until he's standing in a pile of 10+ and hasn't moved.</p>
+          </div>
+          <p class="beats-label">As the barrage lands, he counts, deadpan, over the chaos</p>
+          <div class="coldopen"><blockquote>"...six... seven... that's just this year."</blockquote></div>
+          <p class="beats-label">Beats</p>
+          <ol class="beats">
+            <li><span>Stops. Silence. He looks down at the pile.</span></li>
+            <li><span>Grant and Lionel step in from either side, empty-handed. <span class="beat-k">Grant</span>: "Every one died the same way." <span class="beat-k">Lionel</span>: "So we stopped buying them."</span></li>
+            <li><span>He kicks the pile. <span class="beat-k">Fil</span>: "And built our own."</span></li>
+            <li><span><span class="beat-k">Wide</span> all three, boots piled at their feet, one clean FAR boot standing out from the wreckage.</span></li>
+            <li><span class="button-beat"><span class="beat-k">Closer</span> Lionel picks the FAR boot up out of the pile: "Tested on us first. On real sites. Not a lab."</span></li>
+          </ol>
+          <div class="endtags">
+            <div class="endrow"><span class="k">Button</span><span class="loopnote">Tosses the FAR boot to camera, hard cut to black on the catch.</span></div>
+          </div>
+        </div>
+
+        <div class="option-block">
+          <div class="option-head"><span class="option-num">OPTION 2</span><span class="option-title">Silent</span></div>
+          <p class="option-when">Use if: the barrage footage is strong enough to hold attention with nothing said, or the counting reads try-hard on playback.</p>
+          <div class="coldopen">
+            <span class="label">Same barrage staging</span>
+            <p class="action">Zero dialogue during the throw sequence, just the thuds, the growing pile, his unmoved face. No count-callout.</p>
+            <p class="ost"><span class="ost-k">On-screen text, timed to the peak</span>every boot we've ever owned</p>
+          </div>
+          <p class="beats-label">Then</p>
+          <ol class="beats">
+            <li><span>Stops. Silence. Beat on the pile.</span></li>
+            <li><span>Cut straight to the wide (Grant + Lionel stepping in), same closing beats as Option 1: "Every one died the same way" / "So we stopped buying them" / "And built our own" / closer / button.</span></li>
+          </ol>
+        </div>
+
+        <div class="option-block">
+          <div class="option-head"><span class="option-num">OPTION 3</span><span class="option-title">Aftermath First</span></div>
+          <p class="option-when">Use if: you want the strongest possible scroll-stop. Opening on an unexplained image (a bloke silently buried in boots) is a harder curiosity hook than watching the barrage build in real time. Same footage, just re-ordered, costs nothing extra to film.</p>
+          <div class="coldopen">
+            <span class="label">Cold open · shot 1</span>
+            <p class="action">Open on the AFTERMATH, one of you already standing silently buried to the shins in a pile of 10+ dead boots, dead serious, staring at camera. No context yet.</p>
+            <p class="ost"><span class="ost-k">On-screen text</span>we didn't plan this</p>
+          </div>
+          <p class="beats-label">Beats</p>
+          <ol class="beats">
+            <li><span>Beat. Hard cut: <span class="tc">ONE MINUTE EARLIER</span></span></li>
+            <li><span>Play the barrage in full, Grant and Lionel either side, hurling boots rapid-fire, building back up to the exact frame you opened on.</span></li>
+            <li><span>Land back on the aftermath shot, same framing as the cold open, now it makes sense. <span class="beat-k">Grant</span>: "Every one died the same way." <span class="beat-k">Lionel</span>: "So we stopped buying them."</span></li>
+            <li><span class="button-beat"><span class="beat-k">Fil</span> kicks the pile: "And built our own." Same wide / closer / button as Option 1.</span></li>
+          </ol>
+        </div>
+
+        <div class="castnotes">
+          <h3>Casting + loop notes</h3>
+          <ul>
+            <li><strong>Who stands in the middle:</strong> open call on the day. The recognisable anchor from That'll Do probably reads funniest getting pelted; Fil in the middle works thematically for the "kicks the pile / built our own" beat. Either works.</li>
+            <li><strong>Loop option (any of the 3):</strong> end on one more boot flying in from off-screen at the standing founder, unexplained, right as it cuts to black. Loops back into the cold open on rewatch. Loops drive re-watch, the #1 signal.</li>
+            <li><strong>Cover options:</strong> WE GOT SICK OF IT. / EVERY BOOT WE'VE EVER OWNED. / (Option 3 only) WE DIDN'T PLAN THIS.</li>
+            <li><strong>Caption (draft, any option):</strong> "Ten boots. Three blokes. Same reason every time. So we built the one that doesn't do this."</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <p class="ro-label">Part A · Ensemble comedy · the 6 to film</p>
+
+    <!-- 01 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">01</span>
+        <h2 class="bit-title">I'll Just Quickly</h2>
+        <span class="bit-sub">"The Estimate"</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Quick-POV, time-cards, ~25-30s</dd></div>
+        <div><dt>Cast</dt><dd>Solo centre + 1-2 background</dd></div>
+        <div><dt>Location</dt><dd>Garage, roller door, single work light</dd></div>
+        <div><dt>Props</dt><dd>Shelf/bracket, drill, a wall you can trash, patch filler, a hose/pipe behind the wall</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>Everyone's said "two minutes" to a job that was never two minutes. The joke isn't the mess, it's his confidence never wavering while the wall gets worse. The time-card numbers stacking up ARE the punchline, so each jump gets more absurd. Dead straight, no reaction to camera.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Crouched at the wall, drill half-in, tossing it over his shoulder without looking up.</p>
+        <blockquote>"yeah nah, two secs, I'll just quickly chuck this shelf up."</blockquote>
+        <p class="ost"><span class="ost-k">On-screen text</span>he said "five minutes"</p>
+      </div>
+      <p class="beats-label">Beats</p>
+      <ol class="beats">
+        <li><span><span class="tc">5 MIN</span> First hole, wrong spot. "...she'll be right." Quick cut.</span></li>
+        <li><span><span class="tc">25 MIN</span> Patched, re-drilled, bracket crooked. A mate leans in the doorway watching.</span></li>
+        <li><span><span class="tc">40 MIN</span> Wall's open, bigger drill. "...just gotta find the stud." Hasn't found the stud.</span></li>
+        <li><span><span class="tc">1 HR 10</span> Hits the pipe. A proper little arc of water sideways. Keeps drilling around it, calm.</span></li>
+        <li><span><span class="tc">1 HR 45</span> Mate's gone, water still going. Holds the bracket up to the hole, reconsidering the wall.</span></li>
+        <li><span><span class="beat-k">Wide</span> Studs exposed, water arcing, roller door down, one light. Shelf's on the floor, never hung.</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> Steps back, wipes hands: "...there we go. easy."</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Loop</span><span class="loopnote">"easy" cuts back to the cocky cold-open line.</span></div>
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">I'll just quickly...</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">Every site's got one. The five-minute job that ate the whole arvo.</span></div>
+      </div>
+    </article>
+
+    <!-- 02 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">02</span>
+        <h2 class="bit-title">Defends the Bad Buy</h2>
+        <span class="bit-sub">"Still Good"</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Quick-POV, ~20-25s</dd></div>
+        <div><dt>Cast</dt><dd>Solo centre + foil (the mate)</dd></div>
+        <div><dt>Location</dt><dd>Driveway/yard, needs a walkable stretch</dd></div>
+        <div class="warn"><dt>Prop warning</dt><dd>Cheap GENERIC boot, sole pre-scored to flap and fully detach on cue. Never a FAR boot. Never a real brand. No logo in frame.</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>Sunk-cost denial. Everyone's got a mate (or IS the mate) who defends a dying purchase to the grave. The engine is the gap between what he says and what the camera sees: the more it falls apart, the more confidently he sells it. Never break character, no wink, he believes it the whole way down.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Walking toward camera, sole already flapping loose with every step, mid-sell.</p>
+        <blockquote>"nah these are unreal, honestly best boots I've ever owned."</blockquote>
+      </div>
+      <p class="beats-label">Beats</p>
+      <ol class="beats">
+        <li><span>Mate off-camera: "...your sole's hanging off, mate."</span></li>
+        <li><span>"nah that's just," (sole flaps wide) "that's meant to do that. breaks 'em in."</span></li>
+        <li><span>Keeps walking, more sole peeling each step: "...still got heaps of life in 'em."</span></li>
+        <li><span>Hangs by a thread. Mate: "it's basically off." Glances down: "...that's just cosmetic."</span></li>
+        <li><span>Comes fully off mid-sentence: "couldn't recommend 'em enou-" (thud, bare sock).</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> Looks at the bare sock, keeps walking on it: "...still good."</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Loop</span><span class="loopnote">"still good" cuts back to the cold open.</span></div>
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">Still good.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">We've all got that mate who'll defend the dud to the grave.</span></div>
+      </div>
+    </article>
+
+    <!-- 03 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">03</span>
+        <h2 class="bit-title">The Safety Officer</h2>
+        <span class="bit-sub">"The First Warning"</span>
+        <span class="refilm">Refilm</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Escalation reel, tight 25-40s. Let the build run.</dd></div>
+        <div><dt>Cast</dt><dd>Officer centre + oblivious crew</dd></div>
+        <div><dt>Location</dt><dd>Yard/garage dressed as a "site"</dd></div>
+        <div><dt>Props</dt><dd>Clipboard, hi-vis, hard hat, tape measure, hazard signs, coffee cup</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>The compliance guy nobody listens to. The fire warden, the HR enforcer. Ignore him once and he gets pettier and more theatrical, not quieter. Each escalation is a straight-faced status upgrade, he's doubling down like he's winning, while the crew treats him like furniture.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Crouched at a bloke's feet, measuring the slack on his chin strap with a tape measure, deadly serious.</p>
+        <blockquote>"yeah, see... that's two mil out of spec."</blockquote>
+        <p class="ost"><span class="ost-k">On-screen text</span>he gave ONE warning. you ignored it.</p>
+      </div>
+      <p class="beats-label">Beats</p>
+      <ol class="beats">
+        <li><span>Flash: the reasonable first warning, "mate, hard hat." Ignored, walks off.</span></li>
+        <li><span>Ticketing exactly where a bloke set his coffee down.</span></li>
+        <li><span>Measuring the angle of a sticker on a toolbox. "...that's gotta be level."</span></li>
+        <li><span>A tiny hazard cone laid around one dropped screw. Guarding it.</span></li>
+        <li><span>The crew walks past him, around him, ignoring him throughout.</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> Writing himself up for something. Alone in his own world.</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">The Safety Officer.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">Every workplace has the one nobody listens to. So he doubles down.</span></div>
+      </div>
+    </article>
+
+    <!-- 04 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">04</span>
+        <h2 class="bit-title">The Smoko Hog</h2>
+        <span class="bit-sub">"Wasn't Touching Yours"</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Quick-POV, escalating audacity, ~20-25s</dd></div>
+        <div><dt>Cast</dt><dd>Hog centre + 2-3 crew</dd></div>
+        <div><dt>Location</dt><dd>Outside. Ute tray/tailgate. Never indoors.</dd></div>
+        <div><dt>Props</dt><dd>Esky, everyone's "lunch", a labelled lunchbox for the boss</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>The bloke who never brings his own and always eats. The engine is brazenness: he gets caught immediately and lies to your face, unbothered, then escalates target by target. The final beat is the hard stakes-jump, the ONE container everyone knows not to touch. A stranger who's never worked a trade still knows "don't touch the boss's lunch" is a line.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Caught red-handed. Someone's container in his hand, mouth full, the owner watching.</p>
+        <blockquote>"nah you're right, wasn't touching yours."</blockquote>
+        <p class="ost"><span class="ost-k">On-screen text</span>the bloke who never brings his own</p>
+      </div>
+      <p class="beats-label">Beats</p>
+      <ol class="beats">
+        <li><span>Straight past the denial, onto the next bloke's slice of cake. Doesn't ask, just takes it.</span></li>
+        <li><span>Third bloke hides his lunch behind his back. Hog stares until he caves.</span></li>
+        <li><span>Eyes a container marked <span class="tc">BOSS'S LUNCH</span> in texta. Beat. Goes for it anyway.</span></li>
+        <li><span>Mid-bite straight out of the container, boss walking up behind, hasn't clocked it.</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> Boss right behind him. Still chewing, doesn't turn: "...smells like it needed a taste-test."</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Loop</span><span class="loopnote">Cuts back to "wasn't touching yours."</span></div>
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">The Smoko Hog.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">Every crew's got the bloke who never brings food but always eats.</span></div>
+      </div>
+    </article>
+
+    <!-- 05 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">05</span>
+        <h2 class="bit-title">Site Translator</h2>
+        <span class="bit-sub">"What He Says vs What He Means"</span>
+        <span class="refilm">Refilm</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Quick-cut pairs, ~25s</dd></div>
+        <div><dt>Cast</dt><dd>Trio. One delivers the lines, cut to the reality.</dd></div>
+        <div><dt>Location</dt><dd>Yard/driveway dressed as a "site"</dd></div>
+        <div><dt>Props</dt><dd>Phone, the "disaster" set dressing</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>Every job has its own corporate-speak for "this is not going well." The joke is the flat, breezy delivery of the SAYS line against a visual that's the complete opposite. The bigger the gap, the bigger the laugh. Never break tone, only the cutaway tells the truth.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Leaning on a shovel, phone to his ear, breezy as anything.</p>
+        <blockquote>"yeah mate, she's sweet, basically done, just finishing up."</blockquote>
+        <p class="ost"><span class="ost-k">On-screen text snaps in</span>WHAT HE SAYS: → hard cut → WHAT HE MEANS:</p>
+      </div>
+      <p class="beats-label">Say / mean pairs</p>
+      <ol class="beats">
+        <li><span><span class="beat-k">Says</span> "she's sweet, basically done." → <span class="beat-k">Means</span> wide of a total bombsite, nothing touched.</span></li>
+        <li><span><span class="beat-k">Says</span> "sorted by smoko." → <span class="beat-k">Means</span> hasn't started, making a coffee.</span></li>
+        <li><span><span class="beat-k">Says</span> "she'll be right." → <span class="beat-k">Means</span> catastrophically not going to be right.</span></li>
+        <li><span><span class="beat-k">Says</span> "just needs a quick tickle." → <span class="beat-k">Means</span> a full pull-apart and redo.</span></li>
+        <li><span><span class="beat-k">Says</span> "I'm across it." → <span class="beat-k">Means</span> blank stare, no idea.</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">What he says vs what he means.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">Every trade's got its own language. Here's the translation.</span></div>
+        <div class="endrow"><span class="k">Note</span><span class="loopnote">The character says "she'll be right", the cutaway mocks it. We're sending it up, not adopting it.</span></div>
+      </div>
+    </article>
+
+    <!-- 06 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">06</span>
+        <h2 class="bit-title">The Foreman Who Doesn't Care</h2>
+        <span class="bit-sub">"Not My Problem"</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Quick-POV, ~20-25s</dd></div>
+        <div><dt>Cast</dt><dd>Foreman centre + crew</dd></div>
+        <div><dt>Location</dt><dd>Driveway/yard</dd></div>
+        <div><dt>Props</dt><dd>Phone, something that can fail behind him (leaning stack, hose running, safe smoke effect well clear of anything flammable)</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>The manager who's mentally clocked out. The joke is his private rulebook for a "real" problem: did anyone die, did it stop the pay run, nothing else registers. The engine is the widening gap between how bad it gets behind him and how little it moves him. Escalate the disaster in scale each report.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Something going wrong behind him, on the phone about the footy tips, doesn't turn around.</p>
+        <blockquote>"yeah nah... that's a Monday problem."</blockquote>
+      </div>
+      <p class="beats-label">Beats</p>
+      <ol class="beats">
+        <li><span>"it's actually pretty bad-" → "did anyone die? no? then it's fine."</span></li>
+        <li><span>Bigger problem → "...has it stopped us getting paid? no? then I don't care."</span></li>
+        <li><span>Third bloke, panicked, points at smoke: "is it on fire?!" → looks over, unbothered: "...surface level, or structural?"</span></li>
+        <li><span>Disaster fully escalated behind him, still on the phone.</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> The whole thing collapses. Doesn't flinch. "...still not my problem."</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">The Foreman Who Doesn't Care.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">Every job's got the boss who checked out years ago.</span></div>
+      </div>
+    </article>
+
+    <p class="ro-label">Part B · More comedy · 3 fresh, broad-but-specific</p>
+
+    <!-- 07 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">07</span>
+        <h2 class="bit-title">The Hot Potato Job</h2>
+        <span class="bit-sub">nobody wants it, watch it get passed</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Quick-POV, physical relay, ~20-25s</dd></div>
+        <div><dt>Cast</dt><dd>Ensemble (4+ if possible)</dd></div>
+        <div><dt>Location</dt><dd>Yard/garage</dd></div>
+        <div><dt>Props</dt><dd>One visibly cursed/gross/awkward item (blocked drain snake, a bin to empty, whatever reads instantly as "the worst job")</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>This is the one with a real physical engine, not a talking bit. A job nobody wants gets handed off person to person the second it appears, each one finding an excuse in under a second and shoving it to the next bloke, rapid relay, until it lands on whoever has the least status. Universal: every job, every office, every friend group has had the exact object physically pushed into their hands while everyone else suddenly has somewhere urgent to be. The whole gag is VISUAL, the object moving hand to hand faster than anyone can protest, not a line of dialogue carrying it. Open with the item already mid-handoff, not someone announcing the job.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">The cursed item is already being thrust into someone's hands, mid-motion, no setup, no one explains what it is.</p>
+        <blockquote>"nah, not it, here-" <span style="font-weight:400; font-style:italic; color:var(--muted);">(already shoving it to the next bloke before he's finished the sentence)</span></blockquote>
+      </div>
+      <p class="beats-label">Beats (fast, almost no dialogue, the relay IS the joke)</p>
+      <ol class="beats">
+        <li><span>Second bloke barely touches it, already turning, shoving it on. "yep, nah, here."</span></li>
+        <li><span>Third bloke sees it coming, actively dodges, it gets passed AROUND him to a fourth.</span></li>
+        <li><span>Speed increases each pass, quick cuts, excuses get flimsier and faster ("meeting" / "phone" / just walks off).</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> It lands in the hands of whoever just arrived on site, mid-"hey what's-". Everyone else is already gone. Silence. He looks down at it.</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Loop</span><span class="loopnote">The silence cuts back to the cold open.</span></div>
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">The Hot Potato Job.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">Every crew's got one job nobody wants. Watch how fast it moves.</span></div>
+      </div>
+    </article>
+
+    <!-- 08 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">08</span>
+        <h2 class="bit-title">Can You Just Quickly...</h2>
+        <span class="bit-sub">everyone's dumping ground</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Quick-POV, escalating physical pile-up, ~20-25s</dd></div>
+        <div><dt>Cast</dt><dd>One bloke + 4-5 others each asking</dd></div>
+        <div><dt>Location</dt><dd>Yard/site</dd></div>
+        <div><dt>Props</dt><dd>An armful of random items/tools he keeps getting handed</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>Distinct engine from "I'll Just Quickly" — that one is self-inflicted delusion about time, this one is IMPOSED. Every single person who walks past hits him with "can you just quickly-" and hands him one more thing to carry, stacking literally in his arms, until he's comically overloaded and still saying yes. Universal: every job, every house share, every family has the one everyone dumps "just quickly" on, and it's never quick and it's never just one thing.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">First bloke walks past, hands him something without breaking stride.</p>
+        <blockquote>"hey can you just quickly hold this-"</blockquote>
+      </div>
+      <p class="beats-label">Beats (stacking, faster each time)</p>
+      <ol class="beats">
+        <li><span>Second bloke, different direction: "can you just quickly grab that too-" (adds to the pile).</span></li>
+        <li><span>Third: "quickly hold this a sec" (a tool balanced on top now, precarious).</span></li>
+        <li><span>Wide shot: a ridiculous stacked pile in his arms, one thing about to fall, still nodding yes to someone off-screen.</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> Someone new walks up: "hey can you just quickly-" He doesn't even look up, already resigned: "...yep."</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">Can you just quickly...</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">Every crew's got the one everyone dumps on. He always says yes.</span></div>
+      </div>
+    </article>
+
+    <!-- 09 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">09</span>
+        <h2 class="bit-title">Crook As</h2>
+        <span class="bit-sub">the sickie</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Quick-POV, ~20-25s</dd></div>
+        <div><dt>Cast</dt><dd>Solo or +1</dd></div>
+        <div><dt>Location</dt><dd>Couch/driveway/anywhere</dd></div>
+        <div><dt>Props</dt><dd>Phone, a drink</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>The ritual of pulling a sickie. The fake cough laid on thick, then instantly fine the second he hangs up. Every worker on earth has made this call or agonised over the text. Broad but specific: the fake cough into the phone. The engine is the switch from death's-door to thriving. Open loop: what's he actually doing today.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Mid-fake-cough into the phone to the boss, laying it on thick.</p>
+        <blockquote>"yeah *cough cough* nah I'm not gonna make it in today mate, crook as."</blockquote>
+      </div>
+      <p class="beats-label">Beats</p>
+      <ol class="beats">
+        <li><span>Hangs up. Instantly fine. Not a trace of a cough. Cracks a drink.</span></li>
+        <li><span>Cut to him thriving, beach / couch / fishing, best day of the year.</span></li>
+        <li><span>He posts it. Forgets the boss follows him.</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> Phone buzzes. Boss: "feel better mate. nice spot." He looks around, busted.</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Loop</span><span class="loopnote">"feel better mate" cuts back to the fake cough.</span></div>
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">Crook as.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">We've all made that call. Then had the best day of the year.</span></div>
+      </div>
+    </article>
+
+    <!-- 10 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">10</span>
+        <h2 class="bit-title">What Your Boots Say About You</h2>
+        <span class="bit-sub">ensemble typology</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Text-overlay accumulation, quick cuts, ~30-40s</dd></div>
+        <div><dt>Cast</dt><dd>All three playing the types (quick swaps)</dd></div>
+        <div><dt>Location</dt><dd>Driveway/yard</dd></div>
+        <div class="warn"><dt>Prop warning</dt><dd>Generic/own boots only. The taped pair is GENERIC, never a FAR boot, never a named brand, no logo in frame.</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>You can read every bloke on site off his boots. A quick-fire typology, each type a 2-3 second sketch with its name in text overlay. Instant recognition plus accumulation rhythm, and a strong share ("send this to the bloke who wears runners"). Sound-off friendly. Open loop: which one are you.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Straight into the first type mid-action. Box-fresh spotless boots, tiptoeing around every puddle, precious.</p>
+        <p class="ost"><span class="ost-k">Text overlay</span>BRAND NEW BOOTS</p>
+      </div>
+      <p class="beats-label">Types (name in overlay, quick cut each)</p>
+      <ol class="beats">
+        <li><span><span class="tc">BRAND NEW</span> Steps around every bit of dirt, clearly day one.</span></li>
+        <li><span><span class="tc">TAPED TOGETHER</span> Cable ties and duct tape, won't replace them, "they're fine." (generic, no brand)</span></li>
+        <li><span><span class="tc">FORGOT HIS BOOTS</span> In runners, "yeah nah I'll be right," tiptoeing through the site.</span></li>
+        <li><span><span class="tc">THONGS AT SMOKO</span> Whistle goes, boots off, thongs on, feet out.</span></li>
+        <li><span><span class="tc">STILL IN THEM AT THE PUB</span> 6pm Friday, never changed, work boots at the bar.</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> All of them lined up, looking down at each other's feet, silent judgement.</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">What your boots say about you.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">Every site's got all five. Which one are you.</span></div>
+      </div>
+    </article>
+
+    <p class="ro-label">Part C · Solo · read the job label</p>
+
+    <div class="note" style="border:1px solid var(--hair); margin:0 0 8px;">
+      <span class="tag">Heads up</span>
+      <p>Solo splits two ways. <strong>Solo comedy</strong> (11, 13, 14, 15, 16, 17, 18, 19) is reach-capable. <strong>STDS</strong> (20) is a trust play, not reach, it converts the tradie who already found us. Don't judge an STDS clip by views. Judge it by saves and shares to a mate.</p>
+    </div>
+
+    <!-- 11 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">11</span>
+        <h2 class="bit-title">The Narrator</h2>
+        <span class="bit-sub">solo comedy, oblivious commentary</span>
+        <span class="refilm">Job: reach</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Solo, mock-doco delivery, ~20-25s</dd></div>
+        <div><dt>Cast</dt><dd>Solo (any founder)</dd></div>
+        <div><dt>Location</dt><dd>Anywhere with a task</dd></div>
+        <div><dt>Props</dt><dd>Whatever the task needs</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>He narrates his own actions out loud, calm nature-documentary voice, completely oblivious that nobody's listening and nobody asked. Universal: every workplace has one, and everyone's had the urge. The comedy is the total mismatch between the mundane task and the self-important, hushed-reverence delivery, like he's narrating lion mating season, not tightening a bolt. Physical and vocal, works filmed solo with crew reacting in the background.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Crouched over a mundane task, already mid-narration, hushed and serious, like a camera crew is following him.</p>
+        <blockquote>"...and here, we see him. reaching for the 10-mil. a bold choice."</blockquote>
+      </div>
+      <p class="beats-label">Beats</p>
+      <ol class="beats">
+        <li><span>Narrates picking up a tool like a nature reveal: "...he selects his tool. instinct, mostly."</span></li>
+        <li><span>A mate walks past, visibly unbothered, used to it, doesn't even look over.</span></li>
+        <li><span>Narrates something going slightly wrong like a tense wildlife moment: "...and disaster. he did not see that coming."</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> Someone finally asks "...who are you talking to?" He doesn't break the voice: "...nobody. carry on."</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">The Narrator.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">Every site's got one. Nobody asked. He does it anyway.</span></div>
+      </div>
+    </article>
+
+    <!-- 12 renumbered to 13 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">13</span>
+        <h2 class="bit-title">The Mental Spiral</h2>
+        <span class="bit-sub">solo comedy, text overlay</span>
+        <span class="refilm">Job: reach</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Deadpan face + escalating overlay, ~20-25s</dd></div>
+        <div><dt>Cast</dt><dd>Solo (any founder)</dd></div>
+        <div><dt>Location</dt><dd>Anywhere with a task to do</dd></div>
+        <div><dt>Props</dt><dd>Whatever the mundane task needs</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>One tiny trigger spirals in his head into an absurd catastrophe, played out in text overlay while his face stays completely blank doing a normal task. The comedy is the gap between the dead-calm exterior and the unhinged spiral. KEEP IT ABSURD, NOT BLEAK, it lands somewhere ridiculous, never genuinely dark. Everyone's brain does this.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Tight on his blank face, doing something mundane. Overlay starts immediately.</p>
+        <p class="ost"><span class="ost-k">On-screen text</span>boss said "can we have a chat later"</p>
+      </div>
+      <p class="beats-label">Overlay escalates, face never changes</p>
+      <ol class="beats">
+        <li><span class="mono">what did I do</span></li>
+        <li><span class="mono">he knows about the thing</span></li>
+        <li><span class="mono">I'm getting sacked</span></li>
+        <li><span class="mono">I'll have to sell the ute</span></li>
+        <li><span class="mono">I'll have to move back in with mum</span></li>
+        <li><span class="mono">she's turned my room into a gym. I'll sleep in the shed. the dog gets the good spot.</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> Cut wide, boss walks past: "...you left ya lights on, mate." Back to the blank face.</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Loop</span><span class="loopnote">The mundane reveal cuts back to the blank cold open.</span></div>
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">POV: the boss said "can we chat later"</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">Tell me you don't do this.</span></div>
+      </div>
+    </article>
+
+    <!-- 14 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">14</span>
+        <h2 class="bit-title">Every [Trade] Ever</h2>
+        <span class="bit-sub">solo comedy accumulation</span>
+        <span class="refilm">Job: reach</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Solo in character, quick tells, ~40-60s</dd></div>
+        <div><dt>Cast</dt><dd>Solo (one founder in costume)</dd></div>
+        <div><dt>Location</dt><dd>Site/yard/garage</dd></div>
+        <div><dt>Props</dt><dd>Signature props for that trade</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>Title "Every [Trade] Ever" plus already fully in character holding the signature prop. 5-8 archetypal tells, pure accumulation, no plot. Recognition IS the engine. Tribal share: "tag every chippy you know." Repeatable, so shoot one trade as the template then swap the trade and tells to bank Sparky / Labourer / Plumber / Concreter while you're set up.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1 · template: Every Chippy Ever</span>
+        <p class="action">Already in character, reaches for the pencil behind his ear. It's already in his hand. Pats his ear, confused.</p>
+        <p class="ost"><span class="ost-k">Title</span>EVERY CHIPPY EVER</p>
+      </div>
+      <p class="beats-label">Tells (quick cuts, 2-3s each)</p>
+      <ol class="beats">
+        <li><span>Owns 40 tape measures. Can't find one. Buys another.</span></li>
+        <li><span>"measure twice", measures four times, still cuts it wrong.</span></li>
+        <li><span>The tool belt that weighs more than he does.</span></li>
+        <li><span>"yeah, that'll do" about something visibly not level.</span></li>
+        <li><span>Sweeps the same patch for 20 minutes to avoid the actual job.</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> Knock-off. The belt comes off in one motion and he transforms into a normal, relaxed human.</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">Every chippy ever.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">Tag the chippy. He knows.</span></div>
+        <div class="endrow"><span class="k">Repeat</span><span class="loopnote">Every Sparky Ever (always "just isolating it," phone torch in mouth, quotes a fortune, vanishes for 3 hours) / Labourer / Concreter. Bank 2-3 while set up.</span></div>
+      </div>
+    </article>
+
+    <!-- 15 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">15</span>
+        <h2 class="bit-title">POV Moments</h2>
+        <span class="bit-sub">one relatable beat each, bank a bunch</span>
+        <span class="refilm">Job: reach</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>~8-12s each</dd></div>
+        <div><dt>Cast</dt><dd>Solo (any founder)</dd></div>
+        <div><dt>Location</dt><dd>Anywhere</dd></div>
+        <div><dt>Props</dt><dd>Minimal</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>The broad-but-specific engine in its purest form. One POV line on screen plus a short acted moment anyone with a job feels instantly. No plot, no build, just the moment nailed. Cheap and fast, bank 6+ in one setup. This is the alarm principle as a format: broad enough that a nurse and an office worker both go "that's me," specific enough to stop the scroll. Cut on the peak of the feeling.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">The format</span>
+        <p class="action">POV line on screen (readable muted) + the founder acting the exact beat.</p>
+      </div>
+      <p class="beats-label">Moments to bank (each a quick solo clip)</p>
+      <ol class="beats">
+        <li><span><span class="mono">POV: it's 2:59 and knock-off is 3:00</span> Frozen, watching the clock, then bolts the second it ticks.</span></li>
+        <li><span><span class="mono">POV: the boss says "you got a minute?"</span> The stomach-drop face, the slow turn.</span></li>
+        <li><span><span class="mono">POV: someone asks you to stay back "a couple hours" on a Friday</span> The internal death, the fake smile.</span></li>
+        <li><span><span class="mono">POV: you just said "yeah no worries" to something you cannot do</span> The realisation landing.</span></li>
+        <li><span><span class="mono">POV: the alarm goes off and you do the maths on how much more sleep you can steal</span> Eyes open, calculating.</span></li>
+        <li><span><span class="mono">POV: it's Sunday 6pm</span> The exact moment the weekend dies behind his eyes.</span></li>
+        <li><span><span class="mono">POV: you're mid-sentence explaining something and you already know you're wrong</span> The internal backpedal starting before the sentence ends.</span></li>
+        <li><span><span class="mono">POV: someone says "we should catch up sometime"</span> The mutual, unspoken understanding it's never happening.</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">The POV line is the cover.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">e.g. "2:59 is the longest minute of the day." / "Sunday 6pm should be illegal."</span></div>
+        <div class="endrow"><span class="k">Note</span><span class="loopnote">These double as STDS if you play them straight instead of for laughs. Same moment, two registers.</span></div>
+      </div>
+    </article>
+
+    <!-- 16 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">16</span>
+        <h2 class="bit-title">The Receipt Guy</h2>
+        <span class="bit-sub">documents everything</span>
+        <span class="refilm">Job: reach</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Quick-cut phone-whip-out reflex, ~20-25s</dd></div>
+        <div><dt>Cast</dt><dd>Solo</dd></div>
+        <div><dt>Location</dt><dd>Anywhere</dd></div>
+        <div><dt>Props</dt><dd>Phone, a couple of mundane "evidence" moments</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>Pure CYA paranoia. He photographs and videos literally everything on the job, not because it matters, but because "you never know." Universal: every workplace has someone building a defensive evidence file for a court case that will never happen. The comedy is the phone-whip-out reflex triggering on completely trivial stuff, faster and more reflexive each time, like a tic.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Phone already out, snapping a photo of something totally mundane, dead serious about it.</p>
+        <blockquote>"...just for the record." <span style="font-weight:400; font-style:italic; color:var(--muted);">(photographing a completed, uneventful task like it's a crime scene)</span></blockquote>
+      </div>
+      <p class="beats-label">Beats</p>
+      <ol class="beats">
+        <li><span>Photographs the exact water level in a bottle before someone else drinks from it.</span></li>
+        <li><span>Videos a completely normal handover: "just so we've got it on file."</span></li>
+        <li><span>Takes a time-stamped photo of literally arriving at work, on time, nothing happening.</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> Something genuinely goes wrong right in front of him. He fumbles the phone, misses it completely. All that evidence and nothing that mattered.</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">The Receipt Guy.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">Every job's got one. Photographs everything. Never has it when it counts.</span></div>
+      </div>
+    </article>
+
+    <!-- 17 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">17</span>
+        <h2 class="bit-title">The Pre-Game Hype Speech</h2>
+        <span class="bit-sub">motivational overkill</span>
+        <span class="refilm">Job: reach</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Solo, mirror/ute monologue, ~20-25s</dd></div>
+        <div><dt>Cast</dt><dd>Solo</dd></div>
+        <div><dt>Location</dt><dd>Ute cabin / bathroom mirror / garage</dd></div>
+        <div><dt>Props</dt><dd>None</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>Full athlete-before-the-grand-final pump-up speech, delivered with total conviction, for something completely trivial. Universal: everyone's hyped themselves up in the mirror before something mundane. The comedy is the mismatch between the stakes of the speech and the stakes of the actual task, revealed only at the very end.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Already deep into a serious, fired-up pep talk to himself in the mirror/rearview.</p>
+        <blockquote>"you were BORN for this. today's the day. no fear."</blockquote>
+      </div>
+      <p class="beats-label">Beats</p>
+      <ol class="beats">
+        <li><span>Escalating hype: "they can't stop what's coming." Fists clenched, deep breathing.</span></li>
+        <li><span>A single tear, or a fierce nod to himself, total commitment.</span></li>
+        <li><span>Walks out with real purpose, camera follows.</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> He walks in and... asks the tea lady if they've got any more Milo. That's it. That's the whole thing.</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">The Pre-Game Hype Speech.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">The mental preparation required for some genuinely nothing tasks.</span></div>
+      </div>
+    </article>
+
+    <!-- 18 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">18</span>
+        <h2 class="bit-title">The Roster Conspiracy</h2>
+        <span class="bit-sub">deadpan theory</span>
+        <span class="refilm">Job: reach</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Straight-to-camera "evidence" delivery, ~20-30s</dd></div>
+        <div><dt>Cast</dt><dd>Solo</dd></div>
+        <div><dt>Location</dt><dd>Anywhere</dd></div>
+        <div><dt>Props</dt><dd>None, maybe a notebook if handy</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>An elaborate, totally serious conspiracy theory about why HE always gets the worst shifts, delivered like he's cracked a code, connecting dots that don't connect. Universal: every workplace has the one convinced the roster's out to get him. The comedy is the total sincerity and "evidence-board" logic applied to something mundane and almost certainly random.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Leaning in close to camera, dead serious, like he's about to reveal something huge.</p>
+        <blockquote>"nobody's said anything. but I've noticed a pattern."</blockquote>
+      </div>
+      <p class="beats-label">Beats</p>
+      <ol class="beats">
+        <li><span>"every second Friday. every single time. that's not a coincidence."</span></li>
+        <li><span>Escalates the "evidence": "and who approves the roster? him. and who do I sit next to? also him."</span></li>
+        <li><span>Increasingly unhinged logic, delivered completely calm and reasonable.</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> Someone off-camera: "...mate, you asked for that shift." Long pause. "...that's what they WANT you to think."</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">The Roster Conspiracy.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">Every crew's got one who thinks the roster's got it out for him.</span></div>
+      </div>
+    </article>
+
+    <!-- 19 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">19</span>
+        <h2 class="bit-title">The Phantom Injury Replay</h2>
+        <span class="bit-sub">overdramatic re-enactment</span>
+        <span class="refilm">Job: reach</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Escalating physical re-enactment, ~20-25s</dd></div>
+        <div><dt>Cast</dt><dd>Solo (+ optional listener)</dd></div>
+        <div><dt>Location</dt><dd>Anywhere</dd></div>
+        <div><dt>Props</dt><dd>None</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>Recounting a genuinely minor injury with a wildly disproportionate, slow-motion, action-movie-style physical re-enactment. Universal: everyone's had a mate turn "I rolled my ankle" into a Hollywood stunt story. The comedy is the gap between how small the actual injury clearly was and how cinematic the retelling gets.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Already mid-reenactment, slow-motion dramatic stumble, sound effects with his mouth.</p>
+        <blockquote>"...and that's when I knew. it was ALL going wrong."</blockquote>
+      </div>
+      <p class="beats-label">Beats</p>
+      <ol class="beats">
+        <li><span>Full slow-mo re-enactment of stepping off a single, six-inch step. Treated like a stunt fall.</span></li>
+        <li><span>Increasingly dramatic embellishment: "time slowed down. I saw my whole life."</span></li>
+        <li><span>A mate, unimpressed, in frame the whole time: "...you stubbed your toe."</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> He ignores this completely, straight back into the dramatic voice: "...they said I'd never walk the same."</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">The Phantom Injury Replay.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">The injury was a stubbed toe. The retelling is a war story.</span></div>
+      </div>
+    </article>
+
+    <!-- 20 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">20</span>
+        <h2 class="bit-title">STDS</h2>
+        <span class="bit-sub">Shit Tradies Don't Say · confessional</span>
+        <span class="refilm">Job: trust, not reach</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>Static talking head, 12-20s (under 25s)</dd></div>
+        <div><dt>Cast</dt><dd>Solo, each founder banks his own</dd></div>
+        <div><dt>Location</dt><dd>Ute cabin or quiet corner</dd></div>
+        <div class="warn"><dt>Setup</dt><dd>No music. Natural audio. Single take. Subtitles ON. Silence between lines is content.</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>The proven solo trust format, the alarm-PTSD STDS is the only non-comedy post in FAR's top tier. It names a hyper-specific moment every worker has felt but never said out loud. Confessional, not comedic. Cold-open on the most visceral line, not a calm question. No CTA ever. The NEW bank below is broad-but-specific, felt by a tradie AND a nurse AND a driver AND an office worker. It replaces the old feet-and-knees questions, which were too tradie-only and died.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Protocol · say once, on camera, at the top</span>
+        <blockquote>"If anything I ask is too much, just shake your head."</blockquote>
+        <p class="action">TIACS-aligned. Said once, never repeated.</p>
+      </div>
+      <p class="beats-label">The universal work-dread moments</p>
+      <ol class="beats">
+        <li><span>"The Sunday. Not Sunday night, that moment on Sunday arvo where it just... starts. When does it hit you?"</span></li>
+        <li><span>"The sound that means the day's starting. The alarm, the gate, the truck beeping in reverse. What's yours, and do you hate it?"</span></li>
+        <li><span>"The drive home you don't remember. You just... arrive. Does that happen to you?"</span></li>
+        <li><span>"That fake laugh you do when the boss says something that isn't funny. When's the last time you did it?"</span></li>
+        <li><span>"The five minutes in the car before you walk in. What's actually going on in your head in those five minutes?"</span></li>
+        <li><span>"Someone asks 'how was work' and you've got nothing. Not because it was bad, because it was just work. You get that?"</span></li>
+        <li><span>"The Friday afternoon where time actually stops. What's the longest last hour you've ever done?"</span></li>
+        <li><span>"The 3pm wall. Where does it hit you first, and what do you do to get through it?"</span></li>
+      </ol>
+      <p class="beats-label">The body, broadened (not just feet)</p>
+      <ol class="beats">
+        <li><span>"The first sound your body makes when you get out of bed. When did that start?"</span></li>
+        <li><span>"Something you used to do easy that you've quietly stopped being able to do. What is it?"</span></li>
+      </ol>
+      <p class="beats-label">Sentence-starters (read it, let him finish, hold the silence)</p>
+      <ol class="beats">
+        <li><span>"The part of this job I'll never get used to is..."</span></li>
+        <li><span>"I know it's gonna be a long day the second I..."</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Hold back</span><span class="loopnote">The heavy mental-health questions ("a version of you the job took" class) are gated by the TIACS protocol, one per session, and deserve a proper Fil-on-camera moment. Don't burn them as quick bank clips.</span></div>
+        <div class="endrow"><span class="k">The job</span><span class="loopnote">Lower views than the comedy is EXPECTED. STDS converts, it doesn't reach. Watch saves and DM-shares.</span></div>
+      </div>
+    </article>
+
+    <p class="ro-label">Part D · Film alone · one person, propped phone, no help</p>
+
+    <div class="note" style="border:1px solid var(--hair); margin:0 0 8px;">
+      <span class="tag">Why</span>
+      <p>These five need <strong>nobody else</strong> and almost no setup, for when you're on your own. All broad-but-specific, all reach-capable.</p>
+    </div>
+
+    <!-- A1 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">A1</span>
+        <h2 class="bit-title">The Draft &amp; Delete</h2>
+        <span class="bit-sub">the message you never send</span>
+        <span class="refilm">Alone · reach</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Setup</dt><dd>Just a phone (screen-record it, or a second angle over the screen)</dd></div>
+        <div><dt>Cast</dt><dd>Solo</dd></div>
+        <div><dt>Location</dt><dd>Anywhere</dd></div>
+        <div><dt>Props</dt><dd>Phone</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>Filming the screen while he types, rewrites and deletes a message he'll never send. Universal, everyone's drafted-and-deleted the honest version of a text. The drama is the typing and backspacing, the gap between what he wants to say and what he actually sends. Zero help, zero set.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Screen recording, thumbs already typing a message to "THE BOSS".</p>
+        <blockquote>types: "Hi mate, I won't be able to make it in tod-" <span style="font-weight:400; font-style:italic; color:var(--muted);">(delete delete delete)</span></blockquote>
+      </div>
+      <p class="beats-label">Beats (all on the screen)</p>
+      <ol class="beats">
+        <li><span>Retypes it softer: "Something's come up, I might need to-" (delete)</span></li>
+        <li><span>Tries the big lie: "Family emergen-" (stares, delete)</span></li>
+        <li><span>Types the actual truth: "I just genuinely cannot do today." (long pause on it, delete)</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> Sends "running 5 min late 👍". Locks the phone. Gets up. Goes anyway.</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">The messages we don't send.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">What we want to send vs what we actually send.</span></div>
+      </div>
+    </article>
+
+    <!-- A2 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">A2</span>
+        <h2 class="bit-title">The Ute Cabin Take</h2>
+        <span class="bit-sub">one spicy take, straight to camera</span>
+        <span class="refilm">Alone · reach</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Setup</dt><dd>Phone propped on the dash</dd></div>
+        <div><dt>Cast</dt><dd>Solo</dd></div>
+        <div><dt>Location</dt><dd>Ute cabin</dd></div>
+        <div><dt>Props</dt><dd>None</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>Deadpan "I reckon..." take delivered to camera, defended flatly, built to make everyone argue in the comments. Universal-workplace opinions, not tradie-gated. One person in a ute, no help. Bank 4-5 different takes in one sit, one job annoyance each.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Already mid-take, dead serious, phone on the dash.</p>
+        <blockquote>"I reckon anyone who says they love Mondays is either lying or they're management."</blockquote>
+      </div>
+      <p class="beats-label">Beats</p>
+      <ol class="beats">
+        <li><span>Defends it flat, one reason: "nobody's jumping out of bed at 5. nobody."</span></li>
+        <li><span>Escalates, still deadpan: "and the ones who post 'new week new me'? worst offenders."</span></li>
+        <li><span>Small shrug, case closed.</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> "...anyway." Starts the ute, drives off.</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">The take, as text.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">Agree, or you're wrong. Settle it below.</span></div>
+      </div>
+    </article>
+
+    <!-- A3 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">A3</span>
+        <h2 class="bit-title">The 5am Ritual</h2>
+        <span class="bit-sub">the stages of a dark morning</span>
+        <span class="refilm">Alone · reach</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Setup</dt><dd>Self-film your own hands / feet / coffee / headlights + text overlay</dd></div>
+        <div><dt>Cast</dt><dd>Solo</dd></div>
+        <div><dt>Location</dt><dd>Home + ute, early</dd></div>
+        <div><dt>Props</dt><dd>The real morning</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>The pre-work ritual as "the stages of grief," first-person POV, text overlay naming each stage. Universal to every early start, tradie, nurse, driver, baker. Cheap, cinematic, zero help. The feeling is the whole thing, and the alarm sound-on is the s242 winner, filmed solo.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Black screen. The alarm. A hand slaps it off.</p>
+        <p class="ost"><span class="ost-k">On-screen text</span>the 5 stages of a 5am start</p>
+      </div>
+      <p class="beats-label">Beats (first-person, text overlay each, ~2-3s)</p>
+      <ol class="beats">
+        <li><span><span class="tc">DENIAL</span> lies dead still, staring at the ceiling.</span></li>
+        <li><span><span class="tc">BARGAINING</span> "five more minutes" (it is not five minutes).</span></li>
+        <li><span><span class="tc">ANGER</span> yanking the boots on, one lace snaps.</span></li>
+        <li><span><span class="tc">DEPRESSION</span> the sigh, forehead on the wheel, dark road.</span></li>
+        <li><span><span class="tc">ACCEPTANCE</span> headlights pull onto site. Here we go.</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> One last sigh. Door opens.</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">The 5am ritual.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">Every early start knows all five.</span></div>
+      </div>
+    </article>
+
+    <!-- A4 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">A4</span>
+        <h2 class="bit-title">The Time-Check</h2>
+        <span class="bit-sub">one day in one face</span>
+        <span class="refilm">Alone · reach</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Setup</dt><dd>Phone selfie, same spot, 5 quick clips across one day, cut together</dd></div>
+        <div><dt>Cast</dt><dd>Solo</dd></div>
+        <div><dt>Location</dt><dd>Same framing all day</dd></div>
+        <div><dt>Props</dt><dd>None</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>Selfie check-ins from the same angle at set times, the face visibly degrading through the day then transformed at knock-off. Universal. Zero help, you just film yourself 5 times in a day. Broad-but-specific, the exact times everyone knows.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">Cold open · shot 1</span>
+        <p class="action">Dead-eyed selfie, forced smile, clearly lying.</p>
+        <p class="ost"><span class="ost-k">Time stamp</span>5:45 AM — "today's gonna be a good one"</p>
+      </div>
+      <p class="beats-label">Beats (same framing, time stamp overlay each)</p>
+      <ol class="beats">
+        <li><span><span class="tc">9:00 AM</span> coffee in hand, holding it together.</span></li>
+        <li><span><span class="tc">12:00 PM</span> thousand-yard stare, chewing slowly.</span></li>
+        <li><span><span class="tc">3:00 PM</span> barely human, running on fumes.</span></li>
+        <li><span><span class="tc">KNOCK-OFF</span> transformed, alive, grinning, a different person entirely.</span></li>
+        <li><span class="button-beat"><span class="beat-k">Button</span> The knock-off grin holds a beat too long.</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">A day in one face.</span></div>
+        <div class="endrow"><span class="k">Caption</span><span class="cap-txt">5:45am me and knock-off me are not the same person.</span></div>
+      </div>
+    </article>
+
+    <!-- A5 -->
+    <article class="bit">
+      <header class="bit-head">
+        <span class="bit-num">A5</span>
+        <h2 class="bit-title">Trending-Audio Act-Out</h2>
+        <span class="bit-sub">ride a current sound, solo</span>
+        <span class="refilm">Alone · reach</span>
+      </header>
+      <dl class="spec">
+        <div><dt>Setup</dt><dd>Phone propped, act a trending audio over a real work task</dd></div>
+        <div><dt>Cast</dt><dd>Solo</dd></div>
+        <div><dt>Location</dt><dd>Anywhere with a task</dd></div>
+        <div><dt>Props</dt><dd>Whatever the task needs</dd></div>
+      </dl>
+      <section class="story">
+        <h3>The story</h3>
+        <p>A FORMAT, not a fixed script, because the audio changes weekly. Grab whatever sound is trending that maps to a work feeling and act it out solo doing a task. Trends carry reach a cold account can't get organically. Zero help.</p>
+      </section>
+      <div class="coldopen">
+        <span class="label">How to run it</span>
+        <p class="action">Open Reels/TikTok, find a sound clearly climbing (a few thousand recent posts, not yet everywhere) that maps to one of these, and perform it deadpan doing a normal job:</p>
+      </div>
+      <p class="beats-label">Feelings that map</p>
+      <ol class="beats">
+        <li><span>The "boss said something stupid and I have to keep a straight face" feeling.</span></li>
+        <li><span>The "pretending I know what I'm doing" feeling.</span></li>
+        <li><span>The "it's Friday and nothing can touch me" feeling.</span></li>
+      </ol>
+      <div class="endtags">
+        <div class="endrow"><span class="k">Cover</span><span class="cover-txt">Dictated by the trend.</span></div>
+        <div class="endrow"><span class="k">Keep it ours</span><span class="loopnote">FAR skin (site, ute, tools) so it's ours, not a generic trend-chase. Bank 2-3 while a sound is hot.</span></div>
+      </div>
+    </article>
+
+    <div class="scrap" style="margin-top:40px;">
+      <h3>Solo-safe conversions — make the earlier solo bits need no one either</h3>
+      <ul>
+        <li><strong>Mental Spiral (#13):</strong> instead of the boss walking past, the button is a text overlay, phone buzzes → "it was a dentist reminder". No second person.</li>
+        <li><strong>Roster Conspiracy (#18):</strong> instead of a mate replying off-camera, a text overlay corrects him → he stares → "...that's what they want you to think." Solo.</li>
+        <li><strong>Phantom Injury (#19):</strong> drop the unimpressed mate, run the dramatic voice into a text overlay → "the injury: a stubbed toe." Solo.</li>
+      </ul>
+    </div>
+
+    <!-- prep -->
+    <section class="prep">
+      <h2>Pre-shoot prep</h2>
+      <ul class="prep-list">
+        <li><span>Rip a sacrificial generic boot, pre-score the sole so it flaps and fully detaches on cue</span><span class="for">02</span></li>
+        <li><span>Garage + trashable wall + shelf/bracket + drill + patch filler + a hose/pipe behind the wall that sprays on cue</span><span class="for">01</span></li>
+        <li><span>Clipboard + tape measure + hard hat + hazard signs + coffee cup</span><span class="for">03</span></li>
+        <li><span>Esky + everyone's "lunch" + one container texta'd BOSS'S LUNCH, DO NOT TOUCH</span><span class="for">04</span></li>
+        <li><span>Something that topples/collapses safely + optional smoke effect (dry ice or smoke pellet, kept clear of anything flammable)</span><span class="for">06</span></li>
+        <li><span>A generic taped/cable-tied boot + runners + thongs for the boot typology</span><span class="for">10</span></li>
+        <li><span>One visibly cursed/awkward item to relay hand-to-hand</span><span class="for">07</span></li>
+        <li><span>An armful of random items/tools to keep stacking on him</span><span class="for">08</span></li>
+        <li><span>Phone + a drink</span><span class="for">09</span></li>
+        <li><span>A mundane task to do on camera + crew nearby to react</span><span class="for">11 16</span></li>
+        <li><span>A mundane task to do on camera + text overlay laid in the edit</span><span class="for">13 15</span></li>
+        <li><span>One trade costume + signature props per trade you want to bank</span><span class="for">14</span></li>
+        <li><span>A mirror or rearview to talk to</span><span class="for">17</span></li>
+        <li><span>A quiet spot (ute cabin), no music, single camera, subtitles on in the edit</span><span class="for">20</span></li>
+        <li><span>Film-alone set: a phone to screen-record, propped on the dash, self-filmed morning, 5 selfies across a day, a trending sound picked on the day</span><span class="for">A1-A5</span></li>
+      </ul>
+      <p class="foot">
+        FAR Crew shoot brief · weekend 04-05 Jul 2026 · draft, pre-lock<br>
+        Covers and captions are draft direction. Voice locked at edit, not on the day.<br>
+        Broad but specific · cold-open-first · roles float · no CTA in video · no logo in frame.
+      </p>
+    </section>
+
+    <div class="notes-panel" id="notesPanel">
+      <h3>All notes, compiled</h3>
+      <textarea id="notesCompiled" readonly></textarea>
+      <p><strong>To get these to Claude permanently:</strong> hit "Download notes file" below, then save/move the file into <code style="background:#1c1c1a; padding:1px 5px; border-radius:2px;">C:\FAR\_scratch\shoot_notes\</code>. Anything in that folder gets read automatically next session, no copy-paste needed. Or just paste this text straight into the chat.</p>
+      <p>Notes only SAVE (in the browser box above) on the phone you typed them into, they don't sync live between phones, that needs a real server (the Q1 dashboard build). This download is the bridge: it turns whatever's on THIS phone into a file that becomes permanent FAR memory once it lands in the folder.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="notes-bar">
+  <button id="toggleNotesPanel" type="button">Compile all notes</button>
+  <button id="downloadNotes" type="button">Download notes file</button>
+  <button id="clearAllNotes" type="button" style="background:transparent; color:var(--paper); border:1px solid #4a4a46;">Clear my notes</button>
+</div>
+
+<script>
+(function () {
+  var STORE_PREFIX = 'farShoot04Jul_notes_v1_';
+  var bits = document.querySelectorAll('article.bit');
+
+  bits.forEach(function (bit) {
+    var numEl = bit.querySelector('.bit-num');
+    var titleEl = bit.querySelector('.bit-title');
+    if (!numEl || !titleEl) return;
+    var id = numEl.textContent.trim();
+    var key = STORE_PREFIX + id;
+
+    var box = document.createElement('div');
+    box.className = 'notes-box';
+    box.innerHTML =
+      '<span class="notes-label">Your notes — keep / cut / change / hold for next time</span>' +
+      '<textarea placeholder="e.g. love this one, swap the button line, hold for next shoot..." data-notes-id="' + id + '"></textarea>' +
+      '<p class="saved-flag"></p>';
+
+    bit.appendChild(box);
+
+    var ta = box.querySelector('textarea');
+    var flag = box.querySelector('.saved-flag');
+    try {
+      var saved = localStorage.getItem(key);
+      if (saved) ta.value = saved;
+    } catch (e) {}
+
+    var t = null;
+    ta.addEventListener('input', function () {
+      clearTimeout(t);
+      t = setTimeout(function () {
+        try {
+          localStorage.setItem(key, ta.value);
+          flag.textContent = ta.value ? 'saved on this device' : '';
+        } catch (e) {
+          flag.textContent = 'could not save (private browsing?)';
+        }
+      }, 300);
+    });
+  });
+
+  var panel = document.getElementById('notesPanel');
+  var toggleBtn = document.getElementById('toggleNotesPanel');
+  var compiled = document.getElementById('notesCompiled');
+  var clearBtn = document.getElementById('clearAllNotes');
+  var downloadBtn = document.getElementById('downloadNotes');
+
+  function compileNotes() {
+    var lines = [];
+    document.querySelectorAll('article.bit').forEach(function (bit) {
+      var numEl = bit.querySelector('.bit-num');
+      var titleEl = bit.querySelector('.bit-title');
+      var ta = bit.querySelector('.notes-box textarea');
+      if (ta && ta.value.trim()) {
+        lines.push('[' + numEl.textContent.trim() + '] ' + titleEl.textContent.trim() + ': ' + ta.value.trim());
+      }
+    });
+    return lines.length ? lines.join('\n\n') : '(no notes written yet)';
+  }
+
+  toggleBtn.addEventListener('click', function () {
+    var isOpen = panel.classList.toggle('open');
+    if (isOpen) {
+      compiled.value = compileNotes();
+      panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      compiled.focus();
+      compiled.select();
+      try { document.execCommand('copy'); toggleBtn.textContent = 'Copied — compile again'; } catch (e) {}
+      setTimeout(function () { toggleBtn.textContent = 'Compile all notes'; }, 2000);
+    } else {
+      toggleBtn.textContent = 'Compile all notes';
+    }
+  });
+
+  clearBtn.addEventListener('click', function () {
+    if (!confirm('Clear all your notes on this device?')) return;
+    document.querySelectorAll('.notes-box textarea').forEach(function (ta) {
+      ta.value = '';
+      try { localStorage.removeItem(STORE_PREFIX + ta.getAttribute('data-notes-id')); } catch (e) {}
+    });
+    document.querySelectorAll('.saved-flag').forEach(function (f) { f.textContent = ''; });
+    if (panel.classList.contains('open')) compiled.value = compileNotes();
+  });
+
+  downloadBtn.addEventListener('click', function () {
+    var text = compileNotes();
+    var d = new Date();
+    var stamp = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0')
+      + '_' + String(d.getHours()).padStart(2, '0') + String(d.getMinutes()).padStart(2, '0');
+    var filename = 'far_shoot_notes_' + stamp + '.txt';
+    var header = 'FAR CREW SHOOT NOTES — captured ' + d.toString() + '\n' +
+      'Drop this file in C:\\FAR\\_scratch\\shoot_notes\\ so Claude reads it next session.\n' +
+      '========================================\n\n';
+    var blob = new Blob([header + text], { type: 'text/plain' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    if (!panel.classList.contains('open')) {
+      panel.classList.add('open');
+      compiled.value = text;
+      panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    downloadBtn.textContent = 'Downloaded';
+    setTimeout(function () { downloadBtn.textContent = 'Download notes file'; }, 2000);
+  });
+})();
+</script>
+
+</body>
+</html>
