@@ -17,7 +17,6 @@
      border-bottom:1px solid var(--line);padding-bottom:6px}
   p{margin-bottom:10px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:12px}
-  .card h3{font-size:1rem;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
   .dim{color:var(--dim)}
   ul{list-style:none}
   li{padding-left:16px;position:relative;margin-bottom:6px}
@@ -27,22 +26,43 @@
   .big div{flex:1;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
   .big b{display:block;font-size:2.3rem;line-height:1;margin-bottom:4px}
   .big span{font-size:.78rem;text-transform:uppercase;letter-spacing:1px;color:var(--dim)}
-  .big .accent b{color:#fff}
-
-  .pile{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 15px;margin-bottom:10px;
-        display:flex;gap:13px;align-items:flex-start}
-  .dot{flex:none;width:14px;height:14px;border-radius:50%;margin-top:5px}
-  .dot.g{background:var(--g)}.dot.y{background:var(--y)}.dot.r{background:var(--r)}
-  .pile .n{float:right;color:var(--dim);font-size:.8rem;font-weight:600;margin-left:8px}
-  .pile h3{font-size:.97rem;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
-  .pile p{font-size:.92rem;margin-bottom:4px}
-  .pile .when{font-size:.78rem;color:var(--dim);text-transform:uppercase;letter-spacing:.6px}
-  .yours{display:inline-block;font-size:.68rem;text-transform:uppercase;letter-spacing:1px;
-         background:var(--text);color:#111;border-radius:4px;padding:1px 7px;margin-left:6px;vertical-align:2px}
 
   table{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:.95rem}
   td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
   td:first-child{font-weight:600;white-space:nowrap}
+  .dot{flex:none;width:14px;height:14px;border-radius:50%;display:inline-block}
+  .dot.g{background:var(--g)}.dot.y{background:var(--y)}.dot.r{background:var(--r)}
+
+  /* expandable piles */
+  .ctl{display:flex;gap:8px;margin:4px 0 14px}
+  .ctl button{background:var(--card);border:1px solid var(--line);color:var(--dim);border-radius:20px;
+              padding:6px 13px;font-size:.78rem;text-transform:uppercase;letter-spacing:.7px;
+              cursor:pointer;font-family:inherit}
+  .pile{background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:10px;overflow:hidden}
+  .pile summary{list-style:none;cursor:pointer;padding:13px 15px;display:flex;gap:12px;align-items:center}
+  .pile summary::-webkit-details-marker{display:none}
+  .pile summary:after{content:"+";margin-left:auto;color:var(--dim);font-size:1.15rem;line-height:1}
+  .pile[open] summary:after{content:"\2212"}
+  .ptitle{font-size:.97rem;text-transform:uppercase;letter-spacing:.4px;font-weight:600}
+  .pile .n{color:var(--dim);font-size:.8rem;font-weight:600;margin-left:auto}
+  .pile summary:after{margin-left:10px}
+  .pbody{padding:0 15px 14px;border-top:1px solid var(--line);margin-top:2px;padding-top:12px}
+  .pbody p{font-size:.92rem;margin-bottom:6px}
+  .when{font-size:.78rem;color:var(--dim);text-transform:uppercase;letter-spacing:.6px}
+  .mix{display:block;font-size:.76rem;color:var(--dim);margin:9px 0 4px}
+  .mix i{display:inline-block;width:9px;height:9px;border-radius:50%;margin:0 4px 0 10px;vertical-align:0}
+  .mix i:first-child{margin-left:0}
+  .mix i.g{background:var(--g)}.mix i.y{background:var(--y)}.mix i.r{background:var(--r)}
+  ul.jobs{margin-top:8px;border-top:1px solid var(--line);padding-top:10px}
+  ul.jobs li{padding-left:20px;margin-bottom:9px;font-size:.9rem;line-height:1.45}
+  ul.jobs li::before{display:none}
+  .jd{position:absolute;left:0;top:.45em;width:9px;height:9px;border-radius:50%}
+  .jd.g{background:var(--g)}.jd.y{background:var(--y)}.jd.r{background:var(--r)}
+  ul.jobs b{display:block;font-weight:600}
+  .jt{color:var(--dim)}
+  .yours{display:inline-block;font-size:.66rem;text-transform:uppercase;letter-spacing:1px;
+         background:var(--text);color:#111;border-radius:4px;padding:1px 6px;margin-left:6px;vertical-align:2px}
+
   .foot{margin-top:44px;color:var(--dim);font-size:.85rem}
   .ask{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--text);
        border-radius:10px;padding:16px}
@@ -54,7 +74,7 @@
 <body>
 
 <h1>What it takes to run FAR</h1>
-<p class="sub">Everything that happens behind the videos. One page. Read it, then tell us what you want to take.</p>
+<p class="sub">Everything that happens behind the videos. Tap any pile to see the actual jobs inside it.</p>
 
 <h2>Start here</h2>
 <p>Right now you see the posts. That is the tip of it.</p>
@@ -62,7 +82,7 @@
 <p>So we counted it. Properly, not a guess. Every separate job the business needs, from emailing the factory to packing a box.</p>
 
 <div class="big">
-  <div class="accent"><b>215</b><span>separate jobs</span></div>
+  <div><b>215</b><span>separate jobs</span></div>
   <div><b>36</b><span>are the videos</span></div>
   <div><b>179</b><span>are everything else</span></div>
 </div>
@@ -71,73 +91,169 @@
 <h2>The three colours</h2>
 <div class="card">
 <table>
-  <tr><td><span class="dot g" style="display:inline-block"></span> Green</td><td>Have a go. If it comes out wrong we fix it in a minute and nothing is damaged.</td></tr>
-  <tr><td><span class="dot y" style="display:inline-block"></span> Amber</td><td>You do the work, then it gets checked before it goes out. Most jobs are this. The check already exists, so you cannot really break anything.</td></tr>
-  <tr><td><span class="dot r" style="display:inline-block"></span> Red</td><td>Leave it for now. Real money, contracts, the factory, or it would take a month to learn. Not because you could not, because it is not worth the risk yet.</td></tr>
+  <tr><td><span class="dot g"></span> Green</td><td>Have a go. If it comes out wrong we fix it in a minute and nothing is damaged.</td></tr>
+  <tr><td><span class="dot y"></span> Amber</td><td>You do the work, then it gets checked before it goes out. Most jobs are this. The check already exists, so you cannot really break anything.</td></tr>
+  <tr><td><span class="dot r"></span> Red</td><td>Leave it for now. Real money, contracts, the factory, or it would take a month to learn. Not because you could not, because it is not worth the risk yet.</td></tr>
 </table>
 </div>
 
 <h2>Everything, in ten piles</h2>
+<p class="dim">Tap a pile to open it. Every job inside is listed in plain words.</p>
+<div class="ctl">
+  <button onclick="document.querySelectorAll('details.pile').forEach(d=>d.open=true)">Open all</button>
+  <button onclick="document.querySelectorAll('details.pile').forEach(d=>d.open=false)">Close all</button>
+</div>
 
-<div class="pile"><span class="dot r"></span><div>
-  <span class="n">14 jobs</span><h3>Making the boot</h3>
-  <p>Emails to the factory, chasing samples, wearing them and giving the honest verdict, sizing, the safety certificate, checking the fixes actually got done.</p>
-  <p class="when">Weekly, and heavy right now</p>
-</div></div>
-
-<div class="pile"><span class="dot y"></span><div>
-  <span class="n">10 jobs</span><h3>Getting it to Australia</h3>
-  <p>Shipping company, customs, boxes, and working out where 500 pairs of boots physically land and get stored. None of that is sorted yet.</p>
-  <p class="when">Before launch</p>
-</div></div>
-
-<div class="pile"><span class="dot r"></span><div>
-  <span class="n">20 jobs</span><h3>Money and paperwork</h3>
-  <p>What every pair actually costs, what we charge, the money coming in and out, the lawyer, the accountant, insurance, the trademark.</p>
-  <p class="when">Ongoing, some of it urgent</p>
-</div></div>
-
-<div class="pile"><span class="dot y"></span><div>
-  <span class="n">36 jobs</span><h3>Making the videos <span class="yours">already yours</span></h3>
-  <p>Ideas, scripts, filming days, editing, covers, the words on screen, the caption. You already run the comedy end to end. You proved it: four finished edits landed without anyone chasing you.</p>
-  <p class="when">Every week</p>
-</div></div>
-
-<div class="pile"><span class="dot g"></span><div>
-  <span class="n">12 jobs</span><h3>Socials and replies</h3>
-  <p>Replying to every comment in the first couple of hours, messaging new followers, half an hour a day commenting on other people's posts, then checking what actually worked.</p>
-  <p class="when">Every day</p>
-</div></div>
-
-<div class="pile"><span class="dot y"></span><div>
-  <span class="n">12 jobs</span><h3>Keeping the brand straight</h3>
-  <p>How we sound, the words we never use, what we are allowed to claim about the boot, and watching what the other brands are doing.</p>
-  <p class="when">Ongoing, quiet</p>
-</div></div>
-
-<div class="pile"><span class="dot y"></span><div>
-  <span class="n">30 jobs</span><h3>The email list and the shop</h3>
-  <p>The list of blokes waiting on the boot, the emails that go to them, and building the actual online shop: photos, sizing guide, returns page, checkout that works.</p>
-  <p class="when">Ramping up now</p>
-</div></div>
-
-<div class="pile"><span class="dot g"></span><div>
-  <span class="n">21 jobs</span><h3>Spreading the word</h3>
-  <p>Stickers, posters in smoko rooms, dropping cards at trade suppliers and TAFEs, getting free pairs onto the right feet, talking to people who already trust you.</p>
-  <p class="when">Before and during launch</p>
-</div></div>
-
-<div class="pile"><span class="dot y"></span><div>
-  <span class="n">31 jobs</span><h3>Launch week, then looking after buyers</h3>
-  <p>The launch day plan hour by hour, then everything that never stops after it: orders, questions, wrong sizes, returns, warranty claims, reviews.</p>
-  <p class="when">Launch week and forever after</p>
-</div></div>
-
-<div class="pile"><span class="dot r"></span><div>
-  <span class="n">29 jobs</span><h3>Running the crew and the machine</h3>
-  <p>Getting decisions made between the three of us, and keeping the system that runs all of the above from falling over. This one is invisible and it is the biggest single-person risk we have.</p>
-  <p class="when">Every day, mostly unseen</p>
-</div></div>
+<details class="pile" data-i="0">
+  <summary>
+    <span class="dot r"></span>
+    <span class="ptitle">Making the boot</span>
+    <span class="n">14</span>
+  </summary>
+  <div class="pbody">
+    <p>Emails to the factory, chasing samples, wearing them and giving the honest verdict, sizing, the safety certificate, checking the fixes actually got done.</p>
+    <p class="when">Weekly, and heavy right now</p>
+    <span class="mix"><i class="g"></i>1 have a go <i class="y"></i>4 checked after <i class="r"></i>9 leave for now</span>
+    <ul class="jobs">
+      <li><span class="jd r" title="C"></span><b>Boot factory emails</b><span class="jt">Keep the boot factory thread moving, log every chat, and put phone decisions back in writing.</span></li><li><span class="jd y" title="B"></span><b>Socks and bags suppliers</b><span class="jt">Chase the socks, bags, slides and clothing makers on specs, timings and orders.</span></li><li><span class="jd y" title="B"></span><b>Backup suppliers kept warm</b><span class="jt">Stay in touch with second-choice factories so we have somewhere to go if the main one falls over.</span></li><li><span class="jd y" title="B"></span><b>Wearing the test boots</b><span class="jt">Wear the sample pairs, check the fixes actually held, and write down what is still wrong.</span></li><li><span class="jd r" title="C"></span><b>Locking in the sizes</b><span class="jt">Set which Aussie sizes we make and the size chart, based on the test pairs, then get the tag artwork ready.</span></li><li><span class="jd r" title="C"></span><b>Boot spec sheet</b><span class="jt">Keep one current sheet of what the boot is, what got fixed, and what we can claim.</span></li><li><span class="jd r" title="C"></span><b>Comfort calls on the boot</b><span class="jt">Decide if the Kevlar plate stays, which insole we use, and how light the boot can get.</span></li><li><span class="jd r" title="C"></span><b>Safety certificates</b><span class="jt">Get test reports, grip rating and water resistance confirmed again after every change to the boot.</span></li><li><span class="jd g" title="A"></span><b>Tester feedback form</b><span class="jt">Build a form that tells us if one bad boot slipped through or the whole design is wrong.</span></li><li><span class="jd r" title="C"></span><b>Checks before the big run</b><span class="jt">Approve the final sample, write the checklist, and book an inspector to check boots before they ship.</span></li><li><span class="jd r" title="C"></span><b>The 500-pair order</b><span class="jt">Negotiate and sign the 500-pair order: deposit, lead time in writing, penalties if they run late.</span></li><li><span class="jd r" title="C"></span><b>Paying the suppliers</b><span class="jt">Check the bank details are genuine before every transfer, pay, log it, and file the receipt.</span></li><li><span class="jd r" title="C"></span><b>Second order extras</b><span class="jt">When we decide on the second order, decide the sole mould, the harder heel piece and the China trademark at the same time.</span></li><li><span class="jd y" title="B"></span><b>Checking what the factory claims</b><span class="jt">Prove what the factory says about the boot is actually true before we repeat it anywhere.</span></li>
+    </ul>
+  </div>
+</details>
+<details class="pile" data-i="1">
+  <summary>
+    <span class="dot y"></span>
+    <span class="ptitle">Getting it to Australia</span>
+    <span class="n">10</span>
+  </summary>
+  <div class="pbody">
+    <p>Shipping company, customs, boxes, and working out where 500 pairs of boots physically land and get stored. None of that is sorted yet.</p>
+    <p class="when">Before launch</p>
+    <span class="mix"><i class="g"></i>3 have a go <i class="y"></i>4 checked after <i class="r"></i>3 leave for now</span>
+    <ul class="jobs">
+      <li><span class="jd r" title="C"></span><b>Picking a shipping agent</b><span class="jt">Get real quotes and decide who ships our gear, and whether we share a container or fill one.</span></li><li><span class="jd g" title="A"></span><b>Box sizes and weights</b><span class="jt">Get carton sizes and weights from all four suppliers, the missing bit for any real shipping quote.</span></li><li><span class="jd r" title="C"></span><b>Somewhere to land the stock</b><span class="jt">Find where 30 to 40 cartons get delivered and stored, since the order cannot be signed without it.</span></li><li><span class="jd r" title="C"></span><b>Splitting the shipment</b><span class="jt">Fly 150 pairs, ship 350 by sea, and time the socks and bags to land with them.</span></li><li><span class="jd y" title="B"></span><b>Customs and import tax</b><span class="jt">Get a customs broker and the China trade paperwork, worth about $1,025 saved on the first order.</span></li><li><span class="jd y" title="B"></span><b>Boxes and packaging</b><span class="jt">Price and order boot boxes, boot bags, tissue, satchels and filler, plus spares and a backup supplier.</span></li><li><span class="jd g" title="A"></span><b>Cards in the box</b><span class="jt">Design and print the day-one card, the feedback card and the numbered founding cards for each box.</span></li><li><span class="jd y" title="B"></span><b>Checking stock when it lands</b><span class="jt">Check every single pair for glue, heel, insole and sizing faults, then rack it and count it.</span></li><li><span class="jd y" title="B"></span><b>Packing and posting setup</b><span class="jt">Write how orders get picked, packed and posted, and open accounts with two couriers before launch.</span></li><li><span class="jd g" title="A"></span><b>Postage prices kept current</b><span class="jt">Keep the Australia Post price table up to date and the backup courier account alive.</span></li>
+    </ul>
+  </div>
+</details>
+<details class="pile" data-i="2">
+  <summary>
+    <span class="dot r"></span>
+    <span class="ptitle">Money and paperwork</span>
+    <span class="n">20</span>
+  </summary>
+  <div class="pbody">
+    <p>What every pair actually costs, what we charge, the money coming in and out, the lawyer, the accountant, insurance, the trademark.</p>
+    <p class="when">Ongoing, some of it urgent</p>
+    <span class="mix"><i class="g"></i>1 have a go <i class="y"></i>9 checked after <i class="r"></i>10 leave for now</span>
+    <ul class="jobs">
+      <li><span class="jd y" title="B"></span><b>Keep the budget file current</b><span class="jt">Every time a cost changes, update the budget file and check the totals on the screen still add up.</span></li><li><span class="jd g" title="A"></span><b>Check the exchange rate</b><span class="jt">Pull the latest Aussie-to-US dollar rate and redo the sums before we commit to a factory order.</span></li><li><span class="jd y" title="B"></span><b>What each boot costs us</b><span class="jt">Redo the cost per boot on real quotes, and get the last missing prices: the box, the socks, the freight.</span></li><li><span class="jd r" title="C"></span><b>Money map to launch</b><span class="jt">Work out what a boot costs us by the time it lands here, sea or air, how much cash we&#x27;ve got left by launch day, and how many pairs we have to sell to stop losing money.</span></li><li><span class="jd y" title="B"></span><b>Monthly bills check</b><span class="jt">Once a month, check every paid service and subscription against the budget so nothing bleeds unnoticed.</span></li><li><span class="jd r" title="C"></span><b>Locking in the prices</b><span class="jt">Before we put a price on the website, check what we charge at each stage still leaves enough on top, including what shops would pay.</span></li><li><span class="jd r" title="C"></span><b>Borrowing money</b><span class="jt">Ask the bank for a loan we can draw on when we need it, keep chasing them for an answer, and plan how we pay for the next lot of stock.</span></li><li><span class="jd r" title="C"></span><b>Sort the ownership paperwork</b><span class="jt">Fix how the money already put in is recorded, and update the ownership paperwork for three equal owners.</span></li><li><span class="jd r" title="C"></span><b>Cash set aside</b><span class="jt">Hold money back for returns and warranty claims, and redo the sales forecast when the launch date moves.</span></li><li><span class="jd y" title="B"></span><b>What a customer costs us</b><span class="jt">Each month, work out what we spend on ads to get one sale, and how much that customer spends with us.</span></li><li><span class="jd r" title="C"></span><b>Books and quarterly tax</b><span class="jt">Pick the accounting software, keep the books straight, sort out GST on deposits, and lodge the quarterly tax statement, the BAS.</span></li><li><span class="jd r" title="C"></span><b>Get the lawyer moving</b><span class="jt">Send the lawyer our brief on the trademark, deposit terms and warranty promise, then work through their feedback.</span></li><li><span class="jd r" title="C"></span><b>Get the GST answer</b><span class="jt">Send the accountant our GST questions on deposits and invoices and get a straight answer in writing.</span></li><li><span class="jd r" title="C"></span><b>Protecting the FAR name</b><span class="jt">Get legal advice on the mob already using a name close to ours, and register FAR in China as soon as the factory starts making the moulds.</span></li><li><span class="jd r" title="C"></span><b>Get us insured</b><span class="jt">Line up product and public liability cover, plus life and income protection, because right now we have none.</span></li><li><span class="jd y" title="B"></span><b>Check our claims are true</b><span class="jt">Sweep our docs for boot claims we can no longer back up, like the old sole material, and fix them.</span></li><li><span class="jd y" title="B"></span><b>Website legal pages</b><span class="jt">Keep the privacy, terms, shipping and returns pages on the site current with the law.</span></li><li><span class="jd y" title="B"></span><b>Wholesale paperwork</b><span class="jt">Get the paperwork drawn up for shops that want to stock us: our trade terms, the lowest price they can advertise, a credit form, and the workers-rights statement big buyers ask for.</span></li><li><span class="jd y" title="B"></span><b>Permission in writing</b><span class="jt">Get written OK from employers for the content we post, and signed permission to use people&#x27;s faces.</span></li><li><span class="jd y" title="B"></span><b>Legal record keeping</b><span class="jt">Keep a lawyer on call and one list of every filing, terms doc, warranty and insurance policy.</span></li>
+    </ul>
+  </div>
+</details>
+<details class="pile" data-i="3">
+  <summary>
+    <span class="dot y"></span>
+    <span class="ptitle">Making the videos <span class="yours">already yours</span></span>
+    <span class="n">36</span>
+  </summary>
+  <div class="pbody">
+    <p>Ideas, scripts, filming days, editing, covers, the words on screen, the caption. You already run the comedy end to end. You proved it: four finished edits landed without anyone chasing you.</p>
+    <p class="when">Every week</p>
+    <span class="mix"><i class="g"></i>9 have a go <i class="y"></i>25 checked after <i class="r"></i>2 leave for now</span>
+    <ul class="jobs">
+      <li><span class="jd g" title="A"></span><b>Keeping the idea list</b><span class="jt">Write down every video idea, decide yes or no on each one, and keep a list of the ones we killed so we don&#x27;t redo them.</span></li><li><span class="jd y" title="B"></span><b>Sunday planning session</b><span class="jt">Every Sunday, go back through parked ideas and lock in what gets posted each day next week.</span></li><li><span class="jd y" title="B"></span><b>Monthly idea health check</b><span class="jt">Once a month, check which ideas died, which got made, and whether we&#x27;ve covered all four types: funny, gripe, obsession, proof.</span></li><li><span class="jd y" title="B"></span><b>Character list for skits</b><span class="jt">Keep track of which site characters get a laugh, add one new character each filming block, and keep six scene ideas ready for each.</span></li><li><span class="jd y" title="B"></span><b>Questions we ask tradies</b><span class="jt">Keep the question list for street interviews, cut the weak ones, rate them after each shoot.</span></li><li><span class="jd y" title="B"></span><b>Boot destruction test list</b><span class="jt">Keep a list of boot-wrecking tests sorted into ready to film, needs gear, or maybe.</span></li><li><span class="jd g" title="A"></span><b>Turning gripes into videos</b><span class="jt">Take real complaints tradies have about boots and turn each one into a video idea.</span></li><li><span class="jd g" title="A"></span><b>Pulling quotes off forums</b><span class="jt">Grab what tradies actually write on Reddit and review sites, save their exact words for scripts.</span></li><li><span class="jd r" title="C"></span><b>Rebuilding the posting plan</b><span class="jt">Redo the posting plan each time the business moves to a new stage: first getting seen, then showing the boot, then selling it.</span></li><li><span class="jd y" title="B"></span><b>Tracking footage we&#x27;ve got</b><span class="jt">Track which clips are usable, match them to upcoming posts, flag weeks where we need to film.</span></li><li><span class="jd y" title="B"></span><b>Monday fifteen minute catch-up</b><span class="jt">Fifteen minutes each Monday: how last week&#x27;s posts went, what we&#x27;re filming, three things to watch.</span></li><li><span class="jd y" title="B"></span><b>Writing the scripts</b><span class="jt">Write the scenes and the lines for skits and straight-to-camera bits, then tighten them once the boys have had a read.</span></li><li><span class="jd g" title="A"></span><b>Sending scripts to the crew</b><span class="jt">Put the day&#x27;s scripts in one file on Google Drive so everyone can read them off their phone on site.</span></li><li><span class="jd y" title="B"></span><b>First three seconds</b><span class="jt">Write the opening line, the words on screen at the start, and the thumbnail text, so people stop scrolling.</span></li><li><span class="jd y" title="B"></span><b>Captions and comments</b><span class="jt">Write the caption, the pinned comment, two starter comments, and the TikTok and YouTube versions.</span></li><li><span class="jd y" title="B"></span><b>Building swipe posts</b><span class="jt">Write each slide of a swipe post and lay the text over the images in Canva.</span></li><li><span class="jd y" title="B"></span><b>Automatic quality checks</b><span class="jt">Run the automatic checks on opening lines and wording on every post, and write it down any time we ignore what they say.</span></li><li><span class="jd y" title="B"></span><b>Final check before posting</b><span class="jt">Run the 25-point checklist: banned words, repeats, and claims we can actually prove, before anything goes out.</span></li><li><span class="jd y" title="B"></span><b>Locking the shot list</b><span class="jt">Night before filming, name every shot, confirm who&#x27;s in it, and sort out the location.</span></li><li><span class="jd y" title="B"></span><b>Picking what we film</b><span class="jt">Pick the exact questions, skits and boot tests for the day off the existing lists.</span></li><li><span class="jd g" title="A"></span><b>Gear and props</b><span class="jt">Sort the other brands&#x27; boots, the test gear, the safety gear, charged phones, empty memory cards and tripods.</span></li><li><span class="jd g" title="A"></span><b>Briefing the blokes</b><span class="jt">Brief everyone the night before, confirm hi-vis and outfits, then run through it on the day.</span></li><li><span class="jd r" title="C"></span><b>Permissions and sign-offs</b><span class="jt">Sort out logos showing on camera, permission to film on site, and a signed OK from anyone who appears.</span></li><li><span class="jd y" title="B"></span><b>Filming days</b><span class="jt">Two half-days a month shooting on two phones, keeping takes and file names tidy.</span></li><li><span class="jd g" title="A"></span><b>Logging clips at wrap</b><span class="jt">Before leaving, write down what we got, the best lines, and which questions actually worked.</span></li><li><span class="jd g" title="A"></span><b>Getting footage off phones</b><span class="jt">Rename files the standard way, back everything up to Drive, and log what each camera got.</span></li><li><span class="jd y" title="B"></span><b>Checking the footage matches</b><span class="jt">Look at the real footage before writing anything about it, so the words match the screen.</span></li><li><span class="jd y" title="B"></span><b>AI images and clips</b><span class="jt">Make AI images and video, clean them up, drop the real logo in, and make sure they still look like us.</span></li><li><span class="jd y" title="B"></span><b>Edit instructions per post</b><span class="jt">Write the edit instructions, lock the opening before cutting, and write down how we think it&#x27;ll go.</span></li><li><span class="jd y" title="B"></span><b>Picking the week&#x27;s clips</b><span class="jt">Sit down each week and pick the best clips and ideas for that week&#x27;s edits.</span></li><li><span class="jd y" title="B"></span><b>Editing in CapCut</b><span class="jt">Cut the videos in CapCut using our text style, cover cards and background audio.</span></li><li><span class="jd y" title="B"></span><b>Other versions of the cut</b><span class="jt">Re-export for TikTok and YouTube Shorts, blur other brands, and recut anything running too long.</span></li><li><span class="jd y" title="B"></span><b>Posting the video</b><span class="jt">Post at 7pm, send the collab invite, add pinned and starter comments, TikTok half an hour later.</span></li><li><span class="jd y" title="B"></span><b>Scheduling the week&#x27;s posts</b><span class="jt">Load the whole week&#x27;s posts into the Instagram scheduler ahead of time so nothing gets thrown together last minute.</span></li><li><span class="jd g" title="A"></span><b>Reshares from the boys</b><span class="jt">Sort over WhatsApp who reshares each post and when, keeping the 48-hour minimum gap.</span></li><li><span class="jd y" title="B"></span><b>Trying new formats</b><span class="jt">Trial new styles: different openings, posting more or less often, and music on swipe posts.</span></li>
+    </ul>
+  </div>
+</details>
+<details class="pile" data-i="4">
+  <summary>
+    <span class="dot g"></span>
+    <span class="ptitle">Socials and replies</span>
+    <span class="n">12</span>
+  </summary>
+  <div class="pbody">
+    <p>Replying to every comment in the first couple of hours, messaging new followers, half an hour a day commenting on other people&#x27;s posts, then checking what actually worked.</p>
+    <p class="when">Every day</p>
+    <span class="mix"><i class="g"></i>5 have a go <i class="y"></i>6 checked after <i class="r"></i>1 leave for now</span>
+    <ul class="jobs">
+      <li><span class="jd y" title="B"></span><b>Working the comments</b><span class="jt">Reply to every comment fast, message anyone who comments FAR within the hour, and send anyone with a complaint to the link in the bio.</span></li><li><span class="jd g" title="A"></span><b>Messaging new followers</b><span class="jt">Message every new follower asking what trade they&#x27;re in, then follow the script we&#x27;ve written.</span></li><li><span class="jd y" title="B"></span><b>Answering the hard questions</b><span class="jt">Answer doubts about price, fit and quality in DMs using our ready-made answers for the eleven common ones.</span></li><li><span class="jd g" title="A"></span><b>Half hour on other posts</b><span class="jt">Thirty minutes a day leaving real comments on tradie pages and hashtags, never selling.</span></li><li><span class="jd y" title="B"></span><b>Getting in with other creators</b><span class="jt">Follow twenty Aussie tradie creators a week and actually watch and comment on their stuff. No asking them for anything until the new boot lands.</span></li><li><span class="jd g" title="A"></span><b>Saving the best comments</b><span class="jt">Copy the top five comments off every post word-for-word so we can spot what blokes keep saying.</span></li><li><span class="jd g" title="A"></span><b>Instagram stories</b><span class="jt">Reshare each reel to stories with the link sticker. At 1,000 followers we switch to the full weekly plan.</span></li><li><span class="jd g" title="A"></span><b>Logging the numbers</b><span class="jt">Record views, saves and shares for every post a day or two after it goes up.</span></li><li><span class="jd y" title="B"></span><b>Post write-ups</b><span class="jt">After each post write up the numbers, best comments, the lesson, and whether we repeat it or bin it.</span></li><li><span class="jd y" title="B"></span><b>Tagging each post type</b><span class="jt">Mark by hand what type each post was, funny or proof or gripe, because the computer can&#x27;t judge it.</span></li><li><span class="jd y" title="B"></span><b>Weekly numbers review</b><span class="jt">Once a week pick the best-performing post type, check what we guessed against what actually happened.</span></li><li><span class="jd r" title="C"></span><b>Updating the rules</b><span class="jt">When a lesson proves an old rule wrong, change the rule in the main doc and note why.</span></li>
+    </ul>
+  </div>
+</details>
+<details class="pile" data-i="5">
+  <summary>
+    <span class="dot y"></span>
+    <span class="ptitle">Keeping the brand straight</span>
+    <span class="n">12</span>
+  </summary>
+  <div class="pbody">
+    <p>How we sound, the words we never use, what we are allowed to claim about the boot, and watching what the other brands are doing.</p>
+    <p class="when">Ongoing, quiet</p>
+    <span class="mix"><i class="g"></i>1 have a go <i class="y"></i>7 checked after <i class="r"></i>4 leave for now</span>
+    <ul class="jobs">
+      <li><span class="jd r" title="C"></span><b>Keeping our voice straight</b><span class="jt">Update the word lists and voice rules when we keep drifting off how FAR should sound.</span></li><li><span class="jd r" title="C"></span><b>Checking the voice checkers</b><span class="jt">Run the automatic voice and opening-line checkers over posts we know are good, so we can tell if they&#x27;ve started getting it wrong.</span></li><li><span class="jd r" title="C"></span><b>Full brand check-up</b><span class="jt">Big top-to-bottom brand review about once a year, then roll the fixes out across every doc.</span></li><li><span class="jd y" title="B"></span><b>Scrubbing old wording</b><span class="jt">When we drop a word or a claim, search every file and replace it so nothing old survives.</span></li><li><span class="jd g" title="A"></span><b>Reading competitor complaints</b><span class="jt">Every fortnight spend thirty minutes reading reviews and forums for what blokes hate about other boots.</span></li><li><span class="jd y" title="B"></span><b>Keeping tabs on competitors</b><span class="jt">Every three months update who we&#x27;re up against: new brands, prices, boot weights, how they talk.</span></li><li><span class="jd y" title="B"></span><b>Checking who&#x27;s actually watching</b><span class="jt">Once a month, check the blokes liking and commenting are real tradies, and that people bring up FAR on their own without us asking.</span></li><li><span class="jd y" title="B"></span><b>Refreshing the research</b><span class="jt">Every three months refresh research on the Instagram algorithm, other creators, boot materials and post formats.</span></li><li><span class="jd r" title="C"></span><b>Only claiming what we can prove</b><span class="jt">Check every boot claim and number can be backed up with a named source before it goes out.</span></li><li><span class="jd y" title="B"></span><b>Logo and look rules</b><span class="jt">Keep the logo and colour files current, sort out where each of the three logo versions gets used, and write down how our photos and videos should look.</span></li><li><span class="jd y" title="B"></span><b>Making product images</b><span class="jt">Generate boot images using the settings that work, touch them up, and note what to change next run.</span></li><li><span class="jd y" title="B"></span><b>PDFs and profile wording</b><span class="jt">Build the PDFs we send people, and keep the wording on our social profiles as the version everything else copies.</span></li>
+    </ul>
+  </div>
+</details>
+<details class="pile" data-i="6">
+  <summary>
+    <span class="dot y"></span>
+    <span class="ptitle">The email list and the shop</span>
+    <span class="n">30</span>
+  </summary>
+  <div class="pbody">
+    <p>The list of blokes waiting on the boot, the emails that go to them, and building the actual online shop: photos, sizing guide, returns page, checkout that works.</p>
+    <p class="when">Ramping up now</p>
+    <span class="mix"><i class="g"></i>6 have a go <i class="y"></i>19 checked after <i class="r"></i>5 leave for now</span>
+    <ul class="jobs">
+      <li><span class="jd r" title="C"></span><b>Switch on the launch emails</b><span class="jt">Finish and turn on the automatic emails that go to the waitlist before launch day.</span></li><li><span class="jd y" title="B"></span><b>Writing the emails</b><span class="jt">Write each email, run it through the checks, and load it ready to send.</span></li><li><span class="jd y" title="B"></span><b>How often we email</b><span class="jt">Settle a regular sending schedule and get every email signed off before it goes out.</span></li><li><span class="jd y" title="B"></span><b>Checking how emails did</b><span class="jt">Test subject lines, read the numbers weekly, and act fast if people start unsubscribing.</span></li><li><span class="jd y" title="B"></span><b>Fix the referral emails</b><span class="jt">Rebuild the refer-a-mate emails so rewards fire correctly instead of going to the wrong people.</span></li><li><span class="jd g" title="A"></span><b>Email templates upkeep</b><span class="jt">Keep one master email design everything gets copied from, fix the footer, clear out test versions.</span></li><li><span class="jd y" title="B"></span><b>Cleaning up the email list</b><span class="jt">Import missing signups, fix the waitlist connection, and make sure nobody misses the welcome email.</span></li><li><span class="jd y" title="B"></span><b>Sorting the list into groups</b><span class="jt">Split the list into groups like keen buyers and creators so the right people get the right email.</span></li><li><span class="jd y" title="B"></span><b>Emails landing in inboxes</b><span class="jt">Set up the behind-the-scenes email settings so our emails don&#x27;t land in the junk folder.</span></li><li><span class="jd g" title="A"></span><b>Tagging our links</b><span class="jt">Tag every link and test it on real phones so we know which email drove sales.</span></li><li><span class="jd r" title="C"></span><b>Shop tracking before the deadline</b><span class="jt">Switch the shop over to the new sales tracking before 26 August, or after that we can&#x27;t see where sales come from.</span></li><li><span class="jd g" title="A"></span><b>Waitlist page upkeep</b><span class="jt">Keep the signup page, thank-you page, share links and the tradie counter up to date.</span></li><li><span class="jd y" title="B"></span><b>Ask size and trade</b><span class="jt">Ask new signups their boot size and trade, plus permission to text them.</span></li><li><span class="jd r" title="C"></span><b>Taking deposits</b><span class="jt">Publish the terms, put the deposit up for sale, handle refunds, and track orders and sizes.</span></li><li><span class="jd y" title="B"></span><b>Automatic emails after launch</b><span class="jt">Build the automatic ones: welcome, reminder when someone leaves boots in the cart, thank you after buying, a nudge to people who&#x27;ve gone quiet, receipts, and review requests.</span></li><li><span class="jd r" title="C"></span><b>How our emails sound</b><span class="jt">Write down the tone for each type of email so everything sounds like us.</span></li><li><span class="jd g" title="A"></span><b>Copying the numbers across</b><span class="jt">Type the daily email and waitlist numbers into our records by hand, because nothing does it automatically.</span></li><li><span class="jd y" title="B"></span><b>Auto-messages from comments</b><span class="jt">Set it up so when someone comments a certain word on a post, they get a message back automatically and we get their email.</span></li><li><span class="jd y" title="B"></span><b>Build the actual shop</b><span class="jt">Build the full Shopify shop once V2 stock is confirmed: product pages, menus, the lot.</span></li><li><span class="jd r" title="C"></span><b>Boot page words</b><span class="jt">Write the boot page so it answers the seven questions every buyer has before buying.</span></li><li><span class="jd y" title="B"></span><b>The other shop pages</b><span class="jt">Write the sizing guide, returns, our story, the customer photo wall, and the page calling out the cheap copies.</span></li><li><span class="jd y" title="B"></span><b>Prices and discount codes</b><span class="jt">Set the prices for each stage, the counter showing how many Founding Crew spots are left, and the MATE20 code, so they all work on their own.</span></li><li><span class="jd y" title="B"></span><b>Boot photos and launch film</b><span class="jt">Shoot the boot from every angle, on feet and up close, plus the launch video.</span></li><li><span class="jd y" title="B"></span><b>Test the checkout</b><span class="jt">Buy a pair ourselves start to finish, check it&#x27;s fast on a phone, check the receipt.</span></li><li><span class="jd y" title="B"></span><b>Never edit the live site</b><span class="jt">Copy the site, edit the copy, preview it, then publish, so we never break the shop.</span></li><li><span class="jd y" title="B"></span><b>Help Google read the site</b><span class="jt">Add the hidden code and page descriptions so Google and AI tools know who FAR is.</span></li><li><span class="jd g" title="A"></span><b>Get FAR on the map</b><span class="jt">One-off jobs registering FAR with Google and review sites so we show up as real.</span></li><li><span class="jd y" title="B"></span><b>Get products into Google</b><span class="jt">Add product details Google and Bing can read, and feed our boots into their shopping listings.</span></li><li><span class="jd y" title="B"></span><b>Answer pages for AI search</b><span class="jt">Write pages answering what tradies search, then check weekly whether AI tools mention us.</span></li><li><span class="jd g" title="A"></span><b>Bio link and pinned comments</b><span class="jt">Keep the Instagram bio link, pinned comment lines, and the &#x27;search FAR Workwear&#x27; wording current.</span></li>
+    </ul>
+  </div>
+</details>
+<details class="pile" data-i="7">
+  <summary>
+    <span class="dot g"></span>
+    <span class="ptitle">Spreading the word</span>
+    <span class="n">21</span>
+  </summary>
+  <div class="pbody">
+    <p>Stickers, posters in smoko rooms, dropping cards at trade suppliers and TAFEs, getting free pairs onto the right feet, talking to people who already trust you.</p>
+    <p class="when">Before and during launch</p>
+    <span class="mix"><i class="g"></i>8 have a go <i class="y"></i>11 checked after <i class="r"></i>2 leave for now</span>
+    <ul class="jobs">
+      <li><span class="jd y" title="B"></span><b>Wave 2 personal invites</b><span class="jt">Build the list, post on Facebook, message people one by one, and chase after two days.</span></li><li><span class="jd y" title="B"></span><b>Wave 3 through mates&#x27; lists</b><span class="jt">Brief the three blokes with the big networks, get their lists, track it the same way.</span></li><li><span class="jd g" title="A"></span><b>Daily DM to new followers</b><span class="jt">Message every new follower, every day, ongoing. It never stops like the other waves do.</span></li><li><span class="jd y" title="B"></span><b>Sending boots to creators</b><span class="jt">Pick twenty creators, send boots with a personal note, follow up, then judge if it paid.</span></li><li><span class="jd y" title="B"></span><b>Boots to site foremen</b><span class="jt">Research sites, drop boots at 6:30am, text follow-ups, and track signups by area.</span></li><li><span class="jd g" title="A"></span><b>TAFE apprentices</b><span class="jt">Ring the departments, drop off materials, then offer apprentices trial pairs and a discount after launch.</span></li><li><span class="jd r" title="C"></span><b>Charity and brand partners</b><span class="jt">Lock in the deal to donate per pair to TIACS, the tradies&#x27; mental health charity, before we announce it, then line up the three-brand team-up.</span></li><li><span class="jd y" title="B"></span><b>Press pack ready</b><span class="jt">Fill the gaps in the press pack, add sources, and get big photos ready to send.</span></li><li><span class="jd y" title="B"></span><b>Handling press</b><span class="jt">Answer media requests properly, log every mention, watch for chances, and run the launch-week press push.</span></li><li><span class="jd y" title="B"></span><b>Selling to companies</b><span class="jt">Finish the contact list, write up each company, and make a one-pager for bulk crew orders.</span></li><li><span class="jd y" title="B"></span><b>Company orders after launch</b><span class="jt">Handle company enquiries, loan out sample boots, chase reorders at six months, send safety paperwork.</span></li><li><span class="jd y" title="B"></span><b>Safety trade show in October</b><span class="jt">Build the list of companies worth talking to, then go with boots on hand and real sales numbers.</span></li><li><span class="jd r" title="C"></span><b>Hold off on stockists</b><span class="jt">Don&#x27;t approach shops until we&#x27;ve sold direct for six months and have the numbers to show.</span></li><li><span class="jd y" title="B"></span><b>Brief the web developer</b><span class="jt">Write out exactly what we want the outside developer to build, and run the meeting off the printed pages.</span></li><li><span class="jd g" title="A"></span><b>Stickers and posters</b><span class="jt">Design and order stickers, A3 posters, counter cards, referral cards and stubby holders before launch.</span></li><li><span class="jd g" title="A"></span><b>Boot care handout</b><span class="jt">One page on boot care and looking after your feet, for TAFE drops and inside the box.</span></li><li><span class="jd g" title="A"></span><b>Founding Crew patches</b><span class="jt">Find a supplier and get the first-round and second-round patch designs made.</span></li><li><span class="jd g" title="A"></span><b>Poster and card drops</b><span class="jt">Drop posters and cards at suppliers, TAFEs, pubs and site gates, then top them up fortnightly.</span></li><li><span class="jd g" title="A"></span><b>Handwritten notes and numbering</b><span class="jt">Write 100 notes by hand and number the boots so they match the card in the box.</span></li><li><span class="jd y" title="B"></span><b>WhatsApp group for first 100</b><span class="jt">Set up WhatsApp Business and start the group so the first 100 buyers can reach us direct.</span></li><li><span class="jd g" title="A"></span><b>Packing each order</b><span class="jt">Pack boots, socks, bag, cards and stickers into every order so it opens the way we want.</span></li>
+    </ul>
+  </div>
+</details>
+<details class="pile" data-i="8">
+  <summary>
+    <span class="dot y"></span>
+    <span class="ptitle">Launch week, then looking after buyers</span>
+    <span class="n">31</span>
+  </summary>
+  <div class="pbody">
+    <p>The launch day plan hour by hour, then everything that never stops after it: orders, questions, wrong sizes, returns, warranty claims, reviews.</p>
+    <p class="when">Launch week and forever after</p>
+    <span class="mix"><i class="g"></i>2 have a go <i class="y"></i>20 checked after <i class="r"></i>9 leave for now</span>
+    <ul class="jobs">
+      <li><span class="jd y" title="B"></span><b>Countdown week posts</b><span class="jt">Post one video a day for the seven days before launch, building up to stock landing.</span></li><li><span class="jd y" title="B"></span><b>Store check before we open</b><span class="jt">Go through the 18-point Shopify checklist twice, then one final pass at 4:30am launch morning.</span></li><li><span class="jd y" title="B"></span><b>Launch week emails</b><span class="jt">Launch email at 5am, honest numbers at midday, one a day, last chance on day seven.</span></li><li><span class="jd y" title="B"></span><b>Personal messages to keen buyers</b><span class="jt">Write 50 messages by hand to the blokes most likely to buy, between 5 and 7am.</span></li><li><span class="jd y" title="B"></span><b>Posting on launch day</b><span class="jt">Instagram at 7am, story at 7:30, TikTok at 8am, culture post at 6pm, numbers through the day.</span></li><li><span class="jd y" title="B"></span><b>Watching the shop all day</b><span class="jt">Watch for website faults, answer comments and messages within minutes, split the inbox between the three of us.</span></li><li><span class="jd y" title="B"></span><b>End of day one wrap-up</b><span class="jt">Sit down after day one: what sold, what broke, what people said, save the customer photos.</span></li><li><span class="jd r" title="C"></span><b>Plan if sales are slow</b><span class="jt">If orders are under target after two days, work out why and message warm leads. No panic discounts.</span></li><li><span class="jd y" title="B"></span><b>Launch day battle plan</b><span class="jt">Write down who watches what, the hour by hour running order, and the story we&#x27;re telling.</span></li><li><span class="jd y" title="B"></span><b>Packing and sending boots</b><span class="jt">Pack and send every order over two to three days, print labels, hand over to the courier.</span></li><li><span class="jd y" title="B"></span><b>Answering customer messages</b><span class="jt">Run every message through the four-step check, use the 20 set replies word for word, and hand it to Fil when you&#x27;re stuck.</span></li><li><span class="jd g" title="A"></span><b>Where&#x27;s my order questions</b><span class="jt">Handle tracking, chase lost parcels, and tell people straight when their boots will actually turn up.</span></li><li><span class="jd y" title="B"></span><b>Returns and refunds</b><span class="jt">Take comfort returns back, check the boots, restock or bin them, refund inside the promised time.</span></li><li><span class="jd r" title="C"></span><b>Warranty claims</b><span class="jt">Work out what&#x27;s covered, get evidence, replace or refund, track the cost against money set aside.</span></li><li><span class="jd r" title="C"></span><b>Sort out the warranty promise</b><span class="jt">We&#x27;ve got three different versions of our warranty. Pick one before it goes anywhere a customer can see.</span></li><li><span class="jd y" title="B"></span><b>What to do with duds</b><span class="jt">Pull returned pairs apart to see what went wrong, then sell cheap, donate, or bin them.</span></li><li><span class="jd y" title="B"></span><b>Reviews after delivery</b><span class="jt">Ask for a review two weeks after delivery, reply to them, watch if returns start climbing.</span></li><li><span class="jd r" title="C"></span><b>Publishing our fault numbers</b><span class="jt">Every three months, publish how many pairs came back faulty. We promised it, so we do it.</span></li><li><span class="jd y" title="B"></span><b>Customer photos and feedback</b><span class="jt">Collect customer feedback and photos, get permission in writing, turn the good ones into posts.</span></li><li><span class="jd g" title="A"></span><b>The customer photo wall</b><span class="jt">Put customer photos up on the site, and make sure everyone who sends one gets shown.</span></li><li><span class="jd y" title="B"></span><b>Ring the first 50 buyers</b><span class="jt">Call or text every one of the first 50 customers in week one, founder to customer.</span></li><li><span class="jd y" title="B"></span><b>After the drop emails</b><span class="jt">Thank you to buyers, a decent reply to those who missed out, and to anyone reporting a fault.</span></li><li><span class="jd y" title="B"></span><b>Improving our standard replies</b><span class="jt">Add new set replies as new questions come up, feed what customers say back into content.</span></li><li><span class="jd r" title="C"></span><b>Paid ads</b><span class="jt">Get the ad material made now, spend nothing until boots are selling on their own, then put more money in only if the ads make money back.</span></li><li><span class="jd y" title="B"></span><b>Add-ons at checkout</b><span class="jt">Offer a boot care kit and a second pair for a mate once they&#x27;ve decided to buy.</span></li><li><span class="jd r" title="C"></span><b>Slides as a second product</b><span class="jt">Send slides out with orders now, sell them on their own at month six if customers want them.</span></li><li><span class="jd y" title="B"></span><b>Repeat buyers and partners</b><span class="jt">Work out what repeat buyers get, check out anyone who wants to sell our boots, and set the rules for what they&#x27;re allowed to do.</span></li><li><span class="jd y" title="B"></span><b>Long interview show</b><span class="jt">Work out how a long sit-down interview show would run, more listening than watching, then record one test episode.</span></li><li><span class="jd r" title="C"></span><b>How we run the business</b><span class="jt">Write the plan for the first month, three months and six months, the plan for year one, what we do each week, and a once-a-year check on the brand.</span></li><li><span class="jd r" title="C"></span><b>First five hires</b><span class="jt">Write up the first five jobs we&#x27;ll need: customer service, filming, warehouse, trade sales, bookkeeping.</span></li><li><span class="jd r" title="C"></span><b>Ordering more stock</b><span class="jt">Set the stock level where we reorder, pick sea or air freight, and keep a list of overseas buyers who&#x27;ve asked about us.</span></li>
+    </ul>
+  </div>
+</details>
+<details class="pile" data-i="9">
+  <summary>
+    <span class="dot r"></span>
+    <span class="ptitle">Running the crew and the machine</span>
+    <span class="n">29</span>
+  </summary>
+  <div class="pbody">
+    <p>Getting decisions made between the three of us, and keeping the system that runs all of the above from falling over. This one is invisible and it is the biggest single-person risk we have.</p>
+    <p class="when">Every day, mostly unseen</p>
+    <span class="mix"><i class="g"></i>3 have a go <i class="y"></i>12 checked after <i class="r"></i>14 leave for now</span>
+    <ul class="jobs">
+      <li><span class="jd y" title="B"></span><b>Founder votes</b><span class="jt">Put the big decisions to the three of us, collect the votes, and write down what was decided.</span></li><li><span class="jd r" title="C"></span><b>Prep before we decide</b><span class="jt">Before a founder call, lay out the options with what each one costs so the choice is clear.</span></li><li><span class="jd r" title="C"></span><b>Launch planning sit-down</b><span class="jt">All three of us in a room: split up the real jobs and vote on the decisions waiting.</span></li><li><span class="jd g" title="A"></span><b>Wear the boots, tell us</b><span class="jt">Boots on feet, tags read, honest verdicts collected from all three of us.</span></li><li><span class="jd g" title="A"></span><b>Write up coaching calls</b><span class="jt">After each coaching session, record what was decided so it doesn&#x27;t get lost.</span></li><li><span class="jd y" title="B"></span><b>Numbers catch-up</b><span class="jt">Fifteen minutes weekly and thirty minutes monthly going through the business numbers together.</span></li><li><span class="jd r" title="C"></span><b>What could bite us</b><span class="jt">Re-rate the list of things that could go wrong each month, and tick off the must-dos before launch.</span></li><li><span class="jd r" title="C"></span><b>Are we hitting our goals</b><span class="jt">Every three months, check the goals against what actually happened and sort out the gaps.</span></li><li><span class="jd y" title="B"></span><b>Starting a work session</b><span class="jt">Load the right files and notes at the start so the computer picks up where we left off.</span></li><li><span class="jd y" title="B"></span><b>Closing a work session</b><span class="jt">Save, check and back up everything at the end so nothing done that day gets lost.</span></li><li><span class="jd y" title="B"></span><b>Keeping the notes tidy</b><span class="jt">Trim and file the working notes so files stay small and nothing important gets buried.</span></li><li><span class="jd y" title="B"></span><b>Writing down decisions</b><span class="jt">Write down every decision so it can be looked up later and doesn&#x27;t get argued again.</span></li><li><span class="jd y" title="B"></span><b>Checking overnight suggestions</b><span class="jt">Read what the system suggested overnight, say yes or no, tighten the rules when suggestions go bad.</span></li><li><span class="jd r" title="C"></span><b>Checking the automatic jobs</b><span class="jt">Check the 20 jobs that run on their own each day actually ran, fix the ones that didn&#x27;t.</span></li><li><span class="jd r" title="C"></span><b>Backups and restore tests</b><span class="jt">Check backups actually saved, and every three months test we can get everything back.</span></li><li><span class="jd r" title="C"></span><b>Passwords and access</b><span class="jt">Change passwords on schedule, clear old ones out of the system, recheck who has access monthly.</span></li><li><span class="jd r" title="C"></span><b>Pushing updates to the server</b><span class="jt">Put changes on the live server one at a time, then open it yourself and check it actually worked.</span></li><li><span class="jd y" title="B"></span><b>Tidying the dashboard</b><span class="jt">Clear out old jobs off the board, answer anything marked for attention, and work through what&#x27;s waiting on a yes or no.</span></li><li><span class="jd r" title="C"></span><b>Testing before anything ships</b><span class="jt">Run the full test set and have a second check tear it apart before anything goes live.</span></li><li><span class="jd r" title="C"></span><b>Managing the helper bots</b><span class="jt">Build new helper bots, switch off the ones we don&#x27;t use, and check the rest are still doing the job right and haven&#x27;t gone off track.</span></li><li><span class="jd r" title="C"></span><b>Keeping the AI list current</b><span class="jt">Update which AI models we use, what they cost, and what runs where, each time new ones land.</span></li><li><span class="jd r" title="C"></span><b>Settings and automatic triggers</b><span class="jt">Keep the automatic triggers and settings files working so nothing quietly breaks in the background.</span></li><li><span class="jd y" title="B"></span><b>Learning from what happened</b><span class="jt">Write down what we learned, file it where we&#x27;ll find it again, and check it actually changes what we do next time.</span></li><li><span class="jd y" title="B"></span><b>Regular check-ups</b><span class="jt">A look back over the week every Friday, a proper audit every three months, and a read of the industry news every Monday.</span></li><li><span class="jd y" title="B"></span><b>Watching the spend</b><span class="jt">Track what we spend each week in Aussie dollars, top up the credit before it runs out, and decide how much computing power we&#x27;re paying for.</span></li><li><span class="jd r" title="C"></span><b>Alarms when things stop</b><span class="jt">Build the alarms that tell us when something stops running, instead of finding out days later.</span></li><li><span class="jd r" title="C"></span><b>System upgrade list</b><span class="jt">Work through the queued list of computer system upgrades, one session at a time.</span></li><li><span class="jd y" title="B"></span><b>Picking our posting tools</b><span class="jt">Decide which posting and email tools we pay for, and how we measure Instagram stories.</span></li><li><span class="jd g" title="A"></span><b>Typing in daily numbers</b><span class="jt">Copy the daily numbers into our notes by hand until the system can pull them itself.</span></li>
+    </ul>
+  </div>
+</details>
 
 <h2>What changes at launch</h2>
 <div class="card">
@@ -160,7 +276,7 @@
 </div>
 <p class="dim">Two things have already been put up as wants: the email side, and learning to edit clips. Both are on this page. Both are amber, which means the work can start this week without anything being at risk.</p>
 
-<p class="foot">FAR. Internal crew page, not for sharing outside the three of us. The full detail behind every one of the 215 sits with Fil if you want to dig.</p>
+<p class="foot">FAR. Internal crew page, not for sharing outside the three of us. The long version of this, with every job searchable, is the operator map.</p>
 
 </body>
 </html>
