@@ -264,7 +264,7 @@ a{color:inherit;text-decoration:none}
   transition:color var(--t-label) var(--lift),border-color var(--t-label) var(--lift);
 }
 .ghost:hover{color:var(--paper);border-color:var(--paper-3)}
-.reassure{font-family:var(--mono);font-size:clamp(9px,2.3vw,10px);letter-spacing:.06em;color:var(--paper-3);line-height:1.6}
+.reassure{font-family:var(--mono);font-size:clamp(9px,2.2vw,10px);letter-spacing:.01em;color:var(--paper-3);line-height:1.65;max-width:46ch}
 
 /* sticky bar: slides up once the stage is gone. */
 .dock{
@@ -322,24 +322,31 @@ a{color:inherit;text-decoration:none}
 .pin[aria-pressed="true"]::after{animation:none;opacity:0}
 .pin:hover::before{transform:scale(1.45)}
 
+/* Tapping a point has to PAY. A 96px thumbnail is not a payoff, so on a
+   phone the photograph takes the full width and the text sits under it. */
 .readout{
-  margin-top:22px;border:1px solid var(--line);background:var(--ink);
-  display:grid;grid-template-columns:96px 1fr;min-height:120px;
+  margin-top:20px;border:1px solid var(--line);background:var(--ink);
+  display:grid;grid-template-columns:minmax(0,1fr);
 }
-.readout figure{margin:0;background:var(--ink-3);overflow:hidden;position:relative}
+.readout figure{margin:0;background:var(--ink-3);overflow:hidden;position:relative;aspect-ratio:16/10}
 .readout figure img{
   width:100%;height:100%;object-fit:cover;
-  opacity:0;transition:opacity var(--t-panel) var(--lift);
+  opacity:0;transform:scale(1.04);
+  transition:opacity var(--t-panel) var(--lift),transform var(--t-mass) var(--settle);
 }
-.readout figure img.on{opacity:1}
-.readout .txt{padding:16px 18px;display:flex;flex-direction:column;justify-content:center;gap:8px}
-.readout .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper-3)}
-.readout .val{font-size:clamp(15px,4vw,19px);line-height:1.35;font-variation-settings:'wght' 500;color:var(--paper)}
+.readout figure img.on{opacity:1;transform:none}
+.readout .txt{padding:16px 18px 18px;display:flex;flex-direction:column;gap:9px}
+.readout .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-3)}
+.readout .val{font-size:clamp(15px,4vw,19px);line-height:1.38;font-variation-settings:'wght' 500;color:var(--paper);text-wrap:pretty}
 .readout .flag{
-  font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;
   color:var(--paper-3);border:1px solid var(--line-2);padding:3px 7px;align-self:flex-start;
 }
-@media (min-width:720px){.readout{grid-template-columns:180px 1fr}}
+@media (min-width:760px){
+  .readout{grid-template-columns:minmax(0,300px) minmax(0,1fr)}
+  .readout figure{aspect-ratio:auto;height:100%;min-height:180px}
+  .readout .txt{justify-content:center;padding:24px 28px}
+}
 
 /* ═══ 4. PROOF ═══════════════════════════════════════════════════ */
 .proof{padding:clamp(60px,14vw,120px) 0;border-top:1px solid var(--line)}
@@ -398,6 +405,19 @@ a{color:inherit;text-decoration:none}
 .qa[open] summary::after{content:'\2212'}
 .qa p{padding:0 0 20px;color:var(--paper-2);font-size:15px;line-height:1.55;max-width:60ch}
 
+.crew{padding:clamp(60px,14vw,120px) 0;border-top:1px solid var(--line);background:var(--ink-2)}
+.crew-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;align-items:center}
+.crew-shot{margin:0;border:1px solid var(--line);overflow:hidden;background:var(--ink-3)}
+.crew-shot img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(1) contrast(1.04)}
+@media (min-width:820px){
+  .crew-grid{grid-template-columns:minmax(0,.85fr) minmax(0,1fr);gap:clamp(32px,5vw,72px)}
+  .crew-shot img{aspect-ratio:4/5}
+}
+.rally-close{
+  font-variation-settings:'wdth' 80,'wght' 800;
+  font-size:clamp(26px,8vw,58px);line-height:1;letter-spacing:-.015em;
+  text-transform:uppercase;margin:clamp(48px,12vw,96px) 0 clamp(36px,8vw,64px);
+}
 footer{padding:40px 0 60px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:14px 24px;justify-content:space-between;align-items:center}
 footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
 
@@ -407,7 +427,11 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
   [data-rise]{opacity:1;transform:none}
-  .stage-boot{clip-path:none}
+  .stage-boot{clip-path:none!important;animation:none!important}
+  .halo{opacity:1!important;animation:none!important}
+  .tag,.cue{opacity:1!important;animation:none!important}
+  .pin::after{animation:none!important;opacity:0!important}
+  .grain{animation:none!important}
 }
 </style>
 </head>
@@ -443,7 +467,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
         <span id="buy-txt">Hold my pair</span>
         <span class="amt">$20</span>
       </button>
-      <p class="reassure">Refundable any time, no questions. Comes off the price at launch.</p>
+      <p class="reassure">Refundable any time, no questions. Comes off the price at launch.<br>AU sizing, same as UK.</p>
     </div>
   </div>
   <span class="cue">Scroll</span>
@@ -501,19 +525,36 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
   </div>
 </section>
 
+
+<!-- ══ 4. WHO'S BUILDING IT ══════════════════════════════════════ -->
+<section class="crew">
+  <div class="wrap">
+    <div class="chapter" data-rise><span class="n">04</span><span class="t">Who's building it</span></div>
+    <div class="crew-grid">
+      <figure class="crew-shot" data-rise>
+        <img src="assets/founders.webp" alt="Fil, Grant and Lionel sitting in a garage in hi-vis and work boots." loading="lazy">
+      </figure>
+      <div data-rise>
+        <p class="creed" style="font-size:clamp(24px,6.4vw,44px)">Three of us.<br><em>That's the whole company.</em></p>
+        <p class="say" style="margin-top:20px">Fil, Grant and Lionel. Grant and Lionel are on the tools. Fil runs the build. No boardroom, no marketing department, nobody to hide behind if the boot turns out rubbish.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══ 5. THE OFFER ══════════════════════════════════════════════ -->
 <section class="offer" id="keep">
   <div class="wrap">
-    <div class="chapter" data-rise><span class="n">04</span><span class="t">Two ways in</span></div>
+    <div class="chapter" data-rise><span class="n">05</span><span class="t">Two ways in</span></div>
     <div class="two">
       <div class="card card--lead" data-rise>
         <h3>Hold a pair</h3>
         <p>Twenty bucks holds your spot in the first run of 500. It is not buying a boot. You get it back any time you ask, and it comes off the price at launch.</p>
         <div class="buy">
-          <p class="mono" id="size-lbl-2">Pick your size &mdash; AU</p>
+          <p class="mono" id="size-lbl-2" style="font-size:10px;letter-spacing:.06em">Size &mdash; AU, same as UK</p>
           <div class="size-row"><div class="sizes" role="group" aria-labelledby="size-lbl-2" id="sizes-2"></div></div>
           <button class="cta" id="buy-2" disabled>
-            <span id="buy-txt-2">Pick a size first</span>
+            <span id="buy-txt-2">Hold my pair</span>
             <span class="amt">$20</span>
           </button>
           <p class="reassure">Refundable any time, no questions.</p>
@@ -521,7 +562,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
       </div>
 
       <div class="card" data-rise>
-        <h3>Just keep me posted</h3>
+        <h3>Keep me posted</h3>
         <p>No money. You hear before anyone else when the boots land, and you get first crack at the founding price.</p>
         <form class="field" id="lead" data-kol-form="true" novalidate>
           <input type="email" name="email" required placeholder="you@example.com" autocomplete="email" aria-label="Your email address">
@@ -536,7 +577,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
 <!-- ══ 6. THE SMALL PRINT ════════════════════════════════════════ -->
 <section class="terms">
   <div class="wrap">
-    <div class="chapter" data-rise><span class="n">05</span><span class="t">Straight answers</span></div>
+    <div class="chapter" data-rise><span class="n">06</span><span class="t">Straight answers</span></div>
 
     <details class="qa"><summary>What is the $20, exactly?</summary>
       <p>A refundable deposit. It holds your approximate spot in the queue for the first 500 pairs. It is not a purchase, and you are under no obligation to ever buy a boot.</p></details>
@@ -555,6 +596,8 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
 
     <details class="qa"><summary>Are they waterproof?</summary>
       <p>No. Water resistant. A waterproof boot is a different boot and we'd rather tell you that now than at the first wet day.</p></details>
+
+    <p class="rally-close" data-rise>We refuse to accept it.</p>
 
     <footer>
       <span class="mono">FAR &middot; Australia</span>
@@ -581,19 +624,20 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
 (() => {
 'use strict';
 
-/* ── product data. Shopify variant ids for FAR Boot Deposit ($20). ──
-   Sizes 6-13 exist as 8 variants. Ids below are the confirmed first
-   five pulled live this session; 11-13 are placeholders to be filled
-   from the admin before this goes anywhere near a real checkout. */
+/* ── product data: FAR Boot Deposit ($20 AUD), Shopify product
+   8090384924848. All 8 variant ids pulled live from the Admin API on
+   28 Aug 2026 and verified availableForSale:true with tracksInventory
+   false, so a deposit sells regardless of the 0 inventory count.
+   PRODUCT IS STILL 'DRAFT' — publish it or /cart/ 404s. */
 const SIZES = [
   {au:'6',  vid:'45486470791344'},
   {au:'7',  vid:'45486470824112'},
   {au:'8',  vid:'45486470856880'},
   {au:'9',  vid:'45486470889648'},
   {au:'10', vid:'45486470922416'},
-  {au:'11', vid:'TBC'},
-  {au:'12', vid:'TBC'},
-  {au:'13', vid:'TBC'},
+  {au:'11', vid:'45486470955184'},
+  {au:'12', vid:'45486470987952'},
+  {au:'13', vid:'45486471020720'},
 ];
 
 /* ── the inspection points. x/y are percentages of the boot image.
@@ -604,12 +648,12 @@ const PARTS = [
   {x:45, y:55, lbl:'Eyelets',   img:'assets/d-eyelets.webp',
    val:'Eyelets set high and wide so the laces sit off the top of your foot.'},
   {x:57, y:31, lbl:'The upper', img:'assets/d-leather.webp',
-   val:'Full leather. Water resistant, not waterproof. We are not going to pretend otherwise.'},
+   val:'Full leather, not a synthetic that cracks at the flex point. Water resistant. See the waterproof question below, we are straight about it.'},
   {x:68, y:48, lbl:'Side zip',  img:'assets/d-zip.webp',
    val:'Full side zip behind a leather gusset. Set the fit with the laces once, then zip in and out.'},
   {x:79, y:20, lbl:'Velcro tab',img:'assets/d-velcro.webp',
    val:'A tab over the zip pull so it does not drop open or catch on anything.'},
-  {x:72, y:11, lbl:'Collar',    img:'assets/d-collar.webp',
+  {x:86, y:8,  lbl:'Collar',    img:'assets/d-collar.webp',
    val:'Padded collar. This is the part that saws at your ankle on a cheap boot.'},
   {x:30, y:82, lbl:'Insole',    img:'assets/d-insole.webp',
    val:'The part most blokes bin on day one and replace themselves. We would rather you never had to.'},
