@@ -28,6 +28,8 @@
       GSAP + ScrollTrigger + Lenis, which is the template stack.
    ═══════════════════════════════════════════════════════════════════ */
 
+@view-transition{navigation:auto}
+
 :root{
   /* ground: warm-black, not #000. #000 flat is the template tell. */
   --ink:#0A0A0B;
@@ -44,10 +46,13 @@
   --mono:'Martian Mono',ui-monospace,'SF Mono',Menlo,monospace;
 
   /* mass curves: heavier thing, longer settle, zero overshoot */
-  --settle:cubic-bezier(.22,1,.36,1);
-  --lift:cubic-bezier(.33,1,.68,1);
-  --t-label:.32s;
-  --t-panel:.62s;
+  --settle:cubic-bezier(.22,1,.36,1);   /* mass arriving, long tail, no overshoot */
+  --lift:cubic-bezier(0,0,.3,1);         /* enter */
+  --exit:cubic-bezier(.4,.14,1,1);       /* leave, faster than it arrived */
+  --micro:cubic-bezier(.2,0,.3,1);       /* press, swatch, toggle */
+  --t-micro:.16s;
+  --t-label:.24s;
+  --t-panel:.42s;
   --t-mass:.98s;
 
   --gut:clamp(18px,5vw,64px);
@@ -72,15 +77,11 @@ a{color:inherit;text-decoration:none}
 /* ── grain. kills the flat-black template look, costs one element ── */
 .grain{
   position:fixed;inset:-50%;z-index:9;pointer-events:none;
-  opacity:.16;mix-blend-mode:overlay;
+  opacity:.14;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation:grain 6s steps(5) infinite;
 }
-@keyframes grain{
-  0%{transform:translate(0,0)}20%{transform:translate(-2%,2%)}
-  40%{transform:translate(2%,-1%)}60%{transform:translate(-1%,-2%)}
-  80%{transform:translate(1%,1%)}100%{transform:translate(0,0)}
-}
+/* deliberately static: an animated full-screen blended layer repaints
+   constantly on mobile and buys nothing a still grain does not. */
 
 /* ── type scale. extreme contrast: a shout and a whisper, nothing between ── */
 .mono{
@@ -242,25 +243,17 @@ a{color:inherit;text-decoration:none}
 
 /* ═══ BUY: the action, never more than a thumb away ═══════════════ */
 .buy{display:flex;flex-direction:column;gap:10px}
-/* one row, always. it scrolls sideways rather than wrapping an orphan. */
-.sizes{
-  display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;
-  scroll-snap-type:x proximity;padding:2px var(--gut);
-}
-.sizes::-webkit-scrollbar{display:none}
-.size-row{position:relative;margin-inline:calc(var(--gut) * -1)}
-.size-row::after{
-  content:'';position:absolute;right:0;top:0;bottom:0;width:52px;
-  background:linear-gradient(90deg,transparent,var(--ink));pointer-events:none;
-}
-.card .size-row{margin-inline:calc(clamp(20px,5vw,32px) * -1)}
-.card .size-row .sizes{padding-inline:clamp(20px,5vw,32px)}
-.card--lead .size-row::after{background:linear-gradient(90deg,transparent,var(--ink-3))}
+/* ALL EIGHT SIZES VISIBLE AT ONCE, always. Baymard documents shoppers
+   overlooking a selector they cannot fully see, then hitting buy and landing
+   on an error. A scroller that hid AU 13 off-screen was that same failure. */
+.sizes{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px}
+@media (max-width:359px){.sizes{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.size-row{position:relative}
 .size{
-  flex:0 0 auto;min-width:46px;height:46px;padding:0 6px;
-  border:1px solid var(--line-2);background:transparent;scroll-snap-align:center;
+  min-width:0;height:46px;padding:0 2px;
+  border:1px solid var(--line-2);background:transparent;
   font-family:var(--mono);font-size:12px;color:var(--paper-2);
-  transition:border-color var(--t-label) var(--lift),color var(--t-label) var(--lift),background var(--t-label) var(--lift);
+  transition:border-color var(--t-micro) var(--micro),color var(--t-micro) var(--micro),background var(--t-micro) var(--micro);
 }
 .size:hover{border-color:var(--paper-3);color:var(--paper)}
 .size[aria-pressed="true"]{background:var(--paper);color:var(--ink);border-color:var(--paper)}
@@ -283,6 +276,7 @@ a{color:inherit;text-decoration:none}
   transition:color var(--t-label) var(--lift),border-color var(--t-label) var(--lift);
 }
 .ghost:hover{color:var(--paper);border-color:var(--paper-3)}
+.reassure .rs-lead{color:var(--paper-2);font-weight:400}
 .reassure{font-family:var(--mono);font-size:clamp(9px,2.2vw,10px);letter-spacing:.01em;color:var(--paper-3);line-height:1.65;max-width:46ch}
 
 /* sticky bar: slides up once the stage is gone. */
@@ -297,6 +291,35 @@ a{color:inherit;text-decoration:none}
   transition:transform var(--t-panel) var(--settle);
 }
 .dock.on{transform:translateY(0)}
+
+/* bottom sheet */
+.sheet-scrim{
+  position:fixed;inset:0;z-index:29;background:rgba(6,6,7,.72);
+  opacity:0;transition:opacity var(--t-panel) var(--lift);
+  -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);
+}
+.sheet-scrim.on{opacity:1}
+.sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  background:var(--ink-2);border-top:1px solid var(--line-2);
+  padding:10px var(--gut) max(20px,calc(env(safe-area-inset-bottom) + 12px));
+  display:flex;flex-direction:column;gap:12px;
+  transform:translateY(100%);
+  transition:transform var(--t-panel) var(--settle);
+  max-height:88svh;overflow-y:auto;
+}
+.sheet.on{transform:translateY(0)}
+.sheet-grab{width:38px;height:4px;border-radius:2px;background:var(--line-2);margin:2px auto 6px}
+.sheet-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sheet-top h2{
+  font-variation-settings:'wdth' 84,'wght' 700;
+  font-size:clamp(20px,5.4vw,26px);text-transform:uppercase;letter-spacing:-.01em;
+}
+.sheet-x{width:44px;height:44px;font-size:26px;line-height:1;color:var(--paper-3);margin-right:-10px}
+@media (min-width:820px){
+  .sheet{left:auto;right:24px;bottom:24px;width:420px;border:1px solid var(--line-2);
+         max-height:min(560px,80svh);transform:translateY(calc(100% + 32px))}
+}
 .dock-l{flex:1;min-width:0}
 .dock-l .p{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--paper)}
 .dock-l .s{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--paper-3);text-transform:uppercase}
@@ -515,7 +538,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
         <span id="buy-txt">Hold my pair</span>
         <span class="amt">$20</span>
       </button>
-      <p class="reassure">Refundable any time, no questions. Comes off the price at launch.<br>AU sizing, same as UK.</p>
+      <p class="reassure"><b class="rs-lead">$20 now. It comes off your $219 when the boots land.</b><br>Refundable any time, no questions. AU sizing, same as UK.</p>
     </div>
   </div>
   <span class="cue">Scroll</span>
@@ -663,9 +686,28 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
 <div class="dock" id="dock">
   <div class="dock-l">
     <div class="p">$20 holds your pair</div>
-    <div class="s"><span id="dock-size">Refundable any time</span></div>
+    <div class="s"><span id="dock-size">Comes off your $219</span></div>
   </div>
-  <button class="cta" id="dock-buy">Hold it <span class="amt">&rarr;</span></button>
+  <button class="cta" id="dock-buy" aria-haspopup="dialog" aria-expanded="false">Hold it <span class="amt">&rarr;</span></button>
+</div>
+
+<!-- The sticky bar opens THIS rather than scrolling somewhere. GrowthRock's
+     test: a scroll-to-buy bar produced no significant lift, a drawer that let
+     the shopper pick the variant and finish the purchase did. -->
+<div class="sheet-scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-h" hidden>
+  <div class="sheet-grab" aria-hidden="true"></div>
+  <div class="sheet-top">
+    <h2 id="sheet-h">Pick your size</h2>
+    <button class="sheet-x" id="sheet-x" aria-label="Close">&times;</button>
+  </div>
+  <p class="mono" style="letter-spacing:.06em">AU, same as UK</p>
+  <div class="size-row"><div class="sizes" role="group" aria-label="Pick your size, AU" id="sizes-3"></div></div>
+  <button class="cta" id="sheet-buy">
+    <span id="buy-txt-3">Hold my pair</span>
+    <span class="amt">$20</span>
+  </button>
+  <p class="reassure"><b class="rs-lead">$20 now. It comes off your $219 when the boots land.</b><br>Refundable any time, no questions.</p>
 </div>
 
 <script>
@@ -728,12 +770,13 @@ function selectSize(s){
   picked = s;
   document.querySelectorAll('.size').forEach(b =>
     b.setAttribute('aria-pressed', String(b.dataset.au === s.au)));
-  [['#buy','#buy-txt'],['#buy-2','#buy-txt-2']].forEach(([bt,tx]) =>
+  [['#buy','#buy-txt'],['#buy-2','#buy-txt-2'],['#sheet-buy','#buy-txt-3']].forEach(([bt,tx]) =>
     { if($(bt)) $(tx).textContent = 'Hold my pair · AU ' + s.au; });
-  const d = $('#dock-size'); if(d) d.textContent = 'Size AU ' + s.au + ' · refundable';
+  const d = $('#dock-size'); if(d) d.textContent = 'Size AU ' + s.au + ' · comes off your $219';
 }
 paintSizes($('#sizes'), selectSize);
 paintSizes($('#sizes-2'), selectSize);
+paintSizes($('#sizes-3'), selectSize);
 
 /* The button is never disabled. A greyed-out slab is the first thing a
    cold visitor sees otherwise, and it reads as broken. Press it with no
@@ -750,11 +793,29 @@ function go(fromEl){
 }
 $('#buy').addEventListener('click', e => go(e.currentTarget));
 $('#buy-2').addEventListener('click', e => go(e.currentTarget));
-$('#dock-buy').addEventListener('click', () => {
-  if(picked && picked.vid !== 'TBC') return cartAdd(picked.vid);
-  $('#keep').scrollIntoView({behavior:'smooth', block:'start'});
-  setTimeout(() => go($('#buy-2')), 520);
-});
+$('#sheet-buy').addEventListener('click', e => go(e.currentTarget));
+
+/* ── the sheet ── */
+const sheet = $('#sheet'), scrim = $('#scrim'), dockBuy = $('#dock-buy');
+let lastFocus = null;
+function openSheet(){
+  if(picked && picked.vid !== 'TBC') return cartAdd(picked.vid);  // size known, just go
+  lastFocus = document.activeElement;
+  sheet.hidden = false; scrim.hidden = false;
+  requestAnimationFrame(() => { sheet.classList.add('on'); scrim.classList.add('on'); });
+  dockBuy.setAttribute('aria-expanded','true');
+  const f = sheet.querySelector('.size'); if(f) f.focus({preventScroll:true});
+}
+function closeSheet(){
+  sheet.classList.remove('on'); scrim.classList.remove('on');
+  dockBuy.setAttribute('aria-expanded','false');
+  setTimeout(() => { sheet.hidden = true; scrim.hidden = true; }, 420);
+  if(lastFocus) lastFocus.focus({preventScroll:true});
+}
+dockBuy.addEventListener('click', openSheet);
+scrim.addEventListener('click', closeSheet);
+$('#sheet-x').addEventListener('click', closeSheet);
+addEventListener('keydown', e => { if(e.key === 'Escape' && !sheet.hidden) closeSheet(); });
 
 /* ── the inspection rig ── */
 const rig = $('#rig'), roImg = $('#ro-img'), roLbl = $('#ro-lbl'),
