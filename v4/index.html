@@ -574,8 +574,9 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
 <!-- ══ THE SPIN ══════════════════════════════════════════════════
      The wrk-timepieces mechanic: a sticky canvas whose frame index is
      driven by scroll. Theirs is 729 CGI renders costing ~24MB on mobile.
-     This is 32 frames of REAL FOOTAGE of the real boot, 276KB, so the
-     geometry cannot drift the way a generated rotation would. -->
+     This is 35 frames cut out of REAL 4K turntable footage (31 Aug shoot,
+     white backdrop, 18.0-24.6s, the longest hands-free window), 601KB.
+     Real geometry: it cannot drift the way a generated rotation would. -->
 <section class="spin" id="spin">
   <div class="spin-track">
     <div class="spin-stick">
@@ -965,7 +966,7 @@ $('#lead').addEventListener('submit', ev => {
   if(!cv) return;
   const track = document.querySelector('.spin-track');
   const deg = document.getElementById('spin-deg');
-  const N = 32, SWEEP = 180;
+  const N = 35, SWEEP = 270;
   const imgs = new Array(N), ctx = cv.getContext('2d', {alpha:false});
   let ready = 0, cur = -1, tick = false, sized = false;
 
@@ -978,10 +979,10 @@ $('#lead').addEventListener('submit', ev => {
     const W = cv.width, H = cv.height;
     ctx.fillStyle = '#0A0A0B'; ctx.fillRect(0,0,W,H);
     if(!im) return;
-    const s = Math.min(W/im.width, H/im.height);   // whole boot; the frame
-                                                  // vignettes to ink so no box shows
+    // frames are alpha cutouts, so the page black IS the backdrop
+    const s = Math.min(W/im.width, H/im.height) * 1.02;
     const w = im.width*s, h = im.height*s;
-    ctx.drawImage(im, (W-w)/2, (H-h)/2, w, h);
+    ctx.drawImage(im, (W-w)/2, (H-h)*0.62, w, h);   // sits low, clear air for the copy
   };
   const draw = (force) => {
     if(!sized) return;
