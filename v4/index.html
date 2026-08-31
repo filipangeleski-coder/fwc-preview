@@ -183,6 +183,14 @@ a{color:inherit;text-decoration:none}
 @keyframes fade{to{opacity:1}}
 
 .stage-type{position:relative;z-index:2;pointer-events:none}
+/* The sacred line is DEMOTED, not deleted. It pays the message-match debt to
+   the viewer who just heard it in a reel, while the H1 underneath does the
+   identification work the evidence says the H1 has to do. */
+.kicker{
+  font-family:var(--mono);font-size:clamp(9px,2.4vw,11px);
+  letter-spacing:.16em;text-transform:uppercase;color:var(--paper-3);
+  margin-bottom:10px;
+}
 .stage-foot{position:relative;z-index:3;display:flex;flex-direction:column;gap:10px}
 .stage-sub{
   font-size:clamp(14px,3.7vw,18px);color:var(--paper-2);max-width:32ch;line-height:1.4;
@@ -553,8 +561,9 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
   </div>
 
   <div class="stage-type">
-    <h1 class="shout">It's not the job.<br>It's the boots.</h1>
-    <p class="stage-sub" style="margin-top:10px">We got sick of accepting it, so we built our own. <b>First run is 500 pairs.</b></p>
+    <p class="kicker">It's not the job. It's the boots.</p>
+    <h1 class="shout">Steel-toe work boots.<br>First run of 500.</h1>
+    <p class="stage-sub" style="margin-top:10px"><b>$20 holds your pair</b> and comes off the $219. Refundable any time, no questions.</p>
   </div>
 
   <div class="stage-foot">
@@ -564,7 +573,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
         <span id="buy-txt">Hold my pair</span>
         <span class="amt">$20</span>
       </button>
-      <p class="reassure"><b class="rs-lead">$20 now. It comes off your $219 when the boots land.</b><br>Refundable any time, no questions. AU sizing, same as UK.</p>
+      <p class="reassure">Built to AS/NZS 2210.3. AU sizing, same as UK.<br>Designed in Australia, made overseas. We are straight about that.</p>
     </div>
   </div>
   <span class="cue">Scroll</span>
