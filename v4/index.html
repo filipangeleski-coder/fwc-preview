@@ -325,6 +325,31 @@ a{color:inherit;text-decoration:none}
 .dock-l .s{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--paper-3);text-transform:uppercase}
 .dock .cta{flex:0 0 auto;min-height:48px;padding:0 18px;font-size:14px}
 
+
+/* ═══ THE SPIN ═══════════════════════════════════════════════════ */
+.spin{background:var(--ink);position:relative}
+.spin-track{height:320svh}                     /* the scroll runway */
+.spin-stick{
+  position:sticky;top:0;height:100svh;
+  display:grid;place-items:center;overflow:clip;
+}
+#spin-canvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  display:block;
+}
+.spin-copy{position:relative;z-index:2;text-align:center;pointer-events:none;
+  align-self:start;padding-top:clamp(48px,12svh,120px)}
+.spin-h{font-size:clamp(30px,9vw,86px);line-height:.92;mix-blend-mode:difference}
+.spin-copy .mono{margin-bottom:10px;font-size:11px;color:var(--paper-2)}
+.spin-cue{
+  position:absolute;bottom:calc(18px + env(safe-area-inset-bottom));left:50%;
+  translate:-50% 0;z-index:2;opacity:.55;
+}
+@media (prefers-reduced-motion:reduce){
+  .spin-track{height:auto}
+  .spin-stick{position:static;height:auto;padding:60px 0;min-height:60svh}
+}
+
 /* ═══ 2. THE LINE ════════════════════════════════════════════════ */
 .line-sec{padding:clamp(70px,16vw,150px) 0;border-top:1px solid var(--line)}
 .creed{
@@ -544,6 +569,25 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
   </div>
   <span class="cue">Scroll</span>
 </header>
+
+
+<!-- ══ THE SPIN ══════════════════════════════════════════════════
+     The wrk-timepieces mechanic: a sticky canvas whose frame index is
+     driven by scroll. Theirs is 729 CGI renders costing ~24MB on mobile.
+     This is 32 frames of REAL FOOTAGE of the real boot, 276KB, so the
+     geometry cannot drift the way a generated rotation would. -->
+<section class="spin" id="spin">
+  <div class="spin-track">
+    <div class="spin-stick">
+      <canvas id="spin-canvas" aria-hidden="true"></canvas>
+      <div class="spin-copy wrap">
+        <p class="mono" id="spin-deg">000&deg;</p>
+        <h2 class="shout spin-h">All the way<br>around.</h2>
+      </div>
+      <p class="mono spin-cue">Keep scrolling</p>
+    </div>
+  </div>
+</section>
 
 <!-- ══ 2. THE LINE ═══════════════════════════════════════════════ -->
 <section class="line-sec">
@@ -911,6 +955,67 @@ $('#lead').addEventListener('submit', ev => {
   $('#lead-msg').textContent = "You're in. Check your email.";
   ev.target.hidden = true;
 });
+
+/* ── the spin: sticky canvas, frame index from scroll ──────────────
+   Frames are fetched once and decoded to bitmaps. We only repaint when
+   the INTEGER frame changes, which is the trick that makes a scrub cheap
+   enough to run on a phone. */
+(() => {
+  const cv = document.getElementById('spin-canvas');
+  if(!cv) return;
+  const track = document.querySelector('.spin-track');
+  const deg = document.getElementById('spin-deg');
+  const N = 32, SWEEP = 180;
+  const imgs = new Array(N), ctx = cv.getContext('2d', {alpha:false});
+  let ready = 0, cur = -1, tick = false, sized = false;
+
+  const size = () => {
+    const r = cv.getBoundingClientRect(), dpr = Math.min(devicePixelRatio||1, 2);
+    cv.width = Math.round(r.width*dpr); cv.height = Math.round(r.height*dpr);
+    sized = true; cur = -1; draw(true);
+  };
+  const paint = (im) => {
+    const W = cv.width, H = cv.height;
+    ctx.fillStyle = '#0A0A0B'; ctx.fillRect(0,0,W,H);
+    if(!im) return;
+    const s = Math.min(W/im.width, H/im.height);   // whole boot; the frame
+                                                  // vignettes to ink so no box shows
+    const w = im.width*s, h = im.height*s;
+    ctx.drawImage(im, (W-w)/2, (H-h)/2, w, h);
+  };
+  const draw = (force) => {
+    if(!sized) return;
+    const r = track.getBoundingClientRect(), vh = innerHeight;
+    const t = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - vh)));
+    const i = Math.min(N-1, Math.round(t*(N-1)));
+    if(i !== cur || force){
+      cur = i;
+      if(imgs[i]) paint(imgs[i]);
+      if(deg) deg.textContent = String(Math.round(t*SWEEP)).padStart(3,'0') + '°';
+    }
+    tick = false;
+  };
+  addEventListener('scroll', () => { if(!tick){ tick = true; requestAnimationFrame(() => draw(false)); } }, {passive:true});
+  addEventListener('resize', size, {passive:true});
+
+  /* load only when the runway is within two screens */
+  let started = false;
+  const maybeLoad = () => {
+    if(started) return;
+    const r = track.getBoundingClientRect();
+    if(r.top > innerHeight*2) return;
+    started = true;
+    for(let i=0;i<N;i++){
+      const im = new Image();
+      im.decoding = 'async';
+      im.onload = () => { imgs[i] = im; if(++ready === 1){ size(); } if(i === cur) paint(im); };
+      im.src = `assets/spin/s${String(i).padStart(2,'0')}.webp`;
+    }
+  };
+  addEventListener('scroll', maybeLoad, {passive:true});
+  maybeLoad();
+})();
+
 })();
 </script>
 </body>
