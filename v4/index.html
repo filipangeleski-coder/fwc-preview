@@ -136,9 +136,9 @@ a{color:inherit;text-decoration:none}
   overflow:clip;
 }
 .topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;z-index:4}
-.wordmark{
-  font-variation-settings:'wdth' 70,'wght' 900;
-  font-size:clamp(21px,5.6vw,28px);letter-spacing:.01em;line-height:1;
+.wordmark{display:block;line-height:0}
+.wordmark svg{
+  height:clamp(20px,5vw,28px);width:auto;fill:var(--paper);display:block;
 }
 .topbar .mono{text-align:right;line-height:1.5}
 
@@ -482,11 +482,12 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="far-wm" viewBox="50 154 325 117"><polygon points="208.87 156.22 183.43 156.22 135.49 268.65 167.46 268.65 196.15 191.82 212.71 236.16 188.85 223.13 224.84 268.65 256.81 268.65 208.87 156.22"/><path d="M372.72,268.91c-6.71,0-12.72,0-18.73,0-3.8,0-7.6-.11-11.38.05-1.9.08-2.95-.59-3.92-2.16-6.24-10.12-12.6-20.16-18.82-30.29-.98-1.6-2.02-2.16-3.89-2.14-8.59.11-17.18.05-26.03.05v34.26h-29.5v-110.33c1.12,0,2.12,0,3.12,0,21.23,0,42.47.05,63.7,0,7.38-.02,14.48,1.12,21.16,4.34,14.9,7.17,23.05,22.75,20.96,39.23-1.73,13.59-9.12,22.88-21.19,29.31,8.04,12.36,16.1,24.74,24.51,37.67ZM290.06,210.21c12.65,0,25.13.25,37.59-.12,5.57-.17,10.37-2.63,12.07-8.7,2.7-9.64-3.1-17.35-13.18-17.42-11.48-.09-22.96-.02-34.44,0-.68,0-1.35.16-2.04.25v25.99Z"/><path d="M82.6,183.45v21.62h60.19v25.19h-60.2v38.07h-30.11v-110.2h100.21v25.31h-70.09Z"/></symbol></svg>
 
 <!-- ══ 1. THE STAGE ══════════════════════════════════════════════ -->
 <header class="stage">
   <div class="topbar">
-    <span class="wordmark">FAR</span>
+    <a class="wordmark" href="/" aria-label="FAR"><svg role="img" viewBox="0 0 325 117" aria-label="FAR"><use href="#far-wm"/></svg></a>
     <span class="mono">First run<br>500 pairs</span>
   </div>
 
@@ -527,7 +528,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
   </div>
 
   <div class="stage-type">
-    <h1 class="shout">The boot<br>we couldn't buy</h1>
+    <h1 class="shout">It's not the job.<br>It's the boots.</h1>
     <p class="stage-sub" style="margin-top:10px">We got sick of accepting it, so we built our own. <b>First run is 500 pairs.</b></p>
   </div>
 
@@ -550,7 +551,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
     <div class="chapter" data-rise><span class="n">01</span><span class="t">Why</span></div>
     <p class="creed" data-rise>Comfort isn't a luxury. <em>It's what you're owed.</em></p>
     <p class="say" data-rise style="margin-top:28px">Ten, twelve hours on your feet. Concrete, mud, gravel. Feet fine for two months, then cooked by lunch every day after that. Nobody talked about it. We just accepted it.</p>
-    <p class="say" data-rise style="margin-top:18px"><b>It's not the job. It's the boots.</b></p>
+    <p class="say" data-rise style="margin-top:18px"><b>Two months in, they start cooking you. Every boot we ever bought did it.</b></p>
   </div>
 </section>
 
@@ -607,7 +608,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
       </figure>
       <div data-rise>
         <p class="creed" style="font-size:clamp(24px,6.4vw,44px)">Three of us.<br><em>That's the whole company.</em></p>
-        <p class="say" style="margin-top:20px">Fil, Grant and Lionel. Grant and Lionel are on the tools. Fil runs the build. No boardroom, no marketing department, nobody in the middle. Something goes wrong with your boots, you are talking to one of us.</p>
+        <p class="say" style="margin-top:20px">Fil, Grant and Lionel. All three of us on the tools, all three of us building this. No boardroom, no marketing department, nobody in the middle. Something goes wrong with your boots, you are talking to one of us.</p>
       </div>
     </div>
   </div>
