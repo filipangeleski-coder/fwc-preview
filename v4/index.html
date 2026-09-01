@@ -403,9 +403,9 @@ a{color:inherit;text-decoration:none}
   margin-top:20px;border:1px solid var(--line);background:var(--ink);
   display:grid;grid-template-columns:minmax(0,1fr);
 }
-.readout figure{margin:0;background:var(--ink-3);overflow:hidden;position:relative;aspect-ratio:16/10}
+.readout figure{margin:0;background:#F4F3F1;overflow:hidden;position:relative;aspect-ratio:1/1}
 .readout figure img{
-  width:100%;height:100%;object-fit:cover;
+  width:100%;height:100%;object-fit:contain;
   opacity:0;transform:scale(1.04);
   transition:opacity var(--t-panel) var(--lift),transform var(--t-mass) var(--settle);
 }
@@ -418,8 +418,8 @@ a{color:inherit;text-decoration:none}
   color:var(--paper-3);border:1px solid var(--line-2);padding:3px 7px;align-self:flex-start;
 }
 @media (min-width:760px){
-  .readout{grid-template-columns:minmax(0,300px) minmax(0,1fr)}
-  .readout figure{aspect-ratio:auto;height:100%;min-height:180px}
+  .readout{grid-template-columns:minmax(0,280px) minmax(0,1fr)}
+  .readout figure{aspect-ratio:1/1;height:auto}
   .readout .txt{justify-content:center;padding:24px 28px}
 }
 
@@ -625,10 +625,10 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
       </div>
 
       <div class="readout" aria-live="polite">
-        <figure><img id="ro-img" class="on" src="assets/d-leather.webp" alt="Close up of the FAR boot upper and badge." loading="lazy"></figure>
+        <figure><img id="ro-img" class="on" src="assets/d-profile.webp" alt="The FAR boot in profile." loading="lazy"></figure>
         <div class="txt">
           <span class="lbl" id="ro-lbl">Select a point</span>
-          <span class="val" id="ro-val">Eight parts of this boot, photographed on the actual sample sitting in our hands.</span>
+          <span class="val" id="ro-val">Eight points on the boot. Tap one.</span>
           <span class="flag" id="ro-flag" hidden></span>
         </div>
       </div>
@@ -789,21 +789,21 @@ const SIZES = [
    Measured against boot-01 (lateral, zip side, toe left) on a grid. ── */
 const PARTS = [
   {x:11, y:76, lbl:'Toe cap',   img:'assets/d-toecap.webp',
-   val:'Steel toe built to AS/NZS 2210.3, with a moulded rubber bumper over the front so the leather is not the first thing to go.'},
+   val:'Steel toe under a moulded rubber bumper, so the leather is not the first thing to go.'},
   {x:45, y:55, lbl:'Eyelets',   img:'assets/d-eyelets.webp',
-   val:'Eyelets set high and wide so the laces sit off the top of your foot.'},
+   val:'Set high and wide, so the laces sit off the top of your foot instead of across it.'},
   {x:57, y:31, lbl:'The upper', img:'assets/d-leather.webp',
-   val:'Full leather, not a synthetic that cracks at the flex point. Water resistant. See the waterproof question below, we are straight about it.'},
+   val:'Full leather, not a synthetic that cracks at the flex point. Water resistant. See the waterproof question below.'},
   {x:68, y:48, lbl:'Side zip',  img:'assets/d-zip.webp',
-   val:'Full side zip behind a leather gusset. Set the fit with the laces once, then zip in and out.'},
-  {x:79, y:20, lbl:'Velcro tab',img:'assets/d-velcro.webp',
-   val:'A tab over the zip pull so it does not drop open or catch on anything.'},
+   val:'Full zip behind a leather gusset. Set the fit once with the laces, then zip in and out.'},
   {x:86, y:8,  lbl:'Collar',    img:'assets/d-collar.webp',
-   val:'Padded collar. This is the part that saws at your ankle on a cheap boot.'},
-  {x:30, y:82, lbl:'Insole',    img:'assets/d-insole.webp',
-   val:'The part most blokes bin on day one and replace themselves. We would rather you never had to.'},
+   val:'Padded. This is the part that saws at your ankle on a cheap boot.'},
+  {x:30, y:82, lbl:'Heel',      img:'assets/d-heel.webp',
+   val:'Where the last pair went first. Version one wore through to the foam here, which is why it never shipped.'},
   {x:45, y:93, lbl:'Outsole',   img:'assets/d-sole.webp',
    val:'Nitrile rubber, rated to 300&deg;C. FAR moulded into it.'},
+  {x:75, y:64, lbl:'The whole thing', img:'assets/d-profile.webp',
+   val:'Zip one side, laces the other, steel toe, nitrile sole. That is the boot.'},
 ];
 
 const $ = s => document.querySelector(s);
