@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>FAR — the boot we couldn't buy</title>
-<meta name="description" content="Work boots built by three blokes who got sick of accepting it. First run is 500 pairs. $20 holds your pair, refundable any time.">
+<title>FAR Workwear | Australian work boots. First run of 500.</title>
+<meta name="description" content="Work boots built by three blokes who got sick of accepting it. First 100 pairs at $219. $20 holds your pair, refundable any time.">
 <meta name="theme-color" content="#0A0A0B">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0B'/%3E%3Ctext x='16' y='23' font-family='Arial Black,sans-serif' font-size='17' font-weight='900' fill='%23F2F0EC' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
 
@@ -105,6 +105,16 @@ a{color:inherit;text-decoration:none}
   font-variation-settings:'wdth' 74,'wght' 800;
 }
 @media (min-width:820px){.stage .shout{font-size:clamp(60px,7vw,104px)}}
+/* the hero line is longer than the old one: pull the clamp down a notch so
+   two spoken beats still fit the stage row on a 390px phone */
+.stage .stage-h1{font-size:clamp(30px,8.9vw,78px)}
+@media (min-width:820px){.stage .stage-h1{font-size:clamp(44px,5.6vw,88px)}}
+/* two-beat reveal: the accusation lands, one breath, then the verdict.
+   same fade keyframe the page already owns, nothing floats. */
+.beat{opacity:0;animation:fade .6s var(--lift) .15s forwards}
+.beat-2{animation-delay:.75s}
+.beat-3{animation-delay:1.35s}
+@media (prefers-reduced-motion:reduce){.beat{opacity:1;animation:none}}
 .say{
   font-size:clamp(16px,4.4vw,21px);line-height:1.45;
   color:var(--paper-2);max-width:34ch;
@@ -561,9 +571,8 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
   </div>
 
   <div class="stage-type">
-    <p class="kicker">Go on. We'll wait.</p>
-    <h1 class="shout">Look at<br>your boots.</h1>
-    <p class="stage-sub" style="margin-top:10px">You already know. That's why we're building these. <b>First run is 500 pairs at $219.</b> $20 holds yours, refundable any time.</p>
+    <h1 class="shout stage-h1"><span class="beat">You blamed your feet.</span><br><span class="beat beat-2">It was the boots.</span></h1>
+    <p class="stage-sub beat beat-3" style="margin-top:10px">The inside of a work boot dies long before the outside looks old. Every pair we owned did it. <b>First 100 pairs go at $219.</b> $20 holds yours, refundable any time.</p>
   </div>
 
   <div class="stage-foot">
@@ -603,9 +612,10 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
 <section class="line-sec">
   <div class="wrap">
     <div class="chapter" data-rise><span class="n">01</span><span class="t">Why</span></div>
-    <p class="creed" data-rise>Comfort isn't a luxury. <em>It's what you're owed.</em></p>
-    <p class="say" data-rise style="margin-top:28px">Ten, twelve hours on your feet. Concrete, mud, gravel. Feet fine for two months, then cooked by lunch every day after that. Nobody talked about it. We just accepted it.</p>
-    <p class="say" data-rise style="margin-top:18px"><b>Two months in, they start cooking you. Every boot we ever bought did it.</b></p>
+    <!-- the one volume spike outside the stage: the revelation gets shout scale -->
+    <p class="shout" data-rise style="font-size:clamp(38px,9.5vw,110px)">It was never<br>your feet.</p>
+    <p class="say" data-rise style="margin-top:28px">Ten, twelve hours on concrete. Boots two months old, feet cooked by lunch. You told yourself that's the job. <b>We did too.</b></p>
+    <p class="say" data-rise style="margin-top:18px">Then the first boot we built wore through at the heel. It never shipped. We pulled it apart to see why. <b>The outside lasts years longer than the inside. Nobody tells you that.</b></p>
   </div>
 </section>
 
@@ -613,7 +623,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
 <section class="apart" id="apart">
   <div class="wrap">
     <div class="chapter" data-rise><span class="n">02</span><span class="t">Take it apart</span></div>
-    <p class="creed" data-rise style="font-size:clamp(24px,6.4vw,48px)">Every part, up close.</p>
+    <p class="creed" data-rise style="font-size:clamp(24px,6.4vw,48px)">The part that kills a boot <em>is the part you never see.</em></p>
     <p class="mono" data-rise style="margin-top:14px">Tap a point on the boot</p>
 
     <div class="rig" data-rise>
@@ -640,7 +650,8 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
 <section class="proof">
   <div class="wrap">
     <div class="chapter" data-rise><span class="n">03</span><span class="t">What we did to it</span></div>
-    <p class="creed" data-rise style="font-size:clamp(24px,6.4vw,48px)">We tested it ourselves.<br><em>Here's the footage.</em></p>
+    <p class="creed" data-rise style="font-size:clamp(24px,6.4vw,48px)">We tried to wreck it<br><em>ourselves.</em></p>
+    <p class="say" data-rise style="margin-top:18px"><b>Belt sander. Angle grinder. Open flame.</b> Our boot, our hands.</p>
   </div>
   <div class="wrap" style="margin-top:28px">
     <div class="strip" data-rise>
@@ -677,7 +688,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
         <h3>Hold a pair</h3>
         <p>Twenty bucks holds your spot in the first run of 500. It is not buying a boot. You get it back any time you ask, and it comes off the price at launch.</p>
         <div class="buy">
-          <p class="mono" id="size-lbl-2" style="font-size:10px;letter-spacing:.06em">Size &mdash; AU, same as UK</p>
+          <p class="mono" id="size-lbl-2" style="font-size:10px;letter-spacing:.06em">Size. AU, same as UK</p>
           <div class="size-row"><div class="sizes" role="group" aria-labelledby="size-lbl-2" id="sizes-2"></div></div>
           <button class="cta" id="buy-2" disabled>
             <span id="buy-txt-2">Hold my pair</span>
@@ -741,7 +752,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
 <div class="dock" id="dock">
   <div class="dock-l">
     <div class="p">$20 holds your pair</div>
-    <div class="s"><span id="dock-size">Comes off your $219</span></div>
+    <div class="s"><span id="dock-size">Comes off the price at launch</span></div>
   </div>
   <button class="cta" id="dock-buy" aria-haspopup="dialog" aria-expanded="false">Hold it <span class="amt">&rarr;</span></button>
 </div>
@@ -762,7 +773,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
     <span id="buy-txt-3">Hold my pair</span>
     <span class="amt">$20</span>
   </button>
-  <p class="reassure"><b class="rs-lead">$20 now. It comes off your $219 when the boots land.</b><br>Refundable any time, no questions.</p>
+  <p class="reassure"><b class="rs-lead">$20 now. It comes off the price when the boots land.</b><br>Refundable any time, no questions.</p>
 </div>
 
 <script>
@@ -827,7 +838,7 @@ function selectSize(s){
     b.setAttribute('aria-pressed', String(b.dataset.au === s.au)));
   [['#buy','#buy-txt'],['#buy-2','#buy-txt-2'],['#sheet-buy','#buy-txt-3']].forEach(([bt,tx]) =>
     { if($(bt)) $(tx).textContent = 'Hold my pair · AU ' + s.au; });
-  const d = $('#dock-size'); if(d) d.textContent = 'Size AU ' + s.au + ' · comes off your $219';
+  const d = $('#dock-size'); if(d) d.textContent = 'Size AU ' + s.au + ' · comes off the launch price';
 }
 paintSizes($('#sizes'), selectSize);
 paintSizes($('#sizes-2'), selectSize);
