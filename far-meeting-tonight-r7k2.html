@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Tonight</title>
+<style>
+  :root { --bg:#111; --card:#1a1a1a; --text:#f5f5f5; --dim:#9a9a9a; --line:#2e2e2e; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:"Segoe UI",system-ui,-apple-system,sans-serif; line-height:1.55; padding:24px 16px 90px; max-width:660px; margin:0 auto; }
+  h1 { font-size:1.7rem; letter-spacing:.5px; text-transform:uppercase; margin-bottom:4px; }
+  .sub { color:var(--dim); margin-bottom:28px; font-size:.95rem; }
+  h2 { font-size:1.05rem; text-transform:uppercase; letter-spacing:1px; margin:38px 0 10px; border-bottom:1px solid var(--line); padding-bottom:6px; }
+  p { margin-bottom:10px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:12px; }
+  ul { list-style:none; margin-bottom:8px; }
+  li { padding-left:16px; position:relative; margin-bottom:6px; }
+  li::before { content:""; position:absolute; left:0; top:.62em; width:6px; height:2px; background:var(--dim); }
+  .dim { color:var(--dim); }
+  a { color:var(--text); text-decoration:none; border-bottom:1px solid var(--dim); }
+  table { width:100%; border-collapse:collapse; margin:8px 0 4px; font-size:.93rem; }
+  td, th { padding:7px 8px; border-bottom:1px solid var(--line); vertical-align:top; text-align:left; }
+  th { font-size:.72rem; text-transform:uppercase; letter-spacing:1px; color:var(--dim); font-weight:600; }
+  .num { font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .foot { margin-top:44px; color:var(--dim); font-size:.85rem; border-top:1px solid var(--line); padding-top:14px; }
+  .rec { border-left:3px solid var(--text); padding:8px 12px; margin:10px 0 4px; background:#161616; font-size:.95rem; }
+  .rec b { text-transform:uppercase; letter-spacing:.5px; font-size:.8rem; }
+  .warn { border-left:3px solid #f5f5f5; padding:8px 12px; margin:10px 0 4px; background:#1e1a16; font-size:.95rem; }
+  .warn b { text-transform:uppercase; letter-spacing:.5px; font-size:.8rem; }
+  .tbl-wrap { overflow-x:auto; }
+  .who { display:inline-block; font-size:.68rem; text-transform:uppercase; letter-spacing:1px; border:1px solid var(--line); border-radius:20px; padding:2px 9px; color:var(--dim); margin-right:6px; }
+  .clock { display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 6px; }
+  .clock div { flex:1 1 170px; background:#161616; border:1px solid var(--line); border-radius:8px; padding:10px 12px; }
+  .clock .d { font-size:1.25rem; font-variant-numeric:tabular-nums; }
+  .clock .l { font-size:.78rem; color:var(--dim); line-height:1.35; }
+  .item { display:flex; gap:11px; align-items:flex-start; }
+  .item .body { flex:1; min-width:0; }
+  input[type=checkbox] { appearance:none; -webkit-appearance:none; width:22px; height:22px; min-width:22px; margin-top:3px; border:1px solid var(--dim); border-radius:5px; background:#111; cursor:pointer; position:relative; }
+  input[type=checkbox]:checked { background:#f5f5f5; border-color:#f5f5f5; }
+  input[type=checkbox]:checked::after { content:"\2713"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#111; font-size:15px; font-weight:700; }
+  .done { opacity:.45; }
+  h3 { font-size:1rem; margin-bottom:4px; letter-spacing:.2px; }
+  .mins { font-size:.72rem; color:var(--dim); letter-spacing:1px; text-transform:uppercase; }
+  textarea { width:100%; margin-top:8px; background:#111; color:var(--text); border:1px solid var(--line); border-radius:7px; padding:8px 10px; font-family:inherit; font-size:.9rem; resize:vertical; min-height:38px; }
+  textarea::placeholder { color:#5e5e5e; }
+  .vote { display:inline-block; margin-top:8px; font-size:.85rem; border:1px solid var(--dim); border-radius:6px; padding:5px 11px; border-bottom:1px solid var(--dim); }
+  .settled { font-size:.72rem; text-transform:uppercase; letter-spacing:1px; color:#111; background:var(--dim); border-radius:3px; padding:1px 7px; }
+  .bar { position:fixed; left:0; right:0; bottom:0; background:#0d0d0d; border-top:1px solid var(--line); padding:10px 16px; font-size:.85rem; text-align:center; color:var(--dim); }
+  .bar b { color:var(--text); font-variant-numeric:tabular-nums; }
+</style>
+</head>
+<body>
+
+<h1>Tonight</h1>
+<p class="sub">The running order for the call, in the order we will actually do it. Tick things off as we go, the tick is just for you so you can keep your place. Type notes in any box, they stay on your phone. The decisions get written down by Fil as we say them, so nothing depends on you touching this page. Built 8 September 2026.</p>
+
+<h2>The clock</h2>
+<div class="card">
+<div class="clock">
+  <div><div class="d">4 days</div><div class="l">To sign the order with the factory if we want boots in hand by 15 December, going by sea. That means about 12 September.</div></div>
+  <div><div class="d">14 days</div><div class="l">Since we last posted anything. Last post was 25 August.</div></div>
+  <div><div class="d">5 days</div><div class="l">The factory has been waiting on us since 3 September. He asked for the sizes and gave us the box price. We have not replied.</div></div>
+</div>
+<p style="margin-top:10px" class="dim">Everything downstream moves with the day the order gets signed. Sixty days to make them, no early release, they all finish together. Then the boat. That is why sizes are first tonight and not last.</p>
+</div>
+
+<h2>What we have to walk out with</h2>
+<div class="card">
+<p>Three things, and if we only get three, these are the three:</p>
+<ul>
+<li><strong>The size breakdown for 500 pairs.</strong> Fil emails it to the factory tomorrow.</li>
+<li><strong>A yes or no on the box</strong> at 3 US dollars a pair, in the same email.</li>
+<li><strong>A filming date with all three of us on it,</strong> written in a calendar, not "sometime this week".</li>
+</ul>
+<p class="dim" style="margin-top:8px">Everything else on this page is worth doing and none of it is worth losing those three.</p>
+</div>
+
+<h2>The order we will go in</h2>
+
+<div class="card">
+<div class="item"><input type="checkbox" data-k="a1"><div class="body">
+<span class="mins">20 min &middot; decide tonight</span>
+<h3>1. Sizes. How we split the 500.</h3>
+<p>Nobody has bought a boot yet, so there is no real size data to go on. What we do have: 22 people on the list told us their size, and 17 of those 22 are between AU 9 and AU 12. Plus whatever you two see on site every day, which is honestly better data than the list.</p>
+<p><strong>AU 13 is off this run.</strong> The factory's mould stops at AU 12. Going bigger costs about 1,430 US dollars and adds three months. Anyone who wants a 13 goes on a tell-me-when list and gets it on run two.</p>
+<div class="tbl-wrap"><table>
+<tr><th>Size</th><th>Pairs</th><th>Share</th></tr>
+<tr><td>AU 6</td><td class="num">10</td><td class="num">2%</td></tr>
+<tr><td>AU 7</td><td class="num">25</td><td class="num">5%</td></tr>
+<tr><td>AU 8</td><td class="num">55</td><td class="num">11%</td></tr>
+<tr><td>AU 9</td><td class="num">100</td><td class="num">20%</td></tr>
+<tr><td>AU 10</td><td class="num">120</td><td class="num">24%</td></tr>
+<tr><td>AU 11</td><td class="num">100</td><td class="num">20%</td></tr>
+<tr><td>AU 12</td><td class="num">90</td><td class="num">18%</td></tr>
+</table></div>
+<div class="rec"><b>Our read</b><br>This is a starting point, not evidence. It assumes tradie feet run about a size bigger than the general average. Argue with it. If you two think there are more 11s and 12s on your sites than that, say so, because you are the ones who see fifty pairs of boots a day and the spreadsheet is not.</div>
+<div class="warn"><b>Against</b><br>Get this wrong and we are sitting on forty pairs nobody wants in a size nobody asked for, and short in the size everyone wants. There is no second chance inside this run.</div>
+<a class="vote" href="https://agent.farworkwear.com.au/brain/decide">Answer on the dashboard</a>
+<textarea placeholder="Your note on sizes" data-k="n1"></textarea>
+</div></div>
+</div>
+
+<div class="card">
+<div class="item"><input type="checkbox" data-k="a2"><div class="body">
+<span class="mins">10 min &middot; decide tonight</span>
+<h3>2. The box.</h3>
+<p>The factory can make the magnetic front-opening box for <strong>3 US dollars a pair</strong>, which is the bottom of what we thought it would cost. That is roughly 2,150 Australian across the whole run.</p>
+<p>One thing to check before we say yes: <strong>does it ship flat.</strong> Five hundred already-built boot boxes take up more room on the ship than the boots do. Folding ones cut that by about ten times but we assemble them here, a couple of minutes each.</p>
+<div class="rec"><b>Our read</b><br>Say yes to the 3 dollars tonight and ask him the flat-pack question in the same email. At that price the argument for a plain box and a better bag stops being about money and becomes a taste call.</div>
+<div class="warn"><b>Against</b><br>The bag walks onto sites for years. The box gets seen once and lives in a garage. That case was made and it did not win, but it was not stupid.</div>
+<a class="vote" href="https://agent.farworkwear.com.au/brain/decide">Answer on the dashboard</a>
+<textarea placeholder="Your note on the box" data-k="n2"></textarea>
+</div></div>
+</div>
+
+<div class="card">
+<div class="item"><input type="checkbox" data-k="a3"><div class="body">
+<span class="mins">5 min &middot; already agreed, just recording it</span>
+<h3>3. Presale, not the deposit. <span class="settled">settled</span></h3>
+<p>The twenty dollar deposit existed to tell us what sizes to order. We are ordering off the trade read and the list instead, so it has no job left. We go straight to a proper presale at full price once the order is signed.</p>
+<p>We are minuting this because in July all three of us voted for the deposit, and a thing three people voted for should not quietly disappear. Nobody is reopening it. Speak now if you want to.</p>
+<div class="warn"><b>What it costs us</b><br>Taking 219 dollars off someone carries a lot more weight than taking 20. Longer wait, real refund rights, and a card chargeback window that runs out before the boots land if we open too early. So the presale opens when production starts, not the day the order is signed.</div>
+<textarea placeholder="Anything on this" data-k="n3"></textarea>
+</div></div>
+</div>
+
+<div class="card">
+<div class="item"><input type="checkbox" data-k="a4"><div class="body">
+<span class="mins">10 min</span>
+<h3>4. December. What is actually still possible.</h3>
+<ul>
+<li><strong>Boots in hand by 15 December, by sea:</strong> order signed by about 12 September. That is Saturday.</li>
+<li><strong>Boxing Day, by sea:</strong> order signed by about 22 September.</li>
+<li><strong>First 100 to 150 pairs flown in, in hand by 15 December:</strong> order signed by about 3 October.</li>
+</ul>
+<div class="rec"><b>Our read</b><br>December is alive on two conditions and both have to hold: the order signs inside two weeks, and the first 100 to 150 pairs fly instead of sail. If either one drops, the honest answer is late January and we say that to the list now, not in December when people are waiting.</div>
+<div class="warn"><b>Against</b><br>Flying the first pairs costs roughly 2,600 to 3,300 dollars plus a second customs entry, and the factory wants the full balance paid before anything ships if we do it.</div>
+<a class="vote" href="https://agent.farworkwear.com.au/brain/decide">Answer on the dashboard</a>
+<textarea placeholder="Your note" data-k="n4"></textarea>
+</div></div>
+</div>
+
+<div class="card">
+<div class="item"><input type="checkbox" data-k="a5"><div class="body">
+<span class="mins">20 min &middot; the honest block</span>
+<h3>5. The five things we agreed last time and never actually decided.</h3>
+<p class="dim">All five of these were on the list for the 22 August meeting. None of them got a decision written down. Seventeen days later they are all still open, word for word. That is the pattern this block exists to break.</p>
+<div class="tbl-wrap"><table>
+<tr><th>What</th><th>Why it matters</th></tr>
+<tr><td><strong>Likeness releases</strong></td><td>The one risk on this list that has already gone off. Roughly 8.2 million views archived, Lionel threatened over his job, one post pulled and the appeal knocked back. Two minutes each to sign.</td></tr>
+<tr><td><strong>Home and contents</strong></td><td>About 35,000 dollars of stock is going to sit in our houses. Grant and Lionel: does your policy actually cover business stock. One phone call each this week.</td></tr>
+<tr><td><strong>The Old Fella</strong></td><td>Refilm him or retire him. The room leaned refilm last time but nobody actually called it, so it has been sitting as a maybe and blocking the filming plan.</td></tr>
+<tr><td><strong>Who fronts the launch video</strong></td><td>Five minute call. It has been open for two weeks.</td></tr>
+<tr><td><strong>The paperwork night</strong></td><td>Equal thirds is locked and has been since June. What is not on paper: the actual agreement, a start date, and what happens if one of us walks. Pick a date tonight.</td></tr>
+</table></div>
+<div class="rec"><b>Our read</b><br>Sign the releases on the call if Fil has them ready. Pick a paperwork date before we hang up. Rule on the Old Fella either way, a no is a decision too. The rest is phone calls this week.</div>
+<textarea placeholder="Your note" data-k="n5"></textarea>
+</div></div>
+</div>
+
+<div class="card">
+<div class="item"><input type="checkbox" data-k="a6"><div class="body">
+<span class="mins">10 min &middot; uncomfortable, do it anyway</span>
+<h3>6. The money that sits on a person, not on the company.</h3>
+<ul>
+<li><strong>Dave's loan needs a guarantor and a guarantor is a person, not the company.</strong> Whoever signs can be chased for the whole 70,000 on their own. We have never said out loud who that is.</li>
+<li><strong>Nobody except Grant has read the signed contract.</strong> The copy sitting on our shared drive is a blank template with 300,000 dollars typed in it as an example. If anyone ever fills that one in without reading it, we sign for the wrong number.</li>
+<li><strong>There is a clause that turns the loan into pay-it-all-now if one yearly interest payment gets missed.</strong> Whoever signs should hear that tonight and put the date in their own phone.</li>
+<li><strong>Product insurance is quoted at about 2,080 dollars and has not been paid.</strong> Quoted is not covered. We are about to sell safety boots.</li>
+</ul>
+<div class="rec"><b>Our read</b><br>Name the guarantor tonight. Grant sends the signed contract to the other two this week. Bind the insurance before a single pair sells.</div>
+<textarea placeholder="Your note" data-k="n6"></textarea>
+</div></div>
+</div>
+
+<div class="card">
+<div class="item"><input type="checkbox" data-k="a7"><div class="body">
+<span class="mins">10 min</span>
+<h3>7. Who decides what.</h3>
+<p>We have never written down which calls need all three of us and which ones Fil just makes. So every decision either waits for a meeting or gets made alone and feels like it was made behind someone's back. Both are bad and we have done both.</p>
+<div class="rec"><b>Our read</b><br>Rough line: money out over a set amount, anything with our names on it legally, equity, and anything that goes public under the brand needs all three. Day to day product, suppliers, site, content scheduling is Fil's call unless he wants a second opinion. Pick the number tonight and we write it down.</div>
+<div class="warn"><b>Against</b><br>Three mates who trust each other do not need a rulebook, and writing one can feel like the fun going out of it. The counter is that it is not for when we agree, it is for when we do not.</div>
+<textarea placeholder="Where do you want the line" data-k="n7"></textarea>
+</div></div>
+</div>
+
+<div class="card">
+<div class="item"><input type="checkbox" data-k="a8"><div class="body">
+<span class="mins">15 min &middot; the one that keeps slipping</span>
+<h3>8. Content. A date, not a maybe.</h3>
+<p>Fourteen days with nothing posted. Four Thursdays dark in a row before that. There are <strong>seven fully written comedy scripts nobody has ever filmed</strong>, plus 24 more scene ideas and three character refilms worth about 3.4 million views between them. The shortage is not ideas. It is a day with the three of us and a camera.</p>
+<p>The three refilms we would do first: <strong>The Micromanager</strong> (2.89 million views), <strong>That One Bloke</strong>, <strong>The Close Enough Guy</strong> (best hold rate we have ever had).</p>
+<div class="rec"><b>Our read</b><br>Pick a date now, on the call, and a backup date. Pick the location now too, because "we will find somewhere" is what killed the last two. Private property or a mate's site with real permission, nobody's employer visible in shot.</div>
+<div class="warn"><b>Against</b><br>Both of you work full time and weekends are the only window. That is real. Which is why one locked date beats four maybes.</div>
+<textarea placeholder="Dates you can do" data-k="n8"></textarea>
+</div></div>
+</div>
+
+<div class="card">
+<div class="item"><input type="checkbox" data-k="a9"><div class="body">
+<span class="mins">15 min &middot; cut these first if we run out of time</span>
+<h3>9. The quick ones.</h3>
+<div class="tbl-wrap"><table>
+<tr><th>Item</th><th>Our read</th></tr>
+<tr><td><strong>Socks</strong></td><td>Already sorted. The samples came back as sports socks, wrong build. Same factory, new spec, black work sock with cushioning. No big order until the new sample passes. Nothing to vote on.</td></tr>
+<tr><td><strong>Socks and bags, 500 or 1,000</strong></td><td>500 of each. Going to 1,000 socks saves about 850 dollars and parks about 2,700 in a garage against a second run we have not funded.</td></tr>
+<tr><td><strong>Slides for the first 100</strong></td><td>Do not gift them on run one. The real question is whether we sell slides at all. If yes, buy 500, gift 100, sell 400 and the gift pays for itself.</td></tr>
+<tr><td><strong>Why someone pays early</strong></td><td>Lock their price at 219, give them a numbered pair, a handwritten note and first pick of size. Nothing that costs us stock.</td></tr>
+<tr><td><strong>Meta glasses</strong></td><td>One pair as a test on whoever is on site most, not three. Count how many clips actually make a post before we spend 1,800 to 2,400.</td></tr>
+<tr><td><strong>TIACS</strong></td><td>Send the approach this week, Lionel owns it. Three questions: can we name you, what wording do you want, does 5 dollars a boot work. Nothing public until they say yes in writing.</td></tr>
+</table></div>
+<a class="vote" href="https://agent.farworkwear.com.au/brain/decide">Answer these on the dashboard</a>
+<textarea placeholder="Your note" data-k="n9"></textarea>
+</div></div>
+</div>
+
+<h2>Three jobs we do on the call, not after</h2>
+<div class="card">
+<p class="dim">Each of these takes about two minutes and every one of them has already been asked for once and not happened. Doing them while we are all on the line is the whole point.</p>
+<div class="item"><input type="checkbox" data-k="j1"><div class="body"><strong>Install ntfy on your phone</strong> and tell Fil your topic name. That is how the business is going to ping you when something needs doing. Right now nothing FAR runs can reach either of your phones, so every reminder is Fil texting you.</div></div>
+<div class="item" style="margin-top:12px"><input type="checkbox" data-k="j2"><div class="body"><strong>Send Fil your names.</strong> Twenty to fifty blokes you would actually text on launch day. Not a plan to do it, the actual names, in the group chat while we are talking. There is a shared sheet for it but the fastest version is you type them into the chat and Fil loads them in.</div></div>
+<div class="item" style="margin-top:12px"><input type="checkbox" data-k="j3"><div class="body"><strong>Sign the likeness release.</strong> Two minutes, and it is the one thing on this whole page that has already bitten us once.</div></div>
+</div>
+
+<h2>What each of us owes</h2>
+<div class="card">
+<p><span class="who">Fil</span> The size email to the factory. The certificate questions, drafted 3 August and still sitting unsent. The sock email, written this morning and still unsent. The lawyer and the accountant, never contacted. Bind the insurance. Book the paperwork night.</p>
+<p><span class="who">Grant</span> Send the other two the signed loan contract you are holding. Chase Tony for his read, it was due 24 August. Check your home and contents covers business stock. Your 20 to 50 names. The laptop. Message Ace when the page is live.</p>
+<p><span class="who">Lionel</span> Your wear verdict on the sample. Your 20 to 50 names. Home and contents check. The TIACS approach if you take it. The email lane with Fil.</p>
+<p><span class="who">All three</span> Sizes. The box. Filming date. Guarantor. Paperwork date. Who decides what. Likeness releases.</p>
+</div>
+
+<p class="foot">Ticks and notes on this page stay on your own phone. They are for keeping your place, not for recording anything. The decisions get written down by Fil during the call. The longer version of the ten items, with all the numbers behind them, is at <a href="https://filipangeleski-coder.github.io/fwc-preview/far-founders-chat-j4n7.html">the ten things</a>. Every number here traces back to the business workspace. This link is unlisted, anyone holding it can open it.</p>
+
+<div class="bar"><b id="cnt">0</b> of <b id="tot">0</b> ticked</div>
+
+<script>
+(function () {
+  var K = "far-meeting-r7k2-";
+  function save(k, v) { try { localStorage.setItem(K + k, v); } catch (e) {} }
+  function load(k) { try { return localStorage.getItem(K + k); } catch (e) { return null; } }
+
+  var boxes = [].slice.call(document.querySelectorAll("input[type=checkbox][data-k]"));
+  var notes = [].slice.call(document.querySelectorAll("textarea[data-k]"));
+  var cnt = document.getElementById("cnt");
+  document.getElementById("tot").textContent = boxes.length;
+
+  function paint(b) {
+    var body = b.parentNode.querySelector(".body");
+    if (body) { body.classList.toggle("done", b.checked); }
+  }
+  function tally() {
+    cnt.textContent = boxes.filter(function (b) { return b.checked; }).length;
+  }
+
+  boxes.forEach(function (b) {
+    if (load(b.dataset.k) === "1") { b.checked = true; }
+    paint(b);
+    b.addEventListener("change", function () {
+      save(b.dataset.k, b.checked ? "1" : "0");
+      paint(b);
+      tally();
+    });
+  });
+  notes.forEach(function (t) {
+    var v = load(t.dataset.k);
+    if (v) { t.value = v; }
+    t.addEventListener("input", function () { save(t.dataset.k, t.value); });
+  });
+  tally();
+})();
+</script>
+
+</body>
+</html>
