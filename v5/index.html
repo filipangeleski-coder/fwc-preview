@@ -1,0 +1,665 @@
+<!doctype html>
+<!-- BUILD NOTES
+  ANGLE: EDITORIAL (The Row / Our Legacy / Rick Owens). Photography-led, asymmetric, extreme restraint,
+  type small and exact, two enormous type moments (02 THE LINE, and the footer mark cropped by the page edge).
+
+  SIGNATURE DEVICE: the numbered plate. Every band opens with its two-digit folio number sitting on a
+  hairline rule that bleeds to the page edge, and every photograph is a plate captioned underneath with a
+  line the copy deck already owns (its alt line, or its detail readout), numbered off its band: 01, 03.1
+  to 03.4, 05. The page reads as a numbered lookbook, not a store.
+
+  THREE DECISIONS THE SPEC LEFT OPEN:
+  1. The optional detail rig is built as four LARGE cutout plates (front-on, profile, sole, heel) in an
+     asymmetric staggered grid, not eight tap points on a still boot. Reason, found in the screenshot
+     pass: the eight d-*.webp macro cuts are shot on WHITE and a white block anywhere kills the page.
+     The nine boot-0N angles are true cutouts on black, so the photography comes from those instead, and
+     each plate carries the one deck readout line that truthfully describes it.
+  2. THE LABEL sits BELOW the sticky turntable as its own two-column band, not beside it. The spin stage
+     stays one big quiet image at every width, and the datasheet never gets compressed at 390.
+  3. The topbar run line sits right of the wordmark and left of BUY (centring it would centre the page),
+     and it is hidden under 900px where it cannot fit. The hero size row writes to one page-wide size
+     state: choosing a size also marks it and centres it in 04 THE SIZE RUN.
+
+  FUNCTIONAL LABELS ADDED: none in words. The only marks not in the deck are numerals: the band folios
+  02 to 09 and the plate numbers 01 / 03.1-03.4 / 05.
+-->
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FAR | Work boots. Run 001, 500 pairs.</title>
+<meta name="description" content="FAR Zip work boots, $219 flat. First run of 500 numbered pairs, certified AS 2210.3:2019, 30 days money back after you wear them to work.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#131313">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FAR Zip. Run 001. 500 numbered pairs, $219.">
+<meta property="og:description" content="FAR Zip work boots, $219 flat. First run of 500 numbered pairs, certified AS 2210.3:2019, 30 days money back after you wear them to work.">
+<meta property="og:image" content="https://filipangeleski-coder.github.io/fwc-preview/v5/assets/boot-04-2x.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FAR Zip. Run 001. 500 numbered pairs, $219.">
+<meta name="twitter:description" content="FAR Zip work boots, $219 flat. First run of 500 numbered pairs, certified AS 2210.3:2019, 30 days money back after you wear them to work.">
+<meta name="twitter:image" content="https://filipangeleski-coder.github.io/fwc-preview/v5/assets/boot-04-2x.webp">
+<link rel="icon" type="image/svg+xml" href="assets/far-a.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap">
+<style>
+:root{
+  --black:#131313; --paper:#F5F5F5; --ash:#A8A6A1; --smoke:#6B6B6B;
+  --hair:rgba(245,245,245,.12);
+  --g:clamp(18px,5vw,72px);
+  --wrap:1200px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --disp:"Space Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --body:"DM Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{overflow-x:clip}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--black);color:var(--paper);
+  font:400 1.0625rem/1.68 var(--body);letter-spacing:.006em;
+  font-kerning:normal;-webkit-font-smoothing:antialiased;
+}
+img,canvas,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--paper);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* ---- shared ---------------------------------------------------------- */
+.wrap{width:100%;max-width:calc(var(--wrap) + 2*var(--g));margin-inline:auto;padding-inline:var(--g)}
+.band{position:relative}
+.folio{display:flex;align-items:center;gap:16px;margin-right:calc(-1 * var(--g));margin-bottom:clamp(30px,5vh,56px)}
+.folio b{font:500 .656rem/1 var(--body);letter-spacing:.18em;color:var(--smoke);font-variant-numeric:tabular-nums}
+.folio i{flex:1;height:1px;background:var(--hair)}
+.lab{margin:0;font:500 .656rem/1.3 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--smoke)}
+.kicker{margin:0;font:500 .688rem/1.4 var(--body);letter-spacing:.16em;color:var(--smoke);font-variant-numeric:tabular-nums}
+.h2{margin:0;font-family:var(--disp);font-weight:700;font-size:clamp(1.75rem,3.5vw,2.85rem);line-height:.98;letter-spacing:-.03em;text-wrap:balance}
+.body{margin:0;color:var(--ash);font-size:1.0625rem;max-width:58ch;text-wrap:pretty}
+.small{margin:0;font-size:.875rem;color:var(--smoke)}
+.small a{border-bottom:1px solid var(--hair);padding-bottom:2px;transition:color 180ms var(--ease),border-color 180ms var(--ease)}
+.cap{display:flex;gap:14px;align-items:baseline;margin:14px 0 0;padding-top:10px;border-top:1px solid var(--hair);color:var(--smoke);font-size:.75rem;line-height:1.45;letter-spacing:.01em}
+.cap b{flex:none;font-weight:500;color:var(--ash);font-variant-numeric:tabular-nums;letter-spacing:.1em;font-size:.656rem}
+figure{margin:0}
+.pill{
+  display:inline-flex;align-items:center;gap:14px;justify-content:center;
+  background:var(--paper);color:var(--black);border:0;border-radius:999px;
+  min-height:52px;padding:0 28px;cursor:pointer;
+  font:500 .719rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;
+  transition:transform 150ms var(--ease);
+}
+.pill .pr{font-family:var(--disp);font-weight:700;font-size:.938rem;letter-spacing:0;text-transform:none;font-variant-numeric:tabular-nums}
+.pill:active{transform:scale(.97)}
+.sizes{display:grid;grid-template-columns:repeat(9,1fr);gap:4px;max-width:520px}
+.sz{
+  appearance:none;background:transparent;border:1px solid var(--hair);border-radius:0;
+  color:var(--ash);min-height:46px;cursor:pointer;
+  font:500 .75rem/1 var(--body);letter-spacing:.03em;font-variant-numeric:tabular-nums;
+  transition:color 170ms var(--ease),border-color 170ms var(--ease),background-color 170ms var(--ease),transform 130ms var(--ease);
+}
+.sz[aria-pressed="true"]{background:var(--paper);border-color:var(--paper);color:var(--black)}
+.sz:active{transform:scale(.96)}
+@media (hover:hover) and (pointer:fine){
+  .sz:hover{color:var(--paper);border-color:rgba(245,245,245,.32)}
+  .pill:hover{background:#fff}
+  .small a:hover{color:var(--paper);border-color:var(--paper)}
+  .flinks a:hover{color:var(--paper)}
+}
+
+/* ---- 00 topbar ------------------------------------------------------- */
+.bar{position:sticky;top:0;z-index:40;background:rgba(19,19,19,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--hair);transition:transform 340ms var(--ease)}
+.bar[data-hide="1"]{transform:translateY(-102%)}
+.bar-in{display:flex;align-items:center;gap:clamp(14px,3vw,34px);min-height:64px;padding-top:env(safe-area-inset-top,0px)}
+.mark{flex:none;display:block}
+.mark svg{width:94px;height:33px;fill:var(--paper)}
+.runline{margin:0 0 0 auto;font:500 .656rem/1 var(--body);letter-spacing:.17em;color:var(--smoke);white-space:nowrap;font-variant-numeric:tabular-nums}
+.bar .pill{min-height:40px;padding:0 22px;font-size:.656rem;letter-spacing:.16em}
+
+/* ---- 01 hero --------------------------------------------------------- */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:clip;padding-block:clamp(34px,8vh,90px) clamp(32px,7vh,78px)}
+.hero-in{position:relative;z-index:2}
+.hero h1{
+  margin:.7em 0 0;font-family:var(--disp);font-weight:700;
+  font-size:clamp(2rem,5vw,4rem);line-height:.95;letter-spacing:-.035em;
+  max-width:min(60ch,54vw);
+}
+.hero .sub{margin:clamp(18px,2.6vh,28px) 0 0;color:var(--ash);font-size:1.0625rem;max-width:44ch;text-wrap:pretty}
+.buyblock{margin-top:clamp(26px,4.4vh,44px);display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.buyblock .sizes{margin-top:2px}
+.micro{margin:6px 0 0;font-size:.8125rem;line-height:1.5;color:var(--smoke);max-width:40ch}
+.hero-fig{position:absolute;z-index:1;right:-6vw;bottom:clamp(44px,9vh,104px);width:min(56vw,790px)}
+.hero-fig img{width:100%;height:auto}
+.hero-fig .cap{max-width:32ch;margin-left:auto;margin-right:clamp(80px,11vw,190px)}
+
+/* ---- 02 the line ----------------------------------------------------- */
+.line{padding-block:clamp(72px,12vh,150px) clamp(64px,10vh,130px)}
+.shout{margin:0;font-family:var(--disp);font-weight:700;font-size:13.4vw;line-height:.86;letter-spacing:-.045em}
+.shout span{display:block}
+.origin{width:min(46ch,100%);margin:clamp(40px,6vh,80px) 0 0 auto}
+.origin p{margin:0;font-size:1.0625rem;line-height:1.62;color:var(--ash)}
+.origin p+p{margin-top:.55em}
+.origin p:nth-child(4){color:var(--paper)}
+.creed{
+  margin:clamp(44px,7vh,90px) 0 0;max-width:22ch;
+  font-family:var(--disp);font-weight:700;font-size:clamp(1.3rem,2.5vw,2rem);
+  line-height:1.12;letter-spacing:-.025em;
+}
+
+/* ---- 03 the object --------------------------------------------------- */
+.obj{padding-block:clamp(56px,9vh,110px) clamp(20px,3vh,40px)}
+.obj .body{margin-top:18px}
+.spinwrap{height:140vh;position:relative}
+.spinstage{position:sticky;top:0;height:100svh;display:grid;place-items:center;align-content:center;gap:24px;padding-inline:var(--g)}
+#spin{width:min(60vw,520px);height:auto;aspect-ratio:541/515}
+.hint-drag{display:none}
+.sheetband{padding-block:clamp(24px,4vh,48px) clamp(48px,7vh,96px)}
+.sheet{margin:0;columns:2;column-gap:clamp(34px,6vw,96px)}
+.sheet .row{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:11px 0;border-bottom:1px solid var(--hair);break-inside:avoid}
+.sheet dt{margin:0;font:500 .656rem/1.3 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--smoke);flex:none}
+.sheet dd{margin:0;font-size:.875rem;line-height:1.4;text-align:right;color:var(--paper);font-variant-numeric:tabular-nums}
+.plates{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(32px,5vw,72px) clamp(18px,3vw,44px);padding-bottom:clamp(56px,9vh,120px)}
+.plates .fr{display:grid;place-items:center;overflow:clip}
+.plates .fr img{width:100%;height:100%;object-fit:contain}
+.p1{grid-column:1/7}                  .p1 .fr{aspect-ratio:4/5}
+.p2{grid-column:8/13;align-self:end}  .p2 .fr{aspect-ratio:3/2}
+.p3{grid-column:2/7;margin-top:6%}    .p3 .fr{aspect-ratio:3/4}
+.p4{grid-column:8/13;align-self:end}  .p4 .fr{aspect-ratio:1/1}
+
+/* ---- 04 the size run ------------------------------------------------- */
+.sizerun{padding-block:clamp(56px,9vh,120px)}
+.sizerun .body{margin-top:18px}
+.runscroll{margin-top:clamp(40px,6vh,72px);overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none;scroll-snap-type:x proximity}
+.runscroll::-webkit-scrollbar{display:none}
+.rungrid{display:grid;grid-template-columns:auto repeat(9,minmax(58px,1fr));column-gap:clamp(6px,1.3vw,18px);row-gap:9px;border-top:1px solid var(--hair);padding-top:18px}
+.lg{position:sticky;left:0;z-index:1;background:var(--black);padding-right:14px;align-self:center;font:500 .625rem/1 var(--body);letter-spacing:.13em;text-transform:uppercase;color:var(--smoke);white-space:nowrap}
+.au{font-family:var(--disp);font-weight:700;font-size:clamp(1.3rem,2.4vw,2.1rem);line-height:1;letter-spacing:-.03em;color:var(--smoke);font-variant-numeric:tabular-nums;scroll-snap-align:center;transition:color 200ms var(--ease)}
+.mm{font-size:.8125rem;line-height:1;color:var(--ash);font-variant-numeric:tabular-nums;transition:color 200ms var(--ease)}
+.eu{font-size:.6875rem;line-height:1;color:var(--smoke);font-variant-numeric:tabular-nums;transition:color 200ms var(--ease)}
+.au.on{color:var(--paper)}
+.mm.on{color:var(--paper)}
+.eu.on{color:var(--ash)}
+.sizerun .small{margin-top:clamp(28px,4vh,44px)}
+
+/* ---- 05 the three ---------------------------------------------------- */
+.three{padding-block:clamp(56px,9vh,120px)}
+.three-grid{display:grid;grid-template-columns:340px 1fr;gap:clamp(30px,6vw,84px)}
+.three-grid figure{max-width:340px}
+.names{list-style:none;margin:clamp(30px,4.6vh,48px) 0 0;padding:0}
+.names li{border-top:1px solid var(--hair);padding:15px 0;font-size:1rem;color:var(--ash)}
+.names b{font-family:var(--disp);font-weight:700;font-size:1.0625rem;letter-spacing:-.01em;color:var(--paper);margin-right:.45em}
+.reach{margin:clamp(34px,5vh,56px) 0 0;color:var(--ash);font-size:.9375rem;line-height:1.6;max-width:44ch;text-wrap:pretty}
+
+/* ---- 06 the promise -------------------------------------------------- */
+.promise{padding-block:clamp(56px,9vh,120px)}
+.pledge{margin:clamp(34px,5vh,58px) 0 0;display:flex;flex-direction:column;gap:.35em;max-width:26ch}
+.pledge p{margin:0;font-family:var(--disp);font-weight:700;font-size:clamp(1.1rem,1.9vw,1.5rem);line-height:1.18;letter-spacing:-.022em}
+.deliver{margin:clamp(40px,6vh,72px) 0 0 auto;width:min(52ch,100%);color:var(--ash);font-size:.9375rem;line-height:1.62;text-wrap:pretty}
+.promise .small{margin-top:20px;margin-left:auto;width:min(52ch,100%)}
+
+/* ---- 07 the run ------------------------------------------------------ */
+.run{padding-block:clamp(64px,10vh,140px)}
+.runbig{margin:0 0 clamp(40px,6vh,80px);font-family:var(--disp);font-weight:700;font-size:min(10.5vw,8rem);line-height:.84;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.run-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(34px,6vw,90px);align-items:start}
+.offer p{margin:0}
+.offer .price{margin-top:14px;font-family:var(--disp);font-weight:700;font-size:clamp(1.2rem,2vw,1.6rem);letter-spacing:-.02em}
+.offer .boxline{margin-top:clamp(22px,3.4vh,34px);color:var(--ash);font-size:.9375rem;line-height:1.62;max-width:40ch}
+.counter{margin-top:18px}
+.buy{display:flex;flex-direction:column;align-items:flex-start;gap:13px;border-top:1px solid var(--hair);padding-top:clamp(22px,3.4vh,34px)}
+.buy .sizes{max-width:100%}
+.buy[data-state="presale"] .wl{display:none}
+.buy[data-state="waitlist"] .ps{display:none}
+.wl{display:flex;flex-direction:column;align-items:flex-start;gap:13px;width:100%;max-width:400px}
+.wl input{background:transparent;border:1px solid var(--hair);border-radius:0;min-height:52px;padding:0 16px;width:100%;font-size:.9375rem}
+.wl input::placeholder{color:var(--smoke)}
+
+/* ---- 08 questions ---------------------------------------------------- */
+.qs{padding-block:clamp(44px,7vh,90px) clamp(64px,10vh,130px)}
+.acc{margin-top:clamp(34px,5vh,58px);border-top:1px solid var(--hair)}
+.q{border-bottom:1px solid var(--hair)}
+.q>button{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;
+  background:none;border:0;padding:22px 0;min-height:56px;cursor:pointer;text-align:left;
+  font-family:var(--disp);font-weight:700;font-size:clamp(1rem,1.5vw,1.15rem);letter-spacing:-.015em;
+}
+.pm{position:relative;flex:none;width:13px;height:13px;transition:transform 300ms var(--ease)}
+.pm::before,.pm::after{content:"";position:absolute;inset:50% 0 auto;height:1px;background:var(--ash)}
+.pm::after{transform:rotate(90deg)}
+.q>button[aria-expanded="true"] .pm{transform:rotate(45deg)}
+.p{display:grid;grid-template-rows:0fr;transition:grid-template-rows 340ms var(--ease)}
+.p[data-open="1"]{grid-template-rows:1fr}
+.p>div{overflow:hidden}
+.p p{margin:0 0 26px;color:var(--ash);font-size:.9375rem;line-height:1.66;max-width:62ch;text-wrap:pretty}
+
+/* ---- 09 footer ------------------------------------------------------- */
+.foot{border-top:1px solid var(--hair);padding-top:clamp(50px,8vh,100px);overflow:clip}
+.close{margin:0;display:flex;flex-direction:column;gap:.2em;font-family:var(--disp);font-weight:700;font-size:clamp(1.2rem,2.3vw,1.85rem);line-height:1.14;letter-spacing:-.025em;max-width:24ch}
+.close span:last-child{color:var(--smoke)}
+.flinks{display:flex;flex-wrap:wrap;gap:12px clamp(20px,3vw,40px);margin-top:clamp(40px,6vh,72px);font:500 .719rem/1 var(--body);letter-spacing:.13em;text-transform:uppercase;color:var(--ash)}
+.flinks a{padding:6px 0;transition:color 180ms var(--ease)}
+.foot .lab{margin-top:26px}
+.bigmark{margin-top:clamp(40px,7vh,90px);line-height:0;overflow:clip}
+.bigmark svg{width:100%;height:auto;fill:var(--paper)}
+
+/* ---- mobile dock ----------------------------------------------------- */
+.dock{
+  position:fixed;left:0;right:0;bottom:0;z-index:35;display:none;
+  align-items:center;justify-content:space-between;gap:16px;
+  padding:12px var(--g) calc(12px + env(safe-area-inset-bottom,0px));
+  background:rgba(19,19,19,.92);backdrop-filter:blur(16px);border-top:1px solid var(--hair);
+  transform:translateY(112%);transition:transform 320ms var(--ease);
+}
+.dock[data-on="1"]{transform:none}
+.dock .pr{font-family:var(--disp);font-weight:700;font-size:1.125rem;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+
+/* ---- motion ---------------------------------------------------------- */
+.rise{animation:rise 480ms var(--ease) both;animation-delay:calc(var(--i,0) * 60ms)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+html.js .rv{opacity:0;transform:translateY(18px);transition:opacity 620ms var(--ease),transform 620ms var(--ease)}
+html.js .rv.in{opacity:1;transform:none}
+
+/* ---- breakpoints ----------------------------------------------------- */
+@media (max-width:1100px){
+  .hero h1{max-width:min(60ch,62vw)}
+  .hero-fig{width:min(54vw,600px)}
+  .three-grid{grid-template-columns:280px 1fr}
+  .three-grid figure{max-width:280px}
+}
+@media (max-width:900px){
+  .runline{display:none}
+  .run-grid{grid-template-columns:1fr;gap:clamp(34px,5vh,54px)}
+  .runbig{font-size:min(15vw,7rem)}
+}
+@media (max-width:760px){
+  body{font-size:1rem}
+  .hero{justify-content:flex-end;padding-block:clamp(26px,5vh,50px) clamp(26px,5vh,50px)}
+  .hero-fig{position:static;order:-1;width:100%;margin:0 0 clamp(22px,3.6vh,36px)}
+  .hero-fig img{max-height:33svh;width:auto;max-width:100%;margin-left:auto}
+  .hero-fig .cap{max-width:none;margin-right:0}
+  .hero h1{max-width:none;font-size:2rem;margin-top:.55em}
+  .hero .sub{font-size:.9375rem;max-width:none;margin-top:16px}
+  .sizes{max-width:100%;gap:3px}
+  .sz{font-size:.6875rem}
+  .shout{font-size:15.5vw;letter-spacing:-.04em}
+  .origin{margin-top:44px}
+  .sheet{columns:1}
+  .spinwrap{height:120vh}
+  #spin{width:82vw}
+  .plates{grid-template-columns:repeat(2,1fr);gap:clamp(34px,7vw,52px) 16px}
+  .p1,.p2{grid-column:span 2}
+  .p3,.p4{grid-column:span 1;margin-top:0}
+  .p3 .fr,.p4 .fr{aspect-ratio:3/4}
+  .rungrid{width:max-content;grid-template-columns:auto repeat(9,64px)}
+  .three-grid{grid-template-columns:1fr;gap:clamp(28px,5vh,44px)}
+  .three-grid figure{max-width:300px}
+  .pledge{max-width:none}
+  .deliver,.promise .small{margin-left:0}
+  .foot{padding-bottom:0}
+  .dock{display:flex}
+}
+@media (max-width:430px){
+  .hero-fig img{max-height:30svh}
+  .sz{font-size:.625rem;min-height:44px}
+  .bar-in{gap:12px}
+  .bar .pill{padding:0 18px}
+}
+@media (prefers-reduced-motion:reduce){
+  .rise{animation:none}
+  html.js .rv{opacity:1;transform:none;transition:none}
+  .bar{transition:none}
+  .p{transition:none}
+  .hint-scroll{display:none}
+  .hint-drag{display:inline}
+  *{scroll-behavior:auto !important}
+}
+@media (pointer:coarse){
+  .hint-scroll{display:none}
+  .hint-drag{display:inline}
+}
+</style>
+</head>
+<body>
+
+<!-- 00 TOPBAR -->
+<header class="bar" id="bar">
+  <div class="wrap bar-in">
+    <a class="mark" href="#top" aria-label="FAR">
+      <svg viewBox="52.4 156.2 320.3 112.7" role="img" aria-hidden="true" focusable="false"><polygon points="208.87 156.22 183.43 156.22 135.49 268.65 167.46 268.65 196.15 191.82 212.71 236.16 188.85 223.13 224.84 268.65 256.81 268.65 208.87 156.22"/><path d="M372.72,268.91c-6.71,0-12.72,0-18.73,0-3.8,0-7.6-.11-11.38.05-1.9.08-2.95-.59-3.92-2.16-6.24-10.12-12.6-20.16-18.82-30.29-.98-1.6-2.02-2.16-3.89-2.14-8.59.11-17.18.05-26.03.05v34.26h-29.5v-110.33c1.12,0,2.12,0,3.12,0,21.23,0,42.47.05,63.7,0,7.38-.02,14.48,1.12,21.16,4.34,14.9,7.17,23.05,22.75,20.96,39.23-1.73,13.59-9.12,22.88-21.19,29.31,8.04,12.36,16.1,24.74,24.51,37.67ZM290.06,210.21c12.65,0,25.13.25,37.59-.12,5.57-.17,10.37-2.63,12.07-8.7,2.7-9.64-3.1-17.35-13.18-17.42-11.48-.09-22.96-.02-34.44,0-.68,0-1.35.16-2.04.25v25.99Z"/><path d="M82.6,183.45v21.62h60.19v25.19h-60.2v38.07h-30.11v-110.2h100.21v25.31h-70.09Z"/></svg>
+    </a>
+    <p class="runline">RUN 001 &middot; 500 PAIRS &middot; AU 6 TO 13</p>
+    <a class="pill" href="#run">BUY</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- 01 HERO -->
+<section class="hero" id="hero">
+  <div class="wrap hero-in">
+    <p class="kicker rise" style="--i:0">WORK BOOTS &middot; FIRST RUN OF 500 &middot; $219</p>
+    <h1 class="rise" style="--i:1">Your boots look fine.<br>Your feet disagree.</h1>
+    <p class="sub rise" style="--i:2">The inside of a work boot dies long before the outside looks old. Every pair we owned did it.</p>
+    <div class="buyblock rise" style="--i:3">
+      <p class="lab" id="szl1">Size, AU</p>
+      <div class="sizes" role="group" aria-labelledby="szl1">
+        <button class="sz" type="button" data-s="6" aria-pressed="false">6</button>
+        <button class="sz" type="button" data-s="7" aria-pressed="false">7</button>
+        <button class="sz" type="button" data-s="8" aria-pressed="false">8</button>
+        <button class="sz" type="button" data-s="9" aria-pressed="false">9</button>
+        <button class="sz" type="button" data-s="9.5" aria-pressed="false">9.5</button>
+        <button class="sz" type="button" data-s="10" aria-pressed="false">10</button>
+        <button class="sz" type="button" data-s="11" aria-pressed="false">11</button>
+        <button class="sz" type="button" data-s="12" aria-pressed="false">12</button>
+        <button class="sz" type="button" data-s="13" aria-pressed="false">13</button>
+      </div>
+      <a class="pill" href="#run">Claim a number <span class="pr">$219</span></a>
+      <p class="micro">30 days on the tools, then send them back worn if they are not right.</p>
+    </div>
+  </div>
+  <figure class="hero-fig">
+    <!-- SLOT hero: filmed clip lands here (knee-down walking), keep the same crop -->
+    <img src="assets/boot-04-2x.webp" width="1400" height="1232" decoding="async" fetchpriority="high" alt="FAR Zip work boot, three-quarter front, wheat nubuck with the black tongue patch.">
+    <figcaption class="cap"><b>01</b><span>FAR Zip work boot, three-quarter front, wheat nubuck with the black tongue patch.</span></figcaption>
+  </figure>
+</section>
+
+<!-- 02 THE LINE -->
+<section class="band line wrap">
+  <div class="folio"><b>02</b><i></i></div>
+  <h2 class="shout rv"><span>The inside</span><span>dies first.</span></h2>
+  <div class="origin rv">
+    <p>Ten, twelve hours on your feet. Concrete. Mud. Gravel.</p>
+    <p>Fine for two months. Cooked by lunch every day after that.</p>
+    <p>Nobody talked about it. We just accepted it. That's the job.</p>
+    <p>It's not the job. It's the boots.</p>
+    <p>FAR exists because we got sick of accepting it.</p>
+  </div>
+  <p class="creed rv">Comfort isn't a luxury. It's what you're owed.</p>
+</section>
+
+<!-- 03 THE OBJECT -->
+<section class="band obj wrap">
+  <div class="folio"><b>03</b><i></i></div>
+  <h2 class="h2 rv">Turn it over.</h2>
+  <p class="body rv">The facts, in order. No adjectives.</p>
+</section>
+
+<div class="spinwrap" id="spinwrap">
+  <div class="spinstage">
+    <canvas id="spin" width="1082" height="1030" aria-hidden="true"></canvas>
+    <p class="sr">FAR Zip work boot, three-quarter front, wheat nubuck with the black tongue patch.</p>
+    <p class="lab"><span class="hint-scroll">Scroll to turn</span><span class="hint-drag">Drag to turn</span></p>
+  </div>
+</div>
+
+<div class="band sheetband wrap">
+  <dl class="sheet rv">
+    <div class="row"><dt>Model</dt><dd>FAR Zip</dd></div>
+    <div class="row"><dt>Upper</dt><dd>Nubuck leather</dd></div>
+    <div class="row"><dt>Lining</dt><dd>Mesh</dd></div>
+    <div class="row"><dt>Toe</dt><dd>Steel</dd></div>
+    <div class="row"><dt>Plate</dt><dd>Aramid, penetration resistant</dd></div>
+    <div class="row"><dt>Midsole</dt><dd>PU</dd></div>
+    <div class="row"><dt>Outsole</dt><dd>Rubber</dd></div>
+    <div class="row"><dt>Closure</dt><dd>Side zip + laces</dd></div>
+    <div class="row"><dt>Collar</dt><dd>22mm foam</dd></div>
+    <div class="row"><dt>Marking</dt><dd>Class I SB P SRC</dd></div>
+    <div class="row"><dt>Standard</dt><dd>AS 2210.3:2019</dd></div>
+    <div class="row"><dt>Sizes</dt><dd>AU 6 to 13</dd></div>
+    <div class="row"><dt>Made in</dt><dd>China</dd></div>
+    <div class="row"><dt>Run</dt><dd>001 of 500</dd></div>
+  </dl>
+</div>
+
+<div class="band plates wrap">
+  <!-- SLOT 03.1: macro cutout of the toe cap replaces this angle when one exists on black -->
+  <figure class="p1 rv"><div class="fr"><img src="assets/boot-05-2x.webp" width="1400" height="1232" loading="lazy" decoding="async" alt="Steel toe cap."></div><figcaption class="cap"><b>03.1</b><span>Steel toe, and an aramid plate underfoot.</span></figcaption></figure>
+  <figure class="p2 rv"><div class="fr"><img src="assets/boot-01-2x.webp" width="1400" height="1232" loading="lazy" decoding="async" alt="Profile, zip side."></div><figcaption class="cap"><b>03.2</b><span>Lace front, zip down the side.</span></figcaption></figure>
+  <figure class="p3 rv"><div class="fr"><img src="assets/boot-07-2x.webp" width="1400" height="1232" loading="lazy" decoding="async" alt="Rubber outsole."></div><figcaption class="cap"><b>03.3</b><span>Rubber outsole. SRC in the marking.</span></figcaption></figure>
+  <figure class="p4 rv"><div class="fr"><img src="assets/boot-06-2x.webp" width="1400" height="1232" loading="lazy" decoding="async" alt="Heel counter."></div><figcaption class="cap"><b>03.4</b><span>PU midsole under it, rubber outsole beneath.</span></figcaption></figure>
+</div>
+
+<!-- 04 THE SIZE RUN -->
+<section class="band sizerun wrap" id="sizerun">
+  <div class="folio"><b>04</b><i></i></div>
+  <h2 class="h2 rv">Nine sizes, in millimetres.</h2>
+  <p class="body rv">Every size is measured off the last in millimetres, so the number means something.</p>
+  <div class="runscroll" id="runscroll">
+    <div class="rungrid rv">
+      <span class="lg">AU</span>
+      <span class="au" data-cell="6">6</span><span class="au" data-cell="7">7</span><span class="au" data-cell="8">8</span><span class="au" data-cell="9">9</span><span class="au" data-cell="9.5">9.5</span><span class="au" data-cell="10">10</span><span class="au" data-cell="11">11</span><span class="au" data-cell="12">12</span><span class="au" data-cell="13">13</span>
+      <span class="lg">Last, mm</span>
+      <span class="mm" data-cell="6">271</span><span class="mm" data-cell="7">278</span><span class="mm" data-cell="8">285</span><span class="mm" data-cell="9">291</span><span class="mm" data-cell="9.5">298</span><span class="mm" data-cell="10">305</span><span class="mm" data-cell="11">311</span><span class="mm" data-cell="12">318</span><span class="mm" data-cell="13">325</span>
+      <span class="lg">EUR</span>
+      <span class="eu" data-cell="6">41</span><span class="eu" data-cell="7">42</span><span class="eu" data-cell="8">43</span><span class="eu" data-cell="9">43.5</span><span class="eu" data-cell="9.5">44</span><span class="eu" data-cell="10">45</span><span class="eu" data-cell="11">46</span><span class="eu" data-cell="12">47</span><span class="eu" data-cell="13">48</span>
+    </div>
+  </div>
+  <p class="small rv"><a href="mailto:fil@farworkwear.com.au">Not sure? Send us your foot length.</a></p>
+</section>
+
+<!-- 05 THE THREE -->
+<section class="band three wrap">
+  <div class="folio"><b>05</b><i></i></div>
+  <div class="three-grid">
+    <figure class="rv">
+      <img src="assets/founders.webp" width="612" height="750" loading="lazy" decoding="async" alt="Fil, Grant and Lionel, the three owners of FAR.">
+      <figcaption class="cap"><b>05</b><span>Fil, Grant and Lionel, the three owners of FAR.</span></figcaption>
+    </figure>
+    <div class="rv">
+      <h2 class="h2">Three owners. Three pairs on site.</h2>
+      <!-- FIL: your one-line role, and the three lines are yours to change -->
+      <ul class="names">
+        <li><b>Fil.</b>Runs the build. Wears the same boots.</li>
+        <li><b>Grant.</b>Formwork, ten years. Concrete every day.</li>
+        <li><b>Lionel.</b>Council crew. All day on his feet.</li>
+      </ul>
+      <p class="reach">Two FAR videos have passed 700,000 combined views on Instagram. No ads, no boosting.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 06 THE PROMISE -->
+<section class="band promise wrap">
+  <div class="folio"><b>06</b><i></i></div>
+  <h2 class="h2 rv">Send them back worn.</h2>
+  <div class="pledge rv">
+    <p>Thirty days from the day you buy them.</p>
+    <p>Wear them on site, not on carpet.</p>
+    <p>If they are not right, send them back worn. Money back.</p>
+  </div>
+  <p class="deliver rv">Being made now. Factory finishes mid November 2026. Australian delivery estimated December 2026. We email you the real date when we have it.</p>
+  <p class="small rv"><a href="#returns">Returns policy</a></p>
+</section>
+
+<!-- 07 THE RUN -->
+<section class="band run wrap" id="run">
+  <div class="folio"><b>07</b><i></i></div>
+  <p class="runbig rv">RUN 001</p>
+  <div class="run-grid">
+    <div class="offer rv">
+      <h2 class="h2">500 pairs, numbered.</h2>
+      <p class="price">$219 flat, every pair.</p>
+      <!-- FIL: slides in or out of the box is the open founder vote -->
+      <p class="boxline">In the box: the boots, a pair of socks, the boot bag, a numbered card.</p>
+      <p class="lab counter" id="counter" hidden>{n} of 500 left</p>
+    </div>
+    <div class="buy rv" data-state="presale">
+      <p class="lab" id="szl2">Size, AU</p>
+      <div class="sizes" role="group" aria-labelledby="szl2">
+        <button class="sz" type="button" data-s="6" aria-pressed="false">6</button>
+        <button class="sz" type="button" data-s="7" aria-pressed="false">7</button>
+        <button class="sz" type="button" data-s="8" aria-pressed="false">8</button>
+        <button class="sz" type="button" data-s="9" aria-pressed="false">9</button>
+        <button class="sz" type="button" data-s="9.5" aria-pressed="false">9.5</button>
+        <button class="sz" type="button" data-s="10" aria-pressed="false">10</button>
+        <button class="sz" type="button" data-s="11" aria-pressed="false">11</button>
+        <button class="sz" type="button" data-s="12" aria-pressed="false">12</button>
+        <button class="sz" type="button" data-s="13" aria-pressed="false">13</button>
+      </div>
+      <button class="pill ps" type="button">Claim a number <span class="pr">$219</span></button>
+      <form class="wl" action="#" method="post">
+        <label class="lab" for="em">Email</label>
+        <input id="em" name="email" type="email" autocomplete="email" required>
+        <button class="pill" type="submit">Hold my size</button>
+        <p class="micro">No money now. We email you when Run 001 opens.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- 08 QUESTIONS -->
+<section class="band qs wrap">
+  <div class="folio"><b>08</b><i></i></div>
+  <h2 class="h2 rv">Questions.</h2>
+  <div class="acc rv">
+    <div class="q"><button type="button" id="q1" aria-expanded="false" aria-controls="a1"><span>What size do I take?</span><i class="pm"></i></button><div class="p" id="a1" data-open="0" role="region" aria-labelledby="q1"><div><p>Nine sizes, AU 6 to 13, including a 9.5. Each is measured off the last in millimetres, so the number is the same on every pair. Not sure? Send us your foot length and we will tell you the size.</p></div></div></div>
+    <div class="q"><button type="button" id="q2" aria-expanded="false" aria-controls="a2"><span>When do they arrive?</span><i class="pm"></i></button><div class="p" id="a2" data-open="0" role="region" aria-labelledby="q2"><div><p>The run is being made now. The factory finishes mid November 2026. Australian delivery is estimated December 2026. That is an estimate, so we email you the real date once we have it.</p></div></div></div>
+    <div class="q"><button type="button" id="q3" aria-expanded="false" aria-controls="a3"><span>What if they don't work for me?</span><i class="pm"></i></button><div class="p" id="a3" data-open="0" role="region" aria-labelledby="q3"><div><p>Thirty days from purchase. Wear them to work, properly. If they are not right, send them back worn and you get your money back.</p></div></div></div>
+    <div class="q"><button type="button" id="q4" aria-expanded="false" aria-controls="a4"><span>Are they certified?</span><i class="pm"></i></button><div class="p" id="a4" data-open="0" role="region" aria-labelledby="q4"><div><p>Certified to AS 2210.3:2019. The marking is Class I SB P SRC: steel toe, penetration plate, slip resistance. That is the full marking, and we claim nothing past it.</p></div></div></div>
+    <div class="q"><button type="button" id="q5" aria-expanded="false" aria-controls="a5"><span>Where are they made?</span><i class="pm"></i></button><div class="p" id="a5" data-open="0" role="region" aria-labelledby="q5"><div><p>Made in China, certified to AS 2210.3:2019. Three of us own FAR and wear the boot on site, and we say where it comes from.</p></div></div></div>
+    <div class="q"><button type="button" id="q6" aria-expanded="false" aria-controls="a6"><span>Why a zip?</span><i class="pm"></i></button><div class="p" id="a6" data-open="0" role="region" aria-labelledby="q6"><div><p>The side zip sits next to the laces, not instead of them. Laces set the fit once, then the zip gets you in and out.</p></div></div></div>
+  </div>
+</section>
+
+</main>
+
+<!-- 09 FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="folio"><b>09</b><i></i></div>
+    <p class="close"><span>Comfort isn't a luxury. It's what you're owed.</span><span>We refuse to accept it.</span></p>
+    <nav class="flinks">
+      <a href="https://www.instagram.com/farworkwear/" rel="noopener">search FAR Workwear</a>
+      <a href="mailto:fil@farworkwear.com.au">Contact</a>
+      <a href="#returns">Returns</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#terms">Terms</a>
+    </nav>
+    <p class="lab">FAR &middot; Australia</p>
+  </div>
+  <div class="bigmark">
+    <svg viewBox="52.4 156.2 320.3 86" role="img" aria-label="FAR" focusable="false"><polygon points="208.87 156.22 183.43 156.22 135.49 268.65 167.46 268.65 196.15 191.82 212.71 236.16 188.85 223.13 224.84 268.65 256.81 268.65 208.87 156.22"/><path d="M372.72,268.91c-6.71,0-12.72,0-18.73,0-3.8,0-7.6-.11-11.38.05-1.9.08-2.95-.59-3.92-2.16-6.24-10.12-12.6-20.16-18.82-30.29-.98-1.6-2.02-2.16-3.89-2.14-8.59.11-17.18.05-26.03.05v34.26h-29.5v-110.33c1.12,0,2.12,0,3.12,0,21.23,0,42.47.05,63.7,0,7.38-.02,14.48,1.12,21.16,4.34,14.9,7.17,23.05,22.75,20.96,39.23-1.73,13.59-9.12,22.88-21.19,29.31,8.04,12.36,16.1,24.74,24.51,37.67ZM290.06,210.21c12.65,0,25.13.25,37.59-.12,5.57-.17,10.37-2.63,12.07-8.7,2.7-9.64-3.1-17.35-13.18-17.42-11.48-.09-22.96-.02-34.44,0-.68,0-1.35.16-2.04.25v25.99Z"/><path d="M82.6,183.45v21.62h60.19v25.19h-60.2v38.07h-30.11v-110.2h100.21v25.31h-70.09Z"/></svg>
+  </div>
+</footer>
+
+<div class="dock" id="dock" data-on="0">
+  <span class="pr">$219</span>
+  <a class="pill" href="#run">Claim a number</a>
+</div>
+
+<script>
+(function(){
+  var h=document.documentElement; h.classList.add('js');
+  var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var q=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+  var hasIO='IntersectionObserver' in window;
+
+  /* reveals */
+  if(hasIO){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -10% 0px',threshold:.06});
+    q('.rv').forEach(function(n){io.observe(n);});
+  } else { q('.rv').forEach(function(n){n.classList.add('in');}); }
+
+  /* topbar */
+  var bar=document.getElementById('bar'),last=window.pageYOffset,tick=false;
+  addEventListener('scroll',function(){
+    if(tick)return; tick=true;
+    requestAnimationFrame(function(){
+      var y=window.pageYOffset;
+      bar.setAttribute('data-hide',(y>180&&y>last)?'1':'0');
+      last=y; tick=false;
+    });
+  },{passive:true});
+
+  /* size state */
+  var scroller=document.getElementById('runscroll');
+  function setSize(v){
+    q('.sz').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-s')===v?'true':'false');});
+    q('[data-cell]').forEach(function(c){
+      if(c.getAttribute('data-cell')===v){c.classList.add('on');}else{c.classList.remove('on');}
+    });
+    var cell=document.querySelector('.au[data-cell="'+v+'"]');
+    if(cell&&scroller&&scroller.scrollWidth>scroller.clientWidth+4){
+      var left=cell.offsetLeft-(scroller.clientWidth-cell.offsetWidth)/2;
+      if(scroller.scrollTo){scroller.scrollTo({left:left,behavior:rm?'auto':'smooth'});}else{scroller.scrollLeft=left;}
+    }
+  }
+  document.addEventListener('click',function(e){
+    var t=e.target,b=t&&t.closest?t.closest('.sz'):null;
+    if(b){setSize(b.getAttribute('data-s'));}
+  });
+
+  /* accordion */
+  q('.acc button').forEach(function(b){
+    b.addEventListener('click',function(){
+      var open=b.getAttribute('aria-expanded')==='true';
+      b.setAttribute('aria-expanded',open?'false':'true');
+      var p=document.getElementById(b.getAttribute('aria-controls'));
+      if(p){p.setAttribute('data-open',open?'0':'1');}
+    });
+  });
+
+  /* mobile dock */
+  var dock=document.getElementById('dock'),hero=document.getElementById('hero');
+  if(dock&&hero&&hasIO){
+    new IntersectionObserver(function(es){
+      dock.setAttribute('data-on',es[0].isIntersecting?'0':'1');
+    },{threshold:0}).observe(hero);
+  }
+
+  /* turntable */
+  var cv=document.getElementById('spin'),wrap=document.getElementById('spinwrap');
+  if(cv&&wrap&&cv.getContext){
+    var ctx=cv.getContext('2d'),N=35,ims=[],cur=-1,painted=false,started=false;
+    function draw(i){
+      i=((i%N)+N)%N;
+      var im=ims[i];
+      if(!im||!im.complete||!im.naturalWidth||i===cur)return;
+      cur=i; ctx.clearRect(0,0,cv.width,cv.height); ctx.drawImage(im,0,0,cv.width,cv.height); painted=true;
+    }
+    function load(){
+      for(var i=0;i<N;i++){
+        (function(k){
+          var im=new Image();
+          im.onload=function(){ if(!painted||k===0){draw(0);} };
+          im.src='assets/spin/s'+(k<10?'0':'')+k+'.webp';
+          ims[k]=im;
+        })(i);
+      }
+    }
+    if(hasIO){
+      new IntersectionObserver(function(es){ if(es[0].isIntersecting&&!started){started=true;load();} },{rootMargin:'500px 0px'}).observe(wrap);
+    } else { load(); }
+
+    var stage=cv.parentNode,drag=false,px=0,base=0;
+    stage.addEventListener('pointerdown',function(e){
+      drag=true; px=e.clientX; base=cur<0?0:cur;
+      if(stage.setPointerCapture){try{stage.setPointerCapture(e.pointerId);}catch(err){}}
+    });
+    addEventListener('pointermove',function(e){ if(drag){draw(base+Math.round((e.clientX-px)/9));} });
+    addEventListener('pointerup',function(){drag=false;});
+    addEventListener('pointercancel',function(){drag=false;});
+
+    if(!rm){
+      var st=false;
+      addEventListener('scroll',function(){
+        if(st||drag)return; st=true;
+        requestAnimationFrame(function(){
+          var r=wrap.getBoundingClientRect(),span=r.height-window.innerHeight;
+          if(span>0){
+            var p=Math.min(1,Math.max(0,(-r.top)/span));
+            draw(Math.round(p*(N-1)));
+          }
+          st=false;
+        });
+      },{passive:true});
+    }
+  }
+})();
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Product","name":"FAR Zip","description":"FAR Zip work boots, $219 flat. First run of 500 numbered pairs, certified AS 2210.3:2019, 30 days money back after you wear them to work.","brand":{"@type":"Brand","name":"FAR"},"image":"https://filipangeleski-coder.github.io/fwc-preview/v5/assets/boot-04-2x.webp","material":"Nubuck leather","offers":{"@type":"Offer","price":"219","priceCurrency":"AUD","availability":"https://schema.org/PreOrder"}}
+</script>
+</body>
+</html>
