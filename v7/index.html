@@ -1,0 +1,501 @@
+<!doctype html>
+<!-- BUILD NOTES (v7, S1180, 20 Sep 2026)
+  The page is a reel, not a brochure (Fil S1177: "people want fun, cool, interesting, engaging").
+  Copy: three light-context decks (roast / confession / incident, wf_d370a56d-61c), Fable graft, voice-critic ALL_PASS.
+  Layout: the LOUD candidate of three blind builders (wf_d3760409-194), Fable pick on 390 + 1440 screenshots.
+  Grafts: the boot-on-slab still above the turn removed (the film is the first boot on the page); the wordmark
+  is the inline tight-viewBox SVG; Klaviyo source stamped v7; twitter meta + Organization JSON-LD restored from v6.
+  Capture: the live site's proven kol.js 193736 explicit addLead + Klaviyo Boot Size profile write + Klaviyo
+  list-subscribe fallback, lifted verbatim from v6 (S1177).
+-->
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FAR | Look down. Yeah. Those ones.</title>
+<meta name="description" content="You told her they're fine. She's seen your feet. Four mates built their own boot. First run of 500, $219 a pair for the first 100. Nothing charged today.">
+<meta name="theme-color" content="#131313">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Look down. Yeah. Those ones.">
+<meta property="og:description" content="You told her they're fine. She's seen your feet. Four mates built their own boot. First run of 500, $219 a pair for the first 100. Nothing charged today.">
+<meta property="og:image" content="assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Look down. Yeah. Those ones.">
+<meta name="twitter:description" content="You told her they're fine. She's seen your feet. Four mates built their own boot. First run of 500, $219 a pair for the first 100. Nothing charged today.">
+<meta name="twitter:image" content="assets/og.jpg">
+<link rel="icon" href="assets/far-a.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#131313;overflow-x:hidden}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  font-weight:400;color:#f2f0ec;background:#131313;
+  font-size:16px;line-height:1.35;
+  -webkit-font-smoothing:antialiased;
+}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+:root{
+  --ink:#f2f0ec;
+  --dim:#8c8781;
+  --hair:rgba(242,240,236,.22);
+  --pad:20px;
+  --top:64px;
+}
+.d{font-family:"Space Grotesk","DM Sans",system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:-.035em;line-height:.84}
+.wrap{padding-left:var(--pad);padding-right:var(--pad)}
+.rule{height:1px;background:var(--hair);width:100%}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- topbar ---------- */
+.bar{
+  position:sticky;top:0;z-index:60;height:var(--top);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:0 var(--pad);background:#131313;border-bottom:1px solid var(--hair);
+}
+.bar .mark{display:block;line-height:0}
+.bar .mark svg{width:94px;height:33px;fill:var(--ink)}
+.topcta{
+  font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:13px;letter-spacing:.02em;text-decoration:none;color:#131313;background:var(--ink);
+  padding:10px 14px;border-radius:0;white-space:nowrap;
+}
+
+/* ---------- cold open ---------- */
+.open{
+  min-height:calc(100svh - var(--top));
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:120px var(--pad) 26px;
+}
+h1{margin:0;font-size:clamp(62px,25vw,208px)}
+.openfoot{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:22px}
+.tick{
+  font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:11px;letter-spacing:.24em;color:var(--dim);
+}
+
+/* ---------- escalation ---------- */
+.esc{border-top:1px solid var(--hair)}
+.esc p{
+  margin:0;padding:26px var(--pad) 28px;border-bottom:1px solid var(--hair);
+  font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;
+  letter-spacing:-.03em;line-height:.9;font-size:clamp(28px,8.6vw,66px);
+}
+.esc p:nth-child(2n){padding-left:calc(var(--pad) + 8%);color:#cfcac3}
+.esc p:nth-child(3n){padding-right:calc(var(--pad) + 10%)}
+.esc p span{display:block}
+.esc p span+span{color:var(--dim)}
+
+/* ---------- hard crops ---------- */
+.crop{position:relative;overflow:hidden;background:#0d0d0d}
+.crop img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15) contrast(1.08)}
+.crop-b{height:44vh;min-height:250px;max-height:520px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.crop-b img{transform:scale(2.35);transform-origin:46% 58%}
+
+/* ---------- turn ---------- */
+.turn{position:relative;padding:58px var(--pad) 64px;overflow:hidden;border-bottom:1px solid var(--hair);min-height:340px}
+.turn h2{margin:0;font-size:clamp(62px,23vw,230px);line-height:.8;padding-right:46px}
+.turn .off{
+  position:absolute;right:8px;bottom:26px;margin:0;
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:clamp(17px,4.6vw,30px);letter-spacing:-.02em;color:var(--dim);white-space:nowrap;line-height:1;
+}
+
+/* ---------- reveal ---------- */
+.reveal{position:relative;background:#0d0d0d}
+.reveal video{width:100%;height:auto;object-fit:cover;background:#0d0d0d}
+.reveal .over{
+  position:absolute;left:0;right:0;bottom:0;padding:0 var(--pad) 20px;
+  background:linear-gradient(180deg,rgba(19,19,19,0) 0%,rgba(19,19,19,.78) 55%,rgba(19,19,19,.95) 100%);
+}
+.reveal h2{margin:0;font-size:clamp(34px,10.5vw,86px)}
+.reveal .sub{margin:10px 0 0;font-size:15px;letter-spacing:.04em;color:#cfcac3;text-transform:uppercase;font-weight:500}
+
+/* ---------- the four ---------- */
+.four{border-top:1px solid var(--hair)}
+.four h2{margin:0;padding:34px var(--pad) 22px;font-size:clamp(34px,10.2vw,88px)}
+.four .shot{width:100%;height:auto}
+.four ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--hair)}
+.four li{padding:18px var(--pad);border-bottom:1px solid var(--hair);display:flex;gap:14px;align-items:baseline}
+.four b{
+  font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,6vw,34px);letter-spacing:-.02em;flex:0 0 auto;min-width:3.6em;
+}
+.four span{font-size:clamp(15px,4.1vw,21px);color:#cfcac3}
+
+/* ---------- catch, the loudest thing ---------- */
+.catch{position:relative;padding:44px 0 40px;border-bottom:1px solid var(--hair);overflow:hidden}
+.catch .ghost{position:absolute;inset:auto -22% -8% auto;width:86%;opacity:.5;pointer-events:none}
+.catch .ghost img{width:100%;height:auto;filter:grayscale(1) contrast(1.1)}
+.catch h2{margin:0;padding:0 var(--pad);font-size:clamp(42px,13.2vw,116px);position:relative}
+.catch .lines{margin:22px 0 0;padding:0 var(--pad);position:relative}
+.catch .lines p{margin:0 0 9px;font-size:clamp(15px,4.2vw,20px);color:#cfcac3;max-width:34ch}
+.catch .lines p:first-child{color:var(--ink);font-weight:500}
+
+.join{position:relative;margin:26px 0 0;padding:0 var(--pad)}
+.field{margin:0 0 14px}
+.lab{
+  display:block;margin:0 0 7px;font-family:"Space Grotesk",sans-serif;font-weight:700;
+  text-transform:uppercase;font-size:11px;letter-spacing:.24em;color:var(--dim);
+}
+.join input[type=text],.join input[type=email]{
+  width:100%;height:62px;padding:0 14px;background:#131313;color:var(--ink);
+  border:1px solid var(--hair);border-radius:0;font-family:inherit;font-size:19px;
+}
+.join input:focus{outline:2px solid var(--ink);outline-offset:-2px;border-color:var(--ink)}
+#szl{margin-top:20px}
+.sizes{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:0;
+  border:1px dashed var(--hair);border-radius:0;
+}
+.sz{
+  appearance:none;background:#131313;color:var(--ink);border:0;border-right:1px dashed var(--hair);
+  border-bottom:1px dashed var(--hair);padding:16px 2px;cursor:pointer;
+  font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:20px;
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em;
+}
+.sz:nth-child(5n){border-right:0}
+.sz:nth-child(n+6){border-bottom:0}
+.sz[aria-pressed=true]{background:var(--ink);color:#131313}
+.sz:focus-visible{outline:2px solid var(--ink);outline-offset:-4px}
+.pill{
+  display:block;width:100%;margin:20px 0 0;padding:22px 12px;border:0;border-radius:0;cursor:pointer;
+  background:var(--ink);color:#131313;font-family:"Space Grotesk",sans-serif;font-weight:700;
+  text-transform:uppercase;letter-spacing:-.02em;font-size:clamp(28px,8.4vw,54px);line-height:.92;
+}
+.pill:disabled{opacity:.45;cursor:default}
+.micro{margin:12px 0 0;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:500}
+.err,.ok{display:none;margin:14px 0 0;font-size:15px}
+.err{color:#cfcac3}
+.ok{font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,9vw,60px);line-height:.9}
+.ok small{display:block;margin-top:12px;font-family:"DM Sans",sans-serif;font-weight:400;text-transform:none;font-size:15px;letter-spacing:0;color:#cfcac3;line-height:1.35}
+.join[data-state=busy] .pill{opacity:.45}
+.join[data-state=error] .err{display:block}
+.join[data-state=done] .field,.join[data-state=done] .sizes,.join[data-state=done] .pill,
+.join[data-state=done] .micro,.join[data-state=done] #szl,.join[data-state=done] .err{display:none}
+.join[data-state=done] .ok{display:block}
+
+/* ---------- the boring bit ---------- */
+.boring{border-bottom:1px solid var(--hair)}
+.boring summary{
+  list-style:none;cursor:pointer;padding:28px var(--pad);
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:clamp(28px,8.4vw,60px);letter-spacing:-.03em;
+}
+.boring summary::-webkit-details-marker{display:none}
+.boring summary .mk{font-size:.42em;color:var(--dim);letter-spacing:.2em}
+.boring[open] summary .mk{color:var(--ink)}
+.boring .body{padding:0 var(--pad) 34px}
+.boring .intro{margin:0 0 22px;color:var(--dim);font-size:16px}
+.qa{border-top:1px solid var(--hair);padding:18px 0}
+.qa h3{margin:0 0 8px;font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;font-size:17px;letter-spacing:-.01em}
+.qa p{margin:0;color:#cfcac3;font-size:15px;max-width:60ch}
+.tablewrap{overflow-x:auto;border-top:1px solid var(--hair);margin-top:8px;padding-top:18px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;min-width:520px;width:100%;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:9px 10px 9px 0;border-bottom:1px solid var(--hair);font-size:14px;white-space:nowrap}
+th{font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;font-size:11px;letter-spacing:.2em;color:var(--dim)}
+
+/* ---------- footer ---------- */
+footer{padding:36px var(--pad) 120px}
+footer .fl{margin:0 0 20px;font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,9.4vw,72px);letter-spacing:-.03em;line-height:.86}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 20px}
+footer nav a{font-size:14px;color:var(--dim);text-decoration:none;border-bottom:1px solid transparent}
+footer nav a:hover{color:var(--ink);border-bottom-color:var(--hair)}
+
+/* ---------- sticky phone dock ---------- */
+.dock{
+  position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;align-items:stretch;
+  background:#131313;border-top:1px solid var(--hair);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+.dock .dl{
+  flex:1 1 auto;display:flex;align-items:center;padding:0 var(--pad);
+  font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:15px;letter-spacing:-.01em;font-variant-numeric:tabular-nums;
+}
+.dock a{
+  flex:0 0 auto;display:flex;align-items:center;padding:18px 20px;text-decoration:none;
+  background:var(--ink);color:#131313;font-family:"Space Grotesk",sans-serif;font-weight:700;
+  text-transform:uppercase;font-size:15px;letter-spacing:-.01em;
+}
+@media (min-width:760px){.dock{display:none}}
+
+/* ---------- desktop ---------- */
+@media (min-width:760px){
+  :root{--pad:56px;--top:80px}
+  .bar .mark svg{width:108px;height:38px}
+  .topcta{font-size:15px;padding:13px 20px}
+  .open{padding:160px var(--pad) 46px}
+  .esc p{padding-top:34px;padding-bottom:36px}
+  .esc p:nth-child(2n){padding-left:calc(var(--pad) + 14%)}
+  .reveal{max-height:none}
+  .reveal video{max-height:84svh}
+  .four{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:stretch}
+  .four h2{grid-column:1;padding:44px var(--pad) 26px}
+  .four .shot{grid-column:2;grid-row:1 / span 2;width:100%;height:100%;object-fit:cover}
+  .four ul{grid-column:1;align-self:end;border-top:1px solid var(--hair)}
+  .catch h2{font-size:clamp(72px,9vw,150px)}
+  .catch .ghost{width:44%;inset:auto -6% -6% auto;opacity:.45}
+  .join{max-width:640px}
+  .pill{font-size:44px}
+  .boring .body{max-width:900px}
+  footer{padding-bottom:56px}
+}
+@media (min-width:1180px){
+  .catch{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:0 48px;align-items:start}
+  .catch h2{grid-column:1;grid-row:1}
+  .catch .lines{grid-column:1;grid-row:2}
+  .join{grid-column:2;grid-row:1 / span 2;margin-top:8px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="mark" href="#top" aria-label="FAR"><svg viewBox="52.4 156.2 320.3 112.7" role="img" aria-label="FAR" focusable="false"><polygon points="208.87 156.22 183.43 156.22 135.49 268.65 167.46 268.65 196.15 191.82 212.71 236.16 188.85 223.13 224.84 268.65 256.81 268.65 208.87 156.22"/><path d="M372.72,268.91c-6.71,0-12.72,0-18.73,0-3.8,0-7.6-.11-11.38.05-1.9.08-2.95-.59-3.92-2.16-6.24-10.12-12.6-20.16-18.82-30.29-.98-1.6-2.02-2.16-3.89-2.14-8.59.11-17.18.05-26.03.05v34.26h-29.5v-110.33c1.12,0,2.12,0,3.12,0,21.23,0,42.47.05,63.7,0,7.38-.02,14.48,1.12,21.16,4.34,14.9,7.17,23.05,22.75,20.96,39.23-1.73,13.59-9.12,22.88-21.19,29.31,8.04,12.36,16.1,24.74,24.51,37.67ZM290.06,210.21c12.65,0,25.13.25,37.59-.12,5.57-.17,10.37-2.63,12.07-8.7,2.7-9.64-3.1-17.35-13.18-17.42-11.48-.09-22.96-.02-34.44,0-.68,0-1.35.16-2.04.25v25.99Z"/><path d="M82.6,183.45v21.62h60.19v25.19h-60.2v38.07h-30.11v-110.2h100.21v25.31h-70.09Z"/></svg></a>
+  <a class="topcta" href="#catch">Save my size</a>
+</header>
+
+<main id="top">
+
+  <!-- cold open -->
+  <section class="open">
+    <h1 class="d">Look down. Yeah. Those ones.</h1>
+    <div class="openfoot" aria-hidden="true"><span class="rule"></span></div>
+  </section>
+
+  <!-- escalation -->
+  <section class="esc">
+    <p><span>You've bought the same pair four times.</span><span>Same brand. Same blisters.</span></p>
+    <p><span>You blamed the concrete.</span><span>Every job. Every site.</span></p>
+    <p><span>You told her they're fine.</span><span>She's seen your feet.</span></p>
+    <p><span>You call it toughening up.</span><span>Your knees call it something else.</span></p>
+    <p><span>Boots off before the handbrake's on.</span><span>Every arvo since 2019.</span></p>
+  </section>
+
+  <!-- turn -->
+  <section class="turn">
+    <h2 class="d">It's the boots.</h2>
+    <p class="off">Not you. Never was.</p>
+  </section>
+
+  <!-- reveal -->
+  <section class="reveal">
+    <video id="film" autoplay muted loop playsinline preload="metadata" poster="assets/film-16x9-poster.jpg" width="1280" height="720" aria-label="The boot on a concrete slab">
+      <source src="assets/film-9x16.mp4" type="video/mp4" media="(max-width: 759px)">
+      <source src="assets/film-16x9.mp4" type="video/mp4">
+    </video>
+    <div class="over">
+      <h2 class="d">So we built one that doesn't.</h2>
+      <p class="sub">FAR Zip. First run of 500. Being made now.</p>
+    </div>
+  </section>
+
+  <figure class="crop crop-b" style="margin:0">
+    <img src="assets/boot-04.webp" srcset="assets/boot-04.webp 1x, assets/boot-04-2x.webp 2x" alt="FAR Zip" loading="lazy" decoding="async">
+  </figure>
+
+  <!-- the four -->
+  <section class="four">
+    <h2 class="d">Four blokes. Sick of it. Did something.</h2>
+    <img class="shot" src="assets/founders-4.webp" srcset="assets/founders-4.webp 1x, assets/founders-4-2x.webp 2x" alt="Fil, Grant, Lionel and Con" width="900" height="1125" loading="lazy" decoding="async">
+    <ul>
+      <li><b>Fil</b><span>Talked about better boots for years. Finally stopped talking.</span></li>
+      <li><b>Grant</b><span>Ten years in concrete. My feet retired before I did.</span></li>
+      <li><b>Lionel</b><span>Council crew, on my feet dawn to dark. Not bitter.</span></li>
+      <li><b>Con</b><span>Never swung a hammer. Put my money in anyway.</span></li>
+    </ul>
+  </section>
+
+  <!-- the catch -->
+  <section class="catch" id="catch">
+    <div class="ghost" aria-hidden="true"><img src="assets/boot-07.webp" alt="" loading="lazy" decoding="async"></div>
+    <h2 class="d">Tell us your size. Not another lie.</h2>
+    <div class="lines">
+      <p>500 numbered pairs. Founding Crew gets first pick.</p>
+      <p>$219 a pair for the first 100, plus socks, slides and the boot bag.</p>
+      <p>Nothing charged today. Your email and your size, that's it.</p>
+    </div>
+
+    <form class="join rv" id="join" data-state="idle" action="#" method="post" novalidate>
+      <div class="field">
+        <label class="lab" for="fname">First name</label>
+        <input id="fname" name="first_name" type="text" autocomplete="given-name" required>
+      </div>
+      <div class="field">
+        <label class="lab" for="em">Email</label>
+        <input id="em" name="email" type="email" inputmode="email" autocomplete="email" required>
+      </div>
+      <p class="lab" id="szl">Size, AU</p>
+      <div class="sizes" role="group" aria-labelledby="szl">
+        <button class="sz" type="button" data-s="6" aria-pressed="false">6</button>
+        <button class="sz" type="button" data-s="7" aria-pressed="false">7</button>
+        <button class="sz" type="button" data-s="8" aria-pressed="false">8</button>
+        <button class="sz" type="button" data-s="9" aria-pressed="false">9</button>
+        <button class="sz" type="button" data-s="9.5" aria-pressed="false">9.5</button>
+        <button class="sz" type="button" data-s="10" aria-pressed="false">10</button>
+        <button class="sz" type="button" data-s="11" aria-pressed="false">11</button>
+        <button class="sz" type="button" data-s="12" aria-pressed="false">12</button>
+        <button class="sz" type="button" data-s="13" aria-pressed="false">13</button>
+      </div>
+      <input type="hidden" name="boot_size" id="boot_size" value="">
+      <button class="pill" type="submit">Save my size</button>
+      <p class="micro">No card. No catch.</p>
+      <p class="err">That didn't go through. Try again, or email <a href="mailto:fil@farworkwear.com.au">fil@farworkwear.com.au</a> with your size.</p>
+      <p class="ok">You're in.<small>We email you the real delivery date, and you get first pick when the 500 open.</small></p>
+    </form>
+  </section>
+
+  <!-- the boring bit -->
+  <details class="boring">
+    <summary><span>The boring bit.</span><span class="mk" aria-hidden="true">Open</span></summary>
+    <div class="body">
+      <p class="intro">Everything above was the feeling. Here's the paperwork.</p>
+
+      <div class="qa">
+        <h3>What if they're shit?</h3>
+        <p>Wear them to work for 30 days from the day you buy them. Not right? Send them back worn. Money back.</p>
+      </div>
+      <div class="qa">
+        <h3>When do they land?</h3>
+        <p>The factory finishes mid November 2026. Australian delivery is estimated December 2026. That's an estimate, so we email you the real date once we have it.</p>
+      </div>
+      <div class="qa">
+        <h3>What size am I?</h3>
+        <p>Nine sizes, AU 6 to 13, including 9.5. Each one is measured off the last in millimetres, so the number is the same on every pair. Not sure? Send us your foot length and we'll tell you the size.</p>
+      </div>
+      <div class="qa">
+        <h3>What's actually in the boot?</h3>
+        <p>Nubuck leather upper, mesh lining, steel toe, aramid penetration plate, PU midsole, rubber outsole, side zip plus laces, 22mm collar foam. Certified to AS 2210.3:2019. Marking Class I SB P SRC.</p>
+      </div>
+      <div class="qa">
+        <h3>Where are they made?</h3>
+        <p>Made in China, in a factory we deal with direct. We'd rather tell you where the boots come from than dodge it.</p>
+      </div>
+
+      <div class="tablewrap">
+        <table>
+          <tbody>
+            <tr><th scope="row">AU</th><td>6</td><td>7</td><td>8</td><td>9</td><td>9.5</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
+            <tr><th scope="row">Last, mm</th><td>271</td><td>278</td><td>285</td><td>291</td><td>298</td><td>305</td><td>311</td><td>318</td><td>325</td></tr>
+            <tr><th scope="row">EUR</th><td>41</td><td>42</td><td>43</td><td>43.5</td><td>44</td><td>45</td><td>46</td><td>47</td><td>48</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+
+</main>
+
+<footer>
+  <p class="fl">FAR. Australia.</p>
+  <nav>
+    <a href="https://www.instagram.com/farworkwear/" rel="noopener">search FAR Workwear</a>
+    <a href="mailto:fil@farworkwear.com.au">Contact</a>
+    <a href="#">Returns</a>
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+  </nav>
+</footer>
+
+<div class="dock">
+  <span class="dl">First 100: $219</span>
+  <a href="#catch">Save my size</a>
+</div>
+
+<script src="https://b.kickoffpages.com/2.2.0/kol.js" id="koljs" data-campaign-id="193736" async></script>
+<script>
+(function(){
+  /* portrait poster on the phone, so the reveal never paints a letterbox still */
+  try{
+    var v=document.getElementById('film');
+    if(v&&window.matchMedia&&window.matchMedia('(max-width: 759px)').matches){
+      v.setAttribute('poster','assets/film-9x16-poster.jpg');
+    }
+    if(v&&window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      v.removeAttribute('autoplay'); v.removeAttribute('loop');
+      if(v.pause){v.pause();}
+      v.setAttribute('controls','');
+    }
+  }catch(e){}
+
+  var sizeField=document.getElementById('boot_size');
+  var pills=document.querySelectorAll('.sz');
+  Array.prototype.forEach.call(pills,function(b){
+    b.addEventListener('click',function(){
+      Array.prototype.forEach.call(pills,function(o){o.setAttribute('aria-pressed','false');});
+      b.setAttribute('aria-pressed','true');
+      if(sizeField){sizeField.value=b.getAttribute('data-s');}
+    });
+  });
+
+  /* Founding Crew capture.
+     Path 1 (proven on the live site since S247): kol.js campaign 193736, _kol.leads.addLead, which
+     syncs to Klaviyo list XQ9bDs with the referral properties. The size also goes to Klaviyo directly
+     as the 'Boot Size' profile property (the PI sizing instrument, s1089).
+     Path 2 (kol.js never bound, e.g. an in-app browser): Klaviyo client subscription straight to the
+     list, so the lead is never lost and the page never paints "You're in" over nothing. */
+  var KLAVIYO_COMPANY='RDYHLe',KLAVIYO_LIST='XQ9bDs',KLAVIYO_REV='2024-10-15';
+  var EMAIL_RE=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  function kpost(path,body){
+    return fetch('https://a.klaviyo.com/client/'+path+'/?company_id='+KLAVIYO_COMPANY,{
+      method:'POST',mode:'cors',headers:{'Content-Type':'application/json','revision':KLAVIYO_REV},body:JSON.stringify(body)
+    }).then(function(r){ if(r.status>=200&&r.status<300)return true; throw new Error('klaviyo '+r.status); });
+  }
+  function kprops(size,name){var p={'Boot Size':size||'','Boot Style':'Zip','Landing':'v7 crew'};if(name)p.first_name_landing=name;return p;}
+  function kProfile(email,name,size){
+    return kpost('profiles',{data:{type:'profile',attributes:{email:email,first_name:name,properties:kprops(size,name)}}});
+  }
+  function kSubscribe(email,name,size){
+    return kpost('subscriptions',{data:{type:'subscription',attributes:{
+      custom_source:'Landing v7 Founding Crew',
+      profile:{data:{type:'profile',attributes:{email:email,first_name:name,properties:kprops(size,name)}}}
+    },relationships:{list:{data:{type:'list',id:KLAVIYO_LIST}}}}});
+  }
+  var form=document.getElementById('join');
+  if(form){
+    form.addEventListener('submit',function(ev){
+      ev.preventDefault();
+      var ni=form.querySelector('#fname'),ei=form.querySelector('#em');
+      var name=(ni&&ni.value||'').trim(),email=(ei&&ei.value||'').trim(),size=sizeField?sizeField.value:'';
+      if(!name){ni.focus();return;}
+      if(!EMAIL_RE.test(email)){ei.focus();return;}
+      var btn=form.querySelector('button[type=submit]'); if(btn)btn.disabled=true;
+      form.setAttribute('data-state','busy');
+      function done(){form.setAttribute('data-state','done');}
+      function fail(){form.setAttribute('data-state','error');if(btn)btn.disabled=false;}
+      if(window._kol&&_kol.leads&&typeof _kol.leads.addLead==='function'){
+        _kol.leads.addLead({email:email,first_name:name,name:name,boot_size:size},'anyform')
+          .then(function(){ kProfile(email,name,size).catch(function(){}); done(); })
+          .catch(function(){ kSubscribe(email,name,size).then(done).catch(fail); });
+      } else {
+        kSubscribe(email,name,size).then(done).catch(fail);
+      }
+    });
+  }
+
+  var d=document.querySelector('.boring');
+  if(d){d.addEventListener('toggle',function(){
+    var m=d.querySelector('.mk'); if(m)m.textContent=d.open?'Close':'Open';
+  });}
+})();
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"FAR","url":"https://farworkwear.com.au/","logo":"https://farworkwear.com.au/assets/og.jpg","description":"FAR Zip work boots. First run of 500 numbered pairs, $219 a pair for the first 100, certified to AS 2210.3:2019. Owned by four mates in Australia.","sameAs":["https://www.instagram.com/farworkwear/"]}
+</script>
+</body>
+</html>
