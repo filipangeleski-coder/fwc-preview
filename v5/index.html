@@ -611,7 +611,7 @@ html.js .rv.in{opacity:1;transform:none}
   /* turntable */
   var cv=document.getElementById('spin'),wrap=document.getElementById('spinwrap');
   if(cv&&wrap&&cv.getContext){
-    var ctx=cv.getContext('2d'),N=35,ims=[],cur=-1,painted=false,started=false;
+    var ctx=cv.getContext('2d'),N=32,ims=[]  /* frames 32-34 carry a hand, S1174 contact sheet */,cur=-1,painted=false,started=false;
     function draw(i){
       i=((i%N)+N)%N;
       var im=ims[i];
