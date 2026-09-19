@@ -183,6 +183,7 @@ h1{margin:0;font-size:clamp(62px,25vw,208px)}
 .join[data-state=done] .field,.join[data-state=done] .sizes,.join[data-state=done] .pill,
 .join[data-state=done] .micro,.join[data-state=done] #szl,.join[data-state=done] .err{display:none}
 .join[data-state=done] .ok{display:block}
+.catch:has(.join[data-state=done]) .ghost{opacity:.14}
 
 /* ---------- the boring bit ---------- */
 .boring{border-bottom:1px solid var(--hair)}
@@ -476,7 +477,7 @@ footer nav a:hover{color:var(--ink);border-bottom-color:var(--hair)}
       if(!EMAIL_RE.test(email)){ei.focus();return;}
       var btn=form.querySelector('button[type=submit]'); if(btn)btn.disabled=true;
       form.setAttribute('data-state','busy');
-      function done(){form.setAttribute('data-state','done');}
+      function done(){form.setAttribute('data-state','done');var dk=document.querySelector('.dock');if(dk){dk.style.display='none';}}
       function fail(){form.setAttribute('data-state','error');if(btn)btn.disabled=false;}
       if(window._kol&&_kol.leads&&typeof _kol.leads.addLead==='function'){
         _kol.leads.addLead({email:email,first_name:name,name:name,boot_size:size},'anyform')
