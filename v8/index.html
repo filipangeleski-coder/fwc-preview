@@ -1,0 +1,737 @@
+<!doctype html>
+<!-- BUILD NOTES (v8, S1201, 23 Sep 2026)
+  v7 copy and capture, rebuilt around the W1 film (S1199: seedance_2_0 one-take, morning building site,
+  bytedance upscale to 1080x1920, marks inspected and passed; Fil picked it).
+  The top of the page is ONE pinned film scrubbed by the thumb: the camera drops out of the sunrise sky
+  ("Look down."), the confessions play over the descent with the boot a speck on the slab, "It's the boots."
+  lands as the boot fills frame from behind, the scrim lifts and the camera circles to the badge for the reveal.
+  Film = 121 frames (every 2nd source frame; 1-50 at 540x960 under the scrim, 51-121 at 720x1280) drawn to a
+  canvas with adjacent-frame blending, loaded coarse-to-fine (every 16th, 8th, 4th, 2nd, then all) so any
+  scroll position has a frame within ~1s of arrival. Save-Data loads every 4th only.
+  Story progress bars across the top (the visitor came from Instagram). Tilted site-tape ticker after the
+  reveal, speed follows scroll. Capture form, Klaviyo + kol.js wiring verbatim from v7, source stamped v8.
+  Fixed from v7: the sole ghost behind the capture is full colour (true-tan never desaturates, S455/S1185 R2).
+-->
+<html lang="en-AU" class="nojs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FAR | Look down. Yeah. Those ones.</title>
+<meta name="description" content="You told her they're fine. She's seen your feet. Four mates built their own boot. First run of 500, $219 a pair for the first 100. Nothing charged today.">
+<meta name="theme-color" content="#131313">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Look down. Yeah. Those ones.">
+<meta property="og:description" content="You told her they're fine. She's seen your feet. Four mates built their own boot. First run of 500, $219 a pair for the first 100. Nothing charged today.">
+<meta property="og:image" content="assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Look down. Yeah. Those ones.">
+<meta name="twitter:description" content="You told her they're fine. She's seen your feet. Four mates built their own boot. First run of 500, $219 a pair for the first 100. Nothing charged today.">
+<meta name="twitter:image" content="assets/og.jpg">
+<link rel="icon" href="assets/far-a.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="assets/seq/f001.webp" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=DM+Sans:wght@400;500&display=swap">
+<script>document.documentElement.className='js';</script>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{overflow-x:hidden;-webkit-text-size-adjust:100%;background:#131313}
+body{
+  margin:0;padding:0;
+  font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  font-weight:400;color:#f2f0ec;background:#131313;
+  font-size:16px;line-height:1.35;
+  -webkit-font-smoothing:antialiased;
+}
+img,video,canvas{display:block;max-width:100%}
+a{color:inherit}
+:root{
+  --bg:#131313;
+  --ink:#f2f0ec;
+  --dim:#8c8781;
+  --soft:#cfcac3;
+  --hair:rgba(242,240,236,.22);
+  --pad:20px;
+  --top:64px;
+  --sat:env(safe-area-inset-top,0px);
+  --sab:env(safe-area-inset-bottom,0px);
+  --tb:0px;              /* the part of a large viewport a phone toolbar can cover */
+  --expo:cubic-bezier(.16,1,.3,1);
+  --quart:cubic-bezier(.25,1,.5,1);
+}
+@supports (height:100svh){ :root{--tb:calc(100lvh - 100svh)} }
+.d{font-family:"Space Grotesk","DM Sans",system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:-.035em;line-height:.84}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- topbar: transparent over the film, solid after it ---------- */
+.bar{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  height:calc(var(--top) + var(--sat));padding:var(--sat) var(--pad) 0;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--bg);border-bottom:1px solid var(--hair);
+  transition:background-color .35s var(--quart),border-color .35s var(--quart);
+}
+.js .bar{background:transparent;border-bottom-color:transparent}
+.js .bar.solid{background:var(--bg);border-bottom-color:var(--hair)}
+.bar .mark{display:block;line-height:0}
+.bar .mark svg{width:94px;height:33px;fill:var(--ink)}
+.topcta{
+  font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:13px;letter-spacing:.02em;text-decoration:none;color:var(--bg);background:var(--ink);
+  padding:10px 14px;white-space:nowrap;transition:transform .15s var(--quart);
+}
+.topcta:active{transform:scale(.97)}
+/* story bars: the visitor just came from Instagram */
+.segs{position:absolute;left:var(--pad);right:var(--pad);top:calc(var(--sat) + 6px);display:none;gap:4px;height:2px;transition:opacity .3s}
+.js .segs{display:flex}
+.segs i{flex:1 1 0;height:2px;background:rgba(242,240,236,.3);overflow:hidden;border-radius:1px}
+.segs b{display:block;height:100%;background:var(--ink);transform:scaleX(0);transform-origin:0 50%}
+.bar.solid .segs{opacity:0}
+
+/* ---------- the film stage ---------- */
+.stage{position:relative;background:#0d0d0d}
+.js .stage{height:calc(var(--T) * 100vh + 100vh)}
+@supports (height:100svh){ .js .stage{height:calc(var(--T) * 100svh + 100lvh)} }
+.unit{position:absolute;top:0;left:0;width:1px;height:100vh;visibility:hidden;pointer-events:none}
+@supports (height:100svh){ .unit{height:100svh} }
+.pin{position:relative;overflow:hidden}
+.js .pin{position:sticky;top:0;height:100vh}
+@supports (height:100lvh){ .js .pin{height:100lvh} }
+.screen{position:relative;height:88vh;overflow:hidden;background:#0d0d0d}
+.js .screen{position:absolute;inset:0;height:auto}
+.screen .poster,.screen canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.nojs .screen canvas{display:none}
+.shade{position:absolute;pointer-events:none;left:0;right:0}
+.scrim{inset:0;background:#0d0d0d;opacity:.2}
+.gb{bottom:0;height:62%;background:linear-gradient(0deg,rgba(13,13,13,.9) 0%,rgba(13,13,13,.55) 45%,rgba(13,13,13,0) 100%)}
+.gt{top:0;height:48%;background:linear-gradient(180deg,rgba(13,13,13,.82) 0%,rgba(13,13,13,.45) 45%,rgba(13,13,13,0) 100%);opacity:.35}
+.vig{inset:0;background:radial-gradient(130% 90% at 50% 46%,rgba(0,0,0,0) 58%,rgba(0,0,0,.42) 100%)}
+.grain{position:absolute;inset:-12%;pointer-events:none;opacity:.13;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain .9s steps(5) infinite}
+@keyframes grain{
+  0%{transform:translate3d(0,0,0)}20%{transform:translate3d(-6%,3%,0)}40%{transform:translate3d(4%,-5%,0)}
+  60%{transform:translate3d(-2%,-7%,0)}80%{transform:translate3d(7%,2%,0)}100%{transform:translate3d(0,0,0)}
+}
+.bgc{display:none}
+
+/* copy over the film */
+.copy{position:relative;z-index:4;padding:28px var(--pad) 40px}
+.js .copy{position:absolute;inset:0;padding:0;pointer-events:none}
+.js .beat{position:absolute;left:var(--pad);right:var(--pad);margin:0}
+.js .bot{bottom:calc(var(--tb) + 30px + var(--sab))}
+.js .top{top:calc(var(--top) + var(--sat) + 24px)}
+.js [data-a]{opacity:0;will-change:opacity,transform}
+.js .b-open{opacity:1}
+.nojs .beat{margin:0 0 34px}
+
+h1{margin:0;font-size:clamp(60px,23vw,208px);text-shadow:0 2px 30px rgba(0,0,0,.25)}
+.js h1 .w{display:block;overflow:hidden;padding-bottom:.02em}
+.js h1 .w>span{display:block;transform:translate3d(0,108%,0);animation:rise 1s var(--expo) forwards}
+.js h1 .w:nth-child(1)>span{animation-delay:.2s}
+.js h1 .w:nth-child(2)>span{animation-delay:1.05s}
+.js h1 .w:nth-child(3)>span{animation-delay:1.7s}
+@keyframes rise{to{transform:none}}
+
+.line .set,.line .pun{display:block}
+.line .set{font-size:clamp(22px,6.7vw,46px);color:rgba(242,240,236,.84);margin-bottom:12px;max-width:17ch;line-height:.9}
+.line .pun{font-size:clamp(38px,11.6vw,92px);line-height:.86}
+
+.turn h2{margin:0;font-size:clamp(64px,22vw,210px);line-height:.8;transform-origin:0 0}
+.offb{position:absolute;right:10px;bottom:calc(var(--tb) + 34px + var(--sab));writing-mode:vertical-rl;transform:rotate(180deg)}
+.offb span{display:block;font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(18px,5vw,32px);letter-spacing:-.02em;line-height:1;white-space:nowrap}
+.nojs .offb{position:static;writing-mode:horizontal-tb;transform:none;padding:0 var(--pad)}
+
+.rev h2{margin:0;font-size:clamp(38px,11vw,92px);max-width:9.5em}
+.rev .sub{margin:14px 0 0;font-size:14px;line-height:1.5;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--ink)}
+
+.cue{position:absolute;z-index:5;right:var(--pad);bottom:calc(var(--tb) + 34px + var(--sab));width:14px;height:70px;pointer-events:none;display:none}
+.js .cue{display:block}
+.cue i{position:absolute;left:6px;top:0;width:2px;height:100%;background:rgba(242,240,236,.28);overflow:hidden;opacity:0;animation:fadein .6s 2.5s ease-out forwards}
+.cue i::after{content:"";position:absolute;left:0;top:-45%;width:100%;height:45%;background:var(--ink);animation:drop 1.7s 2.5s cubic-bezier(.65,0,.35,1) infinite}
+@keyframes drop{to{top:100%}}
+@keyframes fadein{to{opacity:1}}
+
+/* ---------- site tape ---------- */
+.tapewrap{position:relative;z-index:6;overflow:hidden;margin-top:-40px;padding:26px 0 30px;pointer-events:none}
+.tape{margin:0 -8vw;transform:rotate(-2.6deg);background:var(--ink);color:var(--bg);padding:13px 0 12px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.track{display:flex;width:max-content;will-change:transform}
+.it{display:flex;align-items:center;flex:0 0 auto;gap:.42em;padding-right:.42em;font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(24px,7.2vw,58px);letter-spacing:-.03em;line-height:1;white-space:nowrap}
+.it svg{height:.66em;width:auto;fill:var(--bg);flex:0 0 auto}
+
+/* ---------- the four ---------- */
+.four{border-top:1px solid var(--hair);margin-top:-10px}
+.four h2{margin:0;padding:34px var(--pad) 22px;font-size:clamp(34px,10.2vw,88px)}
+.four .ph{overflow:hidden}
+.four .shot{width:100%;height:auto}
+.js .four .shot{transform:scale(1.08);transition:transform 1.6s var(--expo)}
+.js .four.in .shot{transform:none}
+.four ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--hair)}
+.four li{padding:18px var(--pad);border-bottom:1px solid var(--hair);display:flex;gap:14px;align-items:baseline}
+.js .four li{opacity:0;transform:translate3d(-16px,0,0);transition:opacity .6s var(--quart),transform .8s var(--expo);transition-delay:calc(var(--i) * 110ms + 250ms)}
+.js .four.in li{opacity:1;transform:none}
+.four b{
+  font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:clamp(20px,6vw,34px);letter-spacing:-.02em;flex:0 0 auto;min-width:3.6em;
+}
+.four span{font-size:clamp(15px,4.1vw,21px);color:var(--soft)}
+
+/* ---------- catch, the loudest thing ---------- */
+.catch{position:relative;padding:48px 0 40px;border-bottom:1px solid var(--hair);overflow:hidden;scroll-margin-top:calc(var(--top) + var(--sat))}
+.catch .ghost{position:absolute;right:-30%;bottom:6%;width:96%;opacity:.2;pointer-events:none;transform:rotate(-11deg);transition:opacity .6s}
+.catch .ghost img{width:100%;height:auto}
+.catch h2{margin:0;padding:0 var(--pad);font-size:clamp(42px,13.2vw,116px);position:relative}
+.catch .lines{margin:22px 0 0;padding:0 var(--pad);position:relative}
+.catch .lines p{margin:0 0 9px;font-size:clamp(15px,4.2vw,20px);color:var(--soft);max-width:34ch}
+.catch .lines p:first-child{color:var(--ink);font-weight:500}
+
+.join{position:relative;margin:26px 0 0;padding:0 var(--pad)}
+.field{margin:0 0 14px}
+.lab{
+  display:block;margin:0 0 7px;font-family:"Space Grotesk",sans-serif;font-weight:700;
+  text-transform:uppercase;font-size:11px;letter-spacing:.24em;color:var(--dim);
+}
+.join input[type=text],.join input[type=email]{
+  width:100%;height:62px;padding:0 14px;background:var(--bg);color:var(--ink);
+  border:1px solid var(--hair);border-radius:0;font-family:inherit;font-size:19px;
+  transition:border-color .2s;
+}
+.join input:focus{outline:2px solid var(--ink);outline-offset:-2px;border-color:var(--ink)}
+#szl{margin-top:20px}
+.sizes{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px dashed var(--hair)}
+.sz{
+  appearance:none;-webkit-appearance:none;background:var(--bg);color:var(--ink);border:0;border-right:1px dashed var(--hair);
+  border-bottom:1px dashed var(--hair);padding:16px 2px;cursor:pointer;border-radius:0;
+  font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:20px;
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em;
+  transition:background-color .16s var(--quart),color .16s var(--quart);
+}
+.sz:nth-child(5n){border-right:0}
+.sz:nth-child(n+6){border-bottom:0}
+.sz[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.sz:focus-visible{outline:2px solid var(--ink);outline-offset:-4px}
+.pill{
+  display:block;width:100%;margin:20px 0 0;padding:22px 12px;border:0;border-radius:0;cursor:pointer;
+  background:var(--ink);color:var(--bg);font-family:"Space Grotesk",sans-serif;font-weight:700;
+  text-transform:uppercase;letter-spacing:-.02em;font-size:clamp(28px,8.4vw,54px);line-height:.92;
+  transition:transform .14s var(--quart),opacity .2s;
+}
+.pill:active{transform:scale(.985)}
+.pill:disabled{opacity:.45;cursor:default}
+.micro{margin:12px 0 0;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:500}
+.err,.ok{display:none;margin:14px 0 0;font-size:15px}
+.err{color:var(--soft)}
+.ok{font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,9vw,60px);line-height:.9}
+.ok small{display:block;margin-top:12px;font-family:"DM Sans",sans-serif;font-weight:400;text-transform:none;font-size:15px;letter-spacing:0;color:var(--soft);line-height:1.35}
+.join[data-state=busy] .pill{opacity:.45}
+.join[data-state=error] .err{display:block}
+.join[data-state=done] .field,.join[data-state=done] .sizes,.join[data-state=done] .pill,
+.join[data-state=done] .micro,.join[data-state=done] #szl,.join[data-state=done] .err{display:none}
+.join[data-state=done] .ok{display:block;animation:okin .7s var(--expo)}
+@keyframes okin{from{opacity:0;transform:translate3d(0,18px,0)}to{opacity:1;transform:none}}
+.catch:has(.join[data-state=done]) .ghost{opacity:.08}
+
+/* ---------- the boring bit ---------- */
+.boring{border-bottom:1px solid var(--hair)}
+.boring summary{
+  list-style:none;cursor:pointer;padding:28px var(--pad);
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:clamp(28px,8.4vw,60px);letter-spacing:-.03em;
+}
+.boring summary::-webkit-details-marker{display:none}
+.boring summary .mk{font-size:.42em;color:var(--dim);letter-spacing:.2em}
+.boring[open] summary .mk{color:var(--ink)}
+.boring .body{padding:0 var(--pad) 34px}
+.boring .intro{margin:0 0 22px;color:var(--dim);font-size:16px}
+.qa{border-top:1px solid var(--hair);padding:18px 0}
+.qa h3{margin:0 0 8px;font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;font-size:17px;letter-spacing:-.01em}
+.qa p{margin:0;color:var(--soft);font-size:15px;max-width:60ch}
+.tablewrap{overflow-x:auto;border-top:1px solid var(--hair);margin-top:8px;padding-top:18px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;min-width:520px;width:100%;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:9px 10px 9px 0;border-bottom:1px solid var(--hair);font-size:14px;white-space:nowrap}
+th{font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;font-size:11px;letter-spacing:.2em;color:var(--dim)}
+
+/* ---------- footer ---------- */
+footer{padding:36px var(--pad) 120px}
+footer .fl{margin:0 0 20px;font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,9.4vw,72px);letter-spacing:-.03em;line-height:.86}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 20px}
+footer nav a{font-size:14px;color:var(--dim);text-decoration:none;border-bottom:1px solid transparent}
+footer nav a:hover{color:var(--ink);border-bottom-color:var(--hair)}
+
+/* ---------- sticky phone dock: arrives with the boot ---------- */
+.dock{
+  position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;align-items:stretch;
+  background:var(--bg);border-top:1px solid var(--hair);
+  padding-bottom:var(--sab);
+}
+.js .dock{transform:translate3d(0,110%,0);transition:transform .55s var(--expo)}
+.js .dock.on{transform:none}
+.dock .dl{
+  flex:1 1 auto;display:flex;align-items:center;padding:0 var(--pad);
+  font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:15px;letter-spacing:-.01em;font-variant-numeric:tabular-nums;
+}
+.dock a{
+  flex:0 0 auto;display:flex;align-items:center;padding:18px 20px;text-decoration:none;
+  background:var(--ink);color:var(--bg);font-family:"Space Grotesk",sans-serif;font-weight:700;
+  text-transform:uppercase;font-size:15px;letter-spacing:-.01em;
+}
+@media (min-width:760px){.dock{display:none}}
+
+/* ---------- desktop: the film stands as a tall frame, the words get the room ---------- */
+@media (min-width:760px){
+  :root{--pad:56px;--top:80px;--filmw:calc(100vh * .5625);--fr:5vw}
+  .bar .mark svg{width:108px;height:38px}
+  .topcta{font-size:15px;padding:13px 20px}
+  .js .screen{left:auto;right:var(--fr);width:var(--filmw);box-shadow:0 0 0 1px rgba(242,240,236,.08),0 40px 120px rgba(0,0,0,.55)}
+  .bgc{display:block;position:absolute;inset:-60px;width:calc(100% + 120px);height:calc(100% + 120px);filter:blur(34px) brightness(.32) saturate(1.05);transform:scale(1.05)}
+  .js .beat{right:calc(var(--filmw) + var(--fr) + 56px)}
+  .js .offb{right:calc(var(--filmw) + var(--fr) + 18px)}
+  .cue{right:calc(var(--filmw) + var(--fr) + 64px)}
+  h1{font-size:clamp(64px,8.6vw,164px)}
+  .line .set{font-size:clamp(24px,2.6vw,42px)}
+  .line .pun{font-size:clamp(44px,5.6vw,104px)}
+  .turn h2{font-size:clamp(72px,8.6vw,176px)}
+  .rev h2{font-size:clamp(44px,5vw,96px)}
+  .js .rev{top:auto;bottom:calc(30px + var(--sab))}
+  .tapewrap{margin-top:-52px}
+  .it{font-size:clamp(34px,4vw,64px)}
+  .four{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:stretch;margin-top:-10px}
+  .four h2{grid-column:1;padding:56px var(--pad) 26px}
+  .four .ph{grid-column:2;grid-row:1 / span 2}
+  .four .shot{width:100%;height:100%;object-fit:cover}
+  .four ul{grid-column:1;align-self:end;border-top:1px solid var(--hair)}
+  .catch h2{font-size:clamp(72px,9vw,150px)}
+  .catch .ghost{width:50%;right:-8%;bottom:4%;opacity:.16}
+  .join{max-width:640px}
+  .pill{font-size:44px}
+  .boring .body{max-width:900px}
+  footer{padding-bottom:56px}
+}
+@media (min-width:1180px){
+  .catch{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:0 48px;align-items:start}
+  .catch h2{grid-column:1;grid-row:1}
+  .catch .lines{grid-column:1;grid-row:2}
+  .join{grid-column:2;grid-row:1 / span 2;margin-top:8px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .js h1 .w>span{transform:none}
+  .cue{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="bar" id="bar">
+  <div class="segs" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+  <a class="mark" href="#top" aria-label="FAR"><svg viewBox="52.4 156.2 320.3 112.7" role="img" aria-label="FAR" focusable="false"><polygon points="208.87 156.22 183.43 156.22 135.49 268.65 167.46 268.65 196.15 191.82 212.71 236.16 188.85 223.13 224.84 268.65 256.81 268.65 208.87 156.22"/><path d="M372.72,268.91c-6.71,0-12.72,0-18.73,0-3.8,0-7.6-.11-11.38.05-1.9.08-2.95-.59-3.92-2.16-6.24-10.12-12.6-20.16-18.82-30.29-.98-1.6-2.02-2.16-3.89-2.14-8.59.11-17.18.05-26.03.05v34.26h-29.5v-110.33c1.12,0,2.12,0,3.12,0,21.23,0,42.47.05,63.7,0,7.38-.02,14.48,1.12,21.16,4.34,14.9,7.17,23.05,22.75,20.96,39.23-1.73,13.59-9.12,22.88-21.19,29.31,8.04,12.36,16.1,24.74,24.51,37.67ZM290.06,210.21c12.65,0,25.13.25,37.59-.12,5.57-.17,10.37-2.63,12.07-8.7,2.7-9.64-3.1-17.35-13.18-17.42-11.48-.09-22.96-.02-34.44,0-.68,0-1.35.16-2.04.25v25.99Z"/><path d="M82.6,183.45v21.62h60.19v25.19h-60.2v38.07h-30.11v-110.2h100.21v25.31h-70.09Z"/></svg></a>
+  <a class="topcta" href="#catch">Save my size</a>
+</header>
+
+<main id="top">
+
+  <!-- the film: cold open, escalation, turn and reveal ride one continuous take -->
+  <section class="stage" id="stage" data-t="6.9" style="--T:6.9">
+    <div class="unit" id="unit" aria-hidden="true"></div>
+    <div class="pin">
+      <canvas class="bgc" id="bgc" aria-hidden="true"></canvas>
+      <div class="screen" id="screen">
+        <img class="poster" src="assets/seq/f001.webp" alt="" width="540" height="960" fetchpriority="high" decoding="async">
+        <canvas id="film" role="img" aria-label="A building site at sunrise. The camera drops out of the sky to one FAR boot standing alone on the slab, then circles round to the front of it."></canvas>
+        <div class="shade scrim" id="scrim"></div>
+        <div class="shade gb" id="gb"></div>
+        <div class="shade gt" id="gt"></div>
+        <div class="shade vig"></div>
+        <div class="grain" aria-hidden="true"></div>
+      </div>
+
+      <div class="copy">
+        <div class="beat bot b-open" data-a="-1" data-b="0.75" data-in="0.01" data-out="0.32">
+          <h1 class="d"><span class="w"><span>Look down.</span></span> <span class="w"><span>Yeah.</span></span> <span class="w"><span>Those ones.</span></span></h1>
+        </div>
+
+        <p class="beat bot line d"><span class="set" data-a="0.75" data-b="1.37">You've bought the same pair four times.</span> <span class="pun" data-a="0.88" data-b="1.37">Same brand. Same blisters.</span></p>
+        <p class="beat bot line d"><span class="set" data-a="1.37" data-b="1.99">You blamed the concrete.</span> <span class="pun" data-a="1.5" data-b="1.99">Every job. Every site.</span></p>
+        <p class="beat bot line d"><span class="set" data-a="1.99" data-b="2.61">You told her they're fine.</span> <span class="pun" data-a="2.12" data-b="2.61">She's seen your feet.</span></p>
+        <p class="beat bot line d"><span class="set" data-a="2.61" data-b="3.23">You call it toughening up.</span> <span class="pun" data-a="2.74" data-b="3.23">Your knees call it something else.</span></p>
+        <p class="beat bot line d"><span class="set" data-a="3.23" data-b="3.85">Boots off before the handbrake's on.</span> <span class="pun" data-a="3.36" data-b="3.85">Every arvo since 2019.</span></p>
+
+        <div class="beat top turn"><h2 class="d" data-a="3.85" data-b="4.85" data-fx="slam" data-in="0.24" data-out="0.18">It's the boots.</h2></div>
+        <p class="offb"><span data-a="4.1" data-b="4.85">Not you. Never was.</span></p>
+
+        <div class="beat top rev">
+          <h2 class="d" data-a="5.8" data-b="99" data-in="0.34">So we built one that doesn't.</h2>
+          <p class="sub" data-a="6.0" data-b="99" data-in="0.3">FAR Zip. First run of 500.<br>Being made now.</p>
+        </div>
+      </div>
+
+      <div class="cue" id="cue" aria-hidden="true"><i></i></div>
+    </div>
+  </section>
+
+  <!-- site tape -->
+  <div class="tapewrap">
+    <p class="sr">First 100: $219. Nothing charged today. 500 numbered pairs. Being made now.</p>
+    <div class="tape" aria-hidden="true">
+      <div class="track" id="track">
+        <span class="it">First 100: $219<svg viewBox="135.49 156.22 121.32 112.43"><polygon points="208.87 156.22 183.43 156.22 135.49 268.65 167.46 268.65 196.15 191.82 212.71 236.16 188.85 223.13 224.84 268.65 256.81 268.65 208.87 156.22"/></svg></span>
+        <span class="it">Nothing charged today<svg viewBox="135.49 156.22 121.32 112.43"><polygon points="208.87 156.22 183.43 156.22 135.49 268.65 167.46 268.65 196.15 191.82 212.71 236.16 188.85 223.13 224.84 268.65 256.81 268.65 208.87 156.22"/></svg></span>
+        <span class="it">500 numbered pairs<svg viewBox="135.49 156.22 121.32 112.43"><polygon points="208.87 156.22 183.43 156.22 135.49 268.65 167.46 268.65 196.15 191.82 212.71 236.16 188.85 223.13 224.84 268.65 256.81 268.65 208.87 156.22"/></svg></span>
+        <span class="it">Being made now<svg viewBox="135.49 156.22 121.32 112.43"><polygon points="208.87 156.22 183.43 156.22 135.49 268.65 167.46 268.65 196.15 191.82 212.71 236.16 188.85 223.13 224.84 268.65 256.81 268.65 208.87 156.22"/></svg></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- the four -->
+  <section class="four" id="four">
+    <h2 class="d">Four blokes. Sick of it. Did something.</h2>
+    <div class="ph"><img class="shot" src="assets/founders-4.webp" srcset="assets/founders-4.webp 1x, assets/founders-4-2x.webp 2x" alt="Fil, Grant, Lionel and Con" width="900" height="1125" loading="lazy" decoding="async"></div>
+    <ul>
+      <li style="--i:0"><b>Fil</b><span>Talked about better boots for years. Finally stopped talking.</span></li>
+      <li style="--i:1"><b>Grant</b><span>Ten years in concrete. My feet retired before I did.</span></li>
+      <li style="--i:2"><b>Lionel</b><span>Council crew, on my feet dawn to dark. Not bitter.</span></li>
+      <li style="--i:3"><b>Con</b><span>Never swung a hammer. Put my money in anyway.</span></li>
+    </ul>
+  </section>
+
+  <!-- the catch -->
+  <section class="catch" id="catch">
+    <div class="ghost" aria-hidden="true"><img src="assets/boot-07.webp" srcset="assets/boot-07.webp 1x, assets/boot-07-2x.webp 2x" alt="" loading="lazy" decoding="async"></div>
+    <h2 class="d">Tell us your size. Not another lie.</h2>
+    <div class="lines">
+      <p>500 numbered pairs. Founding Crew gets first pick.</p>
+      <p>$219 a pair for the first 100, plus socks, slides and the boot bag.</p>
+      <p>Nothing charged today. Your email and your size, that's it.</p>
+    </div>
+
+    <form class="join" id="join" data-state="idle" action="#" method="post" novalidate>
+      <div class="field">
+        <label class="lab" for="fname">First name</label>
+        <input id="fname" name="first_name" type="text" autocomplete="given-name" required>
+      </div>
+      <div class="field">
+        <label class="lab" for="em">Email</label>
+        <input id="em" name="email" type="email" inputmode="email" autocomplete="email" required>
+      </div>
+      <p class="lab" id="szl">Size, AU</p>
+      <div class="sizes" role="group" aria-labelledby="szl">
+        <button class="sz" type="button" data-s="6" aria-pressed="false">6</button>
+        <button class="sz" type="button" data-s="7" aria-pressed="false">7</button>
+        <button class="sz" type="button" data-s="8" aria-pressed="false">8</button>
+        <button class="sz" type="button" data-s="9" aria-pressed="false">9</button>
+        <button class="sz" type="button" data-s="9.5" aria-pressed="false">9.5</button>
+        <button class="sz" type="button" data-s="10" aria-pressed="false">10</button>
+        <button class="sz" type="button" data-s="11" aria-pressed="false">11</button>
+        <button class="sz" type="button" data-s="12" aria-pressed="false">12</button>
+        <button class="sz" type="button" data-s="13" aria-pressed="false">13</button>
+      </div>
+      <input type="hidden" name="boot_size" id="boot_size" value="">
+      <button class="pill" type="submit">Save my size</button>
+      <p class="micro">No card. No catch.</p>
+      <p class="err">That didn't go through. Try again, or email <a href="mailto:fil@farworkwear.com.au">fil@farworkwear.com.au</a> with your size.</p>
+      <p class="ok">You're in.<small>We email you the real delivery date, and you get first pick when the 500 open.</small></p>
+    </form>
+  </section>
+
+  <!-- the boring bit -->
+  <details class="boring">
+    <summary><span>The boring bit.</span><span class="mk" aria-hidden="true">Open</span></summary>
+    <div class="body">
+      <p class="intro">Everything above was the feeling. Here's the paperwork.</p>
+
+      <div class="qa">
+        <h3>What if they're shit?</h3>
+        <p>Wear them to work for 30 days from the day you buy them. Not right? Send them back worn. Money back.</p>
+      </div>
+      <div class="qa">
+        <h3>When do they land?</h3>
+        <p>The factory finishes mid November 2026. Australian delivery is estimated December 2026. That's an estimate, so we email you the real date once we have it.</p>
+      </div>
+      <div class="qa">
+        <h3>What size am I?</h3>
+        <p>Nine sizes, AU 6 to 13, including 9.5. Each one is measured off the last in millimetres, so the number is the same on every pair. Not sure? Send us your foot length and we'll tell you the size.</p>
+      </div>
+      <div class="qa">
+        <h3>What's actually in the boot?</h3>
+        <p>Nubuck leather upper, mesh lining, steel toe, aramid penetration plate, PU midsole, rubber outsole, side zip plus laces, 22mm collar foam. Certified to AS 2210.3:2019. Marking Class I SB P SRC.</p>
+      </div>
+      <div class="qa">
+        <h3>Where are they made?</h3>
+        <p>Made in China, in a factory we deal with direct. We'd rather tell you where the boots come from than dodge it.</p>
+      </div>
+
+      <div class="tablewrap">
+        <table>
+          <tbody>
+            <tr><th scope="row">AU</th><td>6</td><td>7</td><td>8</td><td>9</td><td>9.5</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
+            <tr><th scope="row">Last, mm</th><td>271</td><td>278</td><td>285</td><td>291</td><td>298</td><td>305</td><td>311</td><td>318</td><td>325</td></tr>
+            <tr><th scope="row">EUR</th><td>41</td><td>42</td><td>43</td><td>43.5</td><td>44</td><td>45</td><td>46</td><td>47</td><td>48</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+
+</main>
+
+<footer>
+  <p class="fl">FAR. Australia.</p>
+  <nav>
+    <a href="https://www.instagram.com/farworkwear/" rel="noopener">search FAR Workwear</a>
+    <a href="mailto:fil@farworkwear.com.au">Contact</a>
+    <a href="#">Returns</a>
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+  </nav>
+</footer>
+
+<div class="dock" id="dock">
+  <span class="dl">First 100: $219</span>
+  <a href="#catch">Save my size</a>
+</div>
+
+<script src="https://b.kickoffpages.com/2.2.0/kol.js" id="koljs" data-campaign-id="193736" async></script>
+<script>
+/* ===== the film: scroll scrubs one continuous take ===== */
+(function(){
+  var stage=document.getElementById('stage'); if(!stage||!window.requestAnimationFrame) return;
+  var mm=function(q){return window.matchMedia?window.matchMedia(q):{matches:false};};
+  var RM=mm('(prefers-reduced-motion: reduce)').matches;
+  var DESK=mm('(min-width: 760px)');
+  var unitEl=document.getElementById('unit'), screen=document.getElementById('screen');
+  var cv=document.getElementById('film'), ctx=cv.getContext('2d');
+  var bg=document.getElementById('bgc'), bctx=bg&&bg.getContext?bg.getContext('2d'):null;
+  var scrim=document.getElementById('scrim'), gb=document.getElementById('gb'), gt=document.getElementById('gt');
+  var bar=document.getElementById('bar'), dock=document.getElementById('dock'), cue=document.getElementById('cue');
+  var segs=[].slice.call(document.querySelectorAll('.segs b'));
+  var T=parseFloat(stage.getAttribute('data-t'))||6.9;
+  var N=121;
+
+  /* keyframes, in screens of scroll -> film frame / shade opacity */
+  var FK=[[0,0],[0.75,12],[3.85,43],[4.85,60],[6.3,118],[6.9,120]];
+  var SK=[[0,.2],[0.75,.44],[3.85,.56],[4.85,.34],[5.6,0],[6.9,0]];
+  var GBK=[[0,1],[4.3,1],[5.3,0]];
+  var GTK=[[0,.35],[3.6,.35],[3.95,1],[4.85,1],[5.35,.25],[5.8,1],[6.9,1]];
+  var SEG=[[0,.75],[.75,1.37],[1.37,1.99],[1.99,2.61],[2.61,3.23],[3.23,3.85],[3.85,4.85],[4.85,6.9]];
+  function pw(k,u){
+    if(u<=k[0][0]) return k[0][1];
+    for(var i=1;i<k.length;i++){ if(u<=k[i][0]){ var a=k[i-1],b=k[i]; return a[1]+(b[1]-a[1])*((u-a[0])/(b[0]-a[0])); } }
+    return k[k.length-1][1];
+  }
+  function cl(x){return x<0?0:x>1?1:x;}
+  function eo(x){return 1-Math.pow(1-x,3);}
+
+  /* ---- frames: coarse to fine, so any scroll position has a near frame early ---- */
+  var imgs=new Array(N), ok=new Uint8Array(N), queue=[], seen={}, inflight=0;
+  var saveData=!!(navigator.connection&&navigator.connection.saveData);
+  var steps=saveData?[16,8,4]:[16,8,4,2,1];
+  steps.forEach(function(s){ for(var i=0;i<N;i+=s){ if(!seen[i]){seen[i]=1;queue.push(i);} } if(!seen[N-1]){seen[N-1]=1;queue.push(N-1);} });
+  function src(i){var n=String(i+1); while(n.length<3)n='0'+n; return 'assets/seq/f'+n+'.webp';}
+  var endImg=null, endOk=false, dirty=true;
+  function pump(){ while(inflight<6&&queue.length){ load(queue.shift()); } if(!queue.length&&!inflight&&!endImg&&!saveData){ loadEnd(); } }
+  function load(i){
+    inflight++;
+    var im=new Image(); im.decoding='async';
+    im.onload=function(){
+      var fin=function(){ imgs[i]=im; ok[i]=1; inflight--; dirty=true; kick(); pump(); };
+      if(im.decode){ im.decode().then(fin,fin); } else { fin(); }
+    };
+    im.onerror=function(){ inflight--; pump(); };
+    im.src=src(i);
+  }
+  function loadEnd(){ endImg=new Image(); endImg.decoding='async'; endImg.onload=function(){endOk=true;dirty=true;kick();}; endImg.src='assets/film-end-1080.webp'; }
+  function near(i){ for(var d=0;d<N;d++){ if(i-d>=0&&ok[i-d])return i-d; if(i+d<N&&ok[i+d])return i+d; } return -1; }
+
+  var W=0,H=0,scrimK=1;
+  function size(){
+    var dpr=Math.min(window.devicePixelRatio||1,2), b=screen.getBoundingClientRect();
+    var w=Math.max(1,Math.round(b.width*dpr)), h=Math.max(1,Math.round(b.height*dpr));
+    if(cv.width!==w||cv.height!==h){ cv.width=w; cv.height=h; }
+    W=w; H=h;
+    if(bctx&&DESK.matches){ bg.width=64; bg.height=36; }
+    scrimK=DESK.matches?.5:1; dirty=true;
+  }
+  function cover(c,im,w,h){
+    var iw=im.naturalWidth||im.width, ih=im.naturalHeight||im.height; if(!iw||!ih) return;
+    var s=Math.max(w/iw,h/ih), dw=iw*s, dh=ih*s;
+    c.drawImage(im,(w-dw)/2,(h-dh)/2,dw,dh);
+  }
+  var lastKey=-1;
+  function render(f){
+    var key=Math.round(f*40);
+    if(key===lastKey&&!dirty) return;
+    var i0=Math.floor(f), t=f-i0, a=near(i0); if(a<0) return;
+    lastKey=key; dirty=false;
+    ctx.globalAlpha=1; cover(ctx,imgs[a],W,H);
+    var b=i0+1;
+    if(t>.02&&b<N&&ok[b]&&b!==a){ ctx.globalAlpha=t; cover(ctx,imgs[b],W,H); }
+    if(endOk&&f>118.4){ ctx.globalAlpha=cl((f-118.4)/1.6); cover(ctx,endImg,W,H); }
+    ctx.globalAlpha=1;
+    if(bctx&&DESK.matches){ cover(bctx,imgs[a],bg.width,bg.height); }
+  }
+
+  /* ---- words ---- */
+  var beats=[].slice.call(stage.querySelectorAll('[data-a]')).map(function(el){
+    return {el:el,a:parseFloat(el.getAttribute('data-a')),b:parseFloat(el.getAttribute('data-b')),
+      i:parseFloat(el.getAttribute('data-in'))||.15,o:parseFloat(el.getAttribute('data-out'))||.13,
+      fx:el.getAttribute('data-fx')||'rise',v:-1};
+  });
+  function words(u){
+    for(var k=0;k<beats.length;k++){
+      var B=beats[k], v=0, dir=1;
+      if(u>=B.a&&u<=B.b){
+        var vin=cl((u-B.a)/B.i), vout=cl((B.b-u)/B.o);
+        if(vout<vin){ v=eo(vout); dir=-1; } else { v=eo(vin); }
+      } else if(u>B.b){ dir=-1; }
+      if(Math.abs(v-B.v)<.002) continue;
+      B.v=v; B.el.style.opacity=v.toFixed(3);
+      if(RM) continue;
+      var m=1-v;
+      if(B.fx==='slam'){ B.el.style.transform=dir>0?'translate3d(0,'+(m*-10).toFixed(1)+'px,0) scale('+(1+m*.22).toFixed(3)+')':'translate3d(0,'+(m*-26).toFixed(1)+'px,0)'; }
+      else { B.el.style.transform='translate3d(0,'+(m*(dir>0?28:-24)).toFixed(1)+'px,0)'; }
+    }
+  }
+
+  /* ---- loop ---- */
+  var us=0, ut=0, running=false, lastT=0, solid=null, dockOn=null, barH=64, unitPx=0;
+  function measure(){
+    unitPx=unitEl.getBoundingClientRect().height||window.innerHeight;
+    barH=bar.getBoundingClientRect().height||64;
+  }
+  function frame(now){
+    var dt=lastT?Math.min(64,now-lastT):16; lastT=now;
+    var r=stage.getBoundingClientRect();
+    ut=Math.max(0,Math.min(T,-r.top/unitPx));
+    if(RM){ us=ut; } else { us+=(ut-us)*(1-Math.exp(-dt/90)); if(Math.abs(ut-us)<.0005) us=ut; }
+    var inView=r.bottom>0&&r.top<window.innerHeight;
+    var hover=0;
+    if(!RM&&us<.3&&inView){ hover=(2.6-2.6*Math.cos(now/7200*2*Math.PI))*(1-us/.3); }
+    if(inView){
+      render(Math.min(N-1,pw(FK,us)+hover));
+      words(us);
+      scrim.style.opacity=(pw(SK,us)*scrimK).toFixed(3);
+      gb.style.opacity=pw(GBK,us).toFixed(3);
+      gt.style.opacity=pw(GTK,us).toFixed(3);
+      if(cue) cue.style.opacity=cl(1-(us-.04)/.12).toFixed(3);
+    }
+    for(var j=0;j<segs.length;j++){ var s=SEG[j]; segs[j].style.transform='scaleX('+cl((us-s[0])/(s[1]-s[0])).toFixed(3)+')'; }
+    var sol=r.bottom<=barH+2;
+    if(sol!==solid){ solid=sol; bar.classList.toggle('solid',sol); }
+    var d=us>6.1||sol;
+    if(d!==dockOn&&dock){ dockOn=d; dock.classList.toggle('on',d); }
+    var more=(us!==ut)||(!RM&&us<.3&&inView&&!document.hidden);
+    if(more){ requestAnimationFrame(frame); } else { running=false; lastT=0; }
+  }
+  function kick(){ if(!running){ running=true; requestAnimationFrame(frame); } }
+
+  measure(); size(); pump(); kick();
+  window.addEventListener('scroll',kick,{passive:true});
+  window.addEventListener('resize',function(){ measure(); size(); lastKey=-1; kick(); });
+  document.addEventListener('visibilitychange',kick);
+})();
+
+/* ===== site tape: drifts, and runs faster while the thumb is moving ===== */
+(function(){
+  var tr=document.getElementById('track'); if(!tr) return;
+  var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* clone the run so the loop is seamless */
+  var html=tr.innerHTML; tr.innerHTML=html+html+html;
+  if(RM||!('IntersectionObserver' in window)) return;
+  var x=0, on=false, lastY=window.scrollY, vel=0, lastT=0, span=0;
+  function measure(){ span=tr.scrollWidth/3; }
+  function loop(now){
+    if(!on){ lastT=0; return; }
+    var dt=lastT?Math.min(64,now-lastT):16; lastT=now;
+    var y=window.scrollY, dy=Math.abs(y-lastY); lastY=y;
+    vel+= (dy-vel)*.12;
+    x-=(46+vel*9)*dt/1000;
+    if(span&&x<=-span) x+=span;
+    tr.style.transform='translate3d('+x.toFixed(1)+'px,0,0)';
+    requestAnimationFrame(loop);
+  }
+  measure(); window.addEventListener('resize',measure);
+  new IntersectionObserver(function(es){ var e=es[0]; var was=on; on=e.isIntersecting; if(on&&!was){ lastY=window.scrollY; requestAnimationFrame(loop); } },{rootMargin:'80px 0px'}).observe(tr.parentNode);
+})();
+
+/* ===== the four walk in ===== */
+(function(){
+  var f=document.getElementById('four'); if(!f) return;
+  if(!('IntersectionObserver' in window)){ f.classList.add('in'); return; }
+  var io=new IntersectionObserver(function(es){ if(es[0].isIntersecting){ f.classList.add('in'); io.disconnect(); } },{threshold:.12});
+  io.observe(f);
+})();
+
+/* ===== capture (verbatim from v7, source stamped v8) ===== */
+(function(){
+  var sizeField=document.getElementById('boot_size');
+  var pills=document.querySelectorAll('.sz');
+  Array.prototype.forEach.call(pills,function(b){
+    b.addEventListener('click',function(){
+      Array.prototype.forEach.call(pills,function(o){o.setAttribute('aria-pressed','false');});
+      b.setAttribute('aria-pressed','true');
+      if(sizeField){sizeField.value=b.getAttribute('data-s');}
+    });
+  });
+
+  /* Founding Crew capture.
+     Path 1 (proven on the live site since S247): kol.js campaign 193736, _kol.leads.addLead, which
+     syncs to Klaviyo list XQ9bDs with the referral properties. The size also goes to Klaviyo directly
+     as the 'Boot Size' profile property (the PI sizing instrument, s1089).
+     Path 2 (kol.js never bound, e.g. an in-app browser): Klaviyo client subscription straight to the
+     list, so the lead is never lost and the page never paints "You're in" over nothing. */
+  var KLAVIYO_COMPANY='RDYHLe',KLAVIYO_LIST='XQ9bDs',KLAVIYO_REV='2024-10-15';
+  var EMAIL_RE=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  function kpost(path,body){
+    return fetch('https://a.klaviyo.com/client/'+path+'/?company_id='+KLAVIYO_COMPANY,{
+      method:'POST',mode:'cors',headers:{'Content-Type':'application/json','revision':KLAVIYO_REV},body:JSON.stringify(body)
+    }).then(function(r){ if(r.status>=200&&r.status<300)return true; throw new Error('klaviyo '+r.status); });
+  }
+  function kprops(size,name){var p={'Boot Size':size||'','Boot Style':'Zip','Landing':'v8 crew'};if(name)p.first_name_landing=name;return p;}
+  function kProfile(email,name,size){
+    return kpost('profiles',{data:{type:'profile',attributes:{email:email,first_name:name,properties:kprops(size,name)}}});
+  }
+  function kSubscribe(email,name,size){
+    return kpost('subscriptions',{data:{type:'subscription',attributes:{
+      custom_source:'Landing v8 Founding Crew',
+      profile:{data:{type:'profile',attributes:{email:email,first_name:name,properties:kprops(size,name)}}}
+    },relationships:{list:{data:{type:'list',id:KLAVIYO_LIST}}}}});
+  }
+  var form=document.getElementById('join');
+  if(form){
+    form.addEventListener('submit',function(ev){
+      ev.preventDefault();
+      var ni=form.querySelector('#fname'),ei=form.querySelector('#em');
+      var name=(ni&&ni.value||'').trim(),email=(ei&&ei.value||'').trim(),size=sizeField?sizeField.value:'';
+      if(!name){ni.focus();return;}
+      if(!EMAIL_RE.test(email)){ei.focus();return;}
+      var btn=form.querySelector('button[type=submit]'); if(btn)btn.disabled=true;
+      form.setAttribute('data-state','busy');
+      function done(){form.setAttribute('data-state','done');var dk=document.querySelector('.dock');if(dk){dk.style.display='none';}}
+      function fail(){form.setAttribute('data-state','error');if(btn)btn.disabled=false;}
+      if(window._kol&&_kol.leads&&typeof _kol.leads.addLead==='function'){
+        _kol.leads.addLead({email:email,first_name:name,name:name,boot_size:size},'anyform')
+          .then(function(){ kProfile(email,name,size).catch(function(){}); done(); })
+          .catch(function(){ kSubscribe(email,name,size).then(done).catch(fail); });
+      } else {
+        kSubscribe(email,name,size).then(done).catch(fail);
+      }
+    });
+  }
+
+  var d=document.querySelector('.boring');
+  if(d){d.addEventListener('toggle',function(){
+    var m=d.querySelector('.mk'); if(m)m.textContent=d.open?'Close':'Open';
+  });}
+})();
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"FAR","url":"https://farworkwear.com.au/","logo":"https://farworkwear.com.au/assets/og.jpg","description":"FAR Zip work boots. First run of 500 numbered pairs, $219 a pair for the first 100, certified to AS 2210.3:2019. Owned by four mates in Australia.","sameAs":["https://www.instagram.com/farworkwear/"]}
+</script>
+</body>
+</html>
