@@ -6,48 +6,108 @@
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--text); font-family:"Segoe UI",system-ui,-apple-system,sans-serif; line-height:1.55; padding:24px 16px 80px; max-width:640px; margin:0 auto; }
   h1 { font-size:1.7rem; letter-spacing:.5px; text-transform:uppercase; margin-bottom:4px; }
-  .sub { color:var(--dim); margin-bottom:28px; font-size:.95rem; }
-  h2 { font-size:1.05rem; text-transform:uppercase; letter-spacing:1px; margin:34px 0 10px; border-bottom:1px solid var(--line); padding-bottom:6px; }
+  h2 { font-size:1.05rem; text-transform:uppercase; letter-spacing:1px; margin:36px 0 10px; border-bottom:1px solid var(--line); padding-bottom:6px; }
+  h3 { font-size:.95rem; text-transform:uppercase; letter-spacing:.8px; margin:22px 0 6px; }
   p { margin-bottom:10px; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:12px; }
-  .card h3 { font-size:1rem; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
-  .tag { display:inline-block; font-size:.72rem; text-transform:uppercase; letter-spacing:1px; color:var(--bg); background:var(--text); border-radius:4px; padding:1px 7px; margin-left:8px; vertical-align:middle; }
-  ul { list-style:none; }
-  li { padding-left:16px; position:relative; margin-bottom:6px; }
-  li::before { content:""; position:absolute; left:0; top:.62em; width:6px; height:2px; background:var(--dim); }
   .dim { color:var(--dim); }
-  table { width:100%; border-collapse:collapse; margin:8px 0 4px; font-size:.95rem; }
-  td { padding:7px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
-  td:first-child { font-weight:600; }
-  .num { font-variant-numeric:tabular-nums; white-space:nowrap; }
+  img { width:100%; height:auto; border-radius:6px; margin:10px 0 4px; display:block; background:#1a1a1a; }
+  .cap { color:var(--dim); font-size:14px; margin-bottom:16px; }
+  .rec { border-left:3px solid var(--text); padding:8px 12px; margin:10px 0 8px; background:#161616; font-size:.95rem; }
+  .rec b.k { text-transform:uppercase; letter-spacing:.5px; font-size:.8rem; }
+  .who { display:inline-block; font-size:.72rem; text-transform:uppercase; letter-spacing:1px; color:var(--bg); background:var(--text); border-radius:4px; padding:1px 7px; margin-left:4px; vertical-align:middle; }
+  .vote { display:block; text-align:center; background:var(--text); color:var(--bg); font-weight:700; text-transform:uppercase; letter-spacing:1px; text-decoration:none; padding:14px; border-radius:8px; margin:18px 0 6px; }
+  details { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin:10px 0; }
+  summary { cursor:pointer; font-weight:600; text-transform:uppercase; letter-spacing:.5px; font-size:.95rem; }
+  .story { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:14px 0; }
+  .story .words { font-size:1.02rem; margin:6px 0 4px; }
+  .story .rc { font-weight:800; letter-spacing:.3px; }
   .foot { margin-top:40px; color:var(--dim); font-size:.85rem; }
-  .rec { border-left:3px solid var(--text); padding:8px 12px; margin:10px 0 4px; background:#161616; font-size:.95rem; }
-  .rec b { text-transform:uppercase; letter-spacing:.5px; font-size:.8rem; }
-  img { width:100%; height:auto; border-radius:6px; margin:10px 0 4px; display:block; }
-  .cap { color:var(--dim); font-size:14px; margin-bottom:18px; }
 </style>
 </head><body>
 <h1>The FAR boot box</h1>
-<p class="dim">Every pair of the first 500 ships in this box. Magnetic flip-top, made by Don's box supplier, artwork due to Don by 15 October.</p>
+<p class="dim">Every pair of the first 500 ships in this box. Magnetic flip-top, made by Don's box supplier. The artwork goes to Don by 15 October, so we need two calls: how the lid is printed, and which story goes inside.</p>
+<a class="vote" href="https://agent.farworkwear.com.au/brain/decide?poll=box-design-s1225">Vote on the dashboard</a>
+<p class="cap">Two votes each. Look at the pictures below first.</p>
 
-<h2>Option 1: premium (recommended)</h2>
-<p>The big FAR on the lid is black gloss on matte black. No white ink. It shows when the light catches it, like the premium boxes we used as inspiration. One small white FAR sits on the front flap so it still reads on camera.</p>
-<img src="box/p_closed.jpg" alt="Premium box closed, gloss FAR on the lid, small white FAR on the front flap">
-<p class="cap">Closed. The gloss is shown lighter here so you can see it on a screen.</p>
-<img src="box/p_base.jpg" alt="Premium box turned over, the Creed in gloss on black">
-<p class="cap">Turned over: "Comfort isn't a luxury. It's what you're owed." in the same black gloss.</p>
-<img src="box/p_open.jpg" alt="Box open, inside of the lid with the founders photo space and the story">
-<p class="cap">Open. Inside the lid: a black and white photo of the three of us (grey box for now), a two-line story, and WE REFUSE TO ACCEPT IT.</p>
+<h2>What you are looking at</h2>
+<p>These are not mock-ups. The box is built in 3D at its real size, 360 by 320 by 130, from the exact print files Don's printer will get. The matte black and the gloss are set up the way the real finishes behave, so the gloss only shines when a light bounces off it into your eye, same as in your hand.</p>
+<p>A render is still not a box. The only real test is a photo of one finished box from Don before the 500 get made, and we are asking him for it.</p>
 
-<h2>Option 2: white FAR</h2>
-<p>Same layout, but the big FAR and the Creed are printed white. Louder on camera, less premium in the hand.</p>
-<img src="box/w_closed.jpg" alt="White FAR box closed">
-<img src="box/w_base.jpg" alt="White FAR box turned over with the Creed in white">
+<h2>Three ways to print the lid</h2>
+<p><b>White:</b> the big FAR is bare card, the loudest. <b>Charcoal:</b> the FAR is printed dark grey with gloss over it. <b>Premium:</b> the FAR is black gloss on matte black, no ink, like the inspiration boxes. On charcoal and premium a small white FAR sits on the front flap so the brand always shows from the front.</p>
+
+<h3>Kitchen table, ceiling light</h3>
+<img src="box/v2/cmp_kitchen.jpg" alt="White, charcoal and premium boxes side by side on a timber table under a ceiling light">
+<p class="cap">This is the one that matters most. It is where most unboxing videos get filmed, ours and every customer's. White reads from across the room. Charcoal reads. Premium goes quiet: the FAR is there as darker shiny letters if you look for it.</p>
+
+<h3>When the light catches it</h3>
+<img src="box/v2/cmp_catch.jpg" alt="The three boxes in a photo studio with a softbox catching the gloss">
+<p class="cap">Photo-studio light, placed so the gloss flashes. All three look sharp. This is the look in the inspiration pictures, and it only happens at the right angle.</p>
+
+<h3>Outdoors, grey sky</h3>
+<img src="box/v2/cmp_outdoors.jpg" alt="The three boxes on a concrete slab under an overcast sky">
+<p class="cap">On a slab or a ute tray the gloss mirrors the bright sky, so even premium reads clearly outside.</p>
+
+<h3>Turned over: the Creed on the bottom</h3>
+<img src="box/v2/cmp_base.jpg" alt="The three boxes turned over showing Comfort isn't a luxury, it's what you're owed">
+<p class="cap">"Comfort isn't a luxury. It's what you're owed." Printed the same way as the lid FAR on each option.</p>
+
+<h3>Each one up close</h3>
+<details><summary>White, up close</summary>
+  <img src="box/v2/w_catch.jpg" alt="White FAR box in studio light"><p class="cap">Studio, light catching.</p>
+  <img src="box/v2/w_everyday.jpg" alt="White FAR box in everyday studio light"><p class="cap">Studio, everyday angle.</p>
+  <img src="box/v2/w_kitchen.jpg" alt="White FAR box on a kitchen table"><p class="cap">Kitchen table.</p>
+  <img src="box/v2/w_outdoors.jpg" alt="White FAR box on concrete outdoors"><p class="cap">Outdoors.</p>
+  <img src="box/v2/w_base.jpg" alt="White FAR box turned over"><p class="cap">Turned over.</p>
+</details>
+<details><summary>Charcoal, up close</summary>
+  <img src="box/v2/g_catch.jpg" alt="Charcoal FAR box in studio light"><p class="cap">Studio, light catching.</p>
+  <img src="box/v2/g_everyday.jpg" alt="Charcoal FAR box in everyday studio light"><p class="cap">Studio, everyday angle.</p>
+  <img src="box/v2/g_kitchen.jpg" alt="Charcoal FAR box on a kitchen table"><p class="cap">Kitchen table.</p>
+  <img src="box/v2/g_outdoors.jpg" alt="Charcoal FAR box on concrete outdoors"><p class="cap">Outdoors.</p>
+  <img src="box/v2/g_base.jpg" alt="Charcoal FAR box turned over"><p class="cap">Turned over.</p>
+</details>
+<details><summary>Premium, up close</summary>
+  <img src="box/v2/p_catch.jpg" alt="Premium FAR box in studio light"><p class="cap">Studio, light catching.</p>
+  <img src="box/v2/p_everyday.jpg" alt="Premium FAR box in everyday studio light"><p class="cap">Studio, everyday angle. The gloss FAR reads darker than the matte when the light is not on it.</p>
+  <img src="box/v2/p_kitchen.jpg" alt="Premium FAR box on a kitchen table"><p class="cap">Kitchen table.</p>
+  <img src="box/v2/p_outdoors.jpg" alt="Premium FAR box on concrete outdoors"><p class="cap">Outdoors.</p>
+  <img src="box/v2/p_base.jpg" alt="Premium FAR box turned over"><p class="cap">Turned over.</p>
+</details>
+
+<div class="rec"><b class="k">Our read: charcoal</b><br>It keeps the premium feel in the hand and still puts the FAR in every unboxing shot, in any light. The case against: it is the middle option, not as loud as white and not as pure as premium. White is what Fil first asked for ("Loud FAR on the front") and costs nothing extra on the files as built.</div>
+
+<h2>Open the lid</h2>
+<img src="box/v2/open.jpg" alt="The box open, inside of the lid showing the founders photo, the story and We refuse to accept it">
+<p class="cap">The tray is shown empty. The boots, socks and bag go in here. The photo inside the lid is a frame grab from the garage shoot, standing in until we take the real one.</p>
+
+<h2>The story inside the lid</h2>
+<p>Under the photo of the three of us, two short lines, then <b>WE REFUSE TO ACCEPT IT.</b> Here are all three, zoomed so you can read them the way he will.</p>
+<img src="box/v2/stories_zoom.jpg" alt="The three stories zoomed, one above the other">
+
+<div class="story"><h3>1. The deal</h3>
+  <p class="words">You give the job your back, your weekends and your knees.<br>Your feet shouldn't be part of the deal.<br><span class="rc">WE REFUSE TO ACCEPT IT.</span></p>
+  <p class="dim">About him, not us. Says feet without selling the boot. The quietest of the three, and "part of the deal" is a phrase people have heard.</p>
+  <img src="box/v2/story_1.jpg" alt="Story 1 on the inside of the lid">
+</div>
+<div class="story"><h3>2. The slide</h3>
+  <p class="words">Sore by smoko. Wrecked by knock-off. Back in them at five.<br>Somewhere along the way you accepted it. So did we.<br><span class="rc">WE REFUSE TO ACCEPT IT.</span></p>
+  <p class="dim">The best set-up for the last line, and the only one with the three of us in it. Risk: "wrecked by knock-off" can read as knock-off boots, not knock-off time.</p>
+  <img src="box/v2/story_2.jpg" alt="Story 2 on the inside of the lid">
+</div>
+<div class="story"><h3>3. The best part</h3>
+  <p class="words">Best part of your day? Boots off at the ute.<br>It shouldn't be.<br><span class="rc">WE REFUSE TO ACCEPT IT.</span></p>
+  <p class="dim">Shortest and punchiest. Opens with a question, which is the most common trick in ads, and leans on the day being bad.</p>
+  <img src="box/v2/story_3.jpg" alt="Story 3 on the inside of the lid">
+</div>
+<div class="rec"><b class="k">Our read: 1, the deal</b><br>Clearest in a second, about him, and safe to print 500 times. If you want the one with the most bite, it is 2.</div>
 
 <h2>What we still need</h2>
-<div class="rec"><b>A photo of the three of us</b> <span class="who">Fil</span> <span class="who">Grant</span> <span class="who">Lionel</span><br>On site, facing the light, taken landscape. A phone is fine. Needed by about 10 October so the artwork makes Don's 15 October deadline.</div>
-<div class="rec"><b>The story inside the lid</b> <span class="who">Fil</span><br>Front runner: "Twenty-seven years on our feet between the three of us. Most of them in boots we hated by lunch. Everyone told us that's the job." Grant and Lionel, check your years: it counts 10 each for you and 7 for Fil.</div>
-<div class="rec"><b>Premium or white</b> <span class="who">Fil</span><br>One call, then the files go to Don.</div>
+<div class="rec"><b class="k">The photo for inside the lid</b> <span class="who">Fil</span> <span class="who">Grant</span> <span class="who">Lionel</span><br>By about 10 October. On site, landscape, faces to the light. A phone is fine, it prints black and white.</div>
+<div class="rec"><b class="k">Where we stand in it</b> <span class="who">Fil</span> <span class="who">Grant</span> <span class="who">Lionel</span><br>The names under the photo read left to right, so they have to match the real photo.</div>
+<div class="rec"><b class="k">The email to Don</b> <span class="who">Fil</span><br>The files, the price of the gloss, and a photo of one finished box before the 500 get made.</div>
+<div class="rec"><b class="k">Three or four</b> <span class="who">Fil</span><br>If Con pays in before 15 October, the photo and the names become four. After that it prints with three.</div>
+<a class="vote" href="https://agent.farworkwear.com.au/brain/decide?poll=box-design-s1225">Vote on the dashboard</a>
 
-<p class="dim" style="margin-top:28px">The print files live in the FAR brain (box artwork generator, S1216). This page is unlisted, but anyone holding the link can open it.</p>
+<p class="foot">The print files and the 3D renders live in the FAR brain (box artwork generator and box renderer, September 2026). This page is unlisted, but anyone holding the link can open it.</p>
 </body></html>
