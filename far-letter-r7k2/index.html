@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>FAR welcome letter</title>
+<style>
+  :root{--bg:#131313;--fg:#F5F5F5;--mute:#9A9A9A;--line:#2A2A2A;--card:#1C1C1C}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 Helvetica,Arial,sans-serif}
+  main{max-width:640px;margin:0 auto;padding:28px 16px 64px}
+  h1{font-size:28px;line-height:1.15;margin:0 0 10px}
+  h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mute);margin:40px 0 12px;font-weight:600}
+  p{margin:0 0 14px}
+  .tag{display:inline-block;border:1px solid var(--line);padding:3px 10px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--mute);margin-bottom:16px}
+  .card{background:var(--card);border:1px solid var(--line);padding:16px;margin:0 0 12px}
+  .k{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--mute);margin:0 0 4px}
+  .v{font-size:17px;margin:0}
+  iframe{width:100%;border:1px solid var(--line);background:#131313;display:block}
+  .big{font-size:22px;font-weight:700;letter-spacing:.5px;margin:0 0 6px}
+  ol{padding-left:20px;margin:0}
+  li{margin:0 0 10px}
+  a{color:var(--fg)}
+  .old{color:var(--mute);text-decoration:line-through}
+</style>
+</head>
+<body>
+<main>
+  <span class="tag">Draft, not live yet</span>
+  <h1>The welcome letter, from the four of us</h1>
+  <p>Everyone who signs up on farworkwear.com.au gets this a few seconds after they join. It replaces the old welcome email, which was all about the referral offer we killed on 4 Oct.</p>
+
+  <h2>What lands in their inbox</h2>
+  <div class="card"><p class="k">Subject</p><p class="v">You're in. Here's who you're dealing with.</p></div>
+  <div class="card"><p class="k">Preview line</p><p class="v">Who we are, why we started, and what happens next.</p></div>
+  <iframe id="mail" src="email.html" title="The welcome letter" height="1500" loading="lazy"></iframe>
+  <p style="color:var(--mute);font-size:14px;margin-top:10px">"Jack" stands in for their first name. If we don't have one, it says "Mate".</p>
+
+  <h2>What the sign-up box says after they join</h2>
+  <div class="card">
+    <p class="big">YOU'RE IN.</p>
+    <p style="margin:0">Check your inbox. The four of us wrote you a letter.</p>
+  </div>
+  <p style="color:var(--mute);font-size:14px">Was: <span class="old">We email you the real delivery date, and you get first pick when the 500 open.</span></p>
+
+  <h2>One line fixed in "When do they land?"</h2>
+  <div class="card"><p style="margin:0">The factory finishes late November 2026. Australian delivery is estimated December 2026 to early January 2027, depending on shipping. That's an estimate, so we email you the real date once we have it.</p></div>
+  <p style="color:var(--mute);font-size:14px">Was: <span class="old">Australian delivery is estimated December 2026.</span> The ship after the 28 Nov finish lands the first week of January, and only a flown batch lands in December.</p>
+
+  <h2>Under the bonnet</h2>
+  <p>The sign-up box no longer touches KickoffLabs. It sends the name, email and size straight to Klaviyo, and Klaviyo adds them to Shopify. Tested with a real sign-up on a phone on 6 Oct: one request, straight to Klaviyo, accepted, nothing went to KickoffLabs.</p>
+  <p>See the new version of the page (not live yet): <a href="https://farworkwear.com.au/?preview_theme_id=150097559728">farworkwear.com.au test version</a></p>
+
+  <h2>To go live</h2>
+  <ol>
+    <li>Fil says go, or sends edits.</li>
+    <li>Publish the test version of the page (one click in Shopify).</li>
+    <li>Swap the welcome email to this letter.</li>
+    <li>Switch off the old referral emails in Klaviyo.</li>
+    <li>Then cancel KickoffLabs.</li>
+  </ol>
+</main>
+<script>
+  (function(){var f=document.getElementById('mail');function fit(){try{var h=f.contentWindow.document.documentElement.scrollHeight;if(h>200)f.style.height=(h+4)+'px';}catch(e){}}f.addEventListener('load',function(){fit();setTimeout(fit,600);});window.addEventListener('resize',fit);})();
+</script>
+</body>
+</html>
