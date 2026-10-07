@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Work sessions: how they work</title>
+<style>
+  :root { --bg:#111; --card:#1a1a1a; --text:#f5f5f5; --dim:#9a9a9a; --line:#2e2e2e; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:"Segoe UI",system-ui,-apple-system,sans-serif; line-height:1.55; padding:24px 16px 80px; max-width:640px; margin:0 auto; }
+  h1 { font-size:1.7rem; letter-spacing:.5px; text-transform:uppercase; margin-bottom:4px; }
+  .sub { color:var(--dim); margin-bottom:28px; font-size:.95rem; }
+  h2 { font-size:1.05rem; text-transform:uppercase; letter-spacing:1px; margin:34px 0 10px; border-bottom:1px solid var(--line); padding-bottom:6px; }
+  p { margin-bottom:10px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:12px; }
+  .card h3 { font-size:1rem; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+  .tag { display:inline-block; font-size:.72rem; text-transform:uppercase; letter-spacing:1px; color:var(--bg); background:var(--text); border-radius:4px; padding:1px 7px; margin-left:8px; vertical-align:middle; }
+  ul { list-style:none; }
+  li { padding-left:16px; position:relative; margin-bottom:6px; }
+  li::before { content:""; position:absolute; left:0; top:.62em; width:6px; height:2px; background:var(--dim); }
+  .dim { color:var(--dim); }
+  table { width:100%; border-collapse:collapse; margin:8px 0 4px; font-size:.95rem; }
+  td { padding:7px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  td:first-child { font-weight:600; }
+  .num { font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .foot { margin-top:40px; color:var(--dim); font-size:.85rem; }
+  .rec { border-left:3px solid var(--text); padding:8px 12px; margin:10px 0 4px; background:#161616; font-size:.95rem; }
+  .rec b { text-transform:uppercase; letter-spacing:.5px; font-size:.8rem; }
+</style>
+</head>
+<body>
+
+<h1>Work sessions</h1>
+<p class="sub">Now on for all four of us. Two minutes to read, then try one on your phone.</p>
+
+<div class="rec"><b>The short version</b><br>
+Chat answers a question. A Work session does a job: it reads FAR's files and the dashboard, then writes the thing for you, step by step, while you watch.</div>
+
+<h2>What it is</h2>
+<p>Claude, running on FAR's own server, with its own copy of every FAR file. Each message you send also hands it a fresh look at the dashboard: the tasks, the filming days, the polls and the boss's jobs.</p>
+<p>So you can say "write the shot list for Sunday from the Ideas board" or "turn this card into an email to Don" and it goes and does it, file by file.</p>
+
+<h2>How to start one</h2>
+<ul>
+  <li>In Chat, flip the switch at the bottom from <b>Chat</b> to <b>Work session</b>.</li>
+  <li>Or tap <b>🛠 Work session</b> on a card, a task, a boss job or an email. That way it already knows what you are working on.</li>
+  <li>On a Chat answer, tap <b>Use in work session</b> to carry it across.</li>
+</ul>
+
+<h2>What it can't do</h2>
+<div class="card">
+<ul>
+  <li><b>It can't send anything.</b> No emails, no posts, no messages, no payments. It writes; one of us sends.</li>
+  <li><b>It can't search the web.</b> Research stays in Chat. When it needs something looked up, it gives you a "Look this up in Chat" line with a button.</li>
+  <li><b>Its changes stay in your own copy.</b> Nothing it edits changes the files the rest of us see, yet. Copy out what you want to keep.</li>
+</ul>
+</div>
+
+<h2>The limits</h2>
+<p>These are what the work would cost at Claude's list price. Nobody gets a bill. They come out of FAR's shared Claude allowance, so the limits stop one busy day eating everyone's week.</p>
+<table>
+  <tr><td>All four of us, per day</td><td class="num">USD 60</td></tr>
+  <tr><td>Each of us, per day</td><td class="num">USD 25</td></tr>
+  <tr><td>All four of us, per week</td><td class="num">USD 200</td></tr>
+  <tr><td>One message, at most</td><td class="num">USD 6</td></tr>
+  <tr><td>Burst limit</td><td>USD 10 in any 10 minutes pauses <b>everyone</b> for half an hour</td></tr>
+</table>
+<p class="dim">Two of us can have a message running at once. Your own second message waits until your first one finishes.</p>
+
+<h2>Good to know</h2>
+<ul>
+  <li><b>The other three can see what you type</b> in a Work session. Keep anything private out of it.</li>
+  <li><b>It closes itself after an hour of quiet.</b> Send a new message and it picks up where you left off.</li>
+  <li>A long job can take a few minutes. A working pill shows while it runs, and the back button gets you out without stopping it.</li>
+</ul>
+
+<div class="rec"><b>Try this first</b><br>
+Open any task on your list, tap 🛠 Work session, and ask: "What do I need to do to finish this, and can you draft the first step?"</div>
+
+<p class="foot">The full design lives in FAR's workspace (the Work-session design notes). Unlisted page: anyone with the link can open it, so keep it in the crew.</p>
+
+</body>
+</html>
