@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Con's carousel, first test run</title>
+<style>
+  :root { --bg:#111; --card:#1a1a1a; --text:#f5f5f5; --dim:#9a9a9a; --line:#2e2e2e; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:"Segoe UI",system-ui,-apple-system,sans-serif; line-height:1.55; padding:24px 16px 80px; max-width:640px; margin:0 auto; }
+  h1 { font-size:1.7rem; letter-spacing:.5px; text-transform:uppercase; margin-bottom:4px; }
+  .sub { color:var(--dim); margin-bottom:28px; font-size:.95rem; }
+  h2 { font-size:1.05rem; text-transform:uppercase; letter-spacing:1px; margin:34px 0 10px; border-bottom:1px solid var(--line); padding-bottom:6px; }
+  p { margin-bottom:10px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:12px; }
+  .card h3 { font-size:1rem; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+  .tag { display:inline-block; font-size:.72rem; text-transform:uppercase; letter-spacing:1px; color:var(--bg); background:var(--text); border-radius:4px; padding:1px 7px; margin-left:8px; vertical-align:middle; }
+  ul { list-style:none; }
+  li { padding-left:16px; position:relative; margin-bottom:6px; }
+  li::before { content:""; position:absolute; left:0; top:.62em; width:6px; height:2px; background:var(--dim); }
+  .dim { color:var(--dim); }
+  table { width:100%; border-collapse:collapse; margin:8px 0 4px; font-size:.95rem; }
+  td { padding:7px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  td:first-child { font-weight:600; }
+  .num { font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .foot { margin-top:40px; color:var(--dim); font-size:.85rem; }
+  .rec { border-left:3px solid var(--text); padding:8px 12px; margin:10px 0 4px; background:#161616; font-size:.95rem; }
+  .rec b { text-transform:uppercase; letter-spacing:.5px; font-size:.8rem; }
+  img.slide { display:block; width:100%; height:auto; border:1px solid var(--line); border-radius:8px; background:var(--card); }
+  .slide-n { color:var(--dim); font-size:.8rem; margin:6px 0 22px; }
+  .card p:last-child { margin-bottom:0; }
+</style>
+</head>
+<body>
+
+<h1>Con's carousel, first test run</h1>
+<p class="sub">This is the first carousel the new dashboard maker built, from Con's 2 truths 1 lie message. It ran twice (Con's idea, then 'too much of a give away, make the lie harder to spot and make it funny'). Not for posting yet: a fix round is underway.</p>
+
+<h2>The 7 slides</h2>
+
+<img class="slide" src="con-carousel-test-oh7a/slide_01.jpg" width="1080" height="1350" alt="Slide 1 of 7: Two truths and a lie. Every tradie's said all three. Boots edition. Over a photo of a boot toe cap on concrete.">
+<p class="slide-n">Slide 1 of 7</p>
+
+<img class="slide" src="con-carousel-test-oh7a/slide_02.jpg" width="1080" height="1350" alt="Slide 2 of 7: Round one. Older than the ute. Only the left squelches. Two weddings, a funeral. Lie. Both squelch.">
+<p class="slide-n">Slide 2 of 7</p>
+
+<img class="slide" src="con-carousel-test-oh7a/slide_03.jpg" width="1080" height="1350" alt="Slide 3 of 7: Round two. Year old, tops. Half gaffer tape. Dog won't sniff them. Lie. Older than the kids. Over a photo of a boot sole.">
+<p class="slide-n">Slide 3 of 7</p>
+
+<img class="slide" src="con-carousel-test-oh7a/slide_04.jpg" width="1080" height="1350" alt="Slide 4 of 7: Round three. Toe's showing steel. Binned twice. Rescued twice. Only sore at knock-off. Lie. Sore on Sundays.">
+<p class="slide-n">Slide 4 of 7</p>
+
+<img class="slide" src="con-carousel-test-oh7a/slide_05.jpg" width="1080" height="1350" alt="Slide 5 of 7: Final round. Shed's full of old pairs. Never wearing them. Never binning them. No lie.">
+<p class="slide-n">Slide 5 of 7</p>
+
+<img class="slide" src="con-carousel-test-oh7a/slide_06.jpg" width="1080" height="1350" alt="Slide 6 of 7: The lie's never the wild one. It's always the one that makes the boots sound a bit better than they are. The squelch, the age, the sore feet. Every crew's been telling it that way for years.">
+<p class="slide-n">Slide 6 of 7</p>
+
+<img class="slide" src="con-carousel-test-oh7a/slide_07.jpg" width="1080" height="1350" alt="Slide 7 of 7: They've got another month in them. Lie. Over a photo of boot laces and the FAR badge.">
+<p class="slide-n">Slide 7 of 7</p>
+
+<h2>Caption and pinned comment</h2>
+<div class="card">
+<h3>Caption</h3>
+<p>Not as easy as it looks. The truths are worse than the lies.</p>
+</div>
+<div class="card">
+<h3>Pinned comment</h3>
+<p>Yet to meet a bloke whose boots only squelch on the one side.</p>
+</div>
+
+<h2>What's being fixed</h2>
+<div class="card">
+<ul>
+<li>The lie is revealed on the same slide that asks it (the answer moves to the next swipe).</li>
+<li>Slide 6 explains the joke (it gets cut to one line).</li>
+<li>The photos are clean new boots under jokes about wrecked ones (the boys' own photos or a laptop session will supply worn ones).</li>
+<li>The line break that leaves 'lie.' alone on slide 1.</li>
+</ul>
+</div>
+
+<p class="foot">Unlisted page: anyone with the link can open it.</p>
+
+</body>
+</html>
