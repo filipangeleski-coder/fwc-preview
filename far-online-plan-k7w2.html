@@ -31,7 +31,7 @@
 <body>
 
 <h1>Getting FAR found online</h1>
-<p class="sub">What the website needs so Google, AI tools and buyers can find it and trust it. First checked Wed 7 Oct. Checked again Fri 9 Oct, deeper: every Shopify setting, Google, Bing and AI search, Australian law for the pre-sale, and every page on the site.</p>
+<p class="sub">What the website needs so Google, AI tools and buyers can find it and trust it. First checked Wed 7 Oct. Checked again and worked through Fri 9 Oct, deeper: every Shopify setting, Google, Bing and AI search, Australian law for the pre-sale, and every page on the site.</p>
 
 <h2>The short version</h2>
 <ul>
@@ -50,70 +50,55 @@
   <li><b>"Bing is where ChatGPT looks for products."</b> Too strong. Bing feeds some AI search tools. OpenAI doesn't say it's the only source.</li>
 </ul>
 
-<h2>1. Now: you, in Shopify and Google</h2>
-<p class="dim">About 20 minutes. None of it touches the homepage build, so it can't clash with it.</p>
+<h2>Done Fri 9 Oct</h2>
+<ul>
+  <li><b>Search Console is set up</b> on fil@farworkwear.com.au.</li>
+  <li><b>Google title and description set.</b> Every page except the homepage now shows the new line under its Google result.</li>
+  <li><b>Old Founding Crew page gone.</b> The link now forwards to the homepage.</li>
+  <li><b>Propel uninstalled.</b> It was recording what people typed into the sign-up form.</li>
+  <li><b>Junk pages cleared.</b> Empty blog, empty catalogue and the Catalog menu link are gone.</li>
+  <li><b>Contact and privacy pages fixed on a test copy.</b> The theme's settings file had been empty since v9.1, which is why they showed as plain text. The "Product title $19.99" cards are gone too. Waiting on Fil's publish (below).</li>
+</ul>
 
+<h2>1. Still to do: Fil</h2>
 <div class="card">
-  <h3>Kill the old Founding Crew page <span class="who">Fil</span></h3>
-  <p>It still shows "3 sign up = free socks, 5 = free slides, 10 = free boots", the offer we rejected on 8 Sep, and it loads KickoffLabs, which is cancelled.</p>
-  <p class="dim">Online Store &gt; Pages &gt; Founding Crew &gt; Visibility: Hidden &gt; Save. Then search "URL redirects" in the admin &gt; Create: from <code>/pages/founding-crew</code> to <code>/</code>.</p>
+  <h3>Publish v9.5 <span class="who">Fil</span></h3>
+  <p>It fixes the contact and privacy pages. The homepage code is identical to what's live now.</p>
+  <p class="dim">Online Store &gt; Themes &gt; "FAR v9.5 - inner pages + SEO (S1323)" &gt; Publish.</p>
 </div>
-
-<div class="card">
-  <h3>Uninstall Propel <span class="who">Fil</span></h3>
-  <p>It's a screen-recording app. Its code only hides password boxes, so anything typed into the sign-up form gets recorded and sent to Propel, including names and emails. The privacy page never mentions it. Uninstalling also tells Propel to delete what it stored.</p>
-  <p class="dim">Apps &gt; Propel Replay, Survey, Heatmap &gt; Uninstall.</p>
-</div>
-
-<div class="card">
-  <h3>Google title and description <span class="who">Fil</span></h3>
-  <p>Both are blank, so every page except the homepage shows "FAR work boots." under its Google result.</p>
-  <p class="dim">Online Store &gt; Preferences.</p>
-  <p class="dim">Home page title:</p>
-  <p><code>FAR Workwear | Work boots. You knock off. Your feet don't.</code></p>
-  <p class="dim">Meta description:</p>
-  <p><code>FAR Workwear. Four mates built their own work boot, because you knock off and your feet don't. AU sizes 7 to 14, including 9.5.</code></p>
-  <p class="dim">No price in it, so it doesn't go stale when the first 100 sell. Leave "Crawler access" empty. That's only for paid SEO tools.</p>
-</div>
-
 <div class="card">
   <h3>Prices include tax <span class="who">Fil</span></h3>
-  <p>FAR has been registered for GST since 29 Jun, so prices have to be shown GST-inclusive. The setting is still off.</p>
+  <p>Still off. FAR has been registered for GST since 29 Jun.</p>
   <p class="dim">Settings &gt; Taxes and duties. 2 minutes.</p>
 </div>
-
 <div class="card">
-  <h3>Search Console, then Bing <span class="who">Fil</span></h3>
-  <p>This is how Google finds out the site exists, and how we see what people type to find us.</p>
-  <p class="dim">search.google.com/search-console, logged in as the Google account that runs the farworkwear.com.au email. Screenshot what you see. If the site's there, we submit the sitemap. If not, Add property &gt; Domain &gt; farworkwear.com.au, which may verify straight away. Then Bing Webmaster Tools &gt; Import from Search Console, about 5 minutes.</p>
+  <h3>Google, then Bing <span class="who">Fil</span></h3>
+  <p>Google's first try at reading the sitemap failed. When we fetch it ourselves it loads fine, so it's probably Google's first attempt on a new site. Claude re-checks it in a day or two.</p>
+  <p class="dim">Search Console &gt; URL inspection &gt; <code>https://farworkwear.com.au/</code> &gt; Request indexing. Then bing.com/webmasters &gt; Import from Google Search Console &gt; farworkwear.com.au.</p>
+</div>
+<div class="card">
+  <h3>Three screenshots <span class="who">Fil</span></h3>
+  <p class="dim">Settings &gt; Payments (is Shopify Payments on, the card statement name, payment capture). Settings &gt; Notifications &gt; Sender email. Settings &gt; Markets.</p>
+</div>
+<div class="card">
+  <h3>TikTok bio typo <span class="who">Fil</span></h3>
+  <p>It still says "You're boots are". Should be "Your boots are". 10 seconds in the app.</p>
+</div>
+<div class="card">
+  <h3>The PO box <span class="who">Fil</span></h3>
+  <p>Shopify wouldn't save without a street, so the store address is "Crown Street, Wollongong" for now, and Klaviyo shows the same. When the PO box opens, it goes in both.</p>
+</div>
+<div class="card">
+  <h3>The homepage's Google line <span class="who">Fil</span></h3>
+  <p>The homepage still writes its own Google description and share preview, and it says "$219 for the first 100. Nothing charged today." That's wrong the day the paid page opens. Option 1: leave it and change it that day. Free, but easy to forget. Option 2: point the homepage at the new line in Shopify settings. No price, never goes stale, and you can edit it yourself. Recommended: option 2.</p>
 </div>
 
-<div class="card">
-  <h3>Clear the junk pages <span class="who">Fil</span></h3>
-  <p>Google is being sent an empty blog, an empty catalogue, a "Catalog" menu link and an account login, and nobody has an account yet.</p>
-  <p class="dim">Online Store &gt; Blog posts &gt; Manage blogs &gt; News &gt; Delete (it's empty). Products &gt; Collections &gt; "Home page" &gt; untick Online Store. Online Store &gt; Navigation &gt; Main menu &gt; remove "Catalog". Settings &gt; Customer accounts &gt; turn off sign-in links until launch.</p>
-</div>
-
-<div class="card">
-  <h3>The address on the privacy page <span class="who">Fil</span></h3>
-  <p>The home street is gone. It now says "Crown Street, Wollongong NSW 2500", and still "please call or email us" with no number. A privacy page doesn't need a street at all. An email contact is enough. If Crown Street isn't an address we can get mail at, it comes out.</p>
-  <p class="dim">The address comes from Settings &gt; Store details.</p>
-</div>
-
-<div class="card">
-  <h3>Four screenshots <span class="who">Fil</span></h3>
-  <p>This is the part Claude can't see from outside the admin.</p>
-  <p class="dim">Settings &gt; Store details (every address on it). Settings &gt; Payments (is Shopify Payments on, the card statement name, payment capture). Settings &gt; Notifications &gt; Sender email (is our domain set up for order emails). Settings &gt; Markets.</p>
-</div>
-
-<h2>2. After the new homepage goes live: Claude</h2>
-<p class="dim">This is theme work, so it waits until the homepage build is published. It's done on a test copy, and you publish it.</p>
+<h2>2. Still to do: Claude</h2>
 <ul>
-  <li><b>Make the contact and policy pages look like FAR.</b> The theme has no fonts set, so those pages fall back to plain browser text. This has to be fixed before the refund, shipping and terms pages go up. <span class="who">Claude</span></li>
-  <li><b>Kill the placeholder cards.</b> A wrong link shows a "page not found" screen with four "Product title $19.99" boxes on it. <span class="who">Claude</span></li>
-  <li><b>Give each page its own Google description</b>, and have the homepage read its description from the Shopify setting, so you can change it yourself without code. <span class="who">Claude</span></li>
-  <li><b>Add TikTok to the business links Google reads.</b> Right now only Instagram is listed. <span class="who">Claude</span></li>
-  <li><b>Point the dead crew.farworkwear.com.au at the homepage</b>, so any old link lands somewhere real. This one is a GoDaddy change and a Shopify domain setting. Claude gives you the steps. <span class="who">Fil</span></li>
+  <li><b>Re-check the sitemap</b> in a day or two. If it's still failing, send Google the parts one by one. <span class="who">Claude</span></li>
+  <li><b>Write the privacy page properly.</b> It names the tools we use (Shopify, Klaviyo, Meta, Google), gives an email and the PO box, and drops "please call". It goes to the lawyer on 16 Oct with the other three. <span class="who">Claude</span></li>
+  <li><b>Add TikTok to the business links Google reads.</b> The account is checked and is ours. It goes in with the next homepage update. <span class="who">Claude</span></li>
+  <li><b>Point the dead crew.farworkwear.com.au at the homepage.</b> It's a GoDaddy change and a Shopify domain setting. Claude gives you the steps. <span class="who">Fil</span></li>
 </ul>
 
 <h2>3. Already moving: the policy pages</h2>
