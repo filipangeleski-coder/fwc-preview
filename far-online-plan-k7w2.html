@@ -24,91 +24,139 @@
   .foot { margin-top:40px; color:var(--dim); font-size:.85rem; }
   .rec { border-left:3px solid var(--text); padding:8px 12px; margin:10px 0 4px; background:#161616; font-size:.95rem; }
   .rec b { text-transform:uppercase; letter-spacing:.5px; font-size:.8rem; }
-  code { background:#222; padding:0 4px; border-radius:3px; font-size:.9em; }
+  code { background:#222; padding:2px 6px; border-radius:3px; font-size:.9em; display:inline-block; white-space:normal; word-break:break-word; }
+  a { color:var(--text); }
 </style>
 </head>
 <body>
 
 <h1>Getting FAR found online</h1>
-<p class="sub">What the website needs so Google, AI tools and buyers can find it and trust it. Everything here was checked on the live site on Wed 7 Oct.</p>
+<p class="sub">What the website needs so Google, AI tools and buyers can find it and trust it. First checked Wed 7 Oct. Checked again Fri 9 Oct, deeper: every Shopify setting, Google, Bing and AI search, Australian law for the pre-sale, and every page on the site.</p>
 
 <h2>The short version</h2>
 <ul>
-  <li>The homepage is in decent shape. It has a proper title, a Google description, a share image, and the business details Google reads behind the scenes.</li>
-  <li>The rest of the site isn't. Three policy pages are missing. The privacy page shows your home street. Google has never been told the site exists. The other pages are blank Shopify defaults.</li>
-  <li>None of it is big. Most of it I can do on a test copy of the site. About 30 minutes needs you, because it needs your logins.</li>
+  <li>The homepage is in good shape. It has a proper title, a Google description, a share image, and the business details Google reads behind the scenes.</li>
+  <li>The rest of the site isn't. The contact and privacy pages show as plain, unstyled text. That's a theme fault, and it was already there before the new homepage. Five policy pages are missing. The old referral page is still live, and so is a dead KickoffLabs web address.</li>
+  <li>Google is closer than we thought. A Google verification record has been on the domain since at least September, so Search Console may take one click.</li>
+  <li>The bigger news is the pre-sale. The law check turned up rules that change how the November page gets built. They're in section 4, and they apply to all four of us, because they change what we can say when we ask people to buy.</li>
 </ul>
-<div class="rec"><b>Honest bit</b><br>Google won't sell the first 100. Your personal asks will. Two things here matter no matter what: the policy pages (needed before any money changes hands) and the privacy fix. The rest is cheap but slow, because Google takes weeks to pick up a site. That's why it's worth starting now.</div>
+<div class="rec"><b>Honest bit</b><br>Google won't sell the first 100. Your personal asks will. Search is where people go to check us out after they've seen the content. So the jobs that matter are the ones that make us look real and keep us legal. The rest is cheap but slow, because Google takes weeks to pick up a site. That's why it's worth starting now.</div>
 
-<h2>1. Today or tomorrow: you</h2>
-<p class="dim">Needs your Shopify or Google login. About 30 minutes, phone or laptop.</p>
-
-<div class="card">
-  <h3>Take your street off the privacy page <span class="who">Fil</span></h3>
-  <p>The privacy page ends with "FAR Workwear, Robsons Road, Keiraville NSW 2500", and it says "please call" with no number. Anyone can read it.</p>
-  <p class="dim">Shopify &gt; Settings &gt; Policies &gt; Privacy policy. Change the address to "Wollongong NSW 2500" until the PO box is open, and delete "call or". 5 minutes.</p>
-</div>
-
-<div class="card">
-  <h3>Find out what "Propel replays" is <span class="who">Fil</span></h3>
-  <p>A script with that name loads on every visit to the site. It looks like an app that records visitors' screens. I can't see the app list from here, so I can't tell you what it is.</p>
-  <p class="dim">Shopify &gt; Apps. If nobody's using it, uninstall it. It's also slowing the page down. 5 minutes.</p>
-</div>
-
-<div class="card">
-  <h3>Set up Google Search Console <span class="who">Fil</span></h3>
-  <p>This is how you tell Google the site exists, and how we see what people type to find us. It has never been set up. It needs your Google login plus a one-line record on the domain. You start it, send me the code it gives you, and I tell you exactly where it goes.</p>
-  <p class="dim">search.google.com/search-console &gt; Add property &gt; Domain &gt; farworkwear.com.au. 15 minutes.</p>
-</div>
-
-<div class="card">
-  <h3>Tick "prices include tax" <span class="who">Fil</span></h3>
-  <p>It's off right now. Already on your list for 24 Oct, and it's a 2-minute job.</p>
-  <p class="dim">Shopify &gt; Settings &gt; Taxes and duties.</p>
-</div>
-
-<h2>2. This week: me</h2>
-<p class="dim">All of this happens on a test copy. Nothing on the live site changes until you publish it.</p>
+<h2>What the first version of this page got wrong</h2>
 <ul>
-  <li><b>Fix the wrong facts Google reads.</b> The hidden boot data says sizes AU 6 to 13. The page says 7 to 14, which is right. Fixed in the version going up today.</li>
-  <li><b>Kill the placeholder cards.</b> A wrong link shows a "page not found" screen with four "Product title $19.99" boxes on it.</li>
-  <li><b>Sort the other pages.</b> Contact, an empty blog, an empty catalogue and the cart are all stock Shopify, and all carry the same description, "FAR work boots." I'll hide the empty ones, put the contact page in FAR's look, give each page a real description, and pull the hidden pages out of the list Google reads.</li>
-  <li><b>Add TikTok to the business links Google reads.</b> Right now only Instagram is listed.</li>
-  <li><b>Tell Bing the site exists.</b> It takes minutes, and Bing is where ChatGPT looks for products.</li>
-  <li><b>Update our search plan.</b> It's three months out of date.</li>
+  <li><b>"Google has never been told the site exists."</b> Not quite. A Google verification record has been on the domain since at least 26 Sep. We just don't know yet whether it was finished.</li>
+  <li><b>"Propel is slowing the page down."</b> Not proven. The new homepage loads in about 2 seconds with Propel running. It still has to go, but for privacy, not speed (see below).</li>
+  <li><b>"Check our emails land in the inbox."</b> Already done 26 Sep. Klaviyo mail is signed with our domain and passes the spam checks.</li>
+  <li><b>"Bing is where ChatGPT looks for products."</b> Too strong. Bing feeds some AI search tools. OpenAI doesn't say it's the only source.</li>
 </ul>
 
-<h2>3. Before any money changes hands</h2>
-<p class="dim">Before the private pre-sale page opens in early November.</p>
+<h2>1. Now: you, in Shopify and Google</h2>
+<p class="dim">About 20 minutes. None of it touches the homepage build, so it can't clash with it.</p>
+
 <div class="card">
-  <h3>Refund, shipping and terms pages <span class="tag">Hard gate</span></h3>
-  <p>All three show "page not found" today. Google won't list a shop without them. Australian consumer law also wants refund rights spelled out before you take money.</p>
-  <p class="dim">I draft them from what we've already ruled: 30 days worn from the day they arrive, and a 6-month warranty on faults. Then they go to the lawyer read due 16 Oct.</p>
+  <h3>Kill the old Founding Crew page <span class="who">Fil</span></h3>
+  <p>It still shows "3 sign up = free socks, 5 = free slides, 10 = free boots", the offer we rejected on 8 Sep, and it loads KickoffLabs, which is cancelled.</p>
+  <p class="dim">Online Store &gt; Pages &gt; Founding Crew &gt; Visibility: Hidden &gt; Save. Then search "URL redirects" in the admin &gt; Create: from <code>/pages/founding-crew</code> to <code>/</code>.</p>
 </div>
+
+<div class="card">
+  <h3>Uninstall Propel <span class="who">Fil</span></h3>
+  <p>It's a screen-recording app. Its code only hides password boxes, so anything typed into the sign-up form gets recorded and sent to Propel, including names and emails. The privacy page never mentions it. Uninstalling also tells Propel to delete what it stored.</p>
+  <p class="dim">Apps &gt; Propel Replay, Survey, Heatmap &gt; Uninstall.</p>
+</div>
+
+<div class="card">
+  <h3>Google title and description <span class="who">Fil</span></h3>
+  <p>Both are blank, so every page except the homepage shows "FAR work boots." under its Google result.</p>
+  <p class="dim">Online Store &gt; Preferences.</p>
+  <p class="dim">Home page title:</p>
+  <p><code>FAR Workwear | Work boots. You knock off. Your feet don't.</code></p>
+  <p class="dim">Meta description:</p>
+  <p><code>FAR Workwear. Four mates built their own work boot, because you knock off and your feet don't. AU sizes 7 to 14, including 9.5.</code></p>
+  <p class="dim">No price in it, so it doesn't go stale when the first 100 sell. Leave "Crawler access" empty. That's only for paid SEO tools.</p>
+</div>
+
+<div class="card">
+  <h3>Prices include tax <span class="who">Fil</span></h3>
+  <p>FAR has been registered for GST since 29 Jun, so prices have to be shown GST-inclusive. The setting is still off.</p>
+  <p class="dim">Settings &gt; Taxes and duties. 2 minutes.</p>
+</div>
+
+<div class="card">
+  <h3>Search Console, then Bing <span class="who">Fil</span></h3>
+  <p>This is how Google finds out the site exists, and how we see what people type to find us.</p>
+  <p class="dim">search.google.com/search-console, logged in as the Google account that runs the farworkwear.com.au email. Screenshot what you see. If the site's there, we submit the sitemap. If not, Add property &gt; Domain &gt; farworkwear.com.au, which may verify straight away. Then Bing Webmaster Tools &gt; Import from Search Console, about 5 minutes.</p>
+</div>
+
+<div class="card">
+  <h3>Clear the junk pages <span class="who">Fil</span></h3>
+  <p>Google is being sent an empty blog, an empty catalogue, a "Catalog" menu link and an account login, and nobody has an account yet.</p>
+  <p class="dim">Online Store &gt; Blog posts &gt; Manage blogs &gt; News &gt; Delete (it's empty). Products &gt; Collections &gt; "Home page" &gt; untick Online Store. Online Store &gt; Navigation &gt; Main menu &gt; remove "Catalog". Settings &gt; Customer accounts &gt; turn off sign-in links until launch.</p>
+</div>
+
+<div class="card">
+  <h3>The address on the privacy page <span class="who">Fil</span></h3>
+  <p>The home street is gone. It now says "Crown Street, Wollongong NSW 2500", and still "please call or email us" with no number. A privacy page doesn't need a street at all. An email contact is enough. If Crown Street isn't an address we can get mail at, it comes out.</p>
+  <p class="dim">The address comes from Settings &gt; Store details.</p>
+</div>
+
+<div class="card">
+  <h3>Four screenshots <span class="who">Fil</span></h3>
+  <p>This is the part Claude can't see from outside the admin.</p>
+  <p class="dim">Settings &gt; Store details (every address on it). Settings &gt; Payments (is Shopify Payments on, the card statement name, payment capture). Settings &gt; Notifications &gt; Sender email (is our domain set up for order emails). Settings &gt; Markets.</p>
+</div>
+
+<h2>2. After the new homepage goes live: Claude</h2>
+<p class="dim">This is theme work, so it waits until the homepage build is published. It's done on a test copy, and you publish it.</p>
 <ul>
-  <li><b>TikTok pixel.</b> It's still not on the site, three months after it was planned. It needs a decision on whether it's worth it, then your TikTok login. <span class="who">Fil</span></li>
-  <li><b>Hide the private pre-sale page from Google</b>, so it doesn't show up in search.</li>
-  <li><b>Check our emails land in the inbox, not spam.</b> The welcome email and the pre-sale emails are the whole pre-sale channel.</li>
-  <li><b>The Google description.</b> It says "$219 for the first 100", so it goes stale the day they sell out. A founder call on new wording.</li>
-  <li><b>The certificate line.</b> The page and hidden data say "Certified to AS 2210.3:2019". Before money is taken, check that wording against the certificate itself.</li>
+  <li><b>Make the contact and policy pages look like FAR.</b> The theme has no fonts set, so those pages fall back to plain browser text. This has to be fixed before the refund, shipping and terms pages go up. <span class="who">Claude</span></li>
+  <li><b>Kill the placeholder cards.</b> A wrong link shows a "page not found" screen with four "Product title $19.99" boxes on it. <span class="who">Claude</span></li>
+  <li><b>Give each page its own Google description</b>, and have the homepage read its description from the Shopify setting, so you can change it yourself without code. <span class="who">Claude</span></li>
+  <li><b>Add TikTok to the business links Google reads.</b> Right now only Instagram is listed. <span class="who">Claude</span></li>
+  <li><b>Point the dead crew.farworkwear.com.au at the homepage</b>, so any old link lands somewhere real. This one is a GoDaddy change and a Shopify domain setting. Claude gives you the steps. <span class="who">Fil</span></li>
 </ul>
 
-<h2>4. At launch</h2>
+<h2>3. Already moving: the policy pages</h2>
+<div class="card">
+  <h3>Refund, shipping and terms <span class="tag">Hard gate</span></h3>
+  <p>All three show "page not found" today. No money changes hands until they're up. The drafts are written, with your calls on top. Then they go to the lawyer read on 16 Oct.</p>
+  <p class="dim"><a href="https://filipangeleski-coder.github.io/fwc-preview/far-policies-draft-q7r4.html">Open the policy drafts</a></p>
+</div>
+
+<h2>4. Before the private pre-sale page opens</h2>
+<p class="dim">What the Australian law check turned up. It's research for the lawyer, not legal advice, but every point here comes from the law itself or Shopify's own rules.</p>
+<ul>
+  <li><b>The delivery date we print is a legal promise.</b> Only take money for a window we're sure of, with a real latest date, not "early 2027". The date we give also starts the clock on how long a buyer's bank can reverse the payment. <span class="who">All four</span></li>
+  <li><b>No "refer a mate, get credit when they buy".</b> Australian law bans rewards that depend on someone else buying later. Personal asks are fine. A buy-and-earn scheme isn't. <span class="who">All four</span></li>
+  <li><b>The bloke who hit 10 referrals is legally owed his boots.</b> A promised gift has to be honoured. He's on the honour list. <span class="who">All four</span></li>
+  <li><b>Shopify can hold pre-sale money.</b> It names pre-orders as a reason to hold back payouts. Its own examples are 10% or a set amount for 120 days. If any pre-sale money is meant for the factory balance, ask Shopify support before the page opens. <span class="who">Fil</span></li>
+  <li><b>Hide the pre-sale product.</b> Shopify lists every published product in Shop and the AI shopping tools by default. The pre-sale boot has to be set to Unlisted, or the private page isn't private. <span class="who">Claude</span></li>
+  <li><b>Payment has to be taken at checkout.</b> Any other setting lets the card hold expire after 7 days. <span class="who">Fil</span></li>
+  <li><b>The 6-month warranty needs exact government wording</b> on something the buyer gets, most likely a printed card in the box. It's on the lawyer's list. <span class="who">Fil</span></li>
+  <li><b>Order emails need "FAR WORKWEAR PTY LTD" and the ABN.</b> Trading as plain "FAR Workwear" probably needs a registered business name, which is cheap. It's on the lawyer's list. <span class="who">Fil</span></li>
+  <li><b>Order emails should come from our address</b>, not a Shopify one. That needs a domain setting (it's in the screenshots above). <span class="who">Fil</span></li>
+  <li><b>The certificate line.</b> The page says "Certified to AS 2210.3:2019". Before money is taken, check that wording against the certificate itself. <span class="who">Fil</span></li>
+  <li><b>TikTok pixel.</b> It's still not on the site. It needs a decision on whether it's worth it, then your TikTok login. <span class="who">Fil</span></li>
+</ul>
+
+<h2>5. At launch</h2>
 <p class="dim">When a real product page exists, December to January.</p>
 <ul>
   <li>Price data on the boot, so Google and AI tools can show it with a price.</li>
-  <li>A Google Shopping listing. The Google app is already installed in Shopify, it just has nothing to list yet.</li>
+  <li>A Google Shopping listing. Connect it at launch, not before. Shopify's pre-order setup doesn't carry across to Google properly, and Google can suspend shops that list stock they can't send.</li>
   <li>Review emails after delivery, and a ProductReview.com.au page.</li>
+  <li>Logins. Shopify's Basic plan gives zero staff logins, so Grant, Lionel and Con can't have their own Shopify admin. That only matters once someone other than Fil is packing orders. Upgrade then, or run it through the dashboard.</li>
 </ul>
 
 <h2>Not doing</h2>
 <ul>
   <li>Paying an "AI search" agency, or chasing gimmicks like llms.txt files. Neither moves anything.</li>
-  <li>Letting any of this eat filming or editing time. Content brings people in; search is where they come to check us out.</li>
-  <li>A Google Business Profile. It's probably not allowed for an online seller working from home. Check before applying.</li>
+  <li>Letting any of this eat filming or editing time. Content brings people in. Search is where they come to check us out.</li>
+  <li>A Google Business Profile. Google doesn't allow one for an online-only seller working from home.</li>
+  <li>Shopify's "Crawler access" setting. It's only for paid SEO tools. Google and Bing don't need it.</li>
 </ul>
 
-<p class="foot">The long version lives in the brain: the search plan plus today's full audit (45 items, with the evidence for each). This link is unlisted, but anyone who has it can open it.</p>
+<p class="foot">The long version lives in the brain: the 7 Oct audit (45 items) plus four reports from 9 Oct (Shopify settings, search and AI, Australian law for the pre-sale, a crawl of every page with screenshots), each with its sources. This link is unlisted, but anyone who has it can open it.</p>
 
 </body>
 </html>
