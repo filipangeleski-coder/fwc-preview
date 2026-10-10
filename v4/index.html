@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-AU">
 <head>
+<meta name="robots" content="noindex, nofollow">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>FAR Workwear | Australian work boots. First run of 500.</title>
@@ -524,6 +525,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
 </style>
 </head>
 <body>
+<div style="position:sticky;top:0;z-index:99999;background:#111;color:#fff;font:600 13px/1.4 system-ui,sans-serif;padding:10px 16px;text-align:center;border-bottom:1px solid #444">Old design prototype from mid-2026. Product details and prices on this page are out of date. Not for sharing.</div>
 <div class="grain" aria-hidden="true"></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="far-wm" viewBox="50 154 325 117"><polygon points="208.87 156.22 183.43 156.22 135.49 268.65 167.46 268.65 196.15 191.82 212.71 236.16 188.85 223.13 224.84 268.65 256.81 268.65 208.87 156.22"/><path d="M372.72,268.91c-6.71,0-12.72,0-18.73,0-3.8,0-7.6-.11-11.38.05-1.9.08-2.95-.59-3.92-2.16-6.24-10.12-12.6-20.16-18.82-30.29-.98-1.6-2.02-2.16-3.89-2.14-8.59.11-17.18.05-26.03.05v34.26h-29.5v-110.33c1.12,0,2.12,0,3.12,0,21.23,0,42.47.05,63.7,0,7.38-.02,14.48,1.12,21.16,4.34,14.9,7.17,23.05,22.75,20.96,39.23-1.73,13.59-9.12,22.88-21.19,29.31,8.04,12.36,16.1,24.74,24.51,37.67ZM290.06,210.21c12.65,0,25.13.25,37.59-.12,5.57-.17,10.37-2.63,12.07-8.7,2.7-9.64-3.1-17.35-13.18-17.42-11.48-.09-22.96-.02-34.44,0-.68,0-1.35.16-2.04.25v25.99Z"/><path d="M82.6,183.45v21.62h60.19v25.19h-60.2v38.07h-30.11v-110.2h100.21v25.31h-70.09Z"/></symbol></svg>
 
@@ -567,7 +569,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
     </ul>
     <p class="gal-count" aria-hidden="true"><b id="gal-n">01</b>/09 &middot; <span id="gal-lbl">Three-quarter front</span></p>
     <p class="tag tag--r"><b>AU 6 &ndash; 13</b>Zip and lace</p>
-    <p class="tag tag--l"><b>Steel toe</b>Built to AS/NZS 2210.3</p>
+    <p class="tag tag--l"><b>Steel toe</b>Built to AS 2210.3:2019</p>
   </div>
 
   <div class="stage-type">
@@ -582,7 +584,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
         <span id="buy-txt">Hold my pair</span>
         <span class="amt">$20</span>
       </button>
-      <p class="reassure">Steel toe built to AS/NZS 2210.3, the Australian and New Zealand safety standard.<br>Designed in Australia, made overseas. AU sizing, same as UK.</p>
+      <p class="reassure">Steel toe built to AS 2210.3:2019, the Australian safety footwear standard.<br>Designed in Australia, made overseas. AU sizing, same as UK.</p>
     </div>
   </div>
   <span class="cue">Scroll</span>
@@ -729,10 +731,10 @@ footer nav{display:flex;flex-wrap:wrap;gap:14px 20px}
       <p>Every deposit comes back in full, automatically. You don't have to ask.</p></details>
 
     <details class="qa"><summary>Where are they made?</summary>
-      <p>Designed in Australia, made overseas, built to AS/NZS 2210.3. We're not going to dress that up.</p></details>
+      <p>Designed in Australia, made overseas, built to AS 2210.3:2019. We're not going to dress that up.</p></details>
 
     <details class="qa"><summary>Are they waterproof?</summary>
-      <p>No. Water resistant. A waterproof boot is a different boot and we'd rather tell you that now than at the first wet day.</p></details>
+      <p>No. A waterproof boot is a different boot and we'd rather tell you that now than at the first wet day.</p></details>
 
     <p class="rally-close" data-rise><em>Comfort isn't a luxury. It's what you're owed.</em><br>We refuse to accept it.</p>
 
@@ -804,7 +806,7 @@ const PARTS = [
   {x:45, y:55, lbl:'Eyelets',   img:'assets/d-eyelets.webp',
    val:'Set high and wide, so the laces sit off the top of your foot instead of across it.'},
   {x:57, y:31, lbl:'The upper', img:'assets/d-leather.webp',
-   val:'Full leather, not a synthetic that cracks at the flex point. Water resistant. See the waterproof question below.'},
+   val:'Nubuck leather upper with a textile zip panel and mesh lining.'},
   {x:68, y:48, lbl:'Side zip',  img:'assets/d-zip.webp',
    val:'Full zip behind a leather gusset. Set the fit once with the laces, then zip in and out.'},
   {x:86, y:8,  lbl:'Collar',    img:'assets/d-collar.webp',
@@ -812,9 +814,9 @@ const PARTS = [
   {x:30, y:82, lbl:'Heel',      img:'assets/d-heel.webp',
    val:'Where the last pair went first. Version one wore through to the foam here, which is why it never shipped.'},
   {x:45, y:93, lbl:'Outsole',   img:'assets/d-sole.webp',
-   val:'Nitrile rubber, rated to 300&deg;C. FAR moulded into it.'},
+   val:'Rubber, slip-rated SRC.'},
   {x:75, y:64, lbl:'The whole thing', img:'assets/d-profile.webp',
-   val:'Zip one side, laces the other, steel toe, nitrile sole. That is the boot.'},
+   val:'Zip one side, laces the other, steel toe, rubber sole. That is the boot.'},
 ];
 
 const $ = s => document.querySelector(s);

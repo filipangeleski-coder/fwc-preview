@@ -1,4 +1,5 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FAR — 3D exploded boot (S249 prototype)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,18 +31,19 @@ canvas{display:block}
 #pull input::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--ink);border:1px solid #000;cursor:grab}
 #pull input::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--ink);border:1px solid #000;cursor:grab}
 </style></head><body>
+<div style="position:sticky;top:0;z-index:99999;background:#111;color:#fff;font:600 13px/1.4 system-ui,sans-serif;padding:10px 16px;text-align:center;border-bottom:1px solid #444">Old design prototype from mid-2026. Product details and prices on this page are out of date. Not for sharing.</div>
 <div id="stage"></div>
 <div id="mark">FAR</div>
 <div id="hint">Scroll to pull it apart · drag to spin · pinch to zoom</div>
 <div id="pull"><span class="pl">Pull it apart</span><input id="pullR" type="range" min="0" max="1000" value="0" aria-label="Pull the boot apart"></div>
 <div id="load"><span>Loading the real build</span><div class="b"><i id="lb"></i></div></div>
 
-<div class="label" id="lab-boot"><span class="ln"></span><div class="t">The boot</div><div class="d">Wheat nubuck, side zip. Built to AS/NZS 2210.3.</div></div>
-<div class="label" id="lab-toecap"><span class="ln"></span><div class="t">Steel toe cap</div><div class="d">Certified to AS/NZS 2210.3.</div></div>
-<div class="label" id="lab-insole"><span class="ln"></span><div class="t">Poron insole</div><div class="d">Comfortable from the first shift. No break-in.</div></div>
+<div class="label" id="lab-boot"><span class="ln"></span><div class="t">The boot</div><div class="d">Wheat nubuck, side zip. Built to AS 2210.3:2019.</div></div>
+<div class="label" id="lab-toecap"><span class="ln"></span><div class="t">Steel toe cap</div><div class="d">Certified to AS 2210.3:2019.</div></div>
+<div class="label" id="lab-insole"><span class="ln"></span><div class="t">PU insole</div><div class="d">Comfortable from the first shift. No break-in.</div></div>
 <div class="label" id="lab-sctpu"><span class="ln"></span><div class="t">PU midsole</div><div class="d">Moulded PU midsole from Estar's existing certified mould.</div></div>
 <div class="label" id="lab-plate"><span class="ln"></span><div class="t">Anti-puncture plate</div><div class="d">A nail stops here, not in your foot.</div></div>
-<div class="label" id="lab-outsole"><span class="ln"></span><div class="t">Nitrile outsole</div><div class="d">Rated to 300°C. Grip that holds on a hot slab.</div></div>
+<div class="label" id="lab-outsole"><span class="ln"></span><div class="t">Rubber outsole</div><div class="d">Rubber, slip-rated SRC.</div></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>

@@ -2,6 +2,7 @@
 <html lang="en-AU">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FAR — exploded parts, clickable hotspots (demo)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,6 +40,7 @@ h2{font-family:"Space Grotesk",sans-serif;font-weight:700;line-height:0.94;lette
 </style>
 </head>
 <body>
+<div style="position:sticky;top:0;z-index:99999;background:#111;color:#fff;font:600 13px/1.4 system-ui,sans-serif;padding:10px 16px;text-align:center;border-bottom:1px solid #444">Old design prototype from mid-2026. Product details and prices on this page are out of date. Not for sharing.</div>
 <section class="explode">
   <div class="eyebrow">Built to be cut open</div>
   <h2>Nothing to hide. The real build, pulled apart.</h2>
@@ -60,15 +62,15 @@ h2{font-family:"Space Grotesk",sans-serif;font-weight:700;line-height:0.94;lette
 <script>
 // first-pass hotspot map: {name, desc, x,y (centre %), w,h (% of stage)}
 const PARTS = [
-  {n:"Nubuck upper", d:"Wheat nubuck, side zip, water-resistant. Built to AS/NZS 2210.3.", x:34,y:37,w:42,h:34},
+  {n:"Nubuck upper", d:"Wheat nubuck, side zip. Built to AS 2210.3:2019.", x:34,y:37,w:42,h:34},
   {n:"Padded tongue", d:"Padded across the top of your foot so the laces don't bite.", x:73,y:13,w:26,h:20},
   {n:"Laces", d:"Heavy laces with speed hooks up top. Fast on, fast off.", x:70,y:31,w:28,h:18},
   {n:"Side zip", d:"Full side zip. On and off without touching the laces.", x:12,y:48,w:18,h:24},
-  {n:"Steel toe cap", d:"Certified to AS/NZS 2210.3. The number a real safety boot has to hit.", x:70,y:56,w:28,h:16},
-  {n:"Poron insole", d:"Blue memory foam over Poron. Comfortable from the first shift. No break-in.", x:50,y:60,w:44,h:13},
+  {n:"Steel toe cap", d:"Certified to AS 2210.3:2019. The number a real safety boot has to hit.", x:70,y:56,w:28,h:16},
+  {n:"PU insole", d:"Comfortable from the first shift. No break-in.", x:50,y:60,w:44,h:13},
   {n:"Anti-puncture plate", d:"A penetration-resistant plate underfoot. A nail through the sole stops here, not in your foot.", x:51,y:72,w:46,h:12},
   {n:"PU midsole", d:"Moulded PU midsole from Estar's existing certified mould.", x:35,y:82,w:30,h:10},
-  {n:"Nitrile outsole", d:"Rated to 300°C. Most work boots tap out near 130. Grip that holds on a hot slab.", x:52,y:91,w:54,h:15},
+  {n:"Rubber outsole", d:"Rubber, slip-rated SRC.", x:52,y:91,w:54,h:15},
 ];
 const stage=document.getElementById('stage'), card=document.getElementById('card');
 const idle=document.getElementById('idle'), ct=document.getElementById('ct'), cd=document.getElementById('cd');
