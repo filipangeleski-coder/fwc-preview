@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>The Merch Vote</title>
+<style>
+  /* Layout: one phone-width column, FAR crew-page house style (monochrome, dark only, no accent colour) */
+  :root { --bg:#111; --card:#1a1a1a; --text:#f5f5f5; --dim:#9a9a9a; --line:#2e2e2e; --inset:#161616; color-scheme: dark; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:"Segoe UI",system-ui,-apple-system,sans-serif; line-height:1.55; padding-block:24px 80px; padding-inline:16px; max-width:640px; margin:0 auto; font-size:16px; }
+  h1 { font-size:1.7rem; letter-spacing:.5px; text-transform:uppercase; margin-bottom:4px; text-wrap:balance; }
+  .sub { color:var(--dim); margin-bottom:22px; font-size:.95rem; }
+  h2 { font-size:1.05rem; text-transform:uppercase; letter-spacing:1px; margin:34px 0 10px; border-bottom:1px solid var(--line); padding-bottom:6px; text-wrap:balance; }
+  h3 { font-size:1rem; text-transform:uppercase; letter-spacing:.5px; margin:14px 0 6px; }
+  p { margin-bottom:10px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:12px; }
+  .card h3:first-child { margin-top:0; }
+  .who { display:inline-block; font-size:.72rem; text-transform:uppercase; letter-spacing:1px; color:var(--bg); background:var(--text); border-radius:4px; padding:1px 7px; margin-right:6px; vertical-align:middle; }
+  .draft { border:1px dashed var(--dim); border-radius:8px; padding:10px 12px; margin-bottom:20px; color:var(--dim); font-size:.9rem; }
+  ul { list-style:none; margin-bottom:8px; }
+  li { padding-left:16px; position:relative; margin-bottom:6px; }
+  li::before { content:""; position:absolute; left:0; top:.68em; width:6px; height:2px; background:var(--dim); }
+  .dim { color:var(--dim); }
+  .tw { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; margin:8px 0 4px; font-size:.95rem; }
+  td { padding:7px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  td:first-child { font-weight:600; white-space:nowrap; }
+  .num { font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .rec { border-left:3px solid var(--text); padding:8px 12px; margin:10px 0 4px; background:var(--inset); font-size:.95rem; }
+  .rec b { text-transform:uppercase; letter-spacing:.5px; font-size:.8rem; }
+  .btn { display:block; text-align:center; background:var(--text); color:var(--bg); font-weight:700; text-transform:uppercase; letter-spacing:1px; text-decoration:none; border-radius:8px; padding:12px; margin:12px 0; }
+  .btn:focus-visible, a:focus-visible { outline:2px solid var(--text); outline-offset:2px; }
+  a { color:var(--text); }
+  .foot { margin-top:40px; color:var(--dim); font-size:.85rem; }
+  .mocks { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px; margin:10px 0 6px; }
+  .mocks figure { min-width:0; }
+  .mocks img { width:100%; height:auto; max-width:100%; border-radius:8px; display:block; }
+  .mocks figcaption { font-size:.8rem; color:var(--dim); margin-top:4px; }
+  .mocks.two { grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  .mocks.one { grid-template-columns:1fr; }
+  .sun { font-size:.88rem; color:var(--dim); margin:6px 0 10px; }
+  .fil { border-left:3px solid var(--text); padding:8px 12px; margin:8px 0; background:var(--inset); }
+  .fil p:last-child, .card p:last-child { margin-bottom:0; }
+  .q { font-size:1.05rem; font-weight:700; margin-bottom:6px; }
+  .opts { font-size:.92rem; }
+  .opts td:first-child { white-space:normal; }
+  .money td, .money td:first-child, .money .num { white-space:normal; }
+  .money td:first-child { width:55%; }
+</style>
+</head>
+<body>
+<h1>The merch vote</h1>
+<p class="sub">13 Oct. Real prices from the factories this time, not website prices. Seven questions, vote by Friday 16 Oct. <b>Whatever wins is what we buy. Nothing else gets ordered.</b></p>
+
+<a class="btn" href="https://agent.farworkwear.com.au/brain/decide?poll=merch-vote-s1363">Vote on the dashboard</a>
+
+<h2>How it works</h2>
+<div class="card">
+  <ul>
+    <li>Most votes wins. <b>A tie goes to the cheaper answer.</b></li>
+    <li>Your votes from Sunday are shown under each question. Vote again here. This one is the one that counts.</li>
+    <li>A yes buys that item at up to the price shown. If the real order comes out dearer, it comes back to all four of us.</li>
+    <li>Dollars are Australian unless it says US$. "Landed" means with freight to Wollongong. Anything marked <b>estimate</b> is our maths, not a factory's quote.</li>
+  </ul>
+</div>
+
+<h2>The money first</h2>
+<div class="tw"><table class="money">
+  <tr><td>Stubby + keychain, 600 of each</td><td class="num">about $1,700 landed</td></tr>
+  <tr><td>Stickers + air fresheners</td><td class="num">about $780 (already in the box budget)</td></tr>
+  <tr><td>Tees, 100</td><td class="num">$870-920 landed</td></tr>
+  <tr><td>Tees, 50</td><td class="num">about $510 (estimate)</td></tr>
+  <tr><td>Caps, 100</td><td class="num">$550-740 landed</td></tr>
+  <tr><td>Caps, 50</td><td class="num">about $300 (estimate)</td></tr>
+</table></div>
+<div class="card">
+  <ul>
+    <li><b>Everything new at the top end</b> (stubbies, keychains, 100 tees, 100 caps): about <b>$3,100</b> split across two factories, or about <b>$3,700</b> all from one factory in one parcel.</li>
+    <li><b>The middle</b> (stubbies, keychains, 50 tees, 50 caps): about <b>$2,500</b> (estimate).</li>
+    <li>Each of the first 100 pairs leaves us about <b>$110</b> after GST and costs. So the top end is the profit on <b>28 to 34 pairs</b>.</li>
+    <li>The budget page (10 Oct) has about <b>$13,900 spare</b> after the $10,000 we keep in reserve. The slides, flying in from China, come out of that too.</li>
+    <li>Freight is the big hidden cost. The one-parcel quote is US$845 express, almost half the price of the goods.</li>
+  </ul>
+</div>
+
+<h2>Fil's case</h2>
+<div class="fil">
+  <p>"The unboxing is the most important part of any product launch. It's a 100% open rate, and it's all free marketing."</p>
+  <p>"A hard hat sticker: even if 10% of buyers put it on their hard hat, it's a bonus."</p>
+  <p>"The stubby holder gets used every time they have a drink. Everyone at the BBQ will ask about it."</p>
+  <p>"The keychain will be a tough one. A lot of people don't like them and find them annoying. But having it in there is still a thank you."</p>
+  <p>"Air fresheners are good. And the caps and tees: just to have some merch to give out."</p>
+</div>
+<p class="dim">Lionel on Sunday, on the stubby and keychain: "purely to have the extra to hand out at events or approaching people as a thank you for jumping in videos etc".</p>
+
+<h2>The case against</h2>
+<div class="card">
+  <ul>
+    <li><b>The box already holds nine things:</b> boots, socks, bag, two cards, stickers, air freshener, the safety leaflet and the numbered tag. Nobody's arguing the unboxing doesn't matter. The question is what the tenth and eleventh things add, and nobody has a number on that.</li>
+    <li><b>It isn't free.</b> A stubby and a keychain together cost about $2.80 for every one we hand out, about $1,700 all up.</li>
+    <li><b>The keychain is the thing most likely to end up in the bin.</b> Fil says so too. There's no number either way.</li>
+    <li><b>Nobody has a list of who gets the tees and caps.</b> Without one, 100 of each sits in a garage. If each of the 50 free pairs goes out with a tee and a cap, 50 is gone on day one.</li>
+    <li><b>Sticker glue matters.</b> Solvent glue attacks hard hat plastic. A FAR sticker that weakens someone's hard hat is the worst look a safety boot brand could have. Whoever prints them has to put the glue in writing.</li>
+  </ul>
+</div>
+
+<h2>The seven questions</h2>
+
+<div class="card">
+  <p class="q">1. A stubby holder in every box? (600)</p>
+  <figure class="mocks one"><img src="merch_vote_p8x2/stubby_proof.jpg" alt="Factory proof of the black FAR stubby holder, front and back" style="max-width:360px"></figure>
+  <p>Black neoprene, fits a 375 ml can, our logo in white. 600 = one in every box plus 100 to hand out.</p>
+  <p><b>US$0.45 each</b> (about $0.65), $388 for 600 before freight. An Australian-made one is $2.90 each.</p>
+  <p class="sun">Sunday: Fil, Grant and Lionel yes (as part of "both").</p>
+</div>
+
+<div class="card">
+  <p class="q">2. A leather keychain in every box? (600)</p>
+  <p>Real leather, not the cheaper fake leather (Fil's call: it looks better). 600 = one in every box plus 100 to hand out.</p>
+  <p><b>US$0.85-0.89 each</b> (about $1.22-1.28), $733-768 for 600 before freight.</p>
+  <p class="sun">Sunday: Fil, Grant and Lionel yes (as part of "both").</p>
+</div>
+
+<div class="card">
+  <p class="q">3. If we do keychains: which one?</p>
+  <figure class="mocks two">
+    <div><img src="week_update_r4t7/keychain_letters_mockup.jpg" alt="Mockup of the FAR letters cut out of black leather"><figcaption>A: FAR letters cut out</figcaption></div>
+    <div><img src="week_update_r4t7/keychain_mockup.jpg" alt="Mockup of a black leather tab keychain with FAR pressed in"><figcaption>B: leather tab, FAR pressed in</figcaption></div>
+  </figure>
+  <p>A is US$0.85, B is US$0.89. Pictures are mockups: our real logo on a stand-in product.</p>
+  <p>Lionel's worry is that A looks weak and could break. We've asked the factory how thick the leather is, and the answer goes here when it lands.</p>
+  <p class="sun">Sunday: Fil and Grant A, Lionel B ("cut out looks weak and would break easily").</p>
+</div>
+
+<div class="card">
+  <p class="q">4. Hard hat stickers in every box, plus spares? (1,000)</p>
+  <figure class="mocks one"><img src="merch_vote_p8x2/sticker_proof.jpg" alt="Factory proof of the FAR sticker, 8 by 4.1 cm" style="max-width:300px"></figure>
+  <p>Already voted in on 4 Oct, from an Australian printer, about $400 for 1,000. The China factory can add them to the parcel at <b>US$0.20 each</b> (about $0.29). We'll go with whichever is cheaper, as long as the printer puts in writing that the glue is safe on hard hats.</p>
+</div>
+
+<div class="card">
+  <p class="q">5. A boot-shaped air freshener in every box? (600)</p>
+  <p>FAR logo only. Already voted in on 4 Oct. An Australian supplier advertises them from <b>$0.63 each</b> on its website (600 is about $380, plus any setup cost). We're asking for a real quote this week. China websites list them at $0.26-0.50, but those are website prices, not quotes.</p>
+</div>
+
+<div class="card">
+  <p class="q">6. T-shirts: how many?</p>
+  <figure class="mocks one"><img src="merch_vote_p8x2/tee_proof.jpg" alt="Factory proof of the black tee: A logo on the left chest, at farworkwear at the back neck, FAR and the tagline low on the back"></figure>
+  <p>Black, the A on the chest, FAR and WE REFUSE TO ACCEPT IT low on the back, @farworkwear at the neck. Sizes S to 3XL.</p>
+  <div class="tw"><table class="opts">
+    <tr><td>Molly (made our first 30 shirts)</td><td class="num">US$4.30, 180 gsm</td></tr>
+    <tr><td>Annie</td><td class="num">US$4.75, 220 gsm</td></tr>
+    <tr><td>Carol</td><td class="num">US$5.78, 220 gsm</td></tr>
+  </table></div>
+  <p>Landed, about <b>$8.70-9.20 a shirt</b> at 100: $870-920 for 100, about $510 for 50 (estimate; we've asked for real 50 prices). Halving the order doesn't halve the price per shirt, but it's not far off. Molly's 30 shirts cost $7.11 each before freight, and she quoted about $6.18 for 100.</p>
+  <p class="sun">Sunday: Fil both at 100, Grant tees only, Lionel not until the boots land.</p>
+</div>
+
+<div class="card">
+  <p class="q">7. Caps: how many?</p>
+  <figure class="mocks one"><img src="merch_vote_p8x2/cap_render.jpg" alt="Factory rendering of the black 6-panel cap with FAR and the tagline embroidered in white" style="max-width:360px"></figure>
+  <p>Lionel's black 6-panel with a curved brim, the logo embroidered in white. The small tagline is at the limit of what embroidery can show, so the final size gets picked off the factory's proofs.</p>
+  <div class="tw"><table class="opts">
+    <tr><td>Annie (embroidery and label included)</td><td class="num">US$1.96</td></tr>
+    <tr><td>Carol</td><td class="num">US$2.98</td></tr>
+    <tr><td>Molly</td><td class="num">US$3.40</td></tr>
+  </table></div>
+  <p>Landed, about <b>$5.50-7.40 a cap</b> at 100: $550-740 for 100, about $300 for 50 (estimate).</p>
+  <p class="sun">Sunday: Fil both at 100, Grant tees only, Lionel not until the boots land.</p>
+</div>
+
+<h2>After Friday</h2>
+<div class="card">
+  <p><span class="who">Fil</span>Orders what won the week of 19 Oct, from whichever factory is cheapest for that list at or under these prices. It lands by 20 Nov.</p>
+  <p><span class="who">All four</span>If tees and caps win, write down who gets them before they arrive: us, people in our videos, the free pairs, whoever.</p>
+</div>
+
+<a class="btn" href="https://agent.farworkwear.com.au/brain/decide?poll=merch-vote-s1363">Vote on the dashboard</a>
+
+<p class="foot">The long version, with every quote and message, is in the merch notes on Fil's laptop. This page is unlisted, but anyone with the link can open it.</p>
+</body>
+</html>
