@@ -31,74 +31,103 @@
 <body>
 
 <h1>Getting FAR found online</h1>
-<p class="sub">What the website needs so Google, AI tools and buyers can find it and trust it. First checked Wed 7 Oct. Checked again and worked through Fri 9 Oct, deeper: every Shopify setting, Google, Bing and AI search, Australian law for the pre-sale, and every page on the site.</p>
+<p class="sub">Updated Tue 13 Oct, after Google's emails. What the website needs so Google, AI tools and buyers can find it and trust it. First checked 7 Oct, worked through 9 Oct.</p>
 
 <h2>The short version</h2>
 <ul>
-  <li>The homepage is in good shape. It has a proper title, a Google description, a share image, and the business details Google reads behind the scenes.</li>
-  <li>The rest of the site isn't. The contact and privacy pages show as plain, unstyled text. That's a theme fault, and it was already there before the new homepage. Five policy pages are missing. The old referral page is still live, and so is a dead KickoffLabs web address.</li>
-  <li>Google is closer than we thought. A Google verification record has been on the domain since at least September, so Search Console may take one click.</li>
-  <li>The bigger news is the pre-sale. The law check turned up rules that change how the November page gets built. They're in section 4, and they apply to all four of us, because they change what we can say when we ask people to buy.</li>
+  <li><b>We're on Google.</b> Since Wed 8 Oct, FAR shows up in Google search results.</li>
+  <li><b>The "not indexed" email is mostly normal.</b> Every site has pages Google is told to skip. The real gap is the refund, shipping and terms pages, which don't exist yet.</li>
+  <li><b>Your list from 9 Oct is still open.</b> The first two jobs take 4 minutes and fix what Google sees. The contact and privacy pages still show as plain, broken text on the live site.</li>
 </ul>
-<div class="rec"><b>Honest bit</b><br>Google won't sell the first 100. Your personal asks will. Search is where people go to check us out after they've seen the content. So the jobs that matter are the ones that make us look real and keep us legal. The rest is cheap but slow, because Google takes weeks to pick up a site. That's why it's worth starting now.</div>
+<div class="rec"><b>Honest bit</b><br>Google won't sell the first 100. Your personal asks will. Search is where people go to check us out after they've seen the content. So the jobs that matter are the ones that make us look real and keep us legal.</div>
 
-<h2>What the first version of this page got wrong</h2>
-<ul>
-  <li><b>"Google has never been told the site exists."</b> Not quite. A Google verification record has been on the domain since at least 26 Sep. We just don't know yet whether it was finished.</li>
-  <li><b>"Propel is slowing the page down."</b> Not proven. The new homepage loads in about 2 seconds with Propel running. It still has to go, but for privacy, not speed (see below).</li>
-  <li><b>"Check our emails land in the inbox."</b> Already done 26 Sep. Klaviyo mail is signed with our domain and passes the spam checks.</li>
-  <li><b>"Bing is where ChatGPT looks for products."</b> Too strong. Bing feeds some AI search tools. OpenAI doesn't say it's the only source.</li>
-</ul>
-
-<h2>Done Fri 9 Oct</h2>
-<ul>
-  <li><b>Search Console is set up</b> on fil@farworkwear.com.au.</li>
-  <li><b>Google title and description set.</b> Every page except the homepage now shows the new line under its Google result.</li>
-  <li><b>Old Founding Crew page gone.</b> The link now forwards to the homepage.</li>
-  <li><b>Propel uninstalled.</b> It was recording what people typed into the sign-up form.</li>
-  <li><b>Junk pages cleared.</b> Empty blog, empty catalogue and the Catalog menu link are gone.</li>
-  <li><b>Contact and privacy pages fixed on a test copy.</b> The theme's settings file had been empty since v9.1, which is why they showed as plain text. The "Product title $19.99" cards are gone too. Waiting on Fil's publish (below).</li>
-</ul>
-
-<h2>1. Still to do: Fil</h2>
+<h2>Google's emails, in plain English</h2>
 <div class="card">
-  <h3>Publish v9.5 <span class="who">Fil</span></h3>
-  <p>It fixes the contact and privacy pages. The homepage code is identical to what's live now.</p>
-  <p class="dim">Online Store &gt; Themes &gt; "FAR v9.5 - inner pages + SEO (S1323)" &gt; Publish.</p>
+  <h3>"Monitor the Google Search traffic" <span class="tag">Good news</span></h3>
+  <p>Google started showing FAR in search results on Wed 8 Oct. The "Improve Google presence" email is just Google's welcome after we set up Search Console. Nothing to do on either.</p>
 </div>
 <div class="card">
-  <h3>Prices include tax <span class="who">Fil</span></h3>
-  <p>Still off. FAR has been registered for GST since 29 Jun.</p>
-  <p class="dim">Settings &gt; Taxes and duties. 2 minutes.</p>
+  <h3>"New reasons prevent pages from being indexed"</h3>
+  <p>Sounds bad. Mostly it isn't. Each reason:</p>
+  <ul>
+    <li><b>Blocked by robots.txt.</b> Cart, checkout and account pages. Shopify hides these on purpose. Fine.</li>
+    <li><b>Page with redirect.</b> The old Founding Crew page (it forwards home now), plus the www and http versions of our address. On purpose. Fine.</li>
+    <li><b>Alternative page with proper canonical tag.</b> The same page with extra bits on the end of the address. Google keeps the main one. Fine.</li>
+    <li><b>Excluded by 'noindex'.</b> Pages Shopify tells Google to skip, like search results. Almost certainly fine. Your screenshot below confirms it.</li>
+    <li><b>Not found (404).</b> The one that matters. Refund, shipping and terms don't exist yet. The blog and catalogue we deleted on 9 Oct are in here too, and those are fine. Google drops them on its own.</li>
+  </ul>
+  <p class="dim">The fix is the policy pages (section 3), not anything in Search Console. I couldn't open Search Console myself, so this matches each reason to what I found crawling the site this morning.</p>
 </div>
 <div class="card">
-  <h3>Google, then Bing <span class="who">Fil</span></h3>
-  <p>Google's first try at reading the sitemap failed. When we fetch it ourselves it loads fine, so it's probably Google's first attempt on a new site. Claude re-checks it in a day or two.</p>
-  <p class="dim">Search Console &gt; URL inspection &gt; <code>https://farworkwear.com.au/</code> &gt; Request indexing. Then bing.com/webmasters &gt; Import from Google Search Console &gt; farworkwear.com.au.</p>
+  <h3>"Product snippets structured data issues"</h3>
+  <p>The homepage tells Google about the FAR Zip but gives no price, because there's nothing to buy yet. So Google won't show the boot as a product result with a price. It doesn't push us down in search.</p>
+  <p class="dim">Leave it. The price goes in the day the paid page opens (section 5). Putting one in now would tell Google you can buy something you can't.</p>
+</div>
+
+<h2>1. Your list, in order <span class="who">About 20 min</span></h2>
+<div class="card">
+  <h3>1. Publish v9.5 <span class="who">2 min</span></h3>
+  <p>Still not done. On the live site the contact and privacy pages show as plain text with error messages, and the contact page is the only page Google's sitemap lists. The homepage code is identical to what's live now.</p>
+  <p class="dim">Shopify &gt; Online Store &gt; Themes &gt; "FAR v9.5 - inner pages + SEO (S1323)" &gt; three dots &gt; Publish.</p>
 </div>
 <div class="card">
-  <h3>Three screenshots <span class="who">Fil</span></h3>
+  <h3>2. Prices include tax <span class="who">2 min</span></h3>
+  <p>Still off. FAR has been registered for GST since 29 Jun, so the price people see has to include it.</p>
+  <p class="dim">Shopify &gt; Settings &gt; Taxes and duties &gt; turn on prices include tax.</p>
+</div>
+<div class="card">
+  <h3>3. Search Console check <span class="who">5 min</span></h3>
+  <p>Open search.google.com/search-console on fil@farworkwear.com.au.</p>
+  <p class="dim"><b>Sitemaps</b> (left menu): what does the Status column say next to sitemap.xml? If it says "Couldn't fetch", tap it, remove it, then type <code>sitemap.xml</code> and Submit again.<br><b>Pages</b> (left menu): screenshot the "Why pages aren't indexed" table. Then tap "Not found (404)" and screenshot that list. Send both to me in chat.</p>
+  <p class="dim">No need to "Request indexing" any more. Google already has the homepage.</p>
+</div>
+<div class="card">
+  <h3>4. Bing <span class="who">3 min</span></h3>
+  <p>Bing feeds some of the AI search tools. It can copy everything from Google in one go.</p>
+  <p class="dim">bing.com/webmasters &gt; sign in with the fil@ Google account &gt; Import from Google Search Console &gt; farworkwear.com.au.</p>
+</div>
+<div class="card">
+  <h3>5. TikTok bio <span class="who">30 sec</span></h3>
+  <p>Read live this morning. It still says "You're boots are" and "3 mates". Paste this over it:</p>
+  <p><code>You're not soft.<br>Your boots are.<br>4 mates building the fix.<br>Join the Founding Crew</code></p>
+</div>
+<div class="card">
+  <h3>6. Delete the dead crew address <span class="who">2 min</span></h3>
+  <p>crew.farworkwear.com.au still points at KickoffLabs, which we cancelled on 7 Oct. It shows a "no page exists" page. Worse, anyone with a KickoffLabs account could claim it and put their own page on our web address. Old links to it are dead already, so deleting it loses nothing.</p>
+  <p class="dim">GoDaddy &gt; My Products &gt; farworkwear.com.au &gt; DNS &gt; the CNAME record named <code>crew</code> (it points to 9r54a.kolcname.com) &gt; delete. Leave every other record alone.</p>
+</div>
+<div class="card">
+  <h3>7. Three screenshots <span class="who">2 min</span></h3>
+  <p>These decide whether order emails come from our address and whether money is taken at checkout. Needed before the paid page opens.</p>
   <p class="dim">Settings &gt; Payments (is Shopify Payments on, the card statement name, payment capture). Settings &gt; Notifications &gt; Sender email. Settings &gt; Markets.</p>
 </div>
 <div class="card">
-  <h3>TikTok bio typo <span class="who">Fil</span></h3>
-  <p>It still says "You're boots are". Should be "Your boots are". 10 seconds in the app.</p>
+  <h3>8. The homepage's Google line <span class="who">Your call</span></h3>
+  <p>Now that we're on Google, this is the text people read under our result. It says "$219 for the first 100. Nothing charged today." That's wrong the day the paid page opens.</p>
+  <p>Option 1: leave it and change it that day. Free, but easy to forget. Option 2: point the homepage at the line in Shopify settings ("Four mates built their own work boot, because you knock off and your feet don't."). No price, never goes stale, and you can edit it yourself.</p>
+  <p class="dim">Recommended: option 2. Tell me 1 or 2 and I build it.</p>
 </div>
 <div class="card">
-  <h3>The PO box <span class="who">Fil</span></h3>
-  <p>Shopify wouldn't save without a street, so the store address is "Crown Street, Wollongong" for now, and Klaviyo shows the same. When the PO box opens, it goes in both.</p>
-</div>
-<div class="card">
-  <h3>The homepage's Google line <span class="who">Fil</span></h3>
-  <p>The homepage still writes its own Google description and share preview, and it says "$219 for the first 100. Nothing charged today." That's wrong the day the paid page opens. Option 1: leave it and change it that day. Free, but easy to forget. Option 2: point the homepage at the new line in Shopify settings. No price, never goes stale, and you can edit it yourself. Recommended: option 2.</p>
+  <h3>Later: the PO box <span class="who">When it opens</span></h3>
+  <p>The store and Klaviyo addresses read "Crown Street, Wollongong" for now. The PO box goes in both when it opens.</p>
 </div>
 
-<h2>2. Still to do: Claude</h2>
+<h2>2. Claude</h2>
 <ul>
-  <li><b>Re-check the sitemap</b> in a day or two. If it's still failing, send Google the parts one by one. <span class="who">Claude</span></li>
-  <li><b>Write the privacy page properly.</b> It names the tools we use (Shopify, Klaviyo, Meta, Google), gives an email and the PO box, and drops "please call". It goes to the lawyer on 16 Oct with the other three. <span class="who">Claude</span></li>
-  <li><b>Add TikTok to the business links Google reads.</b> The account is checked and is ours. It goes in with the next homepage update. <span class="who">Claude</span></li>
-  <li><b>Point the dead crew.farworkwear.com.au at the homepage.</b> It's a GoDaddy change and a Shopify domain setting. Claude gives you the steps. <span class="who">Fil</span></li>
+  <li><b>Done 13 Oct:</b> read Google's four emails, crawled every page, checked the store settings, the sitemap and the TikTok bio. <span class="who">Claude</span></li>
+  <li><b>Write the privacy page properly.</b> It names the tools we use (Shopify, Klaviyo, Meta, Google), gives an email, and drops "please call". It goes to the lawyer on 16 Oct with the other three. <span class="who">Claude</span></li>
+  <li><b>Check your Search Console screenshots</b> line by line when they come in. <span class="who">Claude</span></li>
+  <li><b>Add TikTok to the business links Google reads.</b> Goes in with the next homepage update, after v9.5 is live. <span class="who">Claude</span></li>
+</ul>
+
+<h2>Done so far</h2>
+<ul>
+  <li>Search Console set up on fil@farworkwear.com.au (9 Oct). Google showing us since 8 Oct.</li>
+  <li>Google title and description set for every page except the homepage (9 Oct).</li>
+  <li>Old Founding Crew page gone, the link forwards home (9 Oct).</li>
+  <li>Propel uninstalled. It was recording what people typed into the sign-up form (9 Oct).</li>
+  <li>Empty blog, empty catalogue and the Catalog menu link gone (9 Oct).</li>
+  <li>Contact and privacy pages fixed on v9.5, waiting on your publish.</li>
 </ul>
 
 <h2>3. Already moving: the policy pages</h2>
@@ -127,7 +156,7 @@
 <h2>5. At launch</h2>
 <p class="dim">When a real product page exists, December to January.</p>
 <ul>
-  <li>Price data on the boot, so Google and AI tools can show it with a price.</li>
+  <li>Price data on the boot, so Google and AI tools can show it with a price. This clears Google's "Product snippets" email.</li>
   <li>A Google Shopping listing. Connect it at launch, not before. Shopify's pre-order setup doesn't carry across to Google properly, and Google can suspend shops that list stock they can't send.</li>
   <li>Review emails after delivery, and a ProductReview.com.au page.</li>
   <li>Logins. Shopify's Basic plan gives zero staff logins, so Grant, Lionel and Con can't have their own Shopify admin. That only matters once someone other than Fil is packing orders. Upgrade then, or run it through the dashboard.</li>
