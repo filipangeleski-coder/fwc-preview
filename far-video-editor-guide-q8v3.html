@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>The Video Editor</title>
+<style>
+  :root { --bg:#111; --card:#1a1a1a; --text:#f5f5f5; --dim:#9a9a9a; --line:#2e2e2e; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:"Segoe UI",system-ui,-apple-system,sans-serif; line-height:1.55; padding:24px 16px 80px; max-width:640px; margin:0 auto; }
+  h1 { font-size:1.7rem; letter-spacing:.5px; text-transform:uppercase; margin-bottom:4px; }
+  .sub { color:var(--dim); margin-bottom:28px; font-size:.95rem; }
+  h2 { font-size:1.05rem; text-transform:uppercase; letter-spacing:1px; margin:34px 0 10px; border-bottom:1px solid var(--line); padding-bottom:6px; }
+  p { margin-bottom:10px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:12px; }
+  .card h3 { font-size:1rem; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+  ul { list-style:none; }
+  li { padding-left:16px; position:relative; margin-bottom:6px; }
+  li::before { content:""; position:absolute; left:0; top:.62em; width:6px; height:2px; background:var(--dim); }
+  ol { padding-left:20px; margin-bottom:10px; }
+  ol li { padding-left:4px; }
+  ol li::before { display:none; }
+  .dim { color:var(--dim); }
+  table { width:100%; border-collapse:collapse; margin:8px 0 4px; font-size:.95rem; }
+  td { padding:7px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  td:first-child { font-weight:600; white-space:nowrap; }
+  .foot { margin-top:40px; color:var(--dim); font-size:.85rem; }
+  .rec { border-left:3px solid var(--text); padding:8px 12px; margin:10px 0 4px; background:#161616; font-size:.95rem; }
+  .rec b { text-transform:uppercase; letter-spacing:.5px; font-size:.8rem; }
+  .pair { display:grid; grid-template-columns:1fr; gap:4px; margin-bottom:10px; }
+  .bad { color:var(--dim); text-decoration:line-through; }
+  .chip { display:inline-block; border:1px solid var(--text); border-radius:14px; padding:1px 10px; font-size:.85rem; margin:0 4px 4px 0; }
+  video { width:100%; max-height:60vh; border-radius:8px; background:#000; margin:6px 0 2px; }
+</style>
+</head>
+<body>
+<h1>The video editor</h1>
+<p class="sub">How to get a good cut first go. It lives on the dashboard under Studio, then Video.</p>
+
+<h2>What it is</h2>
+<ul>
+  <li><b>The dashboard is the front counter.</b> You hand in the footage, say what you want, watch each version and say what to change.</li>
+  <li><b>Fil's laptop is the workshop.</b> A Claude editor cuts it with FAR's own kit and rules. A second Claude checks every version before you see it.</li>
+  <li><b>The laptop has to be on.</b> If it's off, your job waits in line and starts when it's back.</li>
+  <li><b>Finished cuts land in the posting folder</b> on the Drive with the cover, captions and posting copy, named after the video.</li>
+</ul>
+
+<h2>Four doors</h2>
+<table>
+  <tr><td>🎥 Watch a clip</td><td>You want ideas from a clip: hooks, a cover, a caption. Nothing gets cut.</td></tr>
+  <tr><td>✂️ Edit it</td><td>Raw footage in, a cut reel out. You steer it with notes until it's right.</td></tr>
+  <tr><td>🧽 Fix and pack</td><td>Your video is fine as filmed. It cleans the sound, fixes flicker or shake if it needs it, adds captions and a cover, and saves it ready to post.</td></tr>
+  <tr><td>✅ Already edited</td><td>You cut it yourself. It only makes the cover and the posting copy.</td></tr>
+</table>
+
+<h2>How to ask for a good cut</h2>
+<p>The editor is only as good as what you tell it. Three things make the biggest difference:</p>
+<ol>
+  <li><b>The best bit.</b> The one moment that has to be in it.</li>
+  <li><b>The feel.</b> Funny, proud, proof it works, or a story.</li>
+  <li><b>What to change, in plain words, with a time if you can.</b> "Cut the restart at 0:12."</li>
+</ol>
+<p>Then tap the <b>What can I ask?</b> buttons. Each one writes a sentence the editor knows into your note. Change the words if you want.</p>
+<div class="card"><h3>Vague, then better</h3><div class="pair"><span class="bad">make it better</span><span>Open on the Netflix line, cut the restart at 0:12, zoom in on the setup, not the punchline.</span></div><div class="pair"><span class="bad">make it more engaging</span><span>Open on the rip at frame 1, cut the restart, punch in on &#x27;rubbish&#x27;, hard cut to the skip bin.</span></div><div class="pair"><span class="bad">fix the sound</span><span>Clean the voice, even out the volume and fix the flicker. Leave the cut as it is.</span></div><div class="pair"><span class="bad">add some motion</span><span>Slow the drive-over to half speed, freeze on the peak and label it. Nothing moves on the punchline.</span></div><div class="pair"><span class="bad">it&#x27;s too long</span><span>Cut the air between words and the second take of that line. Keep it around 25 seconds, no padding.</span></div><div class="pair"><span class="bad">do better</span><span>Put SORE FEET in big type behind me on the word, whip to the next scene, and list what you changed.</span></div></div>
+
+<h2>What you can ask for</h2>
+<p>Tap a group to open it. The clips are from our own cuts.</p><details class="card"><summary><b>Sound</b> <span class="dim">(4)</span></summary><ul style="margin-top:10px"><li><span class="chip">Clean the voice</span><br>Clean up the voice and even out the volume.<video controls playsinline preload="none" src="far-video-editor-guide-q8v3/clean_voice.mp4"></video></li><li><span class="chip">Take the echo out</span><br>My voice sounds roomy and echoey. Take the echo out.</li><li><span class="chip">Beep out words as a joke</span><br>Beep out the words I name with one identical beep, and put a black bar where each is written.</li><li><span class="chip">One sound on the big beat</span><br>Put one sound effect on the big beat only, nothing on every cut.</li></ul></details><details class="card"><summary><b>Picture</b> <span class="dim">(8)</span></summary><ul style="margin-top:10px"><li><span class="chip">Fix the flickering lights</span><br>Fix the flickering lights.</li><li><span class="chip">Steady the shaky footage</span><br>Steady the shaky handheld footage.</li><li><span class="chip">Pull the brightness down</span><br>The picture is too bright. Pull the exposure down.</li><li><span class="chip">Ease the contrast back</span><br>The contrast is too strong. Ease it back, keep the colour.</li><li><span class="chip">Keep the footage&#x27;s colour</span><br>Keep the footage&#x27;s own colour, no heavy grade.</li><li><span class="chip">Blur plates and brand marks</span><br>Blur number plates and any other brand&#x27;s logo or lettering, frame by frame.</li><li><span class="chip">Keep my logos, blur plates</span><br>Keep the logos on my cap and shirt. Blur number plates only.</li><li><span class="chip">Make it look new</span><br>Make it look different from our last cuts. No receipt, stamp or the same grade.<video controls playsinline preload="none" src="far-video-editor-guide-q8v3/fresh_look.mp4"></video></li></ul></details><details class="card"><summary><b>Cut</b> <span class="dim">(12)</span></summary><ul style="margin-top:10px"><li><span class="chip">Cut the air between words</span><br>Cut the air between my words. Keep a pause only where a line lands.</li><li><span class="chip">Cut the restart</span><br>Cut my restart and keep only the clean take of that line.</li><li><span class="chip">Open on the action</span><br>Open on the strongest moment from frame 1, with my voice in by about 1 second.<video controls playsinline preload="none" src="far-video-editor-guide-q8v3/open_action.mp4"></video></li><li><span class="chip">Second hook before 0:10</span><br>Add a second hook before 0:10 so people stay past the first line.</li><li><span class="chip">Hold after the punchline</span><br>Let the punchline land. Hold a beat after it before the next thing.</li><li><span class="chip">Right length, no padding</span><br>Make it as long as the footage honestly holds. No padding.</li><li><span class="chip">Don&#x27;t repeat a line</span><br>Never say a line twice to fill time. Keep it shorter if it has to be.</li><li><span class="chip">Keep every line</span><br>Keep every line and the order. Only tighten the gaps between them.</li><li><span class="chip">Start from v1&#x27;s timing</span><br>Start from the last version&#x27;s timing. Change only what I say below.</li><li><span class="chip">Hard cut, no whoosh</span><br>Hard cut straight to the next clip. No whoosh, no transition.<video controls playsinline preload="none" src="far-video-editor-guide-q8v3/hard_cut.mp4"></video></li><li><span class="chip">End on a finished take</span><br>End on a finished take with a short hold after the last word. Never a restart.</li><li><span class="chip">B-roll over the flat parts</span><br>Put b-roll from my own clips over the flat talking parts.</li></ul></details><details class="card"><summary><b>Words</b> <span class="dim">(8)</span></summary><ul style="margin-top:10px"><li><span class="chip">Caption every line</span><br>Caption every spoken line, big and centred, one line at a time.<video controls playsinline preload="none" src="far-video-editor-guide-q8v3/caption_all.mp4"></video></li><li><span class="chip">Highlight the key word</span><br>Highlight the key word in each caption with the white chip.<video controls playsinline preload="none" src="far-video-editor-guide-q8v3/keyword_chip.mp4"></video></li><li><span class="chip">Hook line on frame 1</span><br>Put a short hook line on frame 1 and hold it alone for 1.5 seconds.</li><li><span class="chip">Star the swears in text</span><br>Star the swears in any text. Leave them spoken in the audio.</li><li><span class="chip">No text at all</span><br>No text on screen at all. Let the footage carry it.</li><li><span class="chip">Role plate, never a name</span><br>Add a lower-third role plate for who is talking, like THE FORMWORKER. Never a name.</li><li><span class="chip">Cover: two to four words</span><br>Cover label: the setup in two to four words, never the payoff.</li><li><span class="chip">Label the thing on the word</span><br>Draw a line to the thing I&#x27;m talking about and label it, once, on the word.</li></ul></details><details class="card"><summary><b>Moves</b> <span class="dim">(8)</span></summary><ul style="margin-top:10px"><li><span class="chip">Punch in, not on the joke</span><br>Punch in on the setup words and keep the punchline itself clean.<video controls playsinline preload="none" src="far-video-editor-guide-q8v3/punch_in.mp4"></video></li><li><span class="chip">Replay the big moment slow</span><br>Play the big moment in full, then rewind and replay it at half speed with a freeze and a label.</li><li><span class="chip">Freeze on the hero frame</span><br>Slow it under the word, then freeze on the hero frame so the line can land.</li><li><span class="chip">Whip between scenes</span><br>Whip between the two scenes with no black in between.<video controls playsinline preload="none" src="far-video-editor-guide-q8v3/whip_scene.mp4"></video></li><li><span class="chip">Shake on the hit</span><br>Shake the frame once on the hit, nothing else.</li><li><span class="chip">Big type behind me</span><br>Put the big word behind me on the line, so it sits between me and the background.<video controls playsinline preload="none" src="far-video-editor-guide-q8v3/type_behind.mp4"></video></li><li><span class="chip">Quiet doco look</span><br>Make it a quiet documentary: black bars, role plates, chapter cards, no hook.</li><li><span class="chip">One paper graphic</span><br>Use one paper graphic, a receipt or slip, only on a spoken price or list.</li></ul></details>
+
+<h2>Changing a version</h2>
+<ul>
+  <li>Watch it, then write what to change or tap the buttons.</li>
+  <li>Tick <b>Just fix it</b> if you only want those changes and nothing else touched.</li>
+  <li>Tap <b>Make v2</b>. You get a ping when it's ready.</li>
+  <li>Three rounds of changes per video.</li>
+  <li>Happy with one? Pick the day and tap <b>Use this one</b>. The final files land in that day's folder.</li>
+  <li>A Fix and pack you don't like? Tap <b>Not right? Edit it properly</b>.</li>
+</ul>
+
+<h2>What it can't do yet</h2>
+<ul>
+  <li><b>Songs.</b> Coming next. For now, add the song in the Instagram app when you post.</li>
+  <li><b>A timeline to drag clips around.</b> Not in the dashboard. Open the cut in CapCut for that.</li>
+</ul>
+
+<h2>Where the files go</h2>
+<ul>
+  <li><b>Raw footage:</b> 2 Social media, then 02 Filming days - Raw, then 00 Raw footage, then your own folder.</li>
+  <li><b>Finished:</b> 00 Posting content, then the week, then the day. Or Ready to post when no day is picked yet.</li>
+</ul>
+
+<p class="foot">The long version lives in the FAR workspace. This page is unlisted, but anyone with the link can open it.</p>
+</body>
+</html>
